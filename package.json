@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "moment": "^2.29.4",
     "next": "14.0.4",
     "react": "^18",
+    "react-calendar": "^4.7.0",
     "react-dom": "^18",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "@types/node": "^20",
