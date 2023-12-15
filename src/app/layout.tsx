@@ -12,10 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <body>
-        <Header />
-        {children}
+        {/* 헤더 푸터 커스텀 해야함 */}
+        <header>헤더</header>
+        <main>{children}</main>
+        <footer>푸터</footer>
       </body>
     </html>
   );
