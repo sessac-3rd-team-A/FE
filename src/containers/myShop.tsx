@@ -35,6 +35,7 @@ export default async function MyShopContainer() {
       <ul>
         {(await items).map(item => (<li key={item.productId}>{item.title} - {item.lprice}</li>))}
       </ul> */}
+      <div>aaaaa</div>
     </>
   );
 }
