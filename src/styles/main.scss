@@ -88,7 +88,7 @@
 
 .mainWindContainer {
   display: flex;
-  height: 100vh;
+  height: calc(100vh);
   position: relative;
   align-items: center;
   justify-content: center;
