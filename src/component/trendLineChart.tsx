@@ -1,4 +1,3 @@
-// components/MyLineChart.tsx
 'use client';
 import {
   Chart as ChartJS,
@@ -23,7 +22,7 @@ ChartJS.register(
   Legend,
 );
 
-const MyLineChart = () => {
+const trendLineChart = () => {
   return (
     <div>
       <Line
@@ -41,12 +40,20 @@ const MyLineChart = () => {
             {
               label: 'Data 1',
               data: [100, 120, 115, 134, 168, 132, 200],
-              backgroundColor: 'purple',
+              borderColor: 'rgb(53, 162, 235)',
+              backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
             {
               label: 'Data 2',
-              data: [1, 12, 11, 13, 16, 13, 20],
-              backgroundColor: 'green',
+              data: [110, 110, 100, 170, 200, 100, 90],
+              borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+            {
+              label: 'Data 3',
+              data: [150, 112, 130, 100, 210, 130, 190],
+              borderColor: 'rgb(17, 159, 29)',
+              backgroundColor: 'rgba(17, 159, 29, 0.5)',
             },
           ],
         }}
@@ -54,4 +61,4 @@ const MyLineChart = () => {
     </div>
   );
 };
-export default MyLineChart;
+export default trendLineChart;

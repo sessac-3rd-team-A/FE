@@ -5,7 +5,7 @@ export default function test() {
   let 상품: string[] = ['guitar', 'drum', 'bass', 'violin'];
   let 가격: Array<number> = [140, 500, 200, 1000];
   상품[3] = 'keyboard';
-  console.log(상품[3]);
+  // console.log(상품[3]);
 
   return (
     <div>
