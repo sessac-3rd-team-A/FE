@@ -11,7 +11,7 @@ const threeBox: React.FC = () => {
   return (
     <div className="wrap">
       {/* Repeat the structure for each menu */}
-      {Array.from({ length: 5 }, (_, index) => {
+      {Array.from({ length: 3 }, (_, index) => {
         const menuId = `menu${index + 1}`;
 
         return (
@@ -27,7 +27,7 @@ const threeBox: React.FC = () => {
             <div className="contents">
               <div className="inner">
                 <div className="description">
-                  <h3>{`TITLE ${5 - index}`}</h3>
+                  <h3>{`TITLE ${3 - index}`}</h3>
                   <p>다람쥐 헌 챗바퀴에 타고파. 다람쥐 헌 챗바퀴에 타고파.</p>
                 </div>
               </div>
@@ -37,7 +37,7 @@ const threeBox: React.FC = () => {
               className={`label ${String.fromCharCode(97 + index)}`}
             >
               <span className="rotate">
-                <p>{`MENU ${5 - index}`}</p>
+                <p>{`MENU ${3 - index}`}</p>
               </span>
             </label>
           </React.Fragment>
