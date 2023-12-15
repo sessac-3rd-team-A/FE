@@ -1,0 +1,11 @@
+@use 'sass:math';
+
+// 반응형 크기 계산 (1440px 기준)
+@function toSize($size) {
+  $calculatedSize: ($size / 1920) * 100;
+  @return #{$calculatedSize * 1vw};
+}
+
+body {
+  margin: 0;
+}
