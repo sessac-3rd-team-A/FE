@@ -49,24 +49,124 @@
   }
 }
 
+@keyframes focus-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes puff-in-hor {
+  0% {
+    transform: scaleX(2);
+    filter: blur(4px);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
 .mainWindContainer {
   display: flex;
+  height: 100vh;
   position: relative;
+  align-items: center;
   justify-content: center;
+  background-color: transparent;
 
   .mainWindImg {
     z-index: 1;
     position: absolute;
     width: toSize(1634);
-    animation: 1s ease-in-out wind-slide-in;
+    animation: wind-slide-in 1s ease-in-out 0s 1,
+      cloudFloat 3s ease-in-out 2s infinite;
   }
 
-  .mainSmileImg {
+  .mainFace {
     z-index: 2;
     position: absolute;
-    width: toSize(300);
-    margin-top: toSize(560);
-    margin-right: toSize(500);
-    animation: bounce-in-fwd 1.1s both 0.8s;
+    animation: bounce-in-fwd 1.1s both 0.8s,
+      cloudFloat 3s ease-in-out 2s infinite;
+
+    &.mainTitle {
+      font-size: toSize(160);
+      color: #0066ff;
+      font-family: LEMON MILK;
+      font-weight: bold;
+      letter-spacing: toSize(16);
+      animation: 1s ease-in-out focus-in-expand both 0.8s,
+        cloudFloat 3s ease-in-out 2s infinite;
+    }
+
+    &.mainSmileImg {
+      z-index: 3;
+      width: toSize(320);
+      margin-top: toSize(400);
+      margin-right: toSize(500);
+    }
+    &.mainBadImg {
+      width: toSize(340);
+      margin-bottom: toSize(280);
+      margin-right: toSize(1000);
+    }
+    &.mainDieImg {
+      z-index: 3;
+      width: toSize(180);
+      margin-top: toSize(200);
+      margin-left: toSize(900);
+    }
+    &.mainSadImg {
+      width: toSize(220);
+      margin-bottom: toSize(480);
+      margin-left: toSize(90);
+    }
+    &.mainStar3 {
+      margin-top: toSize(520);
+      margin-right: toSize(1050);
+      width: toSize(310);
+    }
+    &.mainStar4 {
+      margin-bottom: toSize(500);
+      margin-left: toSize(750);
+      width: toSize(190);
+    }
+    &.mainStar1 {
+      margin-top: toSize(230);
+      margin-left: toSize(1220);
+      width: toSize(170);
+    }
+  }
+
+  .mainContent {
+    z-index: 3;
+    position: absolute;
+    font-family: GMarketSans;
+    overflow-x: hidden;
+    font-size: toSize(64);
+    font-weight: bold;
+    max-width: toSize(800);
+    margin-left: toSize(1200);
+    margin-top: toSize(700);
+    animation: puff-in-hor 1.8s cubic-bezier(0.47, 0, 0.745, 0.715) both;
   }
 }
