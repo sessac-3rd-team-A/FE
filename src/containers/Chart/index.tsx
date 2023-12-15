@@ -1,12 +1,13 @@
 import MyLineChart from '@/component/trendLineChart';
 import '../../styles/chart.scss';
 import Semo from '@/component/semo';
-import ThreeBox from '@/component/threebox';
+
 import 'animate.css';
 
 import Image from 'next/image';
 import trendText from '../../public/trendText.svg';
-import trendText1 from '../../public/trendText.png';
+import ThreeBox from '@/component/threebox';
+
 export default function ChartPage() {
   let str: string = '이재욱';
   let arr;
@@ -20,6 +21,7 @@ export default function ChartPage() {
       <MyLineChart></MyLineChart>
 
       <Semo></Semo>
+
       <ThreeBox></ThreeBox>
     </>
   );

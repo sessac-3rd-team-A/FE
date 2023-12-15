@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import '../styles/threebox.scss';
-const threeBox: React.FC = () => {
+import '../styles/threeBox.scss';
+const ThreeBox: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu6');
 
   const handleMenuChange = (menuId: string) => {
@@ -57,4 +57,4 @@ const threeBox: React.FC = () => {
   );
 };
 
-export default threeBox;
+export default ThreeBox;
