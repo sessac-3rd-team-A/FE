@@ -1,4 +1,4 @@
-import Item from '@/component/test';
+import Item from '@/components/test';
 import './test.scss';
 export default function test() {
   let str: string = '차트 페이지';

@@ -1,3 +1,5 @@
+@import '/src/styles/global.scss';
+
 // calendar
 $calendar-color-border: rgb(220, 220, 220);
 $calendar-color-text: #333;
@@ -115,17 +117,4 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   background-color: transparent;
   border-radius: 14px;
   overflow: visible !important;
-
-  &::after {
-    content: 'TODAY';
-    color: $calendar-color-text;
-    font-size: small;
-    position: absolute;
-    left: 20%;
-    font-weight: 700;
-    margin-left: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    border-radius: 10px;
-  }
 }
