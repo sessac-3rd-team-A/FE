@@ -1,0 +1,56 @@
+// container
+.profile-container {
+  box-sizing: border-box;
+  padding: 50px 100px;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background-image: url('/images/profile_background.png');
+}
+
+// left container
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+
+  p {
+    font-size: xx-large;
+  }
+
+  .left-content {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    * {
+      width: 50%;
+      border-radius: 20px;
+      background-color: transparent;
+      backdrop-filter: blur(50px);
+    }
+
+    a {
+      text-decoration: none;
+
+      .link {
+        color: #fff;
+        font-size: xx-large;
+        font-weight: 700;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.profile-right {
+  width: 50%;
+  height: 100%;
+}
