@@ -22,6 +22,7 @@
   margin-top: toSize(100);
   margin-bottom: 3vh;
   z-index: 1;
+  animation: scaleAni 2s ease-in-out;
 }
 
 .sighBtn {
@@ -36,6 +37,12 @@
   z-index: 1;
   margin-top: 3vh;
   cursor: pointer;
+  animation: scaleAni 2s ease-in-out;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: #fffb94;
+  }
 }
 
 .sighWrite {
@@ -93,50 +100,92 @@
   .doodleA {
     bottom: 0;
     width: toSize(383);
+    --startPoint: -100vh;
+    animation: doodleFalling 0.7s linear;
   }
+
   .doodleB {
     bottom: 0;
     left: toSize(375);
     width: toSize(448);
+    --startPoint: -120vh;
+    animation: doodleFalling 0.6s linear;
   }
   .doodleC {
     bottom: 0;
     left: toSize(815);
     width: toSize(327);
+    --startPoint: -200vh;
+    animation: doodleFalling 1s linear;
   }
   .doodleD {
     bottom: 0;
     left: toSize(1140);
     width: toSize(240);
+    --startPoint: -100vh;
+    animation: doodleFalling 0.5s linear;
   }
   .doodleE {
     bottom: 0;
     left: toSize(1320);
     width: toSize(306);
+    --startPoint: -200vh;
+    animation: doodleFalling 0.7s linear;
   }
   .doodleF {
     bottom: 0;
     right: 0;
     width: toSize(361);
+    --startPoint: -100vh;
+    animation: doodleFalling 0.5s linear;
   }
   .doodleG {
     right: 0;
     bottom: toSize(200);
     width: toSize(366);
+    --startPoint: -300vh;
+    animation: doodleFalling 1s linear;
   }
   .doodleH {
     left: toSize(100);
     bottom: toSize(260);
     width: toSize(289);
+    --startPoint: -200vh;
+    animation: doodleFalling 0.8s linear;
   }
   .doodleI {
     left: toSize(335);
     bottom: toSize(140);
     width: toSize(375);
+    --startPoint: -150vh;
+    animation: doodleFalling 1s linear;
   }
   .doodleJ {
     left: toSize(685);
     bottom: toSize(220);
     width: toSize(240);
+    --startPoint: -300vh;
+    animation: doodleFalling 1.2s linear;
+  }
+}
+
+@keyframes doodleFalling {
+  0% {
+    transform: translateY(var(--startPoint));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleAni {
+  0%,
+  50% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
