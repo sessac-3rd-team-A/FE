@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import '../styles/threeBox.scss';
+import { Chart } from 'chart.js';
 const ThreeBox: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu6');
 
@@ -28,7 +29,6 @@ const ThreeBox: React.FC = () => {
               <div className="threeBoxInner">
                 <div className="threeBoxDescription">
                   <h3>{`TITLE ${3 - index}`}</h3>
-                  <p>다람쥐 헌 챗바퀴에 타고파. 다람쥐 헌 챗바퀴에 타고파.</p>
                 </div>
               </div>
             </div>
