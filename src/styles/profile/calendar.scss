@@ -23,10 +23,12 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0;
 
   span {
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: LEMON MILK;
+    font-size: toSize(50);
+    font-weight: 900;
     color: $calendar-color-text;
   }
 
@@ -65,9 +67,10 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__month-view__weekdays {
   background-color: #eee;
   border-radius: 10px;
-  padding: 10px 0 16px 0;
+  padding: toSize(10) 0;
   abbr {
     // 텍스트 부분
+    font-family: LemonMilk;
     font-size: 18px;
     font-weight: 900;
     text-decoration: none;
@@ -82,7 +85,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__tile {
   text-align: start;
   padding: 10px 20px;
-  height: 10vh;
+  height: toSize(120);
   border-radius: 14px;
   display: flex;
   flex-direction: column;
