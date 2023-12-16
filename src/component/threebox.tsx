@@ -9,7 +9,7 @@ const ThreeBox: React.FC = () => {
   };
 
   return (
-    <div className="wrap">
+    <div className="threeBoxWrap">
       {/* Repeat the structure for each menu */}
       {Array.from({ length: 3 }, (_, index) => {
         const menuId = `menu${index + 1}`;
@@ -20,13 +20,13 @@ const ThreeBox: React.FC = () => {
               type="radio"
               name="navigation"
               id={menuId}
-              className="button"
+              className="threeBoxButton"
               checked={selectedMenu === menuId}
               onChange={() => handleMenuChange(menuId)}
             />
-            <div className="contents">
-              <div className="inner">
-                <div className="description">
+            <div className="threeBoxContents">
+              <div className="threeBoxInner">
+                <div className="threeBoxDescription">
                   <h3>{`TITLE ${3 - index}`}</h3>
                   <p>다람쥐 헌 챗바퀴에 타고파. 다람쥐 헌 챗바퀴에 타고파.</p>
                 </div>
@@ -34,9 +34,9 @@ const ThreeBox: React.FC = () => {
             </div>
             <label
               htmlFor={menuId}
-              className={`label ${String.fromCharCode(97 + index)}`}
+              className={`threeBoxLabel ${String.fromCharCode(97 + index)}`}
             >
-              <span className="rotate">
+              <span className="threeBoxRotate">
                 <p>{`MENU ${3 - index}`}</p>
               </span>
             </label>
@@ -45,14 +45,14 @@ const ThreeBox: React.FC = () => {
       })}
 
       {/* Close button */}
-      <input
+      {/* <input
         type="radio"
         name="navigation"
         id="menu6"
-        className="button close"
+        className="threeBox button close"
         checked={selectedMenu === 'menu6'}
         onChange={() => handleMenuChange('menu6')}
-      />
+      /> */}
     </div>
   );
 };
