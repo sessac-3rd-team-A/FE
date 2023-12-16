@@ -159,14 +159,14 @@
 
   .mainContent {
     z-index: 3;
-    position: absolute;
+    // position: absolute;
     font-family: GMarketSans;
-    overflow-x: hidden;
+    // overflow-x: hidden;
     font-size: toSize(64);
     font-weight: bold;
-    max-width: toSize(800);
-    margin-left: toSize(1200);
-    margin-top: toSize(700);
+    margin-left: toSize(1000);
+    margin-top: toSize(800);
+    white-space: pre-wrap;
     animation: puff-in-hor 1.8s cubic-bezier(0.47, 0, 0.745, 0.715) both;
   }
 }
