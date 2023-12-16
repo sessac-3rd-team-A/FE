@@ -1,3 +1,5 @@
+@import '/src/styles/global.scss';
+
 // calendar
 $calendar-color-border: rgb(220, 220, 220);
 $calendar-color-text: #333;
@@ -21,10 +23,12 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0;
 
   span {
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: LEMON MILK;
+    font-size: toSize(50);
+    font-weight: 900;
     color: $calendar-color-text;
   }
 
@@ -63,9 +67,10 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__month-view__weekdays {
   background-color: #eee;
   border-radius: 10px;
-  padding: 10px 0 16px 0;
+  padding: toSize(10) 0;
   abbr {
     // 텍스트 부분
+    font-family: LemonMilk;
     font-size: 18px;
     font-weight: 900;
     text-decoration: none;
@@ -80,7 +85,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__tile {
   text-align: start;
   padding: 10px 20px;
-  height: 10vh;
+  height: toSize(120);
   border-radius: 14px;
   display: flex;
   flex-direction: column;
@@ -115,17 +120,4 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   background-color: transparent;
   border-radius: 14px;
   overflow: visible !important;
-
-  &::after {
-    content: 'TODAY';
-    color: $calendar-color-text;
-    font-size: small;
-    position: absolute;
-    left: 20%;
-    font-weight: 700;
-    margin-left: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    border-radius: 10px;
-  }
 }
