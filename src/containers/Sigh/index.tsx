@@ -5,16 +5,26 @@ import React, { useState } from 'react';
 
 export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>('START');
+
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = event.target.value;
     setSighText(newText);
+  };
+
+  const handleStartButtonClick = () => {
+    setIsVisible((prevVisible) => !prevVisible);
+    setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
   };
 
   return (
     <div className="sighContainer">
       <main className="sighMainContainer">
         <h1 className="sighH">Let me hear your sigh</h1>
-        <article className="sighWrite">
+        <article
+          className={`sighWrite ${isVisible ? 'sighVisible' : 'sighUnVisible'}`}
+        >
           <textarea
             className="sighText"
             placeholder="오늘 어떤 일이 있었나요?"
@@ -23,7 +33,9 @@ export default function SighPage() {
           />
           <p>{sighText.length}/1000</p>
         </article>
-        <button className="sighBtn">START</button>
+        <button className="sighBtn" onClick={handleStartButtonClick}>
+          {buttonText}
+        </button>
       </main>
       <div className="sighDoodles">
         <img
