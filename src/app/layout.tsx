@@ -1,5 +1,5 @@
 import '@/styles/global.scss';
-import Header from '@/component/Header/header';
+import Header from '@/containers/common/header';
 
 export const metadata = {
   title: 'Next.js',
@@ -15,9 +15,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* 헤더 푸터 커스텀 해야함 */}
-        <header>헤더</header>
+        <Header />
         <main>{children}</main>
-        <footer>푸터</footer>
+        {/* <footer>푸터</footer> */}
       </body>
     </html>
   );
