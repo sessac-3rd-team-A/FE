@@ -9,19 +9,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 100%;
 }
 
-.sighText {
+.sighH {
   font-family: 'LEMON MILK';
   font-size: toSize(100);
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   text-transform: capitalize;
+  margin-top: 0;
+  margin-bottom: 3vh;
+  z-index: 1;
 }
 
-.sighStart {
+.sighBtn {
   border: 1px solid black;
   width: toSize(250);
   aspect-ratio: 10/3;
@@ -31,6 +34,42 @@
   font-family: 'LEMON MILK';
   font-size: toSize(40);
   z-index: 1;
+  margin-top: 3vh;
+}
+
+.sighWrite {
+  width: 80vw;
+  height: 60vh;
+  border-radius: 28px;
+  border: 1px solid #fff;
+  background: linear-gradient(
+    276deg,
+    rgba(255, 255, 255, 0.22) 11.01%,
+    rgba(255, 255, 255, 0.28) 37.28%,
+    rgba(186, 186, 186, 0.262) 59.39%,
+    rgba(252, 252, 252, 0.28) 95.77%
+  );
+  background-blend-mode: overlay;
+  box-shadow:
+    0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
+    0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+  padding: toSize(100) toSize(100);
+
+  .sighText {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 90%;
+    font-family: 'Gmarket Sans';
+    font-size: toSize(26);
+    font-weight: 300;
+    line-height: 145%;
+    resize: none;
+    padding: 0 toSize(50);
+    outline: none;
+  }
 }
 
 .sighDoodles {

@@ -1,11 +1,29 @@
+'use client';
+
 import '@/styles/sigh.scss';
+import React, { useState } from 'react';
 
 export default function SighPage() {
+  const [sighText, setSighText] = useState<string>('');
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = event.target.value;
+    setSighText(newText);
+  };
+
   return (
     <div className="sighContainer">
       <main className="sighMainContainer">
-        <h1 className="sighText">Let me hear your sigh</h1>
-        <button className="sighStart">START</button>
+        <h1 className="sighH">Let me hear your sigh</h1>
+        <article className="sighWrite">
+          <textarea
+            className="sighText"
+            placeholder="오늘 어떤 일이 있었나요?"
+            value={sighText}
+            onChange={handleInputChange}
+          />
+          <p>{sighText.length}/1000</p>
+        </article>
+        <button className="sighBtn">START</button>
       </main>
       <div className="sighDoodles">
         <img

@@ -8,6 +8,10 @@
   @return #{$calculatedSize * 1vw};
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
