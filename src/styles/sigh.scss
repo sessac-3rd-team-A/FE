@@ -1,0 +1,89 @@
+@import '/src/styles/global.scss';
+
+.sighContainer {
+  height: calc(100vh - toSize(45));
+}
+
+.sighMainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.sighText {
+  font-family: 'LEMON MILK';
+  font-size: toSize(100);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.sighStart {
+  border: 1px solid black;
+  width: toSize(250);
+  aspect-ratio: 10/3;
+  background-color: #fff;
+  filter: drop-shadow(0px toSize(9) 0px #000);
+  border-radius: 50%;
+  font-family: 'LEMON MILK';
+  font-size: toSize(40);
+  z-index: 1;
+}
+
+.sighDoodles {
+  .doodle {
+    position: fixed;
+  }
+  .doodleA {
+    bottom: 0;
+    width: toSize(383);
+  }
+  .doodleB {
+    bottom: 0;
+    left: toSize(375);
+    width: toSize(448);
+  }
+  .doodleC {
+    bottom: 0;
+    left: toSize(815);
+    width: toSize(327);
+  }
+  .doodleD {
+    bottom: 0;
+    left: toSize(1140);
+    width: toSize(240);
+  }
+  .doodleE {
+    bottom: 0;
+    left: toSize(1320);
+    width: toSize(306);
+  }
+  .doodleF {
+    bottom: 0;
+    right: 0;
+    width: toSize(361);
+  }
+  .doodleG {
+    right: 0;
+    bottom: toSize(200);
+    width: toSize(366);
+  }
+  .doodleH {
+    left: toSize(100);
+    bottom: toSize(260);
+    width: toSize(289);
+  }
+  .doodleI {
+    left: toSize(335);
+    bottom: toSize(140);
+    width: toSize(375);
+  }
+  .doodleJ {
+    left: toSize(685);
+    bottom: toSize(220);
+    width: toSize(240);
+  }
+}
