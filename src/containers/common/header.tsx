@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="headerContainer">
       <img src="/logo.svg" alt="logo" className="headerLogo" />
-      <div style={{ marginLeft: '77px' }}>
+      <div>
         <Link href={'/'} className="headerMenu">
           Main
         </Link>
