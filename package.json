@@ -22,9 +22,13 @@
     "react-calendar": "^4.7.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
+<<<<<<< HEAD
     "react-icons": "^4.12.0",
     "recoil": "^0.7.7",
     "sass": "^1.69.5"
+=======
+    "recoil": "^0.7.7"
+>>>>>>> 2a399c9221c44bfb14c93874e2772960db9a82d0
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
