@@ -1,0 +1,4 @@
+@import '/src/styles/global.scss';
+
+// header height: vertical padding + content height
+$header-height: toSize(20 * 2 + 55);

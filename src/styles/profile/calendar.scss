@@ -15,11 +15,15 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   border-radius: 20px;
   background-color: transparent;
   backdrop-filter: blur(50px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .react-calendar__navigation {
   background: transparent;
-  height: 90px;
+  height: toSize(90);
+  padding-top: toSize(28);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +31,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 
   span {
     font-family: LEMON MILK;
-    font-size: toSize(50);
+    font-size: toSize(28);
     font-weight: 900;
     color: $calendar-color-text;
   }
@@ -52,14 +56,20 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   color: #3a89ff;
 }
 
-.react-calendar__month-view {
-  padding: 12px 32px;
+.react-calendar__viewContainer {
   height: 100%;
+}
+
+.react-calendar__month-view {
+  padding: toSize(45) toSize(32) toSize(72) toSize(32);
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
 
   abbr {
     // 텍스트
     color: $calendar-color-text;
-    font-size: 16px;
+    font-size: toSize(24);
     font-weight: 500;
   }
 }
@@ -71,7 +81,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   abbr {
     // 텍스트 부분
     font-family: LemonMilk;
-    font-size: 18px;
+    font-size: toSize(24);
     font-weight: 900;
     text-decoration: none;
   }
@@ -79,14 +89,14 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 
 .react-calendar__month-view__days {
   height: 100%;
+  display: flex;
   margin-top: 20px;
 }
 
 .react-calendar__tile {
   text-align: start;
-  padding: 10px 20px;
-  height: toSize(120);
-  border-radius: 14px;
+  border-radius: 10px;
+  height: calc(12vh);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -110,7 +120,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: x-large;
+    font-size: toSize(24);
   }
 }
 
