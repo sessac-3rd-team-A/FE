@@ -25,11 +25,11 @@ $container-size: toSize(80);
         transform: translateY(50%);
         position: relative;
         z-index: 110;
+
         div {
             display: flex;
             align-items: center;
             justify-content: center;
-
             .icon-selected-circle {
                 background-color: $primary-color;
                 border-radius: 50%;
@@ -38,6 +38,8 @@ $container-size: toSize(80);
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                margin-right: toSize(50);
+                margin-left: toSize(50);
                 animation: bounce 1s ease-in-out;
 
                 .money-icon,
@@ -66,26 +68,33 @@ $container-size: toSize(80);
   }
 
 
-@keyframes bounce {
+  @keyframes bounce {
     0% {
       top: 40px;
+      border-radius: 50%;
     }
     50% {
       top: 120px;
-  	  height: 40px;
+      height: 40px;
+      border-radius: 20% 20% 50% 50%;
     }
     55% {
       top: 150px;
       height: 25px;
+      border-radius: 50% 50% 20% 20%;
     }
     65% {
       top: 120px;
       height: 40px;
+      border-radius: 50%;
     }
     95% {
-	  top: 40px;
+      top: 40px;
+      border-radius: 50%;
     }
     100% {
       top: 40px;
+      border-radius: 50%;
     }
   }
+  
