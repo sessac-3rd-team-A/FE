@@ -1,0 +1,52 @@
+$primary-color: #3A89FF;
+$icon-size: 50px;
+$container-size: 15vh;
+$icon-margin: 35px;
+
+.profile-menu-container {
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    height: $container-size;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // background-color: red;
+
+    .profile-menu-nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: antiquewhite;
+        position: relative;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: pink;
+
+            .icon-circle {
+                background-color: $primary-color;
+                border-radius: 50%;
+                width: $icon-size;
+                height: $icon-size;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: $icon-margin;
+
+                .money-icon,
+                .person-icon,
+                .setting-icon {
+                width: 80%;
+                }
+            }
+        }
+    }
+    .profile-menu-bottom {
+        width: 100%;
+        position: relative;
+      }
+}
