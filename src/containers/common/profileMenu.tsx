@@ -30,9 +30,8 @@ export default function ProfileMenu() {
               <img
                 src={`/images/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
-                className={`icon ${selectedIcon === index ? 'selected' : ''}`}
+                className={`icon ${selectedIcon === index ? '' : ''}`}
               />
-
             </div>
           ))}
           <div className='space'></div>

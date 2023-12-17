@@ -3,14 +3,15 @@
 $primary-color: #3A89FF;
 $icon-circle-size: toSize(80);
 $icon-size: toSize(50);
-$container-size: 15vh;
-$icon-margin: toSize(100);
+$container-size: toSize(80);
+// $icon-margin: toSize(100);
 
 .profile-menu-container {
     width: 100%;
-    position: absolute;
-    z-index: 100;
     height: $container-size;
+    position: absolute;
+    transform : translateY(-100%);
+    z-index: 100;
     top: 100%;
     display: flex;
     flex-direction: column;
@@ -37,12 +38,12 @@ $icon-margin: toSize(100);
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                animation: bounce 1s ease-in-out;
 
                 .money-icon,
                 .person-icon,
                 .setting-icon {
                     width: 80%;
-                    margin-right: $icon-margin;
                 }
             }
 
@@ -50,14 +51,41 @@ $icon-margin: toSize(100);
                 transform: translateY(80%);
                 margin-left: 10px;
             }
+
+            .icon-hidden {
+                display: none;
+            }
         }
     }
-    // .icon-hidden {
-    //     display: none;
-    // }
-    .profile-menu-bottom {
-        width: 100%;
-        position: relative;
-        z-index: 100;
-      }
 }
+
+.profile-menu-bottom {
+    width: 100%;
+    position: relative;
+    z-index: 100;
+  }
+
+
+@keyframes bounce {
+    0% {
+      top: 40px;
+    }
+    50% {
+      top: 120px;
+  	  height: 40px;
+    }
+    55% {
+      top: 150px;
+      height: 25px;
+    }
+    65% {
+      top: 120px;
+      height: 40px;
+    }
+    95% {
+	  top: 40px;
+    }
+    100% {
+      top: 40px;
+    }
+  }

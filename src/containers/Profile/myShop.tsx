@@ -48,9 +48,9 @@ export default async function MyShopContainer() {
           alt='배경 이미지'
           className='myShop-image-background'
         />
-      {/* <ul>
-        {itemsResult.map(item => (<li key={item.productId}>{item.title} - {item.lprice}</li>))}
-      </ul> */}
+      <ul>
+        {/* {itemsResult.map(item => (<li key={item.productId}>{item.title} - {item.lprice}</li>))} */}
+      </ul>
       <ProfileMenu />
     </div>
   );

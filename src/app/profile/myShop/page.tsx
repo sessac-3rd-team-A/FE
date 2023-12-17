@@ -5,7 +5,6 @@ export default function MyShop() {
   return(
     <>
       <MyShopContainer />
-      <ProfileMenu />
     </>
   )
 }
