@@ -1,9 +1,12 @@
+'use client';
+
 import EmoCalendar from './EmoCalendar';
 import '@/styles/profile/index.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
-  // id 기반으로 nick
+  const router = useRouter();
 
   return (
     <section className="profile-container">
@@ -19,9 +22,15 @@ export default function ProfilePage() {
               <p>SIGHS</p>
             </div>
           </div>
-          <Link href="/">
-            <div className="link">한숨 쉬러 가기</div>
-          </Link>
+          <div
+            style={{ cursor: 'pointer' }}
+            className="link"
+            onClick={() => {
+              router.push('/');
+            }}
+          >
+            <Link href="/">한숨 쉬러 가기</Link>
+          </div>
           <div className="ratio">
             {/* graph */}
             <span>monthly</span>
