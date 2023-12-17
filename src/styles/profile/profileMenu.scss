@@ -1,7 +1,10 @@
+@import '/src/styles/global.scss';
+
 $primary-color: #3A89FF;
-$icon-size: 50px;
+$icon-circle-size: toSize(80);
+$icon-size: toSize(50);
 $container-size: 15vh;
-$icon-margin: 35px;
+$icon-margin: toSize(100);
 
 .profile-menu-container {
     width: 100%;
@@ -12,41 +15,49 @@ $icon-margin: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // background-color: red;
 
     .profile-menu-nav{
         width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
-        background-color: antiquewhite;
+        transform: translateY(50%);
         position: relative;
-
+        z-index: 110;
         div {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: pink;
 
-            .icon-circle {
+            .icon-selected-circle {
                 background-color: $primary-color;
                 border-radius: 50%;
-                width: $icon-size;
-                height: $icon-size;
+                width: $icon-circle-size;
+                height: $icon-circle-size;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-right: $icon-margin;
 
                 .money-icon,
                 .person-icon,
                 .setting-icon {
-                width: 80%;
+                    width: 80%;
+                    margin-right: $icon-margin;
                 }
+            }
+
+            .icon-unselected-circle {
+                transform: translateY(80%);
+                margin-left: 10px;
             }
         }
     }
+    // .icon-hidden {
+    //     display: none;
+    // }
     .profile-menu-bottom {
         width: 100%;
         position: relative;
+        z-index: 100;
       }
 }

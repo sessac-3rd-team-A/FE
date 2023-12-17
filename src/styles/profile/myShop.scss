@@ -1,3 +1,5 @@
+@import '/src/styles/global.scss';
+
 .myShop-container {
     width: 100%;
     height: 100%;
@@ -5,15 +7,16 @@
 
 .header-temp {
     width: 100%;
-    height: 90px;
+    height: toSize(110);
     background-color: white;
 }
 
-.myShop-image-container {
-    width: 100vh;
-    margin-left: 10px;
-    margin-right: 10px;
+.myShop-image-background {
+    width: 100%;
+    padding-left: toSize(50);
+    padding-right: toSize(50);
 }
+
 
 
 

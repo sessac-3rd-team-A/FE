@@ -20,35 +20,19 @@ export default function ProfileMenu() {
       <nav className='profile-menu-nav'>
         <div className='space'></div>
         <div>
-          {/* <div className='icon-circle' onClick={() => handleIconClick('/images/profileMenu_2.svg')}>
-            <img 
-              src='/images/money-sack.svg' 
-              alt='돈주머니 아이콘'
-              className='money-icon' />
-          </div>
-          <div className='icon-circle' onClick={() => handleIconClick('/images/profileMenu_1.svg')}>
-            <img 
-              src='/images/person.svg' 
-              alt='사람 아이콘' 
-              className='person-icon' />
-          </div>
-          <div className='icon-circle' onClick={() => handleIconClick('/images/profileMenu_3.svg')}>
-            <img 
-              src='/images/settings.svg' 
-              alt='세팅 아이콘' 
-              className='setting-icon' />
-          </div> */}
           {[1, 2, 3].map((index) => (
             <div
               key={index}
-              className={selectedIcon === index ? 'icon-circle' : ''}
-              onClick={() => handleIconClick(`/images/profileMenu_${index}.svg`, index)}
+              className={selectedIcon === index ? 'icon-selected-circle' : 'icon-unselected-circle'}
+              onClick={() => 
+                handleIconClick(`/images/profileMenu_${index}.svg`, index)}
             >
               <img
                 src={`/images/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
                 className={`icon ${selectedIcon === index ? 'selected' : ''}`}
               />
+
             </div>
           ))}
           <div className='space'></div>
