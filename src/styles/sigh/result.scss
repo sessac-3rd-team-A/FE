@@ -1,0 +1,109 @@
+@import '/src/styles/global.scss';
+
+.resultContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: toSize(120) toSize(100) toSize(40) toSize(100);
+}
+
+.resultMainContainer {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: toSize(840) toSize(840);
+  //   row-gap: 2vh;
+  column-gap: toSize(40);
+  height: 100%;
+
+  .resultSection {
+    display: flex;
+    flex-direction: column;
+    border-radius: toSize(30);
+    border: 1px solid #fff;
+    background: linear-gradient(
+      276deg,
+      rgba(255, 255, 255, 0.22) 11.01%,
+      rgba(255, 255, 255, 0.28) 37.28%,
+      rgba(186, 186, 186, 0.262) 59.39%,
+      rgba(252, 252, 252, 0.28) 95.77%
+    );
+    background-blend-mode: overlay;
+    box-shadow:
+      0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
+      0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(20px);
+
+    h3 {
+      font-family: 'LEMON MILK';
+      font-size: toSize(24);
+      text-align: center;
+    }
+  }
+
+  .resultPaint {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+  .resultMeme {
+    grid-column: 2;
+    grid-row: 1;
+    height: 40vh;
+  }
+  .resultSentiment {
+    grid-column: 2;
+    grid-row: 2;
+    height: 25vh;
+  }
+  .resultBtns {
+    grid-column: 2;
+    grid-row: 3;
+    height: 15vh;
+  }
+}
+
+.sighPainting {
+  width: toSize(700);
+  height: toSize(700);
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: toSize(20);
+}
+
+.sighMeme {
+  width: 80%;
+  height: 70%;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: toSize(20);
+}
+
+.resultBgText {
+  position: absolute;
+  width: 100%;
+  left: 0;
+
+  p {
+    font-family: 'LEMON MILK';
+    font-style: italic;
+    font-weight: 700;
+    color: #0066ff;
+    margin: 0;
+    font-size: toSize(350);
+    line-height: 90%;
+  }
+
+  & > p:nth-child(2) {
+    text-align: right;
+  }
+}
+
+.resultDoodle {
+  position: fixed;
+  bottom: -5vh;
+  right: -5vw;
+  width: toSize(350);
+  z-index: 2;
+}

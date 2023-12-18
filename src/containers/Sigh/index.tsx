@@ -1,6 +1,6 @@
 'use client';
 
-import '@/styles/sigh.scss';
+import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
 
 export default function SighPage() {

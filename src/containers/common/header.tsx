@@ -10,7 +10,7 @@ export default function Header() {
         <Link href={'/'} className="headerMenu">
           Main
         </Link>
-        <Link href={'/'} className="headerMenu middle">
+        <Link href={'/sigh'} className="headerMenu middle">
           SIGH
         </Link>
         <Link href={'/'} className="headerMenu">
