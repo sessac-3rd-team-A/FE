@@ -3,7 +3,7 @@ import '@/styles/main.scss';
 import '@/styles/profile/profileMenu.scss'
 import { useState, useEffect } from 'react';
 
-export default function ProfileMenu() {
+export default function gitProfileMenu() {
   const [selectedImage, setSelectedImage] = useState('/images/profileMenu_2.svg');
   const [selectedIcon, setSelectedIcon] = useState(2);
 
