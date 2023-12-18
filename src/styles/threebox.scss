@@ -1,0 +1,186 @@
+/*
+자바스크립트 사용하지 않고 CSS만으로 모든 기능을 구현했음
+그러나 하위 브라우저에서 지원되지 않는 선택자들을 사용했으므로
+하위 브라우저에서 정상작동하지 않을 가능성이 있음.
+(http://caniuse.com 에서 어떤 브라우저에서 사용가능한지 확인후에 적용할 필요가 있습니다.)
+
+* 사용 선택자와 속성 목록
+:checked , + , :not, calc
+
+/* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
+.threeBoxWrap {
+  width: 1604px;
+  height: 454px;
+}
+
+/* 기본 CSS 설정 */
+// body {
+//   font-family: '맑은 고딕', 'Malgun Gothic', '애플 SD 산돌고딕 Neo',
+//     'Apple SD Gothic Neo', Ngothic, sans-serif;
+//   font-size: 1em;
+// }
+// * {
+//   box-sizing: border-box;
+//   margin: 0;
+// }
+// div {
+//   display: inline-block;
+//   width: auto;
+//   height: auto;
+// }
+
+/* 화면 전체를 감싸는 박스 */
+// .wrap {
+//   //   position: absolute;
+//   min-width: 250px;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   overflow: hidden;
+// }
+
+/* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
+input.threeBoxButton {
+  display: none;
+}
+
+/* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
+input[type='radio']:checked + .threeBoxContents {
+  visibility: visible;
+  width: calc(100% - 250px);
+}
+
+/* 닫기 버튼 애니메이션 효과, 삭제시 기능상 무방함 */
+// input[type='radio'].close:checked + .closer {
+//   transform: translate(0, 100%);
+//   -webkit-transition: transform 0.2s ease;
+//   transition: transform 0.2s ease;
+// }
+// input[type='radio'].close:not(:checked) + .closer {
+//   transform: translate(0, 0);
+//   -webkit-transition: transform 0.2s ease;
+//   transition: transform 0.2s ease;
+// }
+
+/* 메뉴 버튼 디자인 */
+.threeBoxLabel {
+  height: 100%;
+  width: 50px;
+  display: inline-block;
+  float: left;
+  overflow: hidden;
+  cursor: pointer;
+}
+/*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
+      위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
+.threeBoxLabel.a {
+  background: #7caaf0;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
+}
+.threeBoxLabel.b {
+  background: #06f;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
+}
+.threeBoxLabel.c {
+  background: #7caaf0;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
+}
+
+.threeBoxLabel .rotate {
+  display: inline-block;
+}
+.threeBoxLabel .rotate p {
+  position: relative;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  transform-origin: left;
+  font-size: 2em;
+  white-space: nowrap;
+  left: 18%;
+  font-family: 'arial';
+  font-weight: 600;
+  color: #fff;
+  top: 30px;
+}
+
+/* 컨텐츠 본문 */
+.threeBoxContents {
+  position: relative;
+  visibility: collapse;
+  float: left;
+  // height: 100%;
+  height: 454px;
+  width: 1370px;
+  background-repeat: no-repeat;
+  width: 0;
+  transition: all 0.2s ease-out;
+  z-index: -1;
+  overflow: hidden;
+  background-image: url('../public/maskGroup.png');
+  border-radius: 40px;
+  // background: -moz-linear-gradient(
+  //   -45deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // background: -webkit-linear-gradient(
+  //   -45deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // background: linear-gradient(
+  //   135deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c0c60a', endColorstr='#59007c33',GradientType=1 );
+}
+.threeBoxInner {
+  display: table;
+  width: 400px;
+  height: 100%;
+  margin: 0 auto;
+  -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+}
+.threeBoxDescription {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 5%;
+  background: rgba(0, 0, 0, 0.04);
+}
+.threeBoxDescription h3 {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 50px;
+  color: #37a4ab;
+  line-height: 1;
+  margin: 0;
+  text-shadow: rgb(36, 127, 132) 2px 2px 0px;
+  margin-bottom: 20px;
+}
+.threeBoxDescription h3::first-letter {
+  font-size: 70px;
+  color: #0f848c;
+}
+.threeBoxDescription p {
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 600;
+  color: #4e6b61;
+  padding-left: 50px;
+  overflow: auto;
+  letter-spacing: -1px;
+}
