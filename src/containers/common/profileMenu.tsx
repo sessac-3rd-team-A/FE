@@ -18,7 +18,6 @@ export default function gitProfileMenu() {
   return (
     <div className='profile-menu-container'>
       <nav className='profile-menu-nav'>
-        <div className='space'></div>
         <div>
           {[1, 2, 3].map((index) => (
             <div
@@ -34,7 +33,6 @@ export default function gitProfileMenu() {
               />
             </div>
           ))}
-          <div className='space'></div>
         </div>
       </nav>
       <img 
