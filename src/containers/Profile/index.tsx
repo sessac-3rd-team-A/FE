@@ -61,6 +61,7 @@ export default function ProfilePage() {
         </div>
       </section>
       <ProfileMenu />
+      <section className="whiteGradientBg" />
     </div>
   );
 }

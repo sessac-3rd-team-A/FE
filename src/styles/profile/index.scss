@@ -8,6 +8,19 @@
 
 $calendar-color-border: rgb(220, 220, 220);
 
+.whiteGradientBg {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    52.55% 51.94% at 48.18% 62.86%,
+    rgba(217, 217, 217, 0) 52.78%,
+    #fff 100%
+  );
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
+
 p {
   margin: 0;
 }
@@ -17,20 +30,21 @@ p {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: calc(100vh - $header-height);
+  height: 100vh;
   position: relative;
 }
 
 // container
 .info-container {
-  margin-top: $header-height;
-  height: calc(100% - toSize(80 + 50));
+  height: calc(100vh - $header-height);
   box-sizing: border-box;
-  padding: toSize(50) toSize(100);
+  padding: toSize(150) toSize(50) toSize(100) toSize(50);
   width: toSize(1920);
   display: flex;
   gap: toSize(20);
   align-items: stretch;
+  z-index: 2;
+  position: relative;
 }
 
 // left container
@@ -44,7 +58,7 @@ p {
   .title {
     font-size: toSize(64);
     font-family: GMarketSans;
-    margin-bottom: toSize(50);
+    margin-bottom: 10%;
     font-weight: 400;
     font-style: normal;
     line-height: 110%;
@@ -54,7 +68,7 @@ p {
   .left-content {
     height: 100%;
     display: grid;
-    grid-template-rows: toSize(184) auto;
+    grid-template-rows: 35% 60%;
     grid-template-columns: repeat(2, 1fr);
     row-gap: toSize(20);
     column-gap: toSize(20);
