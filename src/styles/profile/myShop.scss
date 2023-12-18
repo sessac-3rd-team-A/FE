@@ -1,0 +1,24 @@
+@import '/src/styles/global.scss';
+
+.myShop-container {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: toSize(100);
+}
+
+.header-temp {
+    width: 100%;
+    height: toSize(110);
+    background-color: white;
+}
+
+.myShop-image-background {
+    width: 100%;
+    padding-left: toSize(50);
+    padding-right: toSize(50);
+}
+
+
+
+

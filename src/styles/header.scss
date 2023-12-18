@@ -1,0 +1,75 @@
+@import '/src/styles/global.scss';
+
+a {
+  text-decoration: none;
+}
+
+@keyframes shake-vertical {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateY(8px);
+  }
+  80% {
+    transform: translateY(6.4px);
+  }
+  90% {
+    transform: translateY(-6.4px);
+  }
+}
+
+.headerContainer {
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: transparent;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid;
+  padding: toSize(20) toSize(55);
+
+  .headerLogo {
+    width: toSize(50);
+  }
+
+  & div:first-of-type {
+    margin-left: toSize(130);
+  }
+
+  .headerMenu {
+    color: black;
+    font-family: Lemon Milk;
+    font-size: toSize(25);
+    cursor: pointer;
+
+    &.middle {
+      margin: 0 toSize(80);
+    }
+
+    &.signInBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: toSize(185);
+      height: toSize(55);
+      border-radius: 50%;
+      border: 1px solid;
+      box-shadow: 0 toSize(9) #3a89ff;
+    }
+  }
+}
+.signInBtn:hover {
+  animation: shake-vertical 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
