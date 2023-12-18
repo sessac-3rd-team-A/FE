@@ -6,9 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ProfileMenu from './profileMenu';
 import { CiCircleChevRight } from 'react-icons/ci';
+import DiaryModal from './diaryModal';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ProfilePage() {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <div className="profile-container">
@@ -57,10 +60,11 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="info-right">
-          <EmoCalendar />
+          <EmoCalendar setIsModalOpen={setIsModalOpen} />
         </div>
       </section>
       <ProfileMenu />
+      {isModalOpen && <DiaryModal />}
     </div>
   );
 }
