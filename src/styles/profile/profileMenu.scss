@@ -30,6 +30,8 @@ $container-size: toSize(80);
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: toSize(75);
+
             .icon-selected-circle {
                 background-color: $primary-color;
                 border-radius: 50%;
@@ -38,20 +40,23 @@ $container-size: toSize(80);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-right: toSize(50);
-                margin-left: toSize(50);
+                // margin-right: toSize(50);
+                // margin-left: toSize(50);
                 animation: bounce 1s ease-in-out;
 
-                .money-icon,
-                .person-icon,
-                .setting-icon {
+                .icon {
                     width: 80%;
                 }
             }
 
             .icon-unselected-circle {
                 transform: translateY(80%);
-                margin-left: 10px;
+                width: $icon-circle-size;
+                height: $icon-circle-size;
+
+                .icon {
+                  width: 80%;
+              }
             }
 
             .icon-hidden {
