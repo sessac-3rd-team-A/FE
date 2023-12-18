@@ -3,7 +3,6 @@
 @mixin fadeIn($time) {
   animation-name: fadeIn;
   animation-duration: $time;
-  // animation-delay: $time;
   animation-timing-function: ease-in-out;
 }
 
@@ -13,24 +12,29 @@ p {
   margin: 0;
 }
 
-// container
 .profile-container {
-  margin-top: $header-height;
-  box-sizing: border-box;
-  padding: toSize(50) toSize(100);
-  width: toSize(1920);
-  height: calc(100vh - $header-height);
-  display: flex;
-  gap: toSize(20);
-  align-items: stretch;
   background-image: url('/images/profile_background.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: calc(100vh - $header-height);
+  position: relative;
+}
+
+// container
+.info-container {
+  margin-top: $header-height;
+  height: calc(100% - toSize(80 + 50));
+  box-sizing: border-box;
+  padding: toSize(50) toSize(100);
+  width: toSize(1920);
+  display: flex;
+  gap: toSize(20);
+  align-items: stretch;
 }
 
 // left container
-.profile-left {
+.info-left {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -41,14 +45,16 @@ p {
     font-size: toSize(64);
     font-family: GMarketSans;
     margin-bottom: toSize(50);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 110%;
     @include fadeIn(0.3s);
   }
 
   .left-content {
     height: 100%;
-
     display: grid;
-    grid-template-rows: repeat(2, minmax(100px, auto));
+    grid-template-rows: toSize(184) auto;
     grid-template-columns: repeat(2, 1fr);
     row-gap: toSize(20);
     column-gap: toSize(20);
@@ -60,7 +66,6 @@ p {
     .graph,
     .count {
       animation: fadeIn 0.5s ease-in-out forwards;
-      opacity: 0;
       border-radius: 10px;
       border: 0.5px solid $calendar-color-border;
       background-color: transparent;
@@ -71,7 +76,7 @@ p {
     .count {
       position: relative;
       font-family: LEMON MILK;
-      height: toSize(184);
+      // height: toSize(184);
 
       div:first-child {
         box-sizing: border-box;
@@ -82,6 +87,7 @@ p {
         justify-content: flex-end;
         align-items: center;
         padding: 0 toSize(30);
+        // background-color: red;
         -webkit-clip-path: polygon(
           0 0,
           100% 0,
@@ -116,7 +122,7 @@ p {
     }
 
     .link {
-      height: toSize(184);
+      // height: toSize(184);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -161,7 +167,7 @@ p {
   }
 }
 
-.profile-right {
+.info-right {
   width: 50%;
   height: 100%;
   @include fadeIn(1s);
