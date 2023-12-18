@@ -1,3 +1,5 @@
+@import '/src/styles/global.scss';
+
 .diaryModal-container {
   position: absolute;
   top: 50%;
@@ -8,8 +10,43 @@
     linear-gradient(0deg, #e5e5e5 0%, #e5e5e5 100%),
     linear-gradient(0deg, #e5e5e5 0%, #e5e5e5 100%), #e5e5e5;
   box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 30px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1000;
+  animation: onModal 0.3s ease-in-out 0s 1 normal forwards;
+
+  img {
+    border-radius: 28px;
+  }
+}
+
+.date {
+  color: #3a89ff;
+  font-family: GmarketSans;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 110%; /* 35.2px */
+  margin-bottom: 20px;
+}
+
+// 모달 띄워질 때 애니메이션
+@keyframes onModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes offModal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

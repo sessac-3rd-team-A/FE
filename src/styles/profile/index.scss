@@ -6,6 +6,11 @@
   animation-timing-function: ease-in-out;
 }
 
+// 모달 나타났을 때 배경 설정
+.modalOn {
+  opacity: 0.3;
+}
+
 $calendar-color-border: rgb(220, 220, 220);
 
 p {

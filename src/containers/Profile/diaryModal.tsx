@@ -7,10 +7,10 @@ export default function DiaryModal() {
     <div className="diaryModal-container">
       <div className="date">2023.12.08</div>
       <Image
-        src="/images/profile_background.png"
-        width={500}
-        height={500}
+        src="/images/profileShop_background.jpg"
         alt="picture diary"
+        width={300}
+        height={400}
       />
     </div>
   );
