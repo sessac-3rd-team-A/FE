@@ -38,19 +38,19 @@ export default async function MyShopContainer() {
   }, []);
 
   const items = await SearchResult();
-  // const itemsBox = items.items;
+  // const itemsResult: ShopApiRes[] = items.items;
 
   return( mounted &&
     <div className='myShop-container'>
       <div className='header-temp' />
-        {/* <img 
+        <img 
           src='/images/profileShop_background.jpg'
           alt='배경 이미지'
           className='myShop-image-background'
-        /> */}
-      {/* <ul>
-        {itemsBox.map(item => (<li key={item.productId}>{item.title} - {item.lprice}</li>))}
-      </ul> */}
+        />
+      <ul>
+        {/* {itemsResult.map(item => (<li key={item.productId}>{item.title} - {item.lprice}</li>))} */}
+      </ul>
       <ProfileMenu />
     </div>
   );
