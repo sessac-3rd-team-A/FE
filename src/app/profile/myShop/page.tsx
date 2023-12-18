@@ -1,11 +1,10 @@
-import MyShopContainer from '@/containers/myShop';
-import ProfileFooter from '@/containers/common/profileFooter';
+import MyShopContainer from '@/containers/profile/myShop';
+import ProfileMenu from '@/containers/common/profileMenu';
 
 export default function MyShop() {
   return (
     <>
       <MyShopContainer />
-      <ProfileFooter />
     </>
   );
 }
