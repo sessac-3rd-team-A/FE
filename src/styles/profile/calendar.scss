@@ -64,8 +64,6 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   padding: toSize(45) toSize(32) toSize(72) toSize(32);
   height: 100%;
   display: flex;
-  align-items: flex-start;
-
   abbr {
     // 텍스트
     color: $calendar-color-text;
@@ -76,6 +74,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 
 .react-calendar__month-view__weekdays {
   background-color: #eee;
+  text-align: center;
   border-radius: 10px;
   padding: toSize(10) 0;
   abbr {
@@ -96,11 +95,10 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__tile {
   text-align: start;
   border-radius: 10px;
-  height: calc(12vh);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   transition: 0.3s;
 
   /*hover, focus, 선택됐을 시 */
