@@ -1,0 +1,133 @@
+@import '/src/styles/global.scss';
+
+// calendar
+$calendar-color-border: rgb(220, 220, 220);
+$calendar-color-text: #333;
+$theme-color-pink: pink;
+$theme-color-blue: rgba(61, 125, 227, 0.782);
+$theme-color-lime: rgba(160, 226, 160, 0.877);
+$theme-color-purple: rgba(124, 63, 124, 0.857);
+
+.react-calendar {
+  width: 100%;
+  height: 100%;
+  border: 1px solid $calendar-color-border;
+  border-radius: 20px;
+  background-color: transparent;
+  backdrop-filter: blur(50px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.react-calendar__navigation {
+  background: transparent;
+  height: toSize(90);
+  padding-top: toSize(28);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+
+  span {
+    font-family: LEMON MILK;
+    font-size: toSize(28);
+    font-weight: 900;
+    color: $calendar-color-text;
+  }
+
+  .react-calendar__navigation__label {
+    flex-grow: 0 !important;
+  }
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent;
+  border-radius: 20px 20px 0 0;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent;
+  border-radius: 20px 20px 0 0;
+}
+
+.react-calendar__navigation__arrow {
+  color: #3a89ff;
+}
+
+.react-calendar__viewContainer {
+  height: 100%;
+}
+
+.react-calendar__month-view {
+  padding: toSize(45) toSize(32) toSize(72) toSize(32);
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+
+  abbr {
+    // 텍스트
+    color: $calendar-color-text;
+    font-size: toSize(24);
+    font-weight: 500;
+  }
+}
+
+.react-calendar__month-view__weekdays {
+  background-color: #eee;
+  border-radius: 10px;
+  padding: toSize(10) 0;
+  abbr {
+    // 텍스트 부분
+    font-family: LemonMilk;
+    font-size: toSize(24);
+    font-weight: 900;
+    text-decoration: none;
+  }
+}
+
+.react-calendar__month-view__days {
+  height: 100%;
+  display: flex;
+  margin-top: 20px;
+}
+
+.react-calendar__tile {
+  text-align: start;
+  border-radius: 10px;
+  height: calc(12vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  transition: 0.3s;
+
+  /*hover, focus, 선택됐을 시 */
+  &:enabled:hover,
+  &--active {
+    background-color: rgba($theme-color-blue, 0.3);
+  }
+
+  &:enabled:focus,
+  &--active {
+    background: rgba($theme-color-purple, 0.3);
+  }
+
+  div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: toSize(24);
+  }
+}
+
+.react-calendar__tile--now {
+  position: relative;
+
+  background-color: transparent;
+  border-radius: 14px;
+  overflow: visible !important;
+}
