@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
@@ -79,9 +79,11 @@ export default function EmoCalendar() {
         maxDetail="month" // 상단 네비게이션에서 '월' 단위만 보이게 설정
         tileContent={addContent}
         showNeighboringMonth={false}
-        onActiveStartDateChange={({ activeStartDate }) =>
-          // getActiveMonth(activeStartDate)
-          alert(`next, prev 눌러서 설정된 시작 일자 : ${activeStartDate}`)
+        onActiveStartDateChange={
+          ({ activeStartDate }) =>
+            // getActiveMonth(activeStartDate)
+            console.log('하이')
+          // alert(`next, prev 눌러서 설정된 시작 일자 : ${activeStartDate}`)
         }
       />
     </>
