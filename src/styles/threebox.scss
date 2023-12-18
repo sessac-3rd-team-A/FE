@@ -9,8 +9,8 @@
 
 /* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
 .threeBoxWrap {
-  width: 800px;
-  height: 236px;
+  width: 1604px;
+  height: 454px;
 }
 
 /* 기본 CSS 설정 */
@@ -75,20 +75,24 @@ input[type='radio']:checked + .threeBoxContents {
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
 .threeBoxLabel.a {
-  background: #2e97b7;
+  background: #7caaf0;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
 }
 .threeBoxLabel.b {
-  background: #32b9be;
+  background: #06f;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
 }
 .threeBoxLabel.c {
-  background: #5bcebf;
+  background: #7caaf0;
+  border-radius: 40px;
+  width: 100px;
+  border: 10px;
 }
-.threeBoxLabel.d {
-  background: #74dcb9;
-}
-.threeBoxLabel.e {
-  background: #94dcb9;
-}
+
 .threeBoxLabel .rotate {
   display: inline-block;
 }
@@ -114,27 +118,32 @@ input[type='radio']:checked + .threeBoxContents {
   position: relative;
   visibility: collapse;
   float: left;
-  height: 100%;
+  // height: 100%;
+  height: 454px;
+  width: 1370px;
+  background-repeat: no-repeat;
   width: 0;
   transition: all 0.2s ease-out;
   z-index: -1;
   overflow: hidden;
-  background: -moz-linear-gradient(
-    -45deg,
-    rgba(46, 151, 183, 0.4) 0%,
-    rgba(164, 220, 185, 0.9) 100%
-  );
-  background: -webkit-linear-gradient(
-    -45deg,
-    rgba(46, 151, 183, 0.4) 0%,
-    rgba(164, 220, 185, 0.9) 100%
-  );
-  background: linear-gradient(
-    135deg,
-    rgba(46, 151, 183, 0.4) 0%,
-    rgba(164, 220, 185, 0.9) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c0c60a', endColorstr='#59007c33',GradientType=1 );
+  background-image: url('../public/maskGroup.png');
+  border-radius: 40px;
+  // background: -moz-linear-gradient(
+  //   -45deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // background: -webkit-linear-gradient(
+  //   -45deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // background: linear-gradient(
+  //   135deg,
+  //   rgba(46, 151, 183, 0.4) 0%,
+  //   rgba(164, 220, 185, 0.9) 100%
+  // );
+  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c0c60a', endColorstr='#59007c33',GradientType=1 );
 }
 .threeBoxInner {
   display: table;

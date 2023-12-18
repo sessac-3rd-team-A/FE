@@ -14,11 +14,11 @@ export default function ChartPage() {
   return (
     <>
       <h2 className="ChartTitle"> 이 페이지는 차트입니다{str}.</h2>
-      {/* <div className="ChartTitle, animate__animated animate__bounce">
+      <div className="ChartTitle, animate__animated animate__bounce">
         <Image src={trendText} alt="Picture of me" />
-      </div> */}
+      </div>
 
-      {/* <MyLineChart></MyLineChart> */}
+      <MyLineChart></MyLineChart>
 
       {/* <Semo></Semo> */}
 

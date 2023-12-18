@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import '../styles/threeBox.scss';
-import { Chart } from 'chart.js';
+import TrendLineChart from './trendLineChart';
+
 const ThreeBox: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu6');
 
@@ -26,11 +27,11 @@ const ThreeBox: React.FC = () => {
               onChange={() => handleMenuChange(menuId)}
             />
             <div className="threeBoxContents">
-              <div className="threeBoxInner">
-                <div className="threeBoxDescription">
-                  <h3>{`TITLE ${3 - index}`}</h3>
-                </div>
-              </div>
+              {/* <div className="threeBoxInner"> */}
+              {/* <div className="threeBoxDescription"> */}
+              {/* <h3>{`TITLE ${3 - index}`}</h3> */}
+              {/* </div> */}
+              {/* </div> */}
             </div>
             <label
               htmlFor={menuId}
@@ -51,7 +52,8 @@ const ThreeBox: React.FC = () => {
         id="menu6"
         className="threeBox button close"
         checked={selectedMenu === 'menu6'}
-        onChange={() => handleMenuChange('menu6')}
+        onChange={() => handleMenuChange
+          ('menu6')}
       /> */}
     </div>
   );

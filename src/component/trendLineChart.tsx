@@ -22,7 +22,7 @@ ChartJS.register(
   Legend,
 );
 
-const trendLineChart = () => {
+const TrendLineChart = () => {
   return (
     <div>
       <Line
@@ -61,4 +61,4 @@ const trendLineChart = () => {
     </div>
   );
 };
-export default trendLineChart;
+export default TrendLineChart;
