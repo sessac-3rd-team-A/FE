@@ -10,7 +10,15 @@
   @return #{$calculatedSize * 1vw};
 }
 
+// header 높이
 $header-height: toSize(20 * 2 + 55);
+
+// 캘린더 보더 색상
+$calendar-color-border: rgb(220, 220, 220);
+
+p {
+  margin: 0;
+}
 
 * {
   box-sizing: border-box;
@@ -23,4 +31,11 @@ body {
 button {
   border: none;
   background-color: transparent;
+}
+
+/* Chrome, Whale, Edge */
+
+/* 스크롤바 전체 기본 꾸미기 */
+body::-webkit-scrollbar {
+  display: none;
 }
