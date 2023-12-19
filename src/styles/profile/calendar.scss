@@ -96,14 +96,12 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__month-view__days {
   height: 90%;
   display: flex;
-  margin-top: 5rem;
   padding: 0 1rem;
 }
 
 .react-calendar__tile {
   position: relative;
   text-align: start;
-  height: 8rem;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
