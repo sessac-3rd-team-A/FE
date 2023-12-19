@@ -12,7 +12,7 @@
 
 /* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
 .threeBoxWrap {
-  width: toSize(1604);
+  width: 100%;
   height: toSize(876);
   align-items: center;
 }
@@ -55,18 +55,6 @@ input[type='radio']:checked + .threeBoxContents {
   width: toSize(1370);
 }
 
-/* 닫기 버튼 애니메이션 효과, 삭제시 기능상 무방함 */
-// input[type='radio'].close:checked + .closer {
-//   transform: translate(0, 100%);
-//   -webkit-transition: transform 0.2s ease;
-//   transition: transform 0.2s ease;
-// }
-// input[type='radio'].close:not(:checked) + .closer {
-//   transform: translate(0, 0);
-//   -webkit-transition: transform 0.2s ease;
-//   transition: transform 0.2s ease;
-// }
-
 /* 메뉴 버튼 디자인 */
 .threeBoxLabel {
   height: toSize(876);
@@ -77,28 +65,19 @@ input[type='radio']:checked + .threeBoxContents {
   cursor: pointer;
   transition: all 0.1s ease-out;
   margin: 0 toSize(5);
+  border: toSize(10);
+  border-radius: 40px;
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
 .threeBoxLabel.a {
   background: #7caaf0;
-  border-radius: 40px;
-  width: toSize(100);
-  border: toSize(10);
 }
 .threeBoxLabel.b {
   background: #06f;
-  border-radius: 40px;
-  width: toSize(100);
-
-  border: toSize(10);
 }
 .threeBoxLabel.c {
   background: #7caaf0;
-  border-radius: 40px;
-  width: toSize(100);
-
-  border: toSize(10);
 }
 
 .threeBoxRotate {
@@ -106,23 +85,28 @@ input[type='radio']:checked + .threeBoxContents {
   height: fit-content;
 
   position: relative;
+
   p {
-    position: relative;
+    position: absolute;
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
     transform-origin: left;
-    font-size: 2em;
     white-space: nowrap;
-    left: 18%;
-    font-family: 'arial';
-    font-weight: 600;
+    left: toSize(50);
+    font-family: 'LEMON MILK', sans-serif;
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 30.8px */
     color: #fff;
-    top: 30px;
+    top: toSize(438);
     text-align: center;
   }
+
+  //라벨 인덱싱 원
   div {
     width: toSize(74);
     height: toSize(74);
@@ -140,8 +124,8 @@ input[type='radio']:checked + .threeBoxContents {
     font-weight: 400;
     line-height: 110%; /* 30.8px */
     position: absolute;
-    bottom: toSize(-580);
-    left: toSize(15);
+    bottom: toSize(-600);
+    left: toSize(13);
   }
 }
 
@@ -162,6 +146,7 @@ input[type='radio']:checked + .threeBoxContents {
   z-index: -1;
   overflow: hidden;
   border-radius: 40px;
+  margin: 0 toSize(5);
 
   // background: -moz-linear-gradient(
   //   -45deg,
@@ -184,7 +169,7 @@ input[type='radio']:checked + .threeBoxContents {
   display: flex; //가운데 회색박스 나옴
   height: 90%;
   margin: 2% 1.5%;
-  width: 89%;
+  width: 90%;
   float: left;
   border-radius: 28px;
   border: 0.5px solid #fff;
@@ -205,9 +190,51 @@ input[type='radio']:checked + .threeBoxContents {
 }
 .threeBoxDescription {
   display: inline-block;
-  width: 2%;
+  width: toSize(90);
   height: 100%;
-  background: red;
+  // background: red;
+
+  p {
+    position: relative;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    transform-origin: left;
+    white-space: nowrap;
+    font-family: 'LEMON MILK', sans-serif;
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 30.8px */
+    color: #fff;
+    top: toSize(460);
+    left: toSize(50);
+    text-align: center;
+  }
+
+  //라벨 인덱싱 원
+  div {
+    width: toSize(74);
+    height: toSize(74);
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: white;
+    text-align: center;
+
+    color: #000;
+
+    margin-top: toSize(10);
+    font-family: 'GmarketSans';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 30.8px */
+    position: relative;
+    bottom: toSize(-498);
+    left: toSize(11);
+  }
 }
 .threeBoxDescription h3 {
   width: 100%;
@@ -223,13 +250,4 @@ input[type='radio']:checked + .threeBoxContents {
 .threeBoxDescription h3::first-letter {
   font-size: 70px;
   color: #0f848c;
-}
-.threeBoxDescription p {
-  font-size: 19px;
-  line-height: 1.7;
-  font-weight: 600;
-  color: #4e6b61;
-  padding-left: 50px;
-  overflow: auto;
-  letter-spacing: -1px;
 }

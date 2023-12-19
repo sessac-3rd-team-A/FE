@@ -34,9 +34,14 @@ const ThreeBox: React.FC = () => {
             />
             <div className="threeBoxContents">
               <div className="threeBoxInner"></div>
-              <div className="threeBoxDescription">
+              <span className="threeBoxDescription">
+                <p>{`${labeLText[index]}`}</p>
                 {/* <h3>{`TITLE ${3 - index}`}</h3> */}
-              </div>
+                <div className="labelCircle">
+                  <br></br>
+                  {`0${index + 1}`}
+                </div>
+              </span>
             </div>
             {menuId !== selectedMenu && (
               <label
@@ -44,10 +49,7 @@ const ThreeBox: React.FC = () => {
                 className={`threeBoxLabel ${String.fromCharCode(97 + index)}`}
               >
                 <span className="threeBoxRotate">
-                  <p>
-                    <br></br>
-                    {`${labeLText[index]}`}
-                  </p>
+                  <p>{`${labeLText[index]}`}</p>
                   <div className="labelCircle">
                     <br></br>
                     {`0${index + 1}`}
