@@ -1,3 +1,6 @@
+@import '/src/styles/global.scss';
+@import url('https://fonts.cdnfonts.com/css/lemon-milk');
+@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 /*
 자바스크립트 사용하지 않고 CSS만으로 모든 기능을 구현했음
 그러나 하위 브라우저에서 지원되지 않는 선택자들을 사용했으므로
@@ -9,8 +12,9 @@
 
 /* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
 .threeBoxWrap {
-  width: 1604px;
-  height: 454px;
+  width: toSize(1604);
+  height: toSize(876);
+  align-items: center;
 }
 
 /* 기본 CSS 설정 */
@@ -48,7 +52,7 @@ input.threeBoxButton {
 /* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
 input[type='radio']:checked + .threeBoxContents {
   visibility: visible;
-  width: calc(100% - 250px);
+  width: toSize(1370);
 }
 
 /* 닫기 버튼 애니메이션 효과, 삭제시 기능상 무방함 */
@@ -65,69 +69,100 @@ input[type='radio']:checked + .threeBoxContents {
 
 /* 메뉴 버튼 디자인 */
 .threeBoxLabel {
-  height: 100%;
-  width: 50px;
+  height: toSize(876);
+  width: toSize(100);
   display: inline-block;
   float: left;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.1s ease-out;
+  margin: 0 toSize(5);
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
 .threeBoxLabel.a {
   background: #7caaf0;
   border-radius: 40px;
-  width: 100px;
-  border: 10px;
+  width: toSize(100);
+  border: toSize(10);
 }
 .threeBoxLabel.b {
   background: #06f;
   border-radius: 40px;
-  width: 100px;
-  border: 10px;
+  width: toSize(100);
+
+  border: toSize(10);
 }
 .threeBoxLabel.c {
   background: #7caaf0;
   border-radius: 40px;
-  width: 100px;
-  border: 10px;
+  width: toSize(100);
+
+  border: toSize(10);
 }
 
-.threeBoxLabel .rotate {
+.threeBoxRotate {
   display: inline-block;
-}
-.threeBoxLabel .rotate p {
+  height: fit-content;
+
   position: relative;
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-  transform-origin: left;
-  font-size: 2em;
-  white-space: nowrap;
-  left: 18%;
-  font-family: 'arial';
-  font-weight: 600;
-  color: #fff;
-  top: 30px;
+  p {
+    position: relative;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    transform-origin: left;
+    font-size: 2em;
+    white-space: nowrap;
+    left: 18%;
+    font-family: 'arial';
+    font-weight: 600;
+    color: #fff;
+    top: 30px;
+    text-align: center;
+  }
+  div {
+    width: toSize(74);
+    height: toSize(74);
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: white;
+    text-align: center;
+
+    color: #000;
+
+    margin-top: toSize(10);
+    font-family: 'GmarketSans';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 30.8px */
+    position: absolute;
+    bottom: toSize(-580);
+    left: toSize(15);
+  }
 }
 
 /* 컨텐츠 본문 */
 .threeBoxContents {
+  background-image: url('../public/maskGroup.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   visibility: collapse;
   float: left;
   // height: 100%;
-  height: 454px;
-  width: 1370px;
-  background-repeat: no-repeat;
+  height: toSize(876);
+  width: toSize(1370);
   width: 0;
-  transition: all 0.2s ease-out;
+  transition: all 0.1s ease-out;
   z-index: -1;
   overflow: hidden;
-  background-image: url('../public/maskGroup.png');
   border-radius: 40px;
+
   // background: -moz-linear-gradient(
   //   -45deg,
   //   rgba(46, 151, 183, 0.4) 0%,
@@ -146,19 +181,33 @@ input[type='radio']:checked + .threeBoxContents {
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c0c60a', endColorstr='#59007c33',GradientType=1 );
 }
 .threeBoxInner {
-  display: table;
-  width: 400px;
-  height: 100%;
-  margin: 0 auto;
-  -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  display: flex; //가운데 회색박스 나옴
+  height: 90%;
+  margin: 2% 1.5%;
+  width: 89%;
+  float: left;
+  border-radius: 28px;
+  border: 0.5px solid #fff;
+
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.22) -1.57%,
+    rgba(255, 255, 255, 0.28) 36.53%,
+    rgba(143, 143, 143, 0.26) 44.36%,
+    rgba(255, 255, 255, 0.28) 98.98%
+  );
+
+  background-blend-mode: overlay;
+  backdrop-filter: blur(90px);
+  // -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
 }
 .threeBoxDescription {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 0 5%;
-  background: rgba(0, 0, 0, 0.04);
+  display: inline-block;
+  width: 2%;
+  height: 100%;
+  background: red;
 }
 .threeBoxDescription h3 {
   width: 100%;

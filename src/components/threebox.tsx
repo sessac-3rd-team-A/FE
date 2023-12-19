@@ -1,20 +1,26 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/threeBox.scss';
 import TrendLineChart from './trendLineChart';
 
 const ThreeBox: React.FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<string>('menu6');
+  const [selectedMenu, setSelectedMenu] = useState<string>('menu6'); // 현재 선택된 메뉴이름
 
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
   };
 
+  useEffect(() => {
+    console.log(selectedMenu);
+  }, [selectedMenu]);
+
+  const labeLText: string[] = ['MAIN', 'GROUP', 'MEME'];
+
   return (
     <div className="threeBoxWrap">
       {/* Repeat the structure for each menu */}
       {Array.from({ length: 3 }, (_, index) => {
-        const menuId = `menu${index + 1}`;
+        const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
 
         return (
           <React.Fragment key={menuId}>
@@ -27,20 +33,28 @@ const ThreeBox: React.FC = () => {
               onChange={() => handleMenuChange(menuId)}
             />
             <div className="threeBoxContents">
-              {/* <div className="threeBoxInner"> */}
-              {/* <div className="threeBoxDescription"> */}
-              {/* <h3>{`TITLE ${3 - index}`}</h3> */}
-              {/* </div> */}
-              {/* </div> */}
+              <div className="threeBoxInner"></div>
+              <div className="threeBoxDescription">
+                {/* <h3>{`TITLE ${3 - index}`}</h3> */}
+              </div>
             </div>
-            <label
-              htmlFor={menuId}
-              className={`threeBoxLabel ${String.fromCharCode(97 + index)}`}
-            >
-              <span className="threeBoxRotate">
-                <p>{`MENU ${3 - index}`}</p>
-              </span>
-            </label>
+            {menuId !== selectedMenu && (
+              <label
+                htmlFor={menuId}
+                className={`threeBoxLabel ${String.fromCharCode(97 + index)}`}
+              >
+                <span className="threeBoxRotate">
+                  <p>
+                    <br></br>
+                    {`${labeLText[index]}`}
+                  </p>
+                  <div className="labelCircle">
+                    <br></br>
+                    {`0${index + 1}`}
+                  </div>
+                </span>
+              </label>
+            )}
           </React.Fragment>
         );
       })}
