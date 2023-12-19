@@ -6,7 +6,10 @@
   animation-timing-function: ease-in-out;
 }
 
-$calendar-color-border: rgb(220, 220, 220);
+
+// 모달 나타났을 때 배경 설정
+.modalOn {
+  opacity: 0.3;
 
 .whiteGradientBg {
   width: 100vw;
@@ -25,6 +28,7 @@ p {
   margin: 0;
 }
 
+// container
 .profile-container {
   background-image: url('/images/profile_background.png');
   background-position: center;
@@ -34,7 +38,7 @@ p {
   position: relative;
 }
 
-// container
+// main contents
 .info-container {
   height: calc(100vh - $header-height);
   box-sizing: border-box;
@@ -47,7 +51,7 @@ p {
   position: relative;
 }
 
-// left container
+// main contents - left container
 .info-left {
   display: flex;
   flex-direction: column;
@@ -90,7 +94,7 @@ p {
     .count {
       position: relative;
       font-family: LEMON MILK;
-      // height: toSize(184);
+      height: toSize(184);
 
       div:first-child {
         box-sizing: border-box;
@@ -136,7 +140,7 @@ p {
     }
 
     .link {
-      // height: toSize(184);
+      height: toSize(184);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -184,16 +188,36 @@ p {
 .info-right {
   width: 50%;
   height: 100%;
+  display: flex;
   @include fadeIn(1s);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    // transform: translateY(20px); // Adjust as needed
   }
+
   to {
     opacity: 1;
-    // transform: translateY(0);
+  }
+}
+
+@media (max-width: 1920px) {
+  .profile-container {
+    height: 100vh;
+    overflow-y: visible;
+    padding-bottom: toSize(80 + 20);
+  }
+
+  .info-container {
+    flex-direction: column;
+  }
+
+  .info-left {
+    width: 100%;
+  }
+
+  .info-right {
+    width: 100%;
   }
 }

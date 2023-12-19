@@ -10,7 +10,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 
 .react-calendar {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   border: 1px solid $calendar-color-border;
   border-radius: 20px;
   background-color: transparent;
@@ -22,16 +22,15 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 
 .react-calendar__navigation {
   background: transparent;
-  height: toSize(90);
-  padding-top: toSize(28);
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0;
+  padding: 3rem;
 
   span {
     font-family: LEMON MILK;
-    font-size: toSize(28);
+    font-size: 2rem;
     font-weight: 900;
     color: $calendar-color-text;
   }
@@ -67,12 +66,16 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   abbr {
     // 텍스트
     color: $calendar-color-text;
-    font-size: toSize(24);
+    font-size: 1.5rem;
     font-weight: 500;
   }
 
-  & > div > div {
-    height: 100%;
+  // react-calendar__month-view > div > div > react-calendar__month-view__weekdays 이런 구조여서 그 중간꺼 설정
+  & > div {
+    width: 100%;
+    & > div {
+      height: 100%;
+    }
   }
 }
 
@@ -84,7 +87,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   abbr {
     // 텍스트 부분
     font-family: LemonMilk;
-    font-size: toSize(24);
+    font-size: 1.5rem;
     font-weight: 900;
     text-decoration: none;
   }
@@ -93,12 +96,14 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
 .react-calendar__month-view__days {
   height: 90%;
   display: flex;
-  margin-top: 20px;
+  margin-top: 5rem;
+  padding: 0 1rem;
 }
 
 .react-calendar__tile {
   position: relative;
   text-align: start;
+  height: 8rem;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -132,4 +137,19 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   background-color: transparent;
   border-radius: 14px;
   overflow: visible !important;
+}
+
+@media (max-width: 1920px) {
+  .react-calendar__month-view__days {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    height: auto;
+  }
+
+  .react-calendar__tile {
+    height: 6rem;
+    abbr {
+      height: 100%;
+    }
+  }
 }

@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
 import '@/styles/profile/calendar.scss';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 type ValuePiece = Date | null;
 
@@ -22,7 +22,11 @@ const dayList = [
   '2023-12-11',
 ];
 
-export default function EmoCalendar() {
+interface Props {
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function EmoCalendar({ setIsModalOpen }: Props) {
   const [value, onChange] = useState<Value>(new Date()); // 클릭한 날짜 (초기값으로 현재 날짜 넣어줌)
 
   // const monthOfActiveDate = moment(value).format('YYYY-MM');
@@ -65,9 +69,12 @@ export default function EmoCalendar() {
       <Calendar
         locale="en"
         onChange={(value, event) => {
-          // alert(`New date is : ${value}`);
-          // console.log(event);
-          onChange(value);
+          // onChange(value);
+          if (
+            dayList.find((day) => day === moment(value).format('YYYY-MM-DD'))
+          ) {
+            setIsModalOpen(true);
+          }
         }}
         value={value}
         nextLabel={<GrCaretNext />}
