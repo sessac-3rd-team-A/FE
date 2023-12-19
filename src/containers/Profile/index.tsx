@@ -91,6 +91,7 @@ export default function ProfilePage() {
       </section>
       <div className={`${isModalOpen ? 'modalOn' : ''}`}>
         <ProfileMenu />
+        <section className="whiteGradientBg" />
       </div>
       {isModalOpen && <DiaryModal />}
     </div>
