@@ -1,9 +1,7 @@
-import axios from 'axios';
 import Link from 'next/link';
-// import { ShopApiRes } from "@/types";
+import { ShopApiRes } from "@/types";
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
-import { useState, useEffect } from 'react';
 import ProfileMenu from './profileMenu';
 import Image from 'next/image';
 import profile_char from '/public/images/profile_char.svg';
@@ -13,31 +11,31 @@ const API = 'https://openapi.naver.com/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
-async function SearchResult() {
+async function SearchResult(): Promise<any> {
   const query = '20대 여자 스트레스';
   const displayNum = 20;
   const url = `${API}?query=${encodeURIComponent(query)}&display=${displayNum}&start=1&sort=date`;
 
   try {
-    const res = await axios.get(url, {
-      headers: {
-        "X-Naver-Client-Id": NAVER_CLIENT_ID,
-        "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
-      },
-      timeout: 10000
+    const headers = new Headers();
+    headers.append("X-Naver-Client-Id", NAVER_CLIENT_ID || '');
+    headers.append("X-Naver-Client-Secret", NAVER_CLIENT_SECRET || '');
+
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: headers,
     });
-    return res.data;
+    return res.json();
 
   } catch (err) {
-    console.error('axios error:', err);
+    console.error('fetch error:', err);
     throw err;
   }
 }
 
 export default async function MyShopPage() {
-
   const items = await SearchResult();
-  const itemsResult = items.items;
+  const itemsResult:ShopApiRes[] = items.items;
 
   return (
     <div className="myShop-container">
