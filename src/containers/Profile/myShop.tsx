@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Link from 'next/link';
 // import { ShopApiRes } from "@/types";
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
@@ -9,11 +10,11 @@ import profile_char from '/public/images/profile_char.svg';
 import heart_eye from '/public/images/heart_eye.png';
 
 const API = 'https://openapi.naver.com/v1/search/shop.json';
-const NAVER_CLIENT_ID = 'zU_PN2dzVWNX6xNUBsQe';
-const NAVER_CLIENT_SECRET = 'LWe_w7kUpV';
+const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
+const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
 async function SearchResult() {
-  const query = '스트레스';
+  const query = '20대 여자 스트레스';
   const displayNum = 20;
   const url = `${API}?query=${encodeURIComponent(query)}&display=${displayNum}&start=1&sort=date`;
 
@@ -29,25 +30,17 @@ async function SearchResult() {
 
   } catch (err) {
     console.error('axios error:', err);
-    console.error('response status:', err.response?.status);
-    console.error('response data:', err.response?.data);
     throw err;
   }
 }
 
-export default async function MyShopContainer() {
-  // const [mounted, setMounted] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+export default async function MyShopPage() {
 
   const items = await SearchResult();
   const itemsResult = items.items;
 
   return (
-    // mounted && (
-      <div className="myShop-container">
+    <div className="myShop-container">
         <div className="header-temp" />
         <img
           src="/images/profileShop_background.jpg"
@@ -65,15 +58,28 @@ export default async function MyShopContainer() {
             className='char-eye'/>
         </div>
         <div className='myShop-explain-container'>
-              <p id='RECOMMAND1'>RECOMMAND</p>
-              <p id='RECOMMAND2'>당신의 최근 기분을 분석하여 기분이 좋아지는 아이템을 추천합니다.</p>
+          <p id='RECOMMAND1'>RECOMMAND</p>
+          <p id='RECOMMAND2'>당신의 최근 기분을 분석하여 기분이 좋아지는 아이템을 추천합니다.</p>
+        </div>
+        <div className='product-container'>
+          {itemsResult.map((item, index) => (
+            <div className='product-detail-container' key={item.productId}>
+              {[...Array(4)].map((_, innerIndex) => (
+                itemsResult[index * 4 + innerIndex]?.title && (
+                  <Link href={itemsResult[index * 4 + innerIndex]?.link}>
+                    <div className='product-detail' key={innerIndex}>
+                      <img src={itemsResult[index * 4 + innerIndex]?.image}
+                        className='product-image'/>
+                      타이틀: {itemsResult[index * 4 + innerIndex]?.title}<br />
+                      가격: {itemsResult[index * 4 + innerIndex]?.lprice}
+                    </div>
+                  </Link>
+                )
+              ))}
             </div>
-        <div>
-          {itemsResult.map(item => 
-            (<div key={item.productId}>{item.title} - {item.lprice}</div>))}
+          ))}
         </div>
         <ProfileMenu />
-      </div>
-    // )
+    </div>
   );
 }
