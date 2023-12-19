@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../styles/threeBox.scss';
+import '../styles/trend/threeBox.scss';
 import TrendLineChart from './trendLineChart';
 
 const ThreeBox: React.FC = () => {
