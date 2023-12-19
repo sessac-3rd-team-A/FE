@@ -8,6 +8,7 @@ import ProfileMenu from './profileMenu';
 import { CiCircleChevRight } from 'react-icons/ci';
 import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
+import PChart from './profileChart';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -79,6 +80,7 @@ export default function ProfilePage() {
             </div>
             <div className="graph">
               <div>
+                <PChart />
                 <p>MOOD</p>
                 <p>GRAPH</p>
               </div>
