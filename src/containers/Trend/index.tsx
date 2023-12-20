@@ -9,16 +9,14 @@ import trendText from '../../../public/trend/trendText.svg';
 import ThreeBox from '@/components/threebox';
 
 export default function TrendPage() {
-  let str: string = '이재욱';
+  let str: string = '트렌드';
   let arr;
   return (
     <>
-      <h2 className="ChartTitle"> 이 페이지는 차트입니다{str}.</h2>
+      <h2 className="ChartTitle"> 이 페이지는 {str}페이지 입니다.</h2>
       <div className="ChartTitle, animate__animated animate__bounce">
         <Image src={trendText} alt="Picture of me" />
       </div>
-
-      <MyLineChart></MyLineChart>
 
       {/* <Semo></Semo> */}
 
