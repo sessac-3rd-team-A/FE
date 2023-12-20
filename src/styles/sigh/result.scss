@@ -1,6 +1,6 @@
 @import '/src/styles/global.scss';
 
-.resultContainer {
+.result-container {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -10,7 +10,7 @@
   padding: toSize(120) toSize(100) toSize(40) toSize(100);
 }
 
-.resultMainContainer {
+.result-mainContainer {
   z-index: 1;
   display: grid;
   grid-template-columns: toSize(840) toSize(840);
@@ -18,7 +18,7 @@
   column-gap: toSize(40);
   height: 100%;
 
-  .resultSection {
+  .result-section {
     display: flex;
     flex-direction: column;
     border-radius: toSize(30);
@@ -43,28 +43,28 @@
     }
   }
 
-  .resultPaint {
+  .result-paint {
     grid-column: 1;
     grid-row: 1 / 4;
   }
-  .resultMeme {
+  .result-meme {
     grid-column: 2;
     grid-row: 1;
     height: 40vh;
   }
-  .resultSentiment {
+  .result-sentiment {
     grid-column: 2;
     grid-row: 2;
     height: 25vh;
   }
-  .resultBtns {
+  .result-btns {
     grid-column: 2;
     grid-row: 3;
     height: 15vh;
   }
 }
 
-.sighPainting {
+.result-painting {
   width: toSize(700);
   height: toSize(700);
   margin: 0 auto;
@@ -72,7 +72,7 @@
   border-radius: toSize(20);
 }
 
-.sighMeme {
+.result-memeImg {
   width: 80%;
   height: 70%;
   margin: 0 auto;
@@ -81,13 +81,13 @@
 }
 
 // sentiment chart
-.resultSentimentArticle {
+.result-sentimentArticle {
   display: flex;
   margin: 0 toSize(50) toSize(20) toSize(50);
   height: 60%;
 }
 
-.resultSentimentLabel {
+.result-sentimentLabel {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -97,13 +97,13 @@
   margin-right: toSize(30);
 }
 
-.resultSentimentChart {
+.result-sentimentChart {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
-  .resultSentimentData {
+  .result-sentimentData {
     display: flex;
     align-items: center;
     width: 100%;
@@ -126,7 +126,7 @@
 }
 
 // button
-.resultBtns {
+.result-btns {
   text-align: center;
   position: relative;
 
@@ -153,7 +153,7 @@
 }
 
 // Background
-.resultBgText {
+.result-bgText {
   position: absolute;
   width: 100%;
   left: 0;
@@ -173,7 +173,7 @@
   }
 }
 
-.resultDoodle {
+.result-doodle {
   position: fixed;
   bottom: -5vh;
   right: -5vw;

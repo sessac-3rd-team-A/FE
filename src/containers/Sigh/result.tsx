@@ -3,6 +3,7 @@ import Image from 'next/image';
 import '@/styles/sigh/result.scss';
 import { useEffect, useState } from 'react';
 import resultDoodle from '/public/sigh/result_doodle_1.png';
+import Link from 'next/link';
 
 export default function SighResultPage() {
   type resultType = {
@@ -28,9 +29,9 @@ export default function SighResultPage() {
     },
   };
 
-  const [negativeData, setNegativeData] = useState<number>();
-  const [positiveData, setPositiveData] = useState<number>();
-  const [neutralData, setNeutralData] = useState<number>();
+  const [negativeData, setNegativeData] = useState<number | undefined>();
+  const [positiveData, setPositiveData] = useState<number | undefined>();
+  const [neutralData, setNeutralData] = useState<number | undefined>();
 
   useEffect(() => {
     if (sighResult.confidence) {
@@ -42,30 +43,30 @@ export default function SighResultPage() {
   }, [sighResult.confidence]);
 
   return (
-    <div className="resultContainer">
-      <main className="resultMainContainer">
-        <section className="resultSection resultPaint">
+    <div className="result-container">
+      <main className="result-mainContainer">
+        <section className="result-section result-paint">
           <h3>TODAY'S AH-WHEW</h3>
           <img
             src={sighResult.painting}
             alt="그림일기"
-            className="sighPainting"
+            className="result-painting"
           />
         </section>
-        <section className="resultSection resultMeme">
+        <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
-          <img src={sighResult.meme} alt="짤" className="sighMeme" />
+          <img src={sighResult.meme} alt="짤" className="result-memeImg" />
         </section>
-        <section className="resultSection resultSentiment">
+        <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>
-          <article className="resultSentimentArticle">
-            <div className="resultSentimentLabel">
+          <article className="result-sentimentArticle">
+            <div className="result-sentimentLabel">
               <label>Negative</label>
               <label>Positive</label>
               <label>Neutral</label>
             </div>
-            <div className="resultSentimentChart">
-              <div className="resultSentimentData resultNegativeData">
+            <div className="result-sentimentChart">
+              <div className="result-sentimentData result-negativeData">
                 <div
                   style={{
                     width: `${negativeData}%`,
@@ -80,7 +81,7 @@ export default function SighResultPage() {
                   }}
                 />
               </div>
-              <div className="resultSentimentData resultPositiveData">
+              <div className="result-sentimentData result-positiveData">
                 <div
                   style={{
                     width: `${positiveData}%`,
@@ -95,7 +96,7 @@ export default function SighResultPage() {
                   }}
                 />
               </div>
-              <div className="resultSentimentData resultNeutralData">
+              <div className="result-sentimentData result-neutralData">
                 <div
                   style={{
                     width: `${neutralData}%`,
@@ -112,16 +113,18 @@ export default function SighResultPage() {
             </div>
           </article>
         </section>
-        <section className="resultBtns">
-          <button>RESTART</button>
+        <section className="result-btns">
+          <Link href={'/sigh'}>
+            <button>RESTART</button>
+          </Link>
           <button>SAVE</button>
         </section>
       </main>
-      <div className="resultBgText">
+      <div className="result-bgText">
         <p>AH-</p>
         <p>WHEW!</p>
       </div>
-      <Image src={resultDoodle} alt="doodle" className="resultDoodle" />
+      <Image src={resultDoodle} alt="doodle" className="result-doodle" />
     </div>
   );
 }

@@ -19,74 +19,74 @@ export default function SighPage() {
   };
 
   return (
-    <div className="sighContainer">
-      <main className="sighMainContainer">
-        <h1 className="sighH">Let me hear your sigh</h1>
+    <div className="sigh-container">
+      <main className="sigh-mainContainer">
+        <h1 className="sigh-title">Let me hear your sigh</h1>
         <article
-          className={`sighWrite ${isVisible ? 'sighVisible' : 'sighUnVisible'}`}
+          className={`sigh-write ${isVisible ? '-visible' : '-unVisible'}`}
         >
           <textarea
-            className="sighText"
+            className="sigh-text"
             placeholder="오늘 어떤 일이 있었나요?"
             value={sighText}
             onChange={handleInputChange}
           />
           <p>{sighText.length}/1000</p>
         </article>
-        <button className="sighBtn" onClick={handleStartButtonClick}>
+        <button className="sigh-btn" onClick={handleStartButtonClick}>
           {buttonText}
         </button>
       </main>
-      <div className="sighDoodles">
+      <div className="sigh-doodles">
         <img
           src="/sigh/sigh_doodle_1.png"
           alt="doodle"
-          className="doodle doodleA"
+          className="sigh-doodle doodleA"
         />
         <img
           src="/sigh/sigh_doodle_2.png"
           alt="doodle"
-          className="doodle doodleB"
+          className="sigh-doodle doodleB"
         />
         <img
           src="/sigh/sigh_doodle_3.png"
           alt="doodle"
-          className="doodle doodleC"
+          className="sigh-doodle doodleC"
         />
         <img
           src="/sigh/sigh_doodle_4.png"
           alt="doodle"
-          className="doodle doodleD"
+          className="sigh-doodle doodleD"
         />
         <img
           src="/sigh/sigh_doodle_5.png"
           alt="doodle"
-          className="doodle doodleE"
+          className="sigh-doodle doodleE"
         />
         <img
           src="/sigh/sigh_doodle_6.png"
           alt="doodle"
-          className="doodle doodleF"
+          className="sigh-doodle doodleF"
         />
         <img
           src="/sigh/sigh_doodle_7.png"
           alt="doodle"
-          className="doodle doodleG"
+          className="sigh-doodle doodleG"
         />
         <img
           src="/sigh/sigh_doodle_8.png"
           alt="doodle"
-          className="doodle doodleH"
+          className="sigh-doodle doodleH"
         />
         <img
           src="/sigh/sigh_doodle_9.png"
           alt="doodle"
-          className="doodle doodleI"
+          className="sigh-doodle doodleI"
         />
         <img
           src="/sigh/sigh_doodle_10.png"
           alt="doodle"
-          className="doodle doodleJ"
+          className="sigh-doodle doodleJ"
         />
       </div>
     </div>
