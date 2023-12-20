@@ -15,6 +15,7 @@
   width: 100%;
   height: toSize(876);
   align-items: center;
+  margin: 0 0 toSize(90) toSize(90);
 }
 
 /* 기본 CSS 설정 */
@@ -131,7 +132,7 @@ input[type='radio']:checked + .threeBoxContents {
 
 /* 컨텐츠 본문 */
 .threeBoxContents {
-  background-image: url('../../../public/trend/box_background.png');
+  background-image: url('../../../public/statistics/box_background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -143,7 +144,7 @@ input[type='radio']:checked + .threeBoxContents {
   width: toSize(1370);
   width: 0;
   transition: all 0.1s ease-out;
-  z-index: -1;
+  // z-index: -1;
   overflow: hidden;
   border-radius: 40px;
   margin: 0 toSize(5);
@@ -167,7 +168,7 @@ input[type='radio']:checked + .threeBoxContents {
 }
 .threeBoxInner {
   display: flex; //가운데 회색박스 나옴
-  height: 90%;
+  height: 94%;
   margin: 2% 1.5%;
   width: 90%;
   float: left;
