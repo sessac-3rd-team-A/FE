@@ -1,0 +1,56 @@
+@import '/src/styles/global.scss';
+@import '~include-media/dist/include-media';
+
+.sign-mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: calc(100vh - $header-height);
+  margin-top: $header-height;
+  .sign-contentContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    width: 807px;
+    height: 576px;
+    border-radius: toSize(28);
+    border: 1px solid #fff;
+    background-blend-mode: overlay;
+    box-shadow:
+      0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
+      0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(180px);
+    z-index: 1;
+    @include media('<=1200px') {
+      width: toSizeC(807, 1200);
+      height: toSizeC(576, 1200);
+    }
+  }
+  .signIn-letter {
+    font-family: LEMON MILK;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 57px;
+  }
+  input:focus {
+    outline: 1.5px solid #3a89ff;
+  }
+  input::placeholder {
+    color: #a7a7a7;
+  }
+  #id {
+    margin-top: 100px;
+    width: 560px;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid #3a89ff;
+    padding: 31px;
+    font-family: GMarketSans;
+    font-size: 28px;
+    &.pw {
+      margin-top: 13px;
+    }
+  }
+}

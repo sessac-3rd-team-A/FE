@@ -16,6 +16,7 @@
     "chart.js": "^4.4.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "include-media": "^2.0.0",
     "moment": "^2.29.4",
     "next": "14.0.4",
     "react": "^18",

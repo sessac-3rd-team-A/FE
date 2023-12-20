@@ -10,6 +10,12 @@
   @return #{$calculatedSize * 1vw};
 }
 
+// 반응형 크기 계산 (개발자 입력 픽셀 기준)
+@function toSizeC($size, $standard) {
+  $calculatedSize: ($size / $standard) * 100;
+  @return #{$calculatedSize * 1vw};
+}
+
 // header 높이
 $header-height: toSize(20 * 2 + 55);
 
