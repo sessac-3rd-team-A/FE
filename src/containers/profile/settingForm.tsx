@@ -15,7 +15,7 @@ export default function SettingForm() {
       const formData = new FormData(event.currentTarget)
       const response = await fetch('/profile/setting', {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(formData),
       })
  
       if (!response.ok) {
@@ -49,9 +49,10 @@ export default function SettingForm() {
           id='id' 
           placeholder='Your ID'
           minLength={2}
-          maxLength={100}/>
+          maxLength={100}
+          readOnly />
         <div className='age-and-gender'>
-          <select id='age'>
+          <select id='age' name='age'>
             <option value="" disabled selected hidden>Age</option>
             <option value="10대">10 대</option>
             <option value="20대">20 대</option>
@@ -59,7 +60,7 @@ export default function SettingForm() {
             <option value="20대">20 대</option>
             <option value="50대">50 대 이상</option>
           </select>
-          <select id='gender'>
+          <select id='gender' name='gender'>
             <option value="" disabled selected hidden>Gender</option>
             <option value="female">여자</option>
             <option value="male">남자</option>
