@@ -1,0 +1,7 @@
+@import '/src/styles/global.scss';
+.semoFloating {
+  display: flex;
+  position: sticky;
+  transform: translate(toSize(1400), toSize(-1000));
+  z-index: -1;
+}

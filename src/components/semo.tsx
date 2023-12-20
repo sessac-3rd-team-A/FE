@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import profilePic from '../../public/trend/semo.svg';
+import '../../src/styles/trend/semo.scss';
 
 function Semo() {
   return (
@@ -7,7 +8,7 @@ function Semo() {
       src={profilePic}
       alt="Picture of me"
       //   placeholder="blur" // Optional blur-up while loading
-      className="floating"
+      className="semoFloating"
     />
   );
 }

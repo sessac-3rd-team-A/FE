@@ -15,7 +15,7 @@
   width: 100%;
   height: toSize(876);
   align-items: center;
-  margin: toSize(90);
+  margin: 0 0 toSize(90) toSize(90);
 }
 
 /* 기본 CSS 설정 */
@@ -168,7 +168,7 @@ input[type='radio']:checked + .threeBoxContents {
 }
 .threeBoxInner {
   display: flex; //가운데 회색박스 나옴
-  height: 90%;
+  height: 94%;
   margin: 2% 1.5%;
   width: 90%;
   float: left;

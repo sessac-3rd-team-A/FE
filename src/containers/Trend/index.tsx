@@ -13,14 +13,16 @@ export default function TrendPage() {
   let arr;
   return (
     <>
-      <h2 className="ChartTitle"> 이 페이지는 {str}페이지 입니다.</h2>
+      <h2 className="ChartTitle" style={{ visibility: 'hidden' }}>
+        {' '}
+        이 페이지는 {str}페이지 입니다.
+      </h2>
       <div className="ChartTitle, animate__animated animate__bounce">
-        <Image src={trendText} alt="Picture of me" />
+        <Image src={trendText} alt="Picture of me" className="chartText" />
       </div>
 
-      {/* <Semo></Semo> */}
-
       <ThreeBox></ThreeBox>
+      <Semo></Semo>
     </>
   );
 }
