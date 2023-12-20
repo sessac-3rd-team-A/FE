@@ -36,11 +36,9 @@ export default function SighPage() {
           return response.json();
         })
         .then((data) => {
-          // Handle the response data as needed
           console.log('POST request successful:', data);
         })
         .catch((error) => {
-          // Handle errors
           console.error('POST request failed:', error);
         });
     }
