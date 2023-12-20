@@ -1,10 +1,10 @@
 @import '/src/styles/global.scss';
 
-.sighContainer {
+.sigh-container {
   height: calc(100vh - toSize(100));
 }
 
-.sighMainContainer {
+.sigh-mainContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-.sighH {
+.sigh-title {
   font-family: 'LEMON MILK';
   font-size: toSize(100);
   font-style: normal;
@@ -25,7 +25,7 @@
   animation: scaleAni 2s ease-in-out;
 }
 
-.sighBtn {
+.sigh-btn {
   border: 1px solid black;
   width: toSize(250);
   aspect-ratio: 10/3;
@@ -45,7 +45,7 @@
   }
 }
 
-.sighWrite {
+.sigh-write {
   visibility: hidden;
   width: 80vw;
   height: 0;
@@ -68,7 +68,7 @@
   transition: all 0.5s ease-in;
   opacity: 0;
 
-  .sighText {
+  .sigh-text {
     border: none;
     background-color: transparent;
     width: 100%;
@@ -86,15 +86,15 @@
     float: right;
   }
 }
-.sighVisible {
+.-visible {
   visibility: visible;
   height: 60vh;
   opacity: 100;
   padding: toSize(100) toSize(100);
 }
 
-.sighDoodles {
-  .doodle {
+.sigh-doodles {
+  .sigh-doodle {
     position: fixed;
   }
   .doodleA {

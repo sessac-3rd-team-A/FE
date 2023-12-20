@@ -1,6 +1,6 @@
 @import '/src/styles/global.scss';
 
-.resultContainer {
+.result-container {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -10,7 +10,7 @@
   padding: toSize(120) toSize(100) toSize(40) toSize(100);
 }
 
-.resultMainContainer {
+.result-mainContainer {
   z-index: 1;
   display: grid;
   grid-template-columns: toSize(840) toSize(840);
@@ -18,7 +18,7 @@
   column-gap: toSize(40);
   height: 100%;
 
-  .resultSection {
+  .result-section {
     display: flex;
     flex-direction: column;
     border-radius: toSize(30);
@@ -43,28 +43,28 @@
     }
   }
 
-  .resultPaint {
+  .result-paint {
     grid-column: 1;
     grid-row: 1 / 4;
   }
-  .resultMeme {
+  .result-meme {
     grid-column: 2;
     grid-row: 1;
     height: 40vh;
   }
-  .resultSentiment {
+  .result-sentiment {
     grid-column: 2;
     grid-row: 2;
     height: 25vh;
   }
-  .resultBtns {
+  .result-btns {
     grid-column: 2;
     grid-row: 3;
     height: 15vh;
   }
 }
 
-.sighPainting {
+.result-painting {
   width: toSize(700);
   height: toSize(700);
   margin: 0 auto;
@@ -72,7 +72,7 @@
   border-radius: toSize(20);
 }
 
-.sighMeme {
+.result-memeImg {
   width: 80%;
   height: 70%;
   margin: 0 auto;
@@ -80,7 +80,80 @@
   border-radius: toSize(20);
 }
 
-.resultBgText {
+// sentiment chart
+.result-sentimentArticle {
+  display: flex;
+  margin: 0 toSize(50) toSize(20) toSize(50);
+  height: 60%;
+}
+
+.result-sentimentLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: 'GmarketSans';
+  font-size: toSize(24);
+  font-weight: 700;
+  margin-right: toSize(30);
+}
+
+.result-sentimentChart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .result-sentimentData {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+    border-radius: 999px;
+    background: #d9d9d9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    & > div {
+      height: 100%;
+      position: relative;
+      border-radius: 999px;
+      background: #fffb94;
+      box-shadow: 0px -4px 4px -2px rgba(255, 255, 255, 0.7) inset;
+    }
+    & > img {
+      height: 150%;
+      position: relative;
+    }
+  }
+}
+
+// button
+.result-btns {
+  text-align: center;
+  position: relative;
+
+  button {
+    border: 1px solid #ff7246;
+    width: toSize(250);
+    aspect-ratio: 10/3;
+    background-color: #fff;
+    filter: drop-shadow(0px toSize(9) 0px #ff7246);
+    border-radius: 50%;
+    font-family: 'LEMON MILK';
+    font-size: toSize(30);
+    margin-top: 3vh;
+    cursor: pointer;
+    animation: scaleAni 2s ease-in-out;
+    transition: all 0.5s;
+    margin: toSize(30);
+    z-index: 3;
+
+    &:hover {
+      background-color: #fffb94;
+    }
+  }
+}
+
+// Background
+.result-bgText {
   position: absolute;
   width: 100%;
   left: 0;
@@ -100,7 +173,7 @@
   }
 }
 
-.resultDoodle {
+.result-doodle {
   position: fixed;
   bottom: -5vh;
   right: -5vw;
