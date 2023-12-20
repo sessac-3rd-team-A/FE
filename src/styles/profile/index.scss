@@ -1,4 +1,7 @@
 @import '/src/styles/global.scss';
+@import '/src/styles/profile/calendar';
+@import '/src/styles/profile/graph';
+@import '/src/styles/profile/ratio';
 
 @mixin fadeIn($time) {
   animation-name: fadeIn;
@@ -80,8 +83,8 @@ p {
     // grid-auto-flow: row dense;
 
     .link,
-    .ratio,
-    .graph,
+    .profile-ratio,
+    .profile-graph,
     .count {
       animation: fadeIn 0.5s ease-in-out forwards;
       border-radius: 10px;
@@ -148,36 +151,6 @@ p {
         font-family: GMarketSans;
         font-size: toSize(40);
         font-weight: 700;
-      }
-    }
-
-    .ratio,
-    .graph {
-      position: relative;
-      font-family: LEMON MILK;
-
-      span {
-        padding: toSize(13) toSize(17);
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
-
-      div {
-        position: absolute;
-        bottom: 0;
-        left: toSize(10);
-        border-radius: 10px;
-        padding: toSize(13) toSize(17);
-        font-weight: 500;
-
-        p:first-child {
-          font-size: toSize(20);
-        }
-
-        p:last-child {
-          font-size: toSize(40);
-        }
       }
     }
   }
