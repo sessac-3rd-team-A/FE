@@ -29,9 +29,9 @@ export default function SighResultPage() {
     },
   };
 
-  const [negativeData, setNegativeData] = useState<number | undefined>();
-  const [positiveData, setPositiveData] = useState<number | undefined>();
-  const [neutralData, setNeutralData] = useState<number | undefined>();
+  const [negativeData, setNegativeData] = useState<number>(0);
+  const [positiveData, setPositiveData] = useState<number>(0);
+  const [neutralData, setNeutralData] = useState<number>(0);
 
   useEffect(() => {
     if (sighResult.confidence) {
