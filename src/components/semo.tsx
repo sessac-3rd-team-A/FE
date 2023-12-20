@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import profilePic from '../public/semo.svg';
+import profilePic from '../../public/trend/semo.svg';
 
 function Semo() {
   return (
