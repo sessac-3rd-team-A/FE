@@ -3,16 +3,14 @@
 $primary-color: #3a89ff;
 $icon-circle-size: toSize(80);
 $icon-size: toSize(50);
-$container-size: toSize(80);
-// $icon-margin: toSize(100);
+$container-size: toSize(200);
 
 .profile-menu-container {
   width: 100%;
   height: $container-size;
   position: fixed;
-  transform: translateY(-130%);
   z-index: 100;
-  bottom: 2%;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,8 +40,6 @@ $container-size: toSize(80);
         display: flex;
         align-items: center;
         justify-content: center;
-        // margin-right: toSize(50);
-        // margin-left: toSize(50);
         // animation: bounce 1s ease-in-out;
 
         .icon {
@@ -70,7 +66,7 @@ $container-size: toSize(80);
 
 .profile-menu-bottom {
   width: 100%;
-  // position: relative;
+  position: relative;
   z-index: 100;
 }
 
