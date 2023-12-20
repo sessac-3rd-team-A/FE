@@ -1,4 +1,4 @@
-import MySettingPage from '@/containers/mypage/setting'
+import MySettingPage from '@/containers/profile/setting'
 
 export default function MySetting() {
     return (
