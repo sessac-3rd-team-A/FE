@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import profilePic from '../../public/trend/semo.svg';
-import '../../src/styles/trend/semo.scss';
+import profilePic from '../../public/statistics/semo.svg';
+import '../../src/styles/statistics/semo.scss';
 
 function Semo() {
   return (
