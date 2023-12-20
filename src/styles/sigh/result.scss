@@ -80,6 +80,79 @@
   border-radius: toSize(20);
 }
 
+// sentiment chart
+.resultSentimentArticle {
+  display: flex;
+  margin: 0 toSize(50) toSize(20) toSize(50);
+  height: 60%;
+}
+
+.resultSentimentLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: 'GmarketSans';
+  font-size: toSize(24);
+  font-weight: 700;
+  margin-right: toSize(30);
+}
+
+.resultSentimentChart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .resultSentimentData {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+    border-radius: 999px;
+    background: #d9d9d9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    & > div {
+      height: 100%;
+      position: relative;
+      border-radius: 999px;
+      background: #fffb94;
+      box-shadow: 0px -4px 4px -2px rgba(255, 255, 255, 0.7) inset;
+    }
+    & > img {
+      height: 150%;
+      position: relative;
+    }
+  }
+}
+
+// button
+.resultBtns {
+  text-align: center;
+  position: relative;
+
+  button {
+    border: 1px solid #ff7246;
+    width: toSize(250);
+    aspect-ratio: 10/3;
+    background-color: #fff;
+    filter: drop-shadow(0px toSize(9) 0px #ff7246);
+    border-radius: 50%;
+    font-family: 'LEMON MILK';
+    font-size: toSize(30);
+    margin-top: 3vh;
+    cursor: pointer;
+    animation: scaleAni 2s ease-in-out;
+    transition: all 0.5s;
+    margin: toSize(30);
+    z-index: 3;
+
+    &:hover {
+      background-color: #fffb94;
+    }
+  }
+}
+
+// Background
 .resultBgText {
   position: absolute;
   width: 100%;
