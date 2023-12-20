@@ -13,7 +13,7 @@ export default function MySettingPage() {
         </div>
       </div>
       <ProfileMenu />
-      <section className="whiteGradientBg" />
+      {/* <section className="whiteGradientBg" /> */}
     </div>
   );
 }
