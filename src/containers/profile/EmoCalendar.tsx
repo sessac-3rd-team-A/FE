@@ -6,7 +6,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
-import '@/styles/profile/calendar.scss';
+import '@/styles/profile/_calendar.scss';
 // import Image from 'next/image';
 
 type ValuePiece = Date | null;
