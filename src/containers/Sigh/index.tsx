@@ -9,13 +9,39 @@ export default function SighPage() {
   const [buttonText, setButtonText] = useState<string>('START');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = event.target.value;
+    const newText = event.target.value.slice(0, 1000);
     setSighText(newText);
   };
 
   const handleStartButtonClick = () => {
-    setIsVisible((prevVisible) => !prevVisible);
-    setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
+    if (buttonText === 'START') {
+      setIsVisible((prevVisible) => !prevVisible);
+      setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
+    } else if (buttonText === 'OK') {
+      const apiUrl = 'http://localhost:8080/api/diary';
+
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          textDiary: sighText,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('POST request successful:', data);
+        })
+        .catch((error) => {
+          console.error('POST request failed:', error);
+        });
+    }
   };
 
   return (
