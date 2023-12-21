@@ -2,20 +2,52 @@
 
 import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { sighResultType } from '@/types';
 
 export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>('START');
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = event.target.value;
+    const newText = event.target.value.slice(0, 1000);
     setSighText(newText);
   };
 
-  const handleStartButtonClick = () => {
-    setIsVisible((prevVisible) => !prevVisible);
-    setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
+  const handleStartButtonClick = async () => {
+    if (buttonText === 'START') {
+      setIsVisible((prevVisible) => !prevVisible);
+      setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
+    } else if (buttonText === 'OK') {
+      const apiUrl = 'http://localhost:8080/api/diary';
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          textDiary: sighText,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('POST request successful:', data);
+        setIsLoading(false);
+        localStorage.setItem('sighResult', JSON.stringify(data));
+        router.push('/sigh/result');
+      } else {
+        console.error(
+          'POST request failed:',
+          response.status,
+          response.statusText,
+        );
+      }
+    }
   };
 
   return (

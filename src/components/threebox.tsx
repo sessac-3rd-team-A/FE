@@ -1,10 +1,10 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../styles/trend/threeBox.scss';
+import '../styles/statistics/threeBox.scss';
 import TrendLineChart from './trendLineChart';
 
 const ThreeBox: React.FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<string>('menu6'); // 현재 선택된 메뉴이름
+  const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
 
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
@@ -33,7 +33,9 @@ const ThreeBox: React.FC = () => {
               onChange={() => handleMenuChange(menuId)}
             />
             <div className="threeBoxContents">
-              <div className="threeBoxInner"></div>
+              <div className="threeBoxInner">
+                <TrendLineChart></TrendLineChart>
+              </div>
               <span className="threeBoxDescription">
                 <p>{`${labeLText[index]}`}</p>
                 {/* <h3>{`TITLE ${3 - index}`}</h3> */}

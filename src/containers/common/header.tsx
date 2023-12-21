@@ -13,7 +13,7 @@ export default function Header() {
         <Link href={'/sigh'} className="headerMenu middle">
           SIGH
         </Link>
-        <Link href={'/trend'} className="headerMenu">
+        <Link href={'/statistics'} className="headerMenu">
           TREND
         </Link>
       </div>

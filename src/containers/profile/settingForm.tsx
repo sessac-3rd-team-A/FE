@@ -19,7 +19,6 @@ export default function SettingForm() {
         method: 'POST',
         body: JSON.stringify(formData),
       });
-      console.log(response);
 
       if (!response.ok) {
         throw new Error('Failed to submit the data. Please try again.');
@@ -51,9 +50,10 @@ export default function SettingForm() {
           placeholder="Your ID"
           minLength={2}
           maxLength={100}
+          readOnly
         />
         <div className="age-and-gender">
-          <select name="age" id="age">
+          <select id="age" name="age">
             <option value="" disabled selected hidden>
               Age
             </option>
@@ -63,7 +63,7 @@ export default function SettingForm() {
             <option value="20대">20 대</option>
             <option value="50대">50 대 이상</option>
           </select>
-          <select name="gender" id="gender">
+          <select id="gender" name="gender">
             <option value="" disabled selected hidden>
               Gender
             </option>
