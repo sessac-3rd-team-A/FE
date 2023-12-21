@@ -2,6 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/statistics/threeBox.scss';
 import TrendLineChart from './trendLineChart';
+import MemeRank from './memeRank';
+
+// const componentsToRender = [
+//   <TrendLineChart key="trendLineChart" />,
+//   <div key="someDiv">This is a div</div>,
+//   <MemeRank key="memeRank" />,
+// ];
 
 const ThreeBox: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
@@ -21,6 +28,13 @@ const ThreeBox: React.FC = () => {
       {/* Repeat the structure for each menu */}
       {Array.from({ length: 3 }, (_, index) => {
         const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
+        const componentsToRender = [
+          <TrendLineChart key="trendLineChart" />,
+          // <div key="someDiv">This is a div</div>,
+          <TrendLineChart key="trendLineChart" />,
+
+          <MemeRank key="memeRank" />,
+        ];
 
         return (
           <React.Fragment key={menuId}>
@@ -33,9 +47,7 @@ const ThreeBox: React.FC = () => {
               onChange={() => handleMenuChange(menuId)}
             />
             <div className="three-box-contents">
-              <div className="three-box-inner">
-                <TrendLineChart></TrendLineChart>
-              </div>
+              <div className="three-box-inner">{componentsToRender[index]}</div>
               <div className="three-box-description">
                 <p>{`${labeLText[index]}`}</p>
                 {/* <h3>{`TITLE ${3 - index}`}</h3> */}

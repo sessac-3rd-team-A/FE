@@ -45,21 +45,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ category }) => {
 
   return (
     <div>
-      <h2>{category} 이미지 갤러리</h2>
-      {selectedImageIndex !== null && (
-        <div style={{ textAlign: 'center' }}>
-          <img
-            src={images[selectedImageIndex]}
-            alt={`${category} 이미지 ${selectedImageIndex + 1}`}
-            style={{
-              width: '300px',
-              height: '300px',
-              objectFit: 'cover',
-              marginBottom: '10px',
-            }}
-          />
-        </div>
-      )}
+      <div>{category} 이미지 갤러리</div>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {images.map((image, index) => (
           <div key={index} style={{ margin: '10px', textAlign: 'center' }}>
@@ -82,6 +68,20 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ category }) => {
           </div>
         ))}
       </div>
+      {selectedImageIndex !== null && (
+        <div style={{ textAlign: 'center' }}>
+          <img
+            src={images[selectedImageIndex]}
+            alt={`${category} 이미지 ${selectedImageIndex + 1}`}
+            style={{
+              width: '200px',
+              height: '200px',
+              objectFit: 'cover',
+              marginBottom: '10px',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
