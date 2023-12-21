@@ -16,10 +16,10 @@ export interface ShopApiRes {
 }
 
 // diary result
-export type sighResultType = {
+export interface sighResultType {
   id: number;
   userId: string | null;
-  pictureDiary: string | undefined;
+  pictureDiary: string;
   recommendedGif: string;
   sentiment: string;
   positiveRatio: number;
@@ -27,4 +27,4 @@ export type sighResultType = {
   neutralRatio: number;
   date: string;
   // date: Date;
-};
+}

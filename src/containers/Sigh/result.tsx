@@ -6,56 +6,47 @@ import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
 import { sighResultType } from '@/types';
 
-export default function SighResultPage({
-  sighResult,
-}: {
-  sighResult: sighResultType;
-}) {
-  // 임시데이터
-  // const sighResult: resultType = {
-  //   painting:
-  //     'https://mblogthumb-phinf.pstatic.net/MjAxODAxMThfNzEg/MDAxNTE2MjQ5ODE4MjEy.iLPbjW9BLeAjkI1ppclbNdn5kwzTW585Abkz7Qte7c4g.LntCl6JMg0i88zWyCUpQ_bTtcvQuitpFLL29CXgUl0sg.JPEG.qe4865/23.jpg?type=w800',
-  //   meme: 'https://media1.jjalkey.com/media/1536141519140-6143a3e3c9.gif',
-  //   sentiment: 'negative',
-  //   confidence: {
-  //     negative: 97.326324,
-  //     positive: 0.29289702,
-  //     neutral: 2.3807814,
-  //   },
-  // };
+export default function SighResultPage() {
+  // useState를 사용하여 상태를 관리
+  const [sighResult, setSighResult] = useState<sighResultType | null>(null);
 
-  //   {
-  //     "id": 9,
-  //     "userId": "d1426c08-75ad-4957-8739-80a2ad60eeb6",
-  //     "pictureDiary": "https://example-bucket-seeun.s3.ap-northeast-2.amazonaws.com/3cba1799-3572-49e9-9f59-18cef2a8f9b8.jpeg",
-  //     "recommendedGif": "https://media1.jjalkey.com/link/1606606281599-e14c8a2348.jpg",
-  //     "sentiment": "neutral",
-  //     "positiveRatio": 0.43071458,
-  //     "negativeRatio": 0.14317966,
-  //     "neutralRatio": 99.42611,
-  //     "date": "2023-12-21"
-  // }
+  useEffect(() => {
+    // 로컬 스토리지에서 데이터를 검색
+    const storedData = localStorage.getItem('sighResult');
+    if (storedData) {
+      setSighResult(JSON.parse(storedData));
+      if (sighResult) {
+        const roundToInteger = (value: number) => Math.round(value);
+        setNegativeData(roundToInteger(sighResult.positiveRatio));
+        setPositiveData(roundToInteger(sighResult.negativeRatio));
+        setNeutralData(roundToInteger(sighResult.neutralRatio));
+      }
+    }
+  }, []);
 
   const [negativeData, setNegativeData] = useState<number>(0);
   const [positiveData, setPositiveData] = useState<number>(0);
   const [neutralData, setNeutralData] = useState<number>(0);
 
-  useEffect(() => {
-    if (sighResult) {
-      const roundToInteger = (value: number) => Math.round(value);
-      setNegativeData(roundToInteger(sighResult.positiveRatio));
-      setPositiveData(roundToInteger(sighResult.negativeRatio));
-      setNeutralData(roundToInteger(sighResult.neutralRatio));
-    }
-    console.log(sighResult);
-  }, [sighResult]);
+  // useEffect(() => {
+  //   if (sighResult) {
+  //     const roundToInteger = (value: number) => Math.round(value);
+  //     setNegativeData(roundToInteger(sighResult.positiveRatio));
+  //     setPositiveData(roundToInteger(sighResult.negativeRatio));
+  //     setNeutralData(roundToInteger(sighResult.neutralRatio));
+  //   }
+  // }, [sighResult]);
+  console.log(sighResult);
+  console.log(sighResult?.negativeRatio);
+  console.log(sighResult?.positiveRatio);
+  console.log(sighResult?.neutralRatio);
 
   return (
     <div className="result-container">
       <main className="result-mainContainer">
         <section className="result-section result-paint">
           <h3>TODAY'S AH-WHEW</h3>
-          {sighResult.pictureDiary && (
+          {sighResult && sighResult.pictureDiary && (
             <img
               src={sighResult.pictureDiary}
               alt="그림일기"
@@ -63,13 +54,16 @@ export default function SighResultPage({
             />
           )}
         </section>
+
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
-          <img
-            src={sighResult.recommendedGif}
-            alt="짤"
-            className="result-memeImg"
-          />
+          {sighResult && sighResult.recommendedGif && (
+            <img
+              src={sighResult.recommendedGif}
+              alt="짤"
+              className="result-memeImg"
+            />
+          )}
         </section>
         <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>

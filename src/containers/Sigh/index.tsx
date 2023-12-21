@@ -35,10 +35,11 @@ export default function SighPage() {
       });
 
       if (response.ok) {
-        const data: sighResultType = await response.json();
+        const data = await response.json();
         console.log('POST request successful:', data);
         setIsLoading(false);
-        router.push('/sigh/result', { sighResult: data });
+        localStorage.setItem('sighResult', JSON.stringify(data));
+        router.push('/sigh/result');
       } else {
         console.error(
           'POST request failed:',
