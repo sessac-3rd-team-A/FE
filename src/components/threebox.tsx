@@ -7,13 +7,14 @@ import MemeRank from './memeRank';
 export default function ThreeBox() {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
 
-  const handleMenuChange = (menuId: string) => {
-    setSelectedMenu(menuId);
-  };
+  //임시 주석처리
+  // const handleMenuChange = (menuId: string) => {
+  //   setSelectedMenu(menuId);
+  // };
 
-  useEffect(() => {
-    console.log(selectedMenu);
-  }, [selectedMenu]);
+  // useEffect(() => {
+  //   console.log(selectedMenu);
+  // }, [selectedMenu]);
 
   const labeLText: string[] = ['MAIN', 'GROUP', 'MEME'];
 
@@ -25,10 +26,6 @@ export default function ThreeBox() {
         const componentsToRender = [
           <TrendLineChart key="trendLineChart" />,
           <div key="someDiv">This is a div</div>,
-
-          <div key="someDiv">This is a div</div>,
-          // <TrendLineChart key="trendLineChart" />,
-
           <MemeRank key="memeRank" />,
         ];
 
@@ -40,7 +37,7 @@ export default function ThreeBox() {
               id={menuId}
               className="three-box-button"
               checked={selectedMenu === menuId}
-              onChange={() => handleMenuChange(menuId)}
+              // onChange={() => handleMenuChange(menuId)}//임시 주석처리
             />
             <div className="three-box-contents">
               <div className="three-box-inner">{componentsToRender[index]}</div>
