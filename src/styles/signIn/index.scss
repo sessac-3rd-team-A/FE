@@ -1,6 +1,57 @@
 @import '/src/styles/global.scss';
 @import '~include-media/dist/include-media';
 
+.flipper {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.sign-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 28px;
+  border: 1px solid #fff;
+  background-blend-mode: overlay;
+  box-shadow:
+    0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
+    0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(180px);
+  backface-visibility: hidden; /* 뒷면이 화면에 보이지 않도록 설정 */
+}
+
+/* 초기 상태 */
+.front {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotateY(0deg);
+}
+.back {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotateY(180deg);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0d0f53e6; /* 원하는 배경 색상과 불투명도를 설정 (예: 빨간색, 50% 불투명) */
+  }
+}
+
 .sign-mainContainer {
   display: flex;
   align-items: center;
@@ -15,17 +66,29 @@
     align-items: center;
     width: 807px;
     height: 576px;
-    border-radius: toSize(28);
-    border: 1px solid #fff;
-    background-blend-mode: overlay;
-    box-shadow:
-      0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
-      0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
-    backdrop-filter: blur(180px);
+    border-radius: 28px;
     z-index: 1;
     @include media('<=1200px') {
       width: toSizeC(807, 1200);
       height: toSizeC(576, 1200);
+    }
+    .submit-button {
+      cursor: pointer;
+      background-color: #3a89ff;
+      color: white;
+      margin-top: 50px;
+      width: 164px;
+      font-size: 28px;
+      height: 50px;
+      border-radius: 16px;
+      font-family: Lemon Milk;
+      @include media('<=1200px') {
+        margin-top: toSizeC(50, 1200);
+        width: toSizeC(164, 1200);
+        font-size: toSizeC(28, 1200);
+        height: toSizeC(50, 1200);
+        border-radius: toSizeC(16, 1200);
+      }
     }
   }
   .signIn-letter {
@@ -33,6 +96,10 @@
     font-size: 36px;
     font-weight: bold;
     margin-top: 57px;
+    @include media('<=1200px') {
+      font-size: toSizeC(36, 1200);
+      margin-top: toSizeC(57, 1200);
+    }
   }
   input:focus {
     outline: 1.5px solid #3a89ff;
@@ -40,7 +107,8 @@
   input::placeholder {
     color: #a7a7a7;
   }
-  #id {
+  #id,
+  #pw {
     margin-top: 100px;
     width: 560px;
     height: 60px;
@@ -49,8 +117,79 @@
     padding: 31px;
     font-family: GMarketSans;
     font-size: 28px;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    @include media('<=1200px') {
+      font-size: toSizeC(28, 1200);
+      padding: toSizeC(31, 1200);
+      margin-top: toSizeC(100, 1200);
+      width: toSizeC(560, 1200);
+      height: toSizeC(60, 1200);
+      border-radius: toSizeC(12, 1200);
+    }
     &.pw {
       margin-top: 13px;
+      @include media('<=1200px') {
+        margin-top: toSizeC(13, 1200);
+      }
     }
   }
+}
+.sign-checkboxContainer {
+  margin-bottom: 725px;
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  border-radius: 30px;
+  padding: 0;
+  // margin: 10px auto;
+  cursor: pointer;
+  background-color: #d2d2d2;
+  @include media('<=1200px') {
+    width: toSizeC(120, 1200);
+    height: toSizeC(30, 1200);
+    border-radius: toSizeC(30, 1200);
+    margin-bottom: toSizeC(725, 1200);
+  }
+}
+
+.sign-arrowlane {
+  position: absolute;
+  display: block;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  color: #d2d2d2;
+  background-color: #ffde8a;
+  z-index: 20;
+  top: -8px;
+  left: -5px;
+  line-height: 40px;
+  font-size: 24px;
+  transition: all 0.5s ease;
+  @include media('<=1200px') {
+    width: toSizeC(43, 1200);
+    height: toSizeC(43, 1200);
+    top: toSizeC(-8, 1200);
+    left: toSizeC(-5, 1200);
+    line-height: toSizeC(40, 1200);
+    font-size: toSizeC(24, 1200);
+  }
+}
+.sign-arrow {
+  width: 18px;
+  @include media('<=1200px') {
+    width: toSizeC(18, 1200);
+  }
+}
+.sign-register {
+  transform: translateX(85px) rotate(-270deg);
+  @include media('<=1200px') {
+    transform: translateX(toSizeC(85, 1200)) rotate(-270deg);
+  }
+}
+.flipper.flip {
+  transform: rotateY(180deg);
 }
