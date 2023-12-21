@@ -49,19 +49,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ category }) => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {images.map((image, index) => (
           <div key={index} style={{ margin: '10px', textAlign: 'center' }}>
-            {/* <img
-              src={image}
-              alt={`${category} 이미지 ${index + 1}`}
-              style={{
-                width: '150px',
-                height: '150px',
-                objectFit: 'cover',
-                cursor: 'pointer',
-                border:
-                  selectedImageIndex === index ? '2px solid blue' : 'none', // 선택된 이미지에 테두리 추가
-              }}
-              onClick={() => handleButtonClick(index)}
-            /> */}
             <button onClick={() => handleButtonClick(index)}>
               Button {index + 1}
             </button>

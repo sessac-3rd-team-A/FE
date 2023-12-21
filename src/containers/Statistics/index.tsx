@@ -12,7 +12,7 @@ export default async function StatisticsPage() {
     cache: 'no-store',
   });
   const info = await response.json();
-  console.log(info);
+  // console.log(info);
   let str: string = '트렌드';
   let arr;
   return (
@@ -24,7 +24,7 @@ export default async function StatisticsPage() {
         <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
 
-      <ThreeBox></ThreeBox>
+      <ThreeBox />
       <Semo></Semo>
     </div>
   );

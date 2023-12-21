@@ -4,13 +4,7 @@ import '../styles/statistics/threeBox.scss';
 import TrendLineChart from './trendLineChart';
 import MemeRank from './memeRank';
 
-// const componentsToRender = [
-//   <TrendLineChart key="trendLineChart" />,
-//   <div key="someDiv">This is a div</div>,
-//   <MemeRank key="memeRank" />,
-// ];
-
-const ThreeBox: React.FC = () => {
+export default function ThreeBox() {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
 
   const handleMenuChange = (menuId: string) => {
@@ -30,8 +24,10 @@ const ThreeBox: React.FC = () => {
         const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
         const componentsToRender = [
           <TrendLineChart key="trendLineChart" />,
-          // <div key="someDiv">This is a div</div>,
-          <TrendLineChart key="trendLineChart" />,
+          <div key="someDiv">This is a div</div>,
+
+          <div key="someDiv">This is a div</div>,
+          // <TrendLineChart key="trendLineChart" />,
 
           <MemeRank key="memeRank" />,
         ];
@@ -74,19 +70,6 @@ const ThreeBox: React.FC = () => {
           </React.Fragment>
         );
       })}
-
-      {/* Close button */}
-      {/* <input
-        type="radio"
-        name="navigation"
-        id="menu6"
-        className="threeBox button close"
-        checked={selectedMenu === 'menu6'}
-        onChange={() => handleMenuChange
-          ('menu6')}
-      /> */}
     </div>
   );
-};
-
-export default ThreeBox;
+}

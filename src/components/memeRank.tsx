@@ -2,7 +2,7 @@
 import ImageGallery from '@/components/imageGallery';
 import React, { useState } from 'react';
 
-const MemeRank: React.FC = () => {
+export default function MemeRank() {
   const [gender, setGender] = useState<string>('여자');
   const [ageGroup, setAgeGroup] = useState<string>('20대');
 
@@ -28,6 +28,4 @@ const MemeRank: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default MemeRank;
+}
