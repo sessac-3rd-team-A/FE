@@ -17,7 +17,7 @@ const ThreeBox: React.FC = () => {
   const labeLText: string[] = ['MAIN', 'GROUP', 'MEME'];
 
   return (
-    <div className="threeBoxWrap">
+    <div className="three-box-wrap">
       {/* Repeat the structure for each menu */}
       {Array.from({ length: 3 }, (_, index) => {
         const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
@@ -28,31 +28,31 @@ const ThreeBox: React.FC = () => {
               type="radio"
               name="navigation"
               id={menuId}
-              className="threeBoxButton"
+              className="three-box-button"
               checked={selectedMenu === menuId}
               onChange={() => handleMenuChange(menuId)}
             />
-            <div className="threeBoxContents">
-              <div className="threeBoxInner">
+            <div className="three-box-contents">
+              <div className="three-box-inner">
                 <TrendLineChart></TrendLineChart>
               </div>
-              <span className="threeBoxDescription">
+              <div className="three-box-description">
                 <p>{`${labeLText[index]}`}</p>
                 {/* <h3>{`TITLE ${3 - index}`}</h3> */}
-                <div className="labelCircle">
+                <div className="label-circle">
                   <br></br>
                   {`0${index + 1}`}
                 </div>
-              </span>
+              </div>
             </div>
             {menuId !== selectedMenu && (
               <label
                 htmlFor={menuId}
-                className={`threeBoxLabel ${String.fromCharCode(97 + index)}`}
+                className={`three-box-label ${String.fromCharCode(97 + index)}`}
               >
-                <span className="threeBoxRotate">
+                <span className="three-box-rotate">
                   <p>{`${labeLText[index]}`}</p>
-                  <div className="labelCircle">
+                  <div className="label-circle">
                     <br></br>
                     {`0${index + 1}`}
                   </div>

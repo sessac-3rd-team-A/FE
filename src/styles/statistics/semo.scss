@@ -1,5 +1,5 @@
 @import '/src/styles/global.scss';
-.semoFloating {
+.semo-floating {
   display: flex;
   position: sticky;
   transform: translate(toSize(1400), toSize(-1000));

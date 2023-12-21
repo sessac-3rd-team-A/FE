@@ -2,61 +2,65 @@
 @import url('https://fonts.cdnfonts.com/css/lemon-milk');
 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
-.ChartTitle {
-  color: #000;
+.trend-container {
+  height: calc(100vh - toSize(100));
 
-  font-family: Lemon/Milk;
-  font-size: 64px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%; /* 70.4px */
-}
+  .chart-title {
+    color: #000;
 
-.chartText {
-  margin: 0 0 0 toSize(90);
-  width: toSize(860);
-}
-.floating {
-  animation-name: floating;
-  -webkit-animation-name: floating;
-
-  animation-duration: 1.5s;
-  -webkit-animation-duration: 1.5s;
-
-  animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes floating {
-  0% {
-    transform: translateY(0%);
+    font-family: Lemon/Milk;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 70.4px */
   }
-  50% {
-    transform: translateY(8%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
 
-@-webkit-keyframes floating {
-  0% {
-    -webkit-transform: translateY(0%);
+  .chart-text {
+    margin: 0 0 0 toSize(90);
+    width: toSize(860);
   }
-  50% {
-    -webkit-transform: translateY(8%);
-  }
-  100% {
-    -webkit-transform: translateY(0%);
-  }
-}
-.trendBox div {
-  display: flex;
-  background-color: aqua;
-  border: 5px solid black;
+  .floating {
+    animation-name: floating;
+    -webkit-animation-name: floating;
 
-  color: aquamarine;
-  width: 200px;
-  height: 500px;
-  float: left;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+  }
+
+  @keyframes floating {
+    0% {
+      transform: translateY(0%);
+    }
+    50% {
+      transform: translateY(8%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  @-webkit-keyframes floating {
+    0% {
+      -webkit-transform: translateY(0%);
+    }
+    50% {
+      -webkit-transform: translateY(8%);
+    }
+    100% {
+      -webkit-transform: translateY(0%);
+    }
+  }
+  .trend-box div {
+    display: flex;
+    background-color: aqua;
+    border: 5px solid black;
+
+    color: aquamarine;
+    width: 200px;
+    height: 500px;
+    float: left;
+  }
 }

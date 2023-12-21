@@ -92,7 +92,7 @@ const TrendLineChart = () => {
         ],
       }}
       options={{
-        // maintainAspectRatio: false,
+        maintainAspectRatio: false,
         responsive: true,
         scales: {
           y: {
@@ -120,8 +120,8 @@ const TrendLineChart = () => {
         plugins: {
           legend: {
             labels: { color: 'black' },
-            align: 'end',
-            position: 'bottom' as const,
+            align: 'start',
+            position: 'right' as const,
           },
           title: {
             display: true,
