@@ -9,37 +9,26 @@ import { sighResultType } from '@/types';
 export default function SighResultPage() {
   // useState를 사용하여 상태를 관리
   const [sighResult, setSighResult] = useState<sighResultType | null>(null);
+  const [negativeData, setNegativeData] = useState<number>(0);
+  const [positiveData, setPositiveData] = useState<number>(0);
+  const [neutralData, setNeutralData] = useState<number>(0);
 
   useEffect(() => {
     // 로컬 스토리지에서 데이터를 검색
     const storedData = localStorage.getItem('sighResult');
     if (storedData) {
       setSighResult(JSON.parse(storedData));
-      if (sighResult) {
-        const roundToInteger = (value: number) => Math.round(value);
-        setNegativeData(roundToInteger(sighResult.positiveRatio));
-        setPositiveData(roundToInteger(sighResult.negativeRatio));
-        setNeutralData(roundToInteger(sighResult.neutralRatio));
-      }
     }
   }, []);
 
-  const [negativeData, setNegativeData] = useState<number>(0);
-  const [positiveData, setPositiveData] = useState<number>(0);
-  const [neutralData, setNeutralData] = useState<number>(0);
-
-  // useEffect(() => {
-  //   if (sighResult) {
-  //     const roundToInteger = (value: number) => Math.round(value);
-  //     setNegativeData(roundToInteger(sighResult.positiveRatio));
-  //     setPositiveData(roundToInteger(sighResult.negativeRatio));
-  //     setNeutralData(roundToInteger(sighResult.neutralRatio));
-  //   }
-  // }, [sighResult]);
-  console.log(sighResult);
-  console.log(sighResult?.negativeRatio);
-  console.log(sighResult?.positiveRatio);
-  console.log(sighResult?.neutralRatio);
+  useEffect(() => {
+    if (sighResult) {
+      const roundToInteger = (value: number) => Math.round(value);
+      setNegativeData(roundToInteger(sighResult.negativeRatio));
+      setPositiveData(roundToInteger(sighResult.positiveRatio));
+      setNeutralData(roundToInteger(sighResult.neutralRatio));
+    }
+  }, [sighResult]);
 
   return (
     <div className="result-container">
