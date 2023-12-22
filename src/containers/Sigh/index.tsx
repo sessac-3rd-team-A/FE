@@ -3,7 +3,7 @@
 import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { sighResultType } from '@/types';
+import { SighResultType } from '@/types';
 
 export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');

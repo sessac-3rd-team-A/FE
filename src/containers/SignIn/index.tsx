@@ -34,18 +34,18 @@ export default function SignInPage() {
 
     console.log(response.status);
     if (response.status == 200) {
-      // 로그인이 성공하면 userState 업데이트 - recoil
-      // setUser({
-      //   ...user,
-      //   loggedIn: true, // 예시로 로그인 여부를 상태에 추가
-      // });
-      setUser({
-        userId: formattedData.userId,
-        password: formattedData.password,
-      });
-
-      // 이 데이터 전역으로 저장
       const data = await response.json();
+      // recoil 상태 설정
+      setUser({
+        userId: data.userId,
+        nickname: data.nickname,
+        age: data.age,
+        gender: data.gender,
+        isLogin: true,
+      });
+      // 토큰 값은 로컬스토리지에 저장
+      localStorage.setItem('token', data.token);
+
       router.push('/');
     }
   }
