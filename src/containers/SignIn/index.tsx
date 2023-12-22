@@ -32,7 +32,7 @@ export default function SignInPage() {
 
   async function onSubmitSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/auth/signin';
+    const apiUrl = 'http://localhost:8080/auth/signup';
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
     console.log(formattedData);
@@ -42,7 +42,10 @@ export default function SignInPage() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        formattedData,
+        userId: formattedData.userId,
+        password: formattedData.password,
+        age: formattedData.age,
+        gender: formattedData.gender,
       }),
     });
 
@@ -92,24 +95,28 @@ export default function SignInPage() {
           <form className="sign-div back" onSubmit={onSubmitSignUp}>
             <p className="signIn-letter">SIGN UP</p>
             <input
-              name="id"
+              required
+              name="userId"
               type="text"
-              id="id"
+              id="reg-id"
               className="idSignUp"
               placeholder="YOUR ID"
-              minLength={2}
-              maxLength={100}
+              minLength={4}
+              maxLength={12}
+              // pattern="[a-z0-9]{4,12}"
+              // title="패턴에 맞게 작성하세요"
             />
             <input
-              name="pw"
-              type="text"
-              id="pw"
+              required
+              name="password"
+              type="password"
+              id="reg-pw"
               className="pw"
               placeholder="YOUR PASSWORD"
-              minLength={2}
-              maxLength={100}
+              minLength={4}
+              maxLength={12}
             />
-            <input
+            {/* <input
               name="nickname"
               type="text"
               id="nickname"
@@ -118,25 +125,31 @@ export default function SignInPage() {
               placeholder="개피곤한 인간말종"
               minLength={2}
               maxLength={100}
-            />
+            /> */}
             <div className="age-and-gender">
-              <select id="age" name="age">
-                <option value="" disabled selected hidden>
-                  Age
-                </option>
-                <option value="10대">10 대</option>
-                <option value="20대">20 대</option>
-                <option value="20대">20 대</option>
-                <option value="20대">20 대</option>
-                <option value="50대">50 대 이상</option>
-              </select>
-              <select id="gender" name="gender">
-                <option value="" disabled selected hidden>
-                  Gender
-                </option>
-                <option value="female">여자</option>
-                <option value="male">남자</option>
-              </select>
+              <div className="age-container">
+                <select id="age" name="age" defaultValue={''} required>
+                  <option value="" disabled hidden>
+                    Age
+                  </option>
+                  <option value="10대">10 대</option>
+                  <option value="20대">20 대</option>
+                  <option value="30대">30 대</option>
+                  <option value="40대">40 대</option>
+                  <option value="50대">50 대 이상</option>
+                </select>
+                <img className="select-arrow" src="/signIn/down-arrow.svg" />
+              </div>
+              <div className="age-container">
+                <select id="gender" name="gender" defaultValue={''} required>
+                  <option value="" disabled hidden>
+                    Gender
+                  </option>
+                  <option value="F">여자</option>
+                  <option value="M">남자</option>
+                </select>
+                <img className="select-arrow" src="/signIn/down-arrow.svg" />
+              </div>
             </div>
             <button type="submit" className="submit-button submit-signUp">
               SUBMIT

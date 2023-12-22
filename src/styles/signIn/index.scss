@@ -119,6 +119,8 @@
   }
   #id,
   #pw,
+  #reg-id,
+  #reg-pw,
   #nickname {
     margin-top: 100px;
     width: 560px;
@@ -227,7 +229,8 @@
     padding-left: 31px;
     font-family: GMarketSans;
     font-size: 28px;
-    color: gray;
+    color: #a7a7a7;
+    cursor: pointer;
   }
 
   #gender {
@@ -238,13 +241,24 @@
     padding-left: 31px;
     font-family: GMarketSans;
     font-size: 28px;
-    color: gray;
+    cursor: pointer;
+    color: #a7a7a7;
+  }
+}
+
+.age-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .select-arrow {
+    width: 23px;
+    position: absolute;
+    left: 230px;
+    top: 22px;
   }
 }
 
 select {
-  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
-    no-repeat right #fff;
-  -webkit-appearance: none;
-  background-position-x: 244px;
+  appearance: none;
 }
