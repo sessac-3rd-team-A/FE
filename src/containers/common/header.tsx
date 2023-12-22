@@ -1,23 +1,34 @@
-'use client'
+'use client';
 import '@/styles/main.scss';
 import '@/styles/header.scss';
 import Link from 'next/link';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import { userState, selectedIconState, selectedImageState } from '@/utils/state';
-import { useEffect } from 'react';
+import {
+  userState,
+  selectedIconState,
+  selectedImageState,
+} from '@/utils/state';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
   const [user, setUser] = useRecoilState(userState);
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
   const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
 
+  const [isLogin, setIsLogin] = useState<boolean | undefined>();
+
   const handleMenuBar = () => {
     setSelectedIcon(2);
-    setSelectedImage('/images/profileMenu_2.svg')
-  }
+    setSelectedImage('/images/profileMenu_2.svg');
+  };
+
   useEffect(() => {
-    console.log("user >>>>", user)
-  }, []) // recoil
+    console.log('user >>>>', user);
+    user.isLogin ? setIsLogin(true) : setIsLogin(false);
+  }, [userState]); // recoil
+
+  console.log('1', selectedIcon);
+  console.log('2', selectedImage);
 
   return (
     <header className="headerContainer">
@@ -33,15 +44,19 @@ export default function Header() {
           TREND
         </Link>
       </div>
-      {/* <Link href={'/signIn'} className="headerMenu signInBtn">
-        SIGN IN
-      </Link> */}
-      { user.userId === '' ? (<Link href={'/signIn'} className="headerMenu signInBtn">
-        SIGN IN
-      </Link>) : (<Link href={'/profile'} className="headerMenu signInBtn"
-      onClick={handleMenuBar}>
-        profile
-      </Link>)}
+      {!isLogin ? (
+        <Link href={'/signIn'} className="headerMenu signInBtn">
+          SIGN IN
+        </Link>
+      ) : (
+        <Link
+          href={'/profile'}
+          className="headerMenu signInBtn"
+          onClick={handleMenuBar}
+        >
+          profile
+        </Link>
+      )}
     </header>
   );
 }
