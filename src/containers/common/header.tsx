@@ -36,7 +36,7 @@ export default function Header() {
       {/* <Link href={'/signIn'} className="headerMenu signInBtn">
         SIGN IN
       </Link> */}
-      { user === '' ? (<Link href={'/signIn'} className="headerMenu signInBtn">
+      { user.userId === '' ? (<Link href={'/signIn'} className="headerMenu signInBtn">
         SIGN IN
       </Link>) : (<Link href={'/profile'} className="headerMenu signInBtn"
       onClick={handleMenuBar}>

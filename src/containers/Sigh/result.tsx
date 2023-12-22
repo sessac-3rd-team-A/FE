@@ -4,11 +4,11 @@ import '@/styles/sigh/result.scss';
 import { useEffect, useState } from 'react';
 import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
-import { sighResultType } from '@/types';
+import { SighResultType } from '@/types';
 
 export default function SighResultPage() {
   // useState를 사용하여 상태를 관리
-  const [sighResult, setSighResult] = useState<sighResultType | null>(null);
+  const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const [negativeData, setNegativeData] = useState<number>(0);
   const [positiveData, setPositiveData] = useState<number>(0);
   const [neutralData, setNeutralData] = useState<number>(0);

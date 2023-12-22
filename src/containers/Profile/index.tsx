@@ -10,10 +10,9 @@ import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
-import { sighResultType } from '@/types';
+import { SighResultType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
-import { userState } from '@/utils/state';// recoil
-
+import { userState } from '@/utils/state'; // recoil
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -25,10 +24,10 @@ export default function ProfilePage() {
 
   const backgroundRef = useRef(null);
 
-  const [user, setUser] = useRecoilState(userState); // recoil
+  const [user, setUser] = useRecoilState<{ userId: string; password: string; }>(userState); // recoil
   useEffect(() => {
-    console.log( user)
-  }, []) // recoil
+    console.log(user);
+  }, []); // recoil
 
   const getUserInfo = async () => {
     try {
