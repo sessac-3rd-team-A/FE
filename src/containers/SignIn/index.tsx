@@ -3,7 +3,7 @@ import '@/styles/signIn/index.scss';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil'; // recoil
-import { userState } from '@/utils/state';// recoil
+import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
 
 export default function SignInPage() {
@@ -12,7 +12,7 @@ export default function SignInPage() {
   const [user, setUser] = useRecoilState(userState); // recoil
 
   useEffect(() => {
-    console.log("Updated user state:", user);
+    console.log('Updated user state:', user);
   }, [user]); // recoil
 
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
@@ -34,15 +34,15 @@ export default function SignInPage() {
 
     console.log(response.status);
     if (response.status == 200) {
-
       // 로그인이 성공하면 userState 업데이트 - recoil
-    // setUser({
-    //   ...user,
-    //   loggedIn: true, // 예시로 로그인 여부를 상태에 추가
-    // });
-    setUser({
-      userId: formattedData.userId,
-      password: formattedData.password})
+      // setUser({
+      //   ...user,
+      //   loggedIn: true, // 예시로 로그인 여부를 상태에 추가
+      // });
+      setUser({
+        userId: formattedData.userId,
+        password: formattedData.password,
+      });
 
       // 이 데이터 전역으로 저장
       const data = await response.json();
