@@ -13,16 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        {/* 헤더 푸터 커스텀 해야함 */}
-        <Header />
-        <main>
-          <RecoilRootProvider>
-            {children}
-          </RecoilRootProvider>
-        </main>
-      </body>
-    </html>
+    <div>
+      {/* 헤더 푸터 커스텀 해야함 */}
+      <Header />
+      <main>
+        <RecoilRootProvider>
+          {children}
+        </RecoilRootProvider>
+      </main>
+    </div>
   );
 }

@@ -1,10 +1,18 @@
 'use client';
 import React, { useState, FormEvent } from 'react';
 import '@/styles/profile/settingForm.scss';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/utils/state';
 
 export default function SettingForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUserState] = useRecoilState(userState);
   const [error, setError] = useState<string | null>(null);
+
+  const updateUser = e => {
+    setUserState(e.target.value);
+    console.log("user >>>", user);
+  }
 
   async function onSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,9 +31,9 @@ export default function SettingForm() {
           'Failed to submit the data. Please try again.')
       }
       const data = await response.json();
+      
       console.log(data);
     } catch (error) {
-      // setError(error.message)
       console.error(error)
     } finally {
       setIsLoading(false)
@@ -43,14 +51,16 @@ export default function SettingForm() {
           type='text'
           id='nickName'
           placeholder='개피곤한 인간말종'
+          name='nickName'
           readOnly/>
         <input 
           type='text' 
           id='id' 
+          name='id'
+          onChange={updateUser} 
           placeholder='Your ID'
           minLength={2}
-          maxLength={100}
-          readOnly />
+          maxLength={100}/>
         <div className='age-and-gender'>
           <select id='age' name='age'>
             <option value="" disabled selected hidden>Age</option>
