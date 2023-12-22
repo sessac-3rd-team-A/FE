@@ -4,7 +4,8 @@ const userState = atom({
   key: 'userState',
   default: {
     userId: '',
-    password: ''}
+    password: ''
+  }
 });
 
 export { userState };

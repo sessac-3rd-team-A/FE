@@ -7,7 +7,7 @@ import { userState } from '@/utils/state';
 import { useEffect } from 'react';
 
 export default function Header() {
-  const [user, setUser] = useRecoilState<string>(userState);
+  const [user, setUser] = useRecoilState<{ userId: string; password: string; }>(userState);
 
   useEffect(() => {
     console.log("user >>>>", user)
@@ -30,7 +30,7 @@ export default function Header() {
       {/* <Link href={'/signIn'} className="headerMenu signInBtn">
         SIGN IN
       </Link> */}
-      { user === '' ? (<Link href={'/signIn'} className="headerMenu signInBtn">
+      { user.userId === '' ? (<Link href={'/signIn'} className="headerMenu signInBtn">
         SIGN IN
       </Link>) : (<Link href={'/profile'} className="headerMenu signInBtn">
         profile
