@@ -1,6 +1,8 @@
 import '@/styles/profile/setting.scss';
 import ProfileMenu from './profileMenu';
 import SettingForm from './settingForm';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/utils/state';
 
 export default function MySettingPage() {
   return (
