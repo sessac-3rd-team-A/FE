@@ -17,7 +17,7 @@ export default function Header() {
           TREND
         </Link>
       </div>
-      <Link href={'/'} className="headerMenu signInBtn">
+      <Link href={'/signIn'} className="headerMenu signInBtn">
         SIGN IN
       </Link>
     </header>
