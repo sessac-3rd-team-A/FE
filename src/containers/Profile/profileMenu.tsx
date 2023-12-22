@@ -28,31 +28,30 @@ export default function ProfileMenu() {
   //       return '/profile';
   //   }
   // }
-  
 
   return (
     <div className="profile-menu-container">
       <nav className="profile-menu-nav">
-        <div className='profile-menu-detail'>
+        <div className="profile-menu-detail">
           {[1, 2, 3].map((index) => (
             // <Link href={link(index)}>
-              <div
-                key={index}
-                className={
-                  selectedIcon === index
-                    ? 'icon-selected-circle'
-                    : 'icon-unselected-circle'
-                }
-                onClick={() =>
-                  handleIconClick(`/images/profileMenu_${index}.svg`, index)
-                }
-              >
-                <img
-                  src={`/images/profileMenu_icon${index}.svg`}
-                  alt={`아이콘 ${index}`}
-                  className={`icon ${selectedIcon === index ? '' : ''}`}
-                />
-              </div>
+            <div
+              key={index}
+              className={
+                selectedIcon === index
+                  ? 'icon-selected-circle'
+                  : 'icon-unselected-circle'
+              }
+              onClick={() =>
+                handleIconClick(`/images/profileMenu_${index}.svg`, index)
+              }
+            >
+              <img
+                src={`/images/profileMenu_icon${index}.svg`}
+                alt={`아이콘 ${index}`}
+                className={`icon ${selectedIcon === index ? '' : ''}`}
+              />
+            </div>
             // </Link>
           ))}
         </div>

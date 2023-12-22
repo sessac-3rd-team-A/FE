@@ -28,3 +28,6 @@ export interface sighResultType {
   date: string;
   // date: Date;
 }
+
+// profile result (array)
+export type profileResultType = sighResultType[];
