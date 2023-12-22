@@ -23,12 +23,9 @@ export default function Header() {
   };
 
   useEffect(() => {
-    console.log('user >>>>', user);
+    // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [userState]); // recoil
-
-  console.log('1', selectedIcon);
-  console.log('2', selectedImage);
 
   return (
     <header className="headerContainer">
