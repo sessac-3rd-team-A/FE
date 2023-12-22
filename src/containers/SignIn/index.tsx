@@ -2,15 +2,25 @@
 import '@/styles/signIn/index.scss';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useRecoilState } from 'recoil'; // recoil
+import { userState } from '@/utils/state';// recoil
+import { useEffect } from 'react'; // recoil
 
 export default function SignInPage() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [user, setUser] = useRecoilState(userState); // recoil
+
+  useEffect(() => {
+    console.log("Updated user state:", user);
+  }, [user]); // recoil
+
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const apiUrl = 'http://localhost:8080/auth/signin';
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -24,6 +34,16 @@ export default function SignInPage() {
 
     console.log(response.status);
     if (response.status == 200) {
+
+      // 로그인이 성공하면 userState 업데이트 - recoil
+    // setUser({
+    //   ...user,
+    //   loggedIn: true, // 예시로 로그인 여부를 상태에 추가
+    // });
+    setUser({
+      userId: formattedData.userId,
+      password: formattedData.password})
+
       // 이 데이터 전역으로 저장
       const data = await response.json();
       router.push('/');
@@ -120,8 +140,8 @@ export default function SignInPage() {
               maxLength={100}
             />
             <div className="age-and-gender">
-              <select id="age" name="age">
-                <option value="" disabled selected hidden>
+              <select id="age" name="age" defaultValue={'Age'}>
+                <option defaultValue="" disabled hidden>
                   Age
                 </option>
                 <option value="10대">10 대</option>
@@ -130,8 +150,8 @@ export default function SignInPage() {
                 <option value="20대">20 대</option>
                 <option value="50대">50 대 이상</option>
               </select>
-              <select id="gender" name="gender">
-                <option value="" disabled selected hidden>
+              <select id="gender" name="gender" defaultValue={'Gender'}>
+                <option defaultValue="" disabled hidden>
                   Gender
                 </option>
                 <option value="female">여자</option>
