@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
 import { sighResultType } from '@/types';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function SighResultPage() {
   // useState를 사용하여 상태를 관리
@@ -12,6 +13,8 @@ export default function SighResultPage() {
   const [negativeData, setNegativeData] = useState<number>(0);
   const [positiveData, setPositiveData] = useState<number>(0);
   const [neutralData, setNeutralData] = useState<number>(0);
+  const pathname = usePathname();
+  console.log(pathname);
 
   useEffect(() => {
     // 로컬 스토리지에서 데이터를 검색

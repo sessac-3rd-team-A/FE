@@ -2,7 +2,7 @@
 
 import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { sighResultType } from '@/types';
 
 export default function SighPage() {
@@ -39,7 +39,7 @@ export default function SighPage() {
         console.log('POST request successful:', data);
         setIsLoading(false);
         localStorage.setItem('sighResult', JSON.stringify(data));
-        router.push('/sigh/result');
+        router.push(`/sigh/result/${data.id}`);
       } else {
         console.error(
           'POST request failed:',
