@@ -16,7 +16,7 @@ export interface ShopApiRes {
 }
 
 // diary result
-export interface sighResultType {
+export interface SighResultType {
   id: number;
   userId: string | null;
   pictureDiary: string;
@@ -30,4 +30,13 @@ export interface sighResultType {
 }
 
 // profile result (array)
-export type profileResultType = sighResultType[];
+export type ProfileResultType = SighResultType[];
+
+// recoil user
+export interface IUserState {
+  userId: string;
+  nickname: string;
+  age: string;
+  gender: string;
+  isLogin: boolean;
+}
