@@ -1,6 +1,6 @@
 import '@/styles/global.scss';
 import Header from '@/containers/common/header';
-import { RecoilRootProvider } from '@/utils/recoilRootProvider';
+import RecoilRootProvider from '@/utils/recoilRootProvider';
 
 export const metadata = {
   title: 'Ah-whew',
@@ -13,14 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      {/* 헤더 푸터 커스텀 해야함 */}
-      <Header />
-      <main>
-        <RecoilRootProvider>
-          {children}
-        </RecoilRootProvider>
-      </main>
-    </div>
+    <html>
+      <body>
+        {/* 헤더 푸터 커스텀 해야함 */}
+        <Header />
+        <main>
+          <RecoilRootProvider>{children}</RecoilRootProvider>
+        </main>
+      </body>
+    </html>
   );
 }
