@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
@@ -9,25 +9,18 @@ import { GrCaretPrevious } from 'react-icons/gr';
 import '@/styles/profile/_calendar.scss';
 // import Image from 'next/image';
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-// 일기 작성 날짜 리스트 -> 여기에 데이터 들어오면 될듯
-const dayList = [
-  '2023-12-15',
-  '2023-12-14',
-  '2023-12-13',
-  '2023-12-12',
-  '2023-12-11',
-];
-
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  setModalDate: Dispatch<SetStateAction<string>>;
+  emoData: object;
 }
 
-export default function EmoCalendar({ setIsModalOpen }: Props) {
-  const [value, onChange] = useState<Value>(new Date()); // 클릭한 날짜 (초기값으로 현재 날짜 넣어줌)
+export default function EmoCalendar({
+  setModalDate,
+  setIsModalOpen,
+  emoData,
+}: Props) {
+  const [value, onChange] = useState<Date>(new Date()); // 클릭한 날짜 (초기값으로 현재 날짜 넣어줌)
 
   // const monthOfActiveDate = moment(value).format('YYYY-MM');
   // const [activeMonth, setActiveMonth] = useState(monthOfActiveDate);
@@ -38,6 +31,8 @@ export default function EmoCalendar({ setIsModalOpen }: Props) {
   // };
 
   // console.log('변경된 날짜 :: ', value);
+
+  const dayList = Object.keys(emoData);
 
   // 각 날짜 타일에 컨텐츠 추가
   const addContent = ({ date }: any) => {
@@ -71,9 +66,16 @@ export default function EmoCalendar({ setIsModalOpen }: Props) {
         onChange={(value, event) => {
           // onChange(value);
           if (
-            dayList.find((day) => day === moment(value).format('YYYY-MM-DD'))
+            dayList.find(
+              (day) =>
+                day ===
+                moment(value as moment.MomentInput).format('YYYY-MM-DD'),
+            )
           ) {
             setIsModalOpen(true);
+            setModalDate(
+              moment(value as moment.MomentInput).format('YYYY-MM-DD'),
+            );
           }
         }}
         value={value}

@@ -10,12 +10,47 @@ import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
+import { sighResultType } from '@/types';
 
 export default function ProfilePage() {
   const router = useRouter();
 
+  const [modalDate, setModalDate] = useState<string>('');
+  // const [emoData, setEmoData] = useState<sighResultType[]>([]);
+  const [emoData, setEmoData] = useState({});
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const backgroundRef = useRef(null);
+
+  const getUserInfo = async () => {
+    try {
+      const res = await fetch('http://localhost:8080/profile/dashboard', {
+        cache: 'no-store',
+        method: 'GET',
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ZWJhZWVlNS1hNzc4LTQyNGYtYWI5Yy0yZGZhYTk5NjJjZDIiLCJpc3MiOiJhZG1pbkBzcHJpbmcuc2VjdXJpdHkuY29tIiwiaWF0IjoxNzAzMTQ5OTUzLCJleHAiOjE3MDMyMzYzNTMsImFnZSI6IjEw64yAIiwiZ2VuZGVyIjoiTSJ9.PRC3ERUM-jvOiUzoZca4UdsqLyjOy_SNrYj-HQUxZenj8cZ2tiaIa20VCwWLWiTl5Gp9NpJI0zxnLoHpobAQTA',
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('fetch data :: ', data);
+
+      setEmoData(data);
+    } catch (error: any) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+    // Call the function
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(this: Document, ev: MouseEvent): any {
@@ -73,14 +108,18 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="info-right">
-          <EmoCalendar setIsModalOpen={setIsModalOpen} />
+          <EmoCalendar
+            setModalDate={setModalDate}
+            setIsModalOpen={setIsModalOpen}
+            emoData={emoData}
+          />
         </div>
       </div>
       <div className={`${isModalOpen ? 'modalOn' : ''}`}>
         <ProfileMenu />
         <section className="whiteGradientBg" />
       </div>
-      {isModalOpen && <DiaryModal />}
+      {isModalOpen && <DiaryModal emoData={emoData} modalDate={modalDate} />}
     </section>
   );
 }
