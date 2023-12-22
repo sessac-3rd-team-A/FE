@@ -1,8 +1,10 @@
 @import '/src/styles/global.scss';
 
 .diaryModal-container {
-  width: 50vw;
-  height: 60vw;
+  width: 30vw;
+  height: 40vw;
+  min-width: 400px;
+  min-height: 500px;
   padding: 2rem 3rem;
   position: fixed;
   top: 50%;
