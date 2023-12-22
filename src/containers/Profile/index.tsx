@@ -25,7 +25,7 @@ export default function ProfilePage() {
 
   const backgroundRef = useRef(null);
 
-  const [user, setUser] = useRecoilState(userState); // recoil
+  const [user, setUser] = useRecoilState<{ userId: string; password: string; }>(userState); // recoil
   useEffect(() => {
     console.log( user)
   }, []) // recoil
