@@ -3,18 +3,19 @@ import React, { useState, useEffect } from 'react';
 import '../styles/statistics/threeBox.scss';
 import TrendLineChart from './trendLineChart';
 import MemeRank from './memeRank';
+import TrendLineChartCartegory from './trendLineChartCartegory';
 
 export default function ThreeBox() {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
 
   //임시 주석처리
-  // const handleMenuChange = (menuId: string) => {
-  //   setSelectedMenu(menuId);
-  // };
+  const handleMenuChange = (menuId: string) => {
+    setSelectedMenu(menuId);
+  };
 
-  // useEffect(() => {
-  //   console.log(selectedMenu);
-  // }, [selectedMenu]);
+  useEffect(() => {
+    console.log(selectedMenu);
+  }, [selectedMenu]);
 
   const labeLText: string[] = ['MAIN', 'GROUP', 'MEME'];
 
@@ -25,7 +26,7 @@ export default function ThreeBox() {
         const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
         const componentsToRender = [
           <TrendLineChart key="trendLineChart" />,
-          <div key="someDiv">This is a div</div>,
+          <TrendLineChartCartegory key="trendLineChart" />,
           <MemeRank key="memeRank" />,
         ];
 
@@ -37,7 +38,7 @@ export default function ThreeBox() {
               id={menuId}
               className="three-box-button"
               checked={selectedMenu === menuId}
-              // onChange={() => handleMenuChange(menuId)}//임시 주석처리
+              onChange={() => handleMenuChange(menuId)} //임시 주석처리
             />
             <div className="three-box-contents">
               <div className="three-box-inner">{componentsToRender[index]}</div>
@@ -50,6 +51,7 @@ export default function ThreeBox() {
                 </div>
               </div>
             </div>
+
             {menuId !== selectedMenu && (
               <label
                 htmlFor={menuId}

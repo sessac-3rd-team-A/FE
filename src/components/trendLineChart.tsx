@@ -20,61 +20,69 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
+import { useState } from 'react';
 
-export default async function TrendLineChart() {
-  const response = await fetch('http://localhost:8080/api/statistics', {
+export default function TrendLineChart() {
+  const [labels, setLabels] = useState<any>([]);
+  const [datasets, setDatasets] = useState<any>([]);
+
+  fetch('http://localhost:8080/api/statistics', {
     cache: 'no-store',
-  });
-  const info = await response.json();
+  })
+    .then((res) => res.json())
+    .then((info) => {
+      const currentDate = new Date(); // Assuming the current date is available as a JavaScript Date object
+      const label = Array.from({ length: 30 }, (_, index) => {
+        const date = new Date(currentDate);
+        date.setDate(date.getDate() - index);
+        return date.toISOString().slice(0, 10);
+      }).reverse();
+      setLabels(label);
 
-  const currentDate = new Date(); // Assuming the current date is available as a JavaScript Date object
-  const labels = Array.from({ length: 30 }, (_, index) => {
-    const date = new Date(currentDate);
-    date.setDate(date.getDate() - index);
-    return date.toISOString().slice(0, 10);
-  }).reverse();
+      const data = [
+        {
+          label: 'Negative',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averageNegative : 0;
+          }),
+          borderColor: '#FF983A',
+          backgroundColor: '#FF983A',
+          borderWidth: 1,
+        },
+        {
+          label: 'Positive',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averagePositive : 0;
+          }),
+          borderColor: '#4866D2',
+          backgroundColor: '#4866D2',
+          borderWidth: 1,
+        },
+        {
+          label: 'Neutral',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averageNeutral : 0;
+          }),
+          borderColor: '#8F8F8F',
+          backgroundColor: '#8F8F8F',
+          borderWidth: 1,
+        },
+      ];
 
-  const datasets = [
-    {
-      label: 'Negative',
-      data: Array.from({ length: 30 }, (_, index) => {
-        const targetDate = labels[index];
-        const matchingData = info.find(
-          (entry: { date: string }) => entry.date === targetDate,
-        );
-        return matchingData ? matchingData.averageNegative : 0;
-      }),
-      borderColor: '#FF983A',
-      backgroundColor: '#FF983A',
-      borderWidth: 1,
-    },
-    {
-      label: 'Positive',
-      data: Array.from({ length: 30 }, (_, index) => {
-        const targetDate = labels[index];
-        const matchingData = info.find(
-          (entry: { date: string }) => entry.date === targetDate,
-        );
-        return matchingData ? matchingData.averagePositive : 0;
-      }),
-      borderColor: '#4866D2',
-      backgroundColor: '#4866D2',
-      borderWidth: 1,
-    },
-    {
-      label: 'Neutral',
-      data: Array.from({ length: 30 }, (_, index) => {
-        const targetDate = labels[index];
-        const matchingData = info.find(
-          (entry: { date: string }) => entry.date === targetDate,
-        );
-        return matchingData ? matchingData.averageNeutral : 0;
-      }),
-      borderColor: '#8F8F8F',
-      backgroundColor: '#8F8F8F',
-      borderWidth: 1,
-    },
-  ];
+      setDatasets(data);
+    });
 
   return (
     <Line

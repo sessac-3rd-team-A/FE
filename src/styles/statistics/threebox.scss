@@ -47,7 +47,7 @@
 
 /* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
 input.three-box-button {
-  display: none;
+  // display: none;
 }
 
 /* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
