@@ -11,10 +11,12 @@ import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
 import { sighResultType } from '@/types';
+import { useRecoilState } from 'recoil'; // recoil
+import { userState } from '@/utils/state';// recoil
+
 
 export default function ProfilePage() {
   const router = useRouter();
-
   const [modalDate, setModalDate] = useState<string>('');
   // const [emoData, setEmoData] = useState<sighResultType[]>([]);
   const [emoData, setEmoData] = useState({});
@@ -22,6 +24,11 @@ export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const backgroundRef = useRef(null);
+
+  const [user, setUser] = useRecoilState(userState); // recoil
+  useEffect(() => {
+    console.log( user)
+  }, []) // recoil
 
   const getUserInfo = async () => {
     try {

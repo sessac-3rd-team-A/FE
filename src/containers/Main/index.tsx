@@ -1,6 +1,17 @@
+'use client'
 import '@/styles/main.scss';
+import { useRecoilState } from 'recoil'; // recoil
+import { userState } from '@/utils/state';// recoil
+import { useEffect } from 'react'; // recoil
 
 export default function MainPage() {
+
+  const [user, setUser] = useRecoilState(userState); // recoil
+
+  useEffect(() => {
+    console.log( user)
+  }, [])
+  
   return (
     <div className="mainWindContainer">
       <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" />
