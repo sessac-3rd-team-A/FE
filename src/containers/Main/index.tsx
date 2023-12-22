@@ -8,9 +8,9 @@ export default function MainPage() {
 
   const [user, setUser] = useRecoilState(userState); // recoil
 
-  useEffect(() => {
-    console.log( user)
-  }, [])
+  // useEffect(() => {
+  //   console.log( user)
+  // }, [])
   
   return (
     <div className="mainWindContainer">
