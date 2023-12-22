@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
   const backgroundRef = useRef(null);
 
-  const [user, setUser] = useRecoilState<{ userId: string; password: string; }>(userState); // recoil
+  const [user, setUser] = useRecoilState(userState); // recoil
   useEffect(() => {
     console.log(user);
   }, []); // recoil
@@ -35,8 +35,7 @@ export default function ProfilePage() {
         cache: 'no-store',
         method: 'GET',
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ZWJhZWVlNS1hNzc4LTQyNGYtYWI5Yy0yZGZhYTk5NjJjZDIiLCJpc3MiOiJhZG1pbkBzcHJpbmcuc2VjdXJpdHkuY29tIiwiaWF0IjoxNzAzMTQ5OTUzLCJleHAiOjE3MDMyMzYzNTMsImFnZSI6IjEw64yAIiwiZ2VuZGVyIjoiTSJ9.PRC3ERUM-jvOiUzoZca4UdsqLyjOy_SNrYj-HQUxZenj8cZ2tiaIa20VCwWLWiTl5Gp9NpJI0zxnLoHpobAQTA',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 
