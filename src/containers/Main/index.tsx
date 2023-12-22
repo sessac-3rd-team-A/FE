@@ -11,6 +11,7 @@ export default function MainPage() {
   useEffect(() => {
     console.log( user)
   }, [])
+  
   return (
     <div className="mainWindContainer">
       <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" />
