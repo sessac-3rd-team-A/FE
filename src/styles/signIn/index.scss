@@ -35,21 +35,23 @@
   background-repeat: no-repeat;
   background-position: center;
   transform: rotateY(0deg);
+  // z-index: 1;
 }
 .back {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   transform: rotateY(180deg);
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #0d0f53e6; /* 원하는 배경 색상과 불투명도를 설정 (예: 빨간색, 50% 불투명) */
-  }
+  // z-index: 2;
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   // background-color: #0d0f53e6; /* 원하는 배경 색상과 불투명도를 설정 (예: 빨간색, 50% 불투명) */
+  // }
 }
 
 .sign-mainContainer {
@@ -89,6 +91,12 @@
         height: toSizeC(50, 1200);
         border-radius: toSizeC(16, 1200);
       }
+      &.submit-signUp {
+        margin-top: 36px;
+        @include media('<=1200px') {
+          margin-top: toSizeC(36, 1200);
+        }
+      }
     }
   }
   .signIn-letter {
@@ -101,14 +109,17 @@
       margin-top: toSizeC(57, 1200);
     }
   }
-  input:focus {
+  input:focus,
+  select:focus {
     outline: 1.5px solid #3a89ff;
   }
-  input::placeholder {
+  input::placeholder,
+  select:focus {
     color: #a7a7a7;
   }
   #id,
-  #pw {
+  #pw,
+  #nickname {
     margin-top: 100px;
     width: 560px;
     height: 60px;
@@ -127,7 +138,14 @@
       height: toSizeC(60, 1200);
       border-radius: toSizeC(12, 1200);
     }
-    &.pw {
+    &.idSignUp {
+      margin-top: 39px;
+      @include media('<=1200px') {
+        margin-top: toSizeC(39, 1200);
+      }
+    }
+    &.pw,
+    &.nickname {
       margin-top: 13px;
       @include media('<=1200px') {
         margin-top: toSizeC(13, 1200);
@@ -192,4 +210,41 @@
 }
 .flipper.flip {
   transform: rotateY(180deg);
+}
+
+.age-and-gender {
+  width: 560px;
+  height: 60px;
+  margin-top: 13px;
+  display: flex;
+  gap: 12px;
+
+  #age {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #3a89ff;
+    border-radius: 12px;
+    padding-left: 31px;
+    font-family: GMarketSans;
+    font-size: 28px;
+    color: gray;
+  }
+
+  #gender {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #3a89ff;
+    border-radius: 12px;
+    padding-left: 31px;
+    font-family: GMarketSans;
+    font-size: 28px;
+    color: gray;
+  }
+}
+
+select {
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right #fff;
+  -webkit-appearance: none;
+  background-position-x: 244px;
 }
