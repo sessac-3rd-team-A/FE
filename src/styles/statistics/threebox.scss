@@ -11,9 +11,9 @@
 :checked , + , :not, calc
 
 /* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
-.threeBoxWrap {
+.three-box-wrap {
   width: 100%;
-  height: toSize(876);
+  height: toSize(454);
   align-items: center;
   margin: 0 0 toSize(90) toSize(90);
 }
@@ -46,19 +46,20 @@
 // }
 
 /* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
-input.threeBoxButton {
-  display: none;
+input.three-box-button {
+  // display: none;
 }
 
 /* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
-input[type='radio']:checked + .threeBoxContents {
+input[type='radio']:checked + .three-box-contents {
   visibility: visible;
   width: toSize(1370);
 }
 
 /* 메뉴 버튼 디자인 */
-.threeBoxLabel {
-  height: toSize(876);
+.three-box-label {
+  // height: toSize(876);
+  height: 100%;
   width: toSize(100);
   // display: inline-block;
   float: left;
@@ -71,17 +72,17 @@ input[type='radio']:checked + .threeBoxContents {
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
-.threeBoxLabel.a {
+.three-box-label.a {
   background: #7caaf0;
 }
-.threeBoxLabel.b {
+.three-box-label.b {
   background: #06f;
 }
-.threeBoxLabel.c {
+.three-box-label.c {
   background: #7caaf0;
 }
 
-.threeBoxRotate {
+.three-box-rotate {
   display: inline-block;
   height: fit-content;
 
@@ -95,7 +96,7 @@ input[type='radio']:checked + .threeBoxContents {
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
     transform-origin: left;
-    white-space: nowrap;
+    // white-space: nowrap;
     left: toSize(50);
     font-family: 'LEMON MILK', sans-serif;
     font-size: toSize(28);
@@ -103,8 +104,8 @@ input[type='radio']:checked + .threeBoxContents {
     font-weight: 400;
     line-height: 110%; /* 30.8px */
     color: #fff;
-    top: toSize(438);
-    text-align: center;
+    top: toSize(230);
+    // text-align: center;
   }
 
   //라벨 인덱싱 원
@@ -112,7 +113,7 @@ input[type='radio']:checked + .threeBoxContents {
     width: toSize(74);
     height: toSize(74);
     border-radius: 50%;
-    flex-shrink: 0;
+    // flex-shrink: 0;
     background-color: white;
     text-align: center;
 
@@ -125,13 +126,13 @@ input[type='radio']:checked + .threeBoxContents {
     font-weight: 400;
     line-height: 110%; /* 30.8px */
     position: absolute;
-    bottom: toSize(-600);
+    top: toSize(320);
     left: toSize(13);
   }
 }
 
 /* 컨텐츠 본문 */
-.threeBoxContents {
+.three-box-contents {
   background-image: url('../../../public/statistics/box_background.png');
   background-size: cover;
   background-position: center;
@@ -139,8 +140,8 @@ input[type='radio']:checked + .threeBoxContents {
   position: relative;
   visibility: collapse;
   float: left;
-  // height: 100%;
-  height: toSize(876);
+  height: 100%;
+  // height: toSize(876);
   width: toSize(1370);
   width: 0;
   transition: all 0.1s ease-out;
@@ -166,11 +167,11 @@ input[type='radio']:checked + .threeBoxContents {
   // );
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c0c60a', endColorstr='#59007c33',GradientType=1 );
 }
-.threeBoxInner {
+.three-box-inner {
   display: flex; //가운데 회색박스 나옴
-  height: 94%;
-  margin: 2% 1.5%;
-  width: 90%;
+  height: 90%;
+  margin: 1.5% 0 1.5% 1.5%;
+  width: 92%;
   float: left;
   border-radius: 28px;
   border: 0.5px solid #fff;
@@ -189,30 +190,30 @@ input[type='radio']:checked + .threeBoxContents {
   // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
 }
-.threeBoxDescription {
-  display: inline-block;
-  width: toSize(90);
+.three-box-description {
+  display: flex;
+  // width: toSize(90);
   height: 100%;
   // background: red;
 
   p {
-    position: relative;
+    position: absolute;
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
-    transform-origin: left;
-    white-space: nowrap;
+    // transform-origin: left;
+    // white-space: nowrap;
     font-family: 'LEMON MILK', sans-serif;
     font-size: toSize(28);
     font-style: normal;
     font-weight: 400;
     line-height: 110%; /* 30.8px */
     color: #fff;
-    top: toSize(460);
-    left: toSize(50);
-    text-align: center;
+    top: toSize(230);
+    // left: toSize(50);
+    // text-align: center;
   }
 
   //라벨 인덱싱 원
@@ -220,24 +221,24 @@ input[type='radio']:checked + .threeBoxContents {
     width: toSize(74);
     height: toSize(74);
     border-radius: 50%;
-    flex-shrink: 0;
+    // flex-shrink: 0;
     background-color: white;
     text-align: center;
 
-    color: #000;
+    // color: #000;
 
-    margin-top: toSize(10);
+    // margin-top: toSize(10);
     font-family: 'GmarketSans';
     font-size: toSize(28);
     font-style: normal;
     font-weight: 400;
     line-height: 110%; /* 30.8px */
-    position: relative;
-    bottom: toSize(-498);
-    left: toSize(11);
+    position: absolute;
+    bottom: toSize(20);
+    right: toSize(10);
   }
 }
-.threeBoxDescription h3 {
+.three-box-description h3 {
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -248,7 +249,7 @@ input[type='radio']:checked + .threeBoxContents {
   text-shadow: rgb(36, 127, 132) 2px 2px 0px;
   margin-bottom: 20px;
 }
-.threeBoxDescription h3::first-letter {
+.three-box-description h3::first-letter {
   font-size: 70px;
   color: #0f848c;
 }
