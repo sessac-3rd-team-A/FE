@@ -13,17 +13,24 @@ const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
 async function getUserInfo() {
   try {
+    const bearerToken = '토큰_값';
+
     const res = await fetch('http://localhost:3000/profile/my-shop', {
-      method: 'GET'
-    })
-    console.log(res);
-    return res;
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${bearerToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+    return data;
   } catch (err) {
     console.log(err);
   }
 }
 
-async function SearchResult(): Promise<any> {
+async function SearchResult(): Promise<ShopApiRes> {
   const query = '20대 여자 스트레스';
   const displayNum = 20;
   const url = `${API}?query=${encodeURIComponent(
@@ -46,9 +53,9 @@ async function SearchResult(): Promise<any> {
   }
 }
 
-export default async function MyShopPage() {
-  const items = await SearchResult();
-  const itemsResult: ShopApiRes[] = items.items;
+export default async function MyShopPage(): Promise<JSX.Element> {
+  const items:object = await SearchResult();
+  const itemsResult = items.items;
 
   return (
     <div className="myShop-container">
