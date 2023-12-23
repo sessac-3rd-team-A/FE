@@ -10,11 +10,12 @@ import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
-import { sighResultType } from '@/types';
+import { SighResultType } from '@/types';
+import { useRecoilState } from 'recoil'; // recoil
+import { userState } from '@/utils/state'; // recoil
 
 export default function ProfilePage() {
   const router = useRouter();
-
   const [modalDate, setModalDate] = useState<string>('');
   // const [emoData, setEmoData] = useState<sighResultType[]>([]);
   const [emoData, setEmoData] = useState({});
@@ -23,14 +24,18 @@ export default function ProfilePage() {
 
   const backgroundRef = useRef(null);
 
+  const [user, setUser] = useRecoilState(userState); // recoil
+  useEffect(() => {
+    console.log(user);
+  }, []); // recoil
+
   const getUserInfo = async () => {
     try {
       const res = await fetch('http://localhost:8080/profile/dashboard', {
         cache: 'no-store',
         method: 'GET',
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1ZWJhZWVlNS1hNzc4LTQyNGYtYWI5Yy0yZGZhYTk5NjJjZDIiLCJpc3MiOiJhZG1pbkBzcHJpbmcuc2VjdXJpdHkuY29tIiwiaWF0IjoxNzAzMTQ5OTUzLCJleHAiOjE3MDMyMzYzNTMsImFnZSI6IjEw64yAIiwiZ2VuZGVyIjoiTSJ9.PRC3ERUM-jvOiUzoZca4UdsqLyjOy_SNrYj-HQUxZenj8cZ2tiaIa20VCwWLWiTl5Gp9NpJI0zxnLoHpobAQTA',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 

@@ -7,25 +7,30 @@ import Image from 'next/image';
 import trendText from '../../../public/statistics/trendText.svg';
 import ThreeBox from '@/components/threebox';
 
-export default async function StatisticsPage() {
-  const response = await fetch('http://localhost:8080/api/statistics', {
-    cache: 'no-store',
-  });
-  const info = await response.json();
-  console.log(info);
+export default function StatisticsPage() {
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:8080/api/statistics', {
+      cache: 'no-store',
+    });
+    const info = await response.json();
+    console.log(info);
+  };
+
+  fetchData();
+
   let str: string = '트렌드';
   let arr;
   return (
-    <>
-      <h2 className="ChartTitle" style={{ visibility: 'hidden' }}>
+    <div className="trend-container">
+      <h2 className="chart-title" style={{ visibility: 'hidden' }}>
         이 페이지는 {str}페이지 입니다.
       </h2>
-      <div className="ChartTitle, animate__animated animate__bounce">
-        <Image src={trendText} alt="Picture of me" className="chartText" />
+      <div className="chart-title, animate__animated animate__bounce">
+        <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
 
-      <ThreeBox></ThreeBox>
+      <ThreeBox />
       <Semo></Semo>
-    </>
+    </div>
   );
 }
