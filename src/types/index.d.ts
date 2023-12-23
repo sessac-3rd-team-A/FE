@@ -1,3 +1,4 @@
+// my-shop details
 export interface ShopApiRes {
   title: string;
   link: string;
