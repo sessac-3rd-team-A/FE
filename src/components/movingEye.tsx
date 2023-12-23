@@ -4,21 +4,21 @@ import { useRafState } from 'react-use';
 import cx from 'clsx';
 import '../styles/signIn/movingEye.scss';
 
-const MovingEye = ({ cName }: any) => {
-  const originRef = useRef<HTMLDivElement>(null);
-  const [cord, setCord] = useRafState({
-    top: false,
-    right: false,
-    bottom: false,
-    left: false,
-  });
+const MovingEye = ({ cName, eRef, cord, setCord }: any) => {
+  // const originRef = useRef<HTMLDivElement>(null);
+  // const [cord, setCord] = useRafState({
+  //   top: false,
+  //   right: false,
+  //   bottom: false,
+  //   left: false,
+  // });
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent): void => {
-      if (!originRef.current) return;
+      // if (!eRef.current) return;
 
       const { x: x1, y: y1 } = e;
-      const { x: x2, y: y2 } = originRef.current.getBoundingClientRect();
+      const { x: x2, y: y2 } = eRef?.current?.getBoundingClientRect();
 
       let rad = Math.atan2(y2 - y1, x2 - x1);
       if (rad < 0) rad += Math.PI * 2;
@@ -98,13 +98,15 @@ const MovingEye = ({ cName }: any) => {
         });
       }
     };
-    window.addEventListener('mousemove', onMouseMove);
+    if (eRef) {
+      window.addEventListener('mousemove', onMouseMove);
+    }
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
     };
   });
   return (
-    <div className={`fancyEyeBall ${cName}`} ref={originRef}>
+    <div className={`fancyEyeBall ${cName}`} ref={eRef || null}>
       <div className="eyeTemplate" />
       <div
         className={cx('eyeBall', {

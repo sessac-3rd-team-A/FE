@@ -1,16 +1,46 @@
 'use client';
 import '@/styles/signIn/index.scss';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
 import MovingEye from '@/components/movingEye';
+import { useRafState } from 'react-use';
 
 export default function SignInPage() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [user, setUser] = useRecoilState(userState); // recoil
+  const eyeRef1 = useRef<HTMLDivElement>(null);
+  const eyeRef2 = useRef<HTMLDivElement>(null);
+  const eyeRef3 = useRef<HTMLDivElement>(null);
+  const eyeRef4 = useRef<HTMLDivElement>(null);
+
+  const [cord1, setCord1] = useRafState({
+    top: false,
+    right: false,
+    bottom: false,
+    left: false,
+  });
+  const [cord2, setCord2] = useRafState({
+    top: false,
+    right: false,
+    bottom: false,
+    left: false,
+  });
+  const [cord3, setCord3] = useRafState({
+    top: false,
+    right: false,
+    bottom: false,
+    left: false,
+  });
+  const [cord4, setCord4] = useRafState({
+    top: false,
+    right: false,
+    bottom: false,
+    left: false,
+  });
 
   useEffect(() => {
     console.log('Updated user state:', user);
@@ -81,6 +111,8 @@ export default function SignInPage() {
 
   return (
     <article className="sign-mainContainer">
+      <p className="sign-text in">SIGN IN</p>
+      <p className="sign-text up">SIGN UP</p>
       <div
         onClick={() => setIsLogin(!isLogin)}
         className="sign-checkboxContainer"
@@ -177,24 +209,44 @@ export default function SignInPage() {
         </div>
       </div>
       <div className="monster mon1">
-        <img src="/signIn/mon1.png" />
-        <MovingEye cName={'mon1-eye1'} />
-        <MovingEye cName={'mon1-eye2'} />
+        <img style={{ width: '100%' }} src="/signIn/mon1.png" />
+        <MovingEye
+          eRef={eyeRef1}
+          cord={cord1}
+          setCord={setCord1}
+          cName={'mon1-eye1'}
+        />
+        <MovingEye cName={'mon1-eye2'} cord={cord1} setCord={setCord1} />
       </div>
       <div className="monster mon2">
-        <img src="/signIn/mon2.png" />
-        <MovingEye cName={'mon2-eye1'} />
-        <MovingEye cName={'mon2-eye2'} />
+        <img style={{ width: '100%' }} src="/signIn/mon2.png" />
+        <MovingEye
+          eRef={eyeRef2}
+          cord={cord2}
+          setCord={setCord2}
+          cName={'mon2-eye1'}
+        />
+        <MovingEye cName={'mon2-eye2'} cord={cord2} setCord={setCord2} />
       </div>
       <div className="monster mon3">
-        <img src="/signIn/mon3.png" />
-        <MovingEye cName={'mon3-eye1'} />
-        <MovingEye cName={'mon3-eye2'} />
+        <img style={{ width: '100%' }} src="/signIn/mon3.png" />
+        <MovingEye
+          eRef={eyeRef3}
+          cord={cord3}
+          setCord={setCord3}
+          cName={'mon3-eye1'}
+        />
+        <MovingEye cName={'mon3-eye2'} cord={cord3} setCord={setCord3} />
       </div>
       <div className="monster mon4">
-        <img src="/signIn/mon4.png" />
-        <MovingEye cName={'mon4-eye1'} />
-        <MovingEye cName={'mon4-eye2'} />
+        <img style={{ width: '100%' }} src="/signIn/mon4.png" />
+        <MovingEye
+          eRef={eyeRef4}
+          cord={cord4}
+          setCord={setCord4}
+          cName={'mon4-eye1'}
+        />
+        <MovingEye cName={'mon4-eye2'} cord={cord4} setCord={setCord4} />
       </div>
     </article>
   );

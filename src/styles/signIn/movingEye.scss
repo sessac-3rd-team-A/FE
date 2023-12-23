@@ -1,3 +1,6 @@
+@import '/src/styles/global.scss';
+@import '~include-media/dist/include-media';
+
 .fancyEyeBall {
   position: absolute;
   display: flex;
@@ -11,6 +14,10 @@
     background-color: black;
     z-index: 10;
     border-radius: 999px;
+    @include media('<=1200px') {
+      width: toSizeC(20, 1200);
+      height: toSizeC(22, 1200);
+    }
   }
 
   .eyeTemplate {
@@ -21,6 +28,10 @@
     background-color: white;
     // background-color: lightcyan;
     z-index: 1;
+    @include media('<=1200px') {
+      width: toSizeC(44, 1200);
+      height: toSizeC(44, 1200);
+    }
   }
 
   .eyeBall {
@@ -29,21 +40,33 @@
     &.top {
       bottom: -2px;
       top: auto;
+      @include media('<=1200px') {
+        bottom: toSizeC(-2, 1200);
+      }
     }
 
     &.left {
       left: auto;
       right: -2px;
+      @include media('<=1200px') {
+        right: toSizeC(-2, 1200);
+      }
     }
 
     &.bottom {
       bottom: auto;
       top: -2px;
+      @include media('<=1200px') {
+        top: toSizeC(-2, 1200);
+      }
     }
 
     &.right {
       left: -2px;
       right: auto;
+      @include media('<=1200px') {
+        left: toSizeC(-2, 1200);
+      }
     }
   }
 }
