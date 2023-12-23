@@ -9,9 +9,12 @@ import ThreeBox from '@/components/threebox';
 
 export default function StatisticsPage() {
   const fetchData = async () => {
-    const response = await fetch('http://localhost:8080/api/statistics', {
-      cache: 'no-store',
-    });
+    const response = await fetch(
+      'http://localhost:8080/api/statistics/meme?age=30대',
+      {
+        cache: 'no-store',
+      },
+    );
     const info = await response.json();
     console.log(info);
   };
