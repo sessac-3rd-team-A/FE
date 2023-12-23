@@ -9,7 +9,7 @@ export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>('START');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,8 +42,8 @@ export default function SighPage() {
           const data = await response.json();
           console.log('POST request successful:', data);
           localStorage.setItem('sighResult', JSON.stringify(data));
-          setIsLoading(false);
           router.push(`/sigh/result/${data.id}`);
+          setIsLoading(false);
         } else {
           console.error(
             'POST request failed:',

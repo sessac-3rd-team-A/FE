@@ -1,0 +1,63 @@
+@import '/src/styles/global.scss';
+
+.loading-main {
+  background-color: #3a89ff;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .loading-doodles {
+    position: relative;
+    left: -5vw;
+    top: 40vh;
+  }
+
+  h1 {
+    position: relative;
+    top: 88vh;
+    color: white;
+    font-family: 'LEMON MILK';
+    font-size: toSize(30);
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0deg) translateX(toSize(220)) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) translateX(toSize(220)) rotate(-90deg) scale(1.2); /* Grown */
+  }
+  50% {
+    transform: rotate(180deg) translateX(toSize(220)) rotate(-180deg) scale(1); /* Normal size */
+  }
+  75% {
+    transform: rotate(270deg) translateX(toSize(220)) rotate(-270deg) scale(0.8); /* Shrunk */
+  }
+  100% {
+    transform: rotate(360deg) translateX(toSize(220)) rotate(-360deg) scale(1);
+  }
+}
+
+.loading-doodle1,
+.loading-doodle2,
+.loading-doodle3 {
+  position: absolute;
+  animation: circle 10s infinite linear;
+}
+
+.loading-doodle1 {
+  animation-delay: 0s;
+  width: toSize(250);
+}
+
+.loading-doodle2 {
+  animation-delay: -3.33s;
+  width: toSize(250);
+}
+
+.loading-doodle3 {
+  animation-delay: -6.66s;
+  width: toSize(250);
+}
