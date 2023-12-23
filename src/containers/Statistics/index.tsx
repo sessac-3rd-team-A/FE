@@ -1,22 +1,22 @@
 import '../../styles/statistics/chart.scss';
-import Semo from '@/components/semo';
+import Semo from '@/containers/Statistics/semo';
 
 import 'animate.css';
 
 import Image from 'next/image';
 import trendText from '../../../public/statistics/trendText.svg';
-import ThreeBox from '@/components/threebox';
+import ThreeBox from '@/containers/Statistics/threebox';
 
 export default function StatisticsPage() {
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:8080/api/statistics', {
-      cache: 'no-store',
-    });
-    const info = await response.json();
-    console.log(info);
-  };
+  // const fetchData = async () => {
+  //   const response = await fetch('http://localhost:8080/api/statistics/meme', {
+  //     cache: 'no-store',
+  //   });
+  //   const info = await response.json();
+  //   console.log(info);
+  // };
 
-  fetchData();
+  // fetchData();
 
   let str: string = '트렌드';
   let arr;
@@ -30,7 +30,7 @@ export default function StatisticsPage() {
       </div>
 
       <ThreeBox />
-      <Semo></Semo>
+      {/* <Semo></Semo> */}
     </div>
   );
 }
