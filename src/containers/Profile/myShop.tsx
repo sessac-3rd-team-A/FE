@@ -18,7 +18,7 @@ async function getUserInfo() {
     const res = await fetch('http://localhost:3000/profile/my-shop', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${bearerToken}`,
+        Authorization: `Bearer ${bearerToken}`,
         'Content-Type': 'application/json',
       },
     });
@@ -54,7 +54,7 @@ async function SearchResult(): Promise<ShopApiRes> {
 }
 
 export default async function MyShopPage(): Promise<JSX.Element> {
-  const items:object = await SearchResult();
+  const items: object = await SearchResult();
   const itemsResult = items.items;
 
   return (
@@ -87,12 +87,17 @@ export default async function MyShopPage(): Promise<JSX.Element> {
                         src={itemsResult[index * 4 + innerIndex]?.image}
                         className="product-image"
                       />
-                      <div className='product-detail-explain'>
-                        <div className='product-item-name'>
-                          <span>상품명</span><br /> {itemsResult[index * 4 + innerIndex]?.title.replace(/<b>/g, '').replace(/<\/b>/g, '')}
+                      <div className="product-detail-explain">
+                        <div className="product-item-name">
+                          <span>상품명</span>
+                          <br />{' '}
+                          {itemsResult[index * 4 + innerIndex]?.title
+                            .replace(/<b>/g, '')
+                            .replace(/<\/b>/g, '')}
                         </div>
                         <br />
-                        <span>가격</span> {itemsResult[index * 4 + innerIndex]?.lprice}
+                        <span>가격</span>{' '}
+                        {itemsResult[index * 4 + innerIndex]?.lprice}
                       </div>
                     </div>
                   </Link>

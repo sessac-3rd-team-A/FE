@@ -1,34 +1,25 @@
 'use client';
 import Image from 'next/image';
 import '@/styles/sigh/result.scss';
-import { useEffect, useState } from 'react';
 import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
-import { SighResultType } from '@/types';
+import { usePathname } from 'next/navigation';
+import ResultChart from './resultChart';
 
-export default function SighResultPage() {
-  // useState를 사용하여 상태를 관리
-  const [sighResult, setSighResult] = useState<SighResultType | null>(null);
-  const [negativeData, setNegativeData] = useState<number>(0);
-  const [positiveData, setPositiveData] = useState<number>(0);
-  const [neutralData, setNeutralData] = useState<number>(0);
+async function resultFetchData() {
+  const pathname = usePathname();
+  const id = pathname.split('/').pop();
+  console.log(id);
+  const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
+    next: { revalidate: 10 },
+  });
+  const data = await res.json();
+  return data;
+}
 
-  useEffect(() => {
-    // 로컬 스토리지에서 데이터를 검색
-    const storedData = localStorage.getItem('sighResult');
-    if (storedData) {
-      setSighResult(JSON.parse(storedData));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (sighResult) {
-      const roundToInteger = (value: number) => Math.round(value);
-      setNegativeData(roundToInteger(sighResult.negativeRatio));
-      setPositiveData(roundToInteger(sighResult.positiveRatio));
-      setNeutralData(roundToInteger(sighResult.neutralRatio));
-    }
-  }, [sighResult]);
+export default async function SighResultPage() {
+  const sighResult = await resultFetchData();
+  console.log(sighResult);
 
   return (
     <div className="result-container">
@@ -56,59 +47,7 @@ export default function SighResultPage() {
         </section>
         <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>
-          <article className="result-sentimentArticle">
-            <div className="result-sentimentLabel">
-              <label>Negative</label>
-              <label>Positive</label>
-              <label>Neutral</label>
-            </div>
-            <div className="result-sentimentChart">
-              <div className="result-sentimentData result-negativeData">
-                <div
-                  style={{
-                    width: `${negativeData}%`,
-                  }}
-                />
-                <img
-                  src="/sigh/negative.svg"
-                  alt="😢"
-                  style={{
-                    left:
-                      negativeData >= 0 && negativeData < 3 ? '-1.5%' : '-3%',
-                  }}
-                />
-              </div>
-              <div className="result-sentimentData result-positiveData">
-                <div
-                  style={{
-                    width: `${positiveData}%`,
-                  }}
-                />
-                <img
-                  src="/sigh/positive.svg"
-                  alt="😄"
-                  style={{
-                    left:
-                      positiveData >= 0 && positiveData < 3 ? '-1.5%' : '-3%',
-                  }}
-                />
-              </div>
-              <div className="result-sentimentData result-neutralData">
-                <div
-                  style={{
-                    width: `${neutralData}%`,
-                  }}
-                />
-                <img
-                  src="/sigh/neutral.svg"
-                  alt="😐"
-                  style={{
-                    left: neutralData >= 0 && neutralData < 3 ? '-1.5%' : '-3%',
-                  }}
-                />
-              </div>
-            </div>
-          </article>
+          {sighResult && <ResultChart sighResult={sighResult} />}
         </section>
         <section className="result-btns">
           <Link href={'/sigh'}>

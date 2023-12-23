@@ -1,9 +1,11 @@
 import SighResultPage from '@/containers/Sigh/result';
+import { Suspense } from 'react';
+import LoadingPage from './loading';
 
 export default function sighResult() {
   return (
-    <div>
+    <Suspense fallback={<LoadingPage />}>
       <SighResultPage />
-    </div>
+    </Suspense>
   );
 }

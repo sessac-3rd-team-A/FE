@@ -3,13 +3,13 @@
 import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { SighResultType } from '@/types';
+import LoadingPage from '@/app/sigh/loading';
 
 export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>('START');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -18,37 +18,51 @@ export default function SighPage() {
   };
 
   const handleStartButtonClick = async () => {
+    console.log(isLoading);
+
     if (buttonText === 'START') {
       setIsVisible((prevVisible) => !prevVisible);
       setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
     } else if (buttonText === 'OK') {
       const apiUrl = 'http://localhost:8080/api/diary';
+      setIsLoading(true);
 
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          textDiary: sighText,
-        }),
-      });
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            textDiary: sighText,
+          }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('POST request successful:', data);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('POST request successful:', data);
+          localStorage.setItem('sighResult', JSON.stringify(data));
+          router.push(`/sigh/result/${data.id}`);
+          setIsLoading(false);
+        } else {
+          console.error(
+            'POST request failed:',
+            response.status,
+            response.statusText,
+          );
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      } finally {
         setIsLoading(false);
-        localStorage.setItem('sighResult', JSON.stringify(data));
-        router.push('/sigh/result');
-      } else {
-        console.error(
-          'POST request failed:',
-          response.status,
-          response.statusText,
-        );
+        console.log(isLoading);
       }
     }
   };
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="sigh-container">
