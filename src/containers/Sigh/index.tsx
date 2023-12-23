@@ -9,7 +9,7 @@ export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>('START');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
