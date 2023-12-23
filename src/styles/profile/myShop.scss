@@ -3,8 +3,7 @@
 .myShop-container {
     width: 100%;
     height: 100%;
-    // min-height: 100%;
-    // padding-bottom: toSize(100);
+    padding-bottom: toSize(100);
 
     .header-temp {
         width: 100%;
@@ -25,14 +24,14 @@
         .profile-char {
             width: toSize(300);
             height: toSize(400);
-            transform: translateX(-5%);
-            transform: translateY(-30%);
+            transform: translate(-5%, -30%);
         }
 
         .char-eye {
-            width: toSize(100);
-            height: toSize(30);
-            transform: translateY(130%);
+            width: toSize(50);
+            height: toSize(20);
+            transform: translate(-350%, 250%);
+            animation: slideIn 1s ease infinite alternate;
         }
     }
     .myShop-explain-container {
@@ -65,15 +64,40 @@
             align-items: center;
             justify-content: center;
             justify-items: center;
+            font-family: GmarketSans;
 
             .product-detail {
-                width: toSize(300);
+                width: toSize(350);
+                height: toSize(600);
                 padding:toSize(20);
                 margin: toSize(10);
+                border: 1px solid #3A89FF;
+                border-radius: toSize(20);
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+                box-shadow: 0 4px 0px -2px #0066FF; 
+                font-size: toSize(30);
+
+                span {
+                    font-weight: bold;
+                }
 
                 .product-image {
                     width: 100%;
                     height: 50%;
+                    border-radius: toSize(20);
+                }
+
+                .product-detail-explain {
+                    width: 100%;
+                    height: 50%;
+
+                    .product-item-name {
+                        padding: 1px;
+                        height: 73%;
+                        overflow: hidden;
+                    }
                 }
             }
         }
@@ -81,7 +105,14 @@
     }
 }
 
-
+@keyframes slideIn {
+    from {
+      transform: translate(-350%, 260%);
+    }
+    to {
+      transform: translate(-280%, 260%);
+    }
+  }
 
 
 

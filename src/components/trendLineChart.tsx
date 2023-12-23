@@ -1,4 +1,4 @@
-'use client';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,7 +9,7 @@ import {
   Title,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+
 // Register ChartJS components using ChartJS.register
 ChartJS.register(
   CategoryScale,
@@ -20,79 +20,75 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
+import { useState } from 'react';
 
-const TrendLineChart = () => {
+export default function TrendLineChart() {
+  const [labels, setLabels] = useState<any>([]);
+  const [datasets, setDatasets] = useState<any>([]);
+
+  fetch('http://localhost:8080/api/statistics', {
+    cache: 'no-store',
+  })
+    .then((res) => res.json())
+    .then((info) => {
+      const currentDate = new Date(); // Assuming the current date is available as a JavaScript Date object
+      const label = Array.from({ length: 30 }, (_, index) => {
+        const date = new Date(currentDate);
+        date.setDate(date.getDate() - index);
+        return date.toISOString().slice(0, 10);
+      }).reverse();
+      setLabels(label);
+
+      const data = [
+        {
+          label: 'Negative',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averageNegative : 0;
+          }),
+          borderColor: '#FF983A',
+          backgroundColor: '#FF983A',
+          borderWidth: 1,
+        },
+        {
+          label: 'Positive',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averagePositive : 0;
+          }),
+          borderColor: '#4866D2',
+          backgroundColor: '#4866D2',
+          borderWidth: 1,
+        },
+        {
+          label: 'Neutral',
+          data: Array.from({ length: 30 }, (_, index) => {
+            const targetDate = labels[index];
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averageNeutral : 0;
+          }),
+          borderColor: '#8F8F8F',
+          backgroundColor: '#8F8F8F',
+          borderWidth: 1,
+        },
+      ];
+
+      setDatasets(data);
+    });
+
   return (
     <Line
-      data={{
-        labels: [
-          '0',
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          '23',
-          '24',
-          '25',
-          '26',
-          '27',
-          '28',
-          '29',
-          '30',
-        ],
-        datasets: [
-          {
-            label: 'Negative',
-            data: [
-              30, 35, 15, 45, 25, 20, 60, 45, 25, 20, 70, 25, 50, 35, 25, 45,
-              25, 70, 25, 50, 15, 25, 25, 50, 10, 15, 30, 35, 70, 15, 20,
-            ],
-            borderColor: '#FF983A',
-            backgroundColor: '#FF983A',
-            borderWidth: 1,
-          },
-          {
-            label: 'Positive',
-            data: [
-              45, 25, 70, 25, 50, 10, 25, 25, 50, 10, 15, 30, 35, 55, 15, 30,
-              35, 15, 45, 25, 25, 60, 45, 25, 20, 70, 25, 50, 20, 25, 25,
-            ],
-            borderColor: '#4866D2',
-            backgroundColor: '#4866D2',
-            borderWidth: 1,
-          },
-          {
-            label: 'Neutral',
-            data: [
-              25, 50, 15, 30, 35, 70, 15, 30, 35, 70, 15, 45, 25, 10, 60, 25,
-              50, 15, 30, 35, 65, 15, 30, 35, 70, 15, 45, 25, 10, 60, 55,
-            ],
-            borderColor: '#8F8F8F',
-            backgroundColor: '#8F8F8F',
-            borderWidth: 1,
-          },
-        ],
-      }}
+      data={{ labels, datasets }}
       options={{
-        // maintainAspectRatio: false,
+        maintainAspectRatio: false,
         responsive: true,
         scales: {
           y: {
@@ -120,8 +116,8 @@ const TrendLineChart = () => {
         plugins: {
           legend: {
             labels: { color: 'black' },
-            align: 'end',
-            position: 'bottom' as const,
+            align: 'start',
+            position: 'right' as const,
           },
           title: {
             display: true,
@@ -135,5 +131,4 @@ const TrendLineChart = () => {
       }}
     />
   );
-};
-export default TrendLineChart;
+}

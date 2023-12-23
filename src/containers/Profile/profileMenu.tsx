@@ -2,13 +2,13 @@
 import '@/styles/main.scss';
 import '@/styles/profile/profileMenu.scss';
 import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedIconState, selectedImageState } from '@/utils/state';
 import Link from 'next/link';
 
 export default function ProfileMenu() {
-  const [selectedImage, setSelectedImage] = useState(
-    '/images/profileMenu_2.svg',
-  );
-  const [selectedIcon, setSelectedIcon] = useState(2);
+  const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
+  const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
 
   const handleIconClick = (newImage: string, index: number) => {
     setSelectedImage(newImage);
@@ -16,26 +16,25 @@ export default function ProfileMenu() {
   };
 
   useEffect(() => {}, [selectedImage]);
-  // const link: string = (index: number) => {
-  //   switch (index) {
-  //     case 1:
-  //       return '/profile/my-shop';
-  //     case 2:
-  //       return '/profile';
-  //     case 3:
-  //       return '/profile/account';
-  //     default:
-  //       return '/profile';
-  //   }
-  // }
-  
+  const link: (index: number) => string = (index: number) => {
+    switch (index) {
+      case 1:
+        return '/profile/my-shop';
+      case 2:
+        return '/profile';
+      case 3:
+        return '/profile/account';
+      default:
+        return '/profile';
+    }
+  };
 
   return (
     <div className="profile-menu-container">
       <nav className="profile-menu-nav">
-        <div className='profile-menu-detail'>
+        <div className="profile-menu-detail">
           {[1, 2, 3].map((index) => (
-            // <Link href={link(index)}>
+            <Link key={index} href={link(index)}>
               <div
                 key={index}
                 className={
@@ -53,7 +52,7 @@ export default function ProfileMenu() {
                   className={`icon ${selectedIcon === index ? '' : ''}`}
                 />
               </div>
-            // </Link>
+            </Link>
           ))}
         </div>
       </nav>

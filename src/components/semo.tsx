@@ -8,7 +8,7 @@ function Semo() {
       src={profilePic}
       alt="Picture of me"
       //   placeholder="blur" // Optional blur-up while loading
-      className="semoFloating"
+      className="semo-floating"
     />
   );
 }

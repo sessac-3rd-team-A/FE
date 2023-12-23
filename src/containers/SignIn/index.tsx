@@ -2,15 +2,25 @@
 import '@/styles/signIn/index.scss';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useRecoilState } from 'recoil'; // recoil
+import { userState } from '@/utils/state'; // recoil
+import { useEffect } from 'react'; // recoil
 
 export default function SignInPage() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [user, setUser] = useRecoilState(userState); // recoil
+
+  useEffect(() => {
+    console.log('Updated user state:', user);
+  }, [user]); // recoil
+
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const apiUrl = 'http://localhost:8080/auth/signin';
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -24,8 +34,18 @@ export default function SignInPage() {
 
     console.log(response.status);
     if (response.status == 200) {
-      // 이 데이터 전역으로 저장
       const data = await response.json();
+      // recoil 상태 설정
+      setUser({
+        userId: data.userId,
+        nickname: data.nickname,
+        age: data.age,
+        gender: data.gender,
+        isLogin: true,
+      });
+      // 토큰 값은 로컬스토리지에 저장
+      localStorage.setItem('token', data.token);
+
       router.push('/');
     }
   }
