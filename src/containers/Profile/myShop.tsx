@@ -11,6 +11,18 @@ const API = 'https://openapi.naver.com/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
+async function getUserInfo() {
+  try {
+    const res = await fetch('http://localhost:3000/profile/my-shop', {
+      method: 'GET'
+    })
+    console.log(res);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function SearchResult(): Promise<any> {
   const query = '20대 여자 스트레스';
   const displayNum = 20;
