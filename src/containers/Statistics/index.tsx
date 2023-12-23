@@ -11,7 +11,6 @@ export default function StatisticsPage() {
   const fetchData = async () => {
     const response = await fetch('http://localhost:8080/api/statistics', {
       cache: 'no-store',
-      next: { revalidate: 10 },
     });
     const info = await response.json();
     console.log(info);
