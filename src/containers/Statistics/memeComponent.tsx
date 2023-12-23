@@ -1,28 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MemeComponentProps from './memeComponentProps';
 
 const MemeComponent = () => {
-  const [gender, setGender] = useState('');
-  const [age, setAge] = useState('');
-
-  useEffect(() => {
-    setGender('F'); // 컴포넌트가 마운트될 때 성별을 'F'로 설정
-    setAge('20대'); // 컴포넌트가 마운트될 때 연령을 '20대'로 설정
-  }, []);
+  const [gender, setGender] = useState('F');
+  const [age, setAge] = useState('20대');
 
   const handleGenderChange = (e: any) => setGender(e.target.value);
   const handleAgeChange = (e: any) => setAge(e.target.value);
 
+  if (!gender || !age) return null;
+
   return (
     <div>
-      <select onChange={handleGenderChange}>
+      <select value={gender} onChange={handleGenderChange}>
         <option value="">전체</option>
         <option value="M">남자</option>
         <option value="F">여자</option>
       </select>
-      <select onChange={handleAgeChange}>
+      <select value={age} onChange={handleAgeChange}>
         <option value="">전체</option>
         <option value="10대">10대</option>
         <option value="20대">20대</option>
