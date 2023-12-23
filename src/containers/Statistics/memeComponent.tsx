@@ -1,26 +1,22 @@
 'use client';
-import MemeComponent from '@/components/memeComponentProps';
-import { useState } from 'react';
 
-const App = () => {
-  const [gender, setGender] = useState(null);
-  const [age, setAge] = useState(null);
+import { useEffect, useState } from 'react';
+import MemeComponentProps from './memeComponentProps';
+
+const MemeComponent = () => {
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+
+  useEffect(() => {
+    setGender('F'); // 컴포넌트가 마운트될 때 성별을 'F'로 설정
+    setAge('20대'); // 컴포넌트가 마운트될 때 연령을 '20대'로 설정
+  }, []);
 
   const handleGenderChange = (e: any) => setGender(e.target.value);
   const handleAgeChange = (e: any) => setAge(e.target.value);
 
   return (
     <div>
-      <div>d</div>
-      <div>as</div>
-      <div>asd</div>
-      <div>1</div>
-      <div>2</div>
-      <div>32</div>
-      <div>4</div>
-      <div>4</div>
-      <div>4</div>
-      <div>4</div>
       <select onChange={handleGenderChange}>
         <option value="">전체</option>
         <option value="M">남자</option>
@@ -34,9 +30,9 @@ const App = () => {
         <option value="40대">40대</option>
         <option value="50대">50대 이상</option>
       </select>
-      <MemeComponent gender={gender} age={age} />
+      <MemeComponentProps gender={gender} age={age} />
     </div>
   );
 };
 
-export default App;
+export default MemeComponent;
