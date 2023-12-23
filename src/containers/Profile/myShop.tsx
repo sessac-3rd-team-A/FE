@@ -68,9 +68,13 @@ export default async function MyShopPage() {
                         src={itemsResult[index * 4 + innerIndex]?.image}
                         className="product-image"
                       />
-                      타이틀: {itemsResult[index * 4 + innerIndex]?.title}
-                      <br />
-                      가격: {itemsResult[index * 4 + innerIndex]?.lprice}
+                      <div className='product-detail-explain'>
+                        <div className='product-item-name'>
+                          <span>상품명</span><br /> {itemsResult[index * 4 + innerIndex]?.title.replace(/<b>/g, '').replace(/<\/b>/g, '')}
+                        </div>
+                        <br />
+                        <span>가격</span> {itemsResult[index * 4 + innerIndex]?.lprice}
+                      </div>
                     </div>
                   </Link>
                 ),
