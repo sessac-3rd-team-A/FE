@@ -5,37 +5,38 @@ import { useEffect, useState } from 'react';
 import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
 import { SighResultType } from '@/types';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import sighResult from '@/app/sigh/result/[id]/page';
 
-export default function SighResultPage() {
-  // useState를 사용하여 상태를 관리
-  const [sighResult, setSighResult] = useState<SighResultType | null>(null);
-  const [negativeData, setNegativeData] = useState<number>(0);
-  const [positiveData, setPositiveData] = useState<number>(0);
-  const [neutralData, setNeutralData] = useState<number>(0);
+async function resultFetchData() {
   const pathname = usePathname();
-  console.log(pathname);
+  const id = pathname.split('/').pop();
+  console.log(id);
+  const res = await fetch(`http://localhost:8080/api/diary/${id}`);
+  const data = await res.json();
+  return data;
+}
 
-  useEffect(() => {
-    // 로컬 스토리지에서 데이터를 검색
-    const storedData = localStorage.getItem('sighResult');
-    if (storedData) {
-      setSighResult(JSON.parse(storedData));
-    }
-  }, []);
+export default async function SighResultPage() {
+  const sighResult = await resultFetchData();
+  console.log(sighResult);
 
-  useEffect(() => {
-    if (sighResult) {
-      const roundToInteger = (value: number) => Math.round(value);
-      setNegativeData(roundToInteger(sighResult.negativeRatio));
-      setPositiveData(roundToInteger(sighResult.positiveRatio));
-      setNeutralData(roundToInteger(sighResult.neutralRatio));
-    }
-  }, [sighResult]);
+  // const [negativeData, setNegativeData] = useState<number>(0);
+  // const [positiveData, setPositiveData] = useState<number>(0);
+  // const [neutralData, setNeutralData] = useState<number>(0);
+
+  // useEffect(() => {
+  //   if (sighResult) {
+  //     const roundToInteger = (value: number) => Math.round(value);
+  //     setNegativeData(roundToInteger(sighResult.negativeRatio));
+  //     setPositiveData(roundToInteger(sighResult.positiveRatio));
+  //     setNeutralData(roundToInteger(sighResult.neutralRatio));
+  //   }
+  // }, [sighResult]);
 
   return (
     <div className="result-container">
-      <main className="result-mainContainer">
+      {/* <main className="result-mainContainer">
         <section className="result-section result-paint">
           <h3>TODAY'S AH-WHEW</h3>
           {sighResult && sighResult.pictureDiary && (
@@ -124,7 +125,7 @@ export default function SighResultPage() {
         <p>AH-</p>
         <p>WHEW!</p>
       </div>
-      <Image src={resultDoodle} alt="doodle" className="result-doodle" />
+      <Image src={resultDoodle} alt="doodle" className="result-doodle" /> */}
     </div>
   );
 }
