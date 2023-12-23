@@ -1,0 +1,49 @@
+.fancyEyeBall {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .eyeBall {
+    position: absolute;
+    width: 20px;
+    height: 22px;
+    background-color: black;
+    z-index: 10;
+    border-radius: 999px;
+  }
+
+  .eyeTemplate {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background-color: white;
+    // background-color: lightcyan;
+    z-index: 1;
+  }
+
+  .eyeBall {
+    transition: 100ms;
+
+    &.top {
+      bottom: -2px;
+      top: auto;
+    }
+
+    &.left {
+      left: auto;
+      right: -2px;
+    }
+
+    &.bottom {
+      bottom: auto;
+      top: -2px;
+    }
+
+    &.right {
+      left: -2px;
+      right: auto;
+    }
+  }
+}

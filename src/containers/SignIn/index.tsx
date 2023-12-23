@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
+import MovingEye from '@/components/movingEye';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function SignInPage() {
     console.log('Updated user state:', user);
   }, [user]); // recoil
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const apiUrl = 'http://localhost:8080/auth/signin';
@@ -31,8 +33,7 @@ export default function SignInPage() {
         password: formattedData.password,
       }),
     });
-
-    console.log(response.status);
+    console.log(response);
     if (response.status == 200) {
       const data = await response.json();
       // recoil 상태 설정
@@ -44,7 +45,8 @@ export default function SignInPage() {
         isLogin: true,
       });
       // 토큰 값은 로컬스토리지에 저장
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
 
       router.push('/');
     }
@@ -52,10 +54,10 @@ export default function SignInPage() {
 
   async function onSubmitSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsLoading(true);
     const apiUrl = 'http://localhost:8080/auth/signup';
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
-    console.log(formattedData);
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -67,13 +69,14 @@ export default function SignInPage() {
         age: formattedData.age,
         gender: formattedData.gender,
       }),
+    }).catch((error) => {
+      alert(error);
+      setIsLoading(false);
     });
-
-    // Handle response if necessary
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-    // ...
+    if (response?.status == 200) {
+      setIsLoading(false);
+      setIsLogin(true);
+    }
   }
 
   return (
@@ -91,21 +94,23 @@ export default function SignInPage() {
           <form className="sign-div front" onSubmit={onSubmitSignIn}>
             <p className="signIn-letter">SIGN IN</p>
             <input
+              required
               name="userId"
               type="text"
               id="id"
               placeholder="YOUR ID"
-              minLength={2}
-              maxLength={100}
+              minLength={4}
+              maxLength={12}
             />
             <input
+              required
               name="password"
-              type="text"
+              type="password"
               id="pw"
               className="pw"
               placeholder="YOUR PASSWORD"
-              minLength={2}
-              maxLength={100}
+              minLength={4}
+              maxLength={12}
             />
             <button type="submit" className="submit-button">
               SUBMIT
@@ -136,16 +141,6 @@ export default function SignInPage() {
               minLength={4}
               maxLength={12}
             />
-            {/* <input
-              name="nickname"
-              type="text"
-              id="nickname"
-              className="nickname"
-              disabled
-              placeholder="개피곤한 인간말종"
-              minLength={2}
-              maxLength={100}
-            /> */}
             <div className="age-and-gender">
               <div className="age-container">
                 <select id="age" name="age" defaultValue={''} required>
@@ -171,11 +166,35 @@ export default function SignInPage() {
                 <img className="select-arrow" src="/signIn/down-arrow.svg" />
               </div>
             </div>
-            <button type="submit" className="submit-button submit-signUp">
-              SUBMIT
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="submit-button submit-signUp"
+            >
+              {isLoading ? 'LOADING' : 'SUBMIT'}
             </button>
           </form>
         </div>
+      </div>
+      <div className="monster mon1">
+        <img src="/signIn/mon1.png" />
+        <MovingEye cName={'mon1-eye1'} />
+        <MovingEye cName={'mon1-eye2'} />
+      </div>
+      <div className="monster mon2">
+        <img src="/signIn/mon2.png" />
+        <MovingEye cName={'mon2-eye1'} />
+        <MovingEye cName={'mon2-eye2'} />
+      </div>
+      <div className="monster mon3">
+        <img src="/signIn/mon3.png" />
+        <MovingEye cName={'mon3-eye1'} />
+        <MovingEye cName={'mon3-eye2'} />
+      </div>
+      <div className="monster mon4">
+        <img src="/signIn/mon4.png" />
+        <MovingEye cName={'mon4-eye1'} />
+        <MovingEye cName={'mon4-eye2'} />
       </div>
     </article>
   );
