@@ -15,7 +15,7 @@ export interface ShopApiRes {
     category2: string;
     category3: string;
     category4: string;
-  }>
+  }>;
 }
 
 // diary result
@@ -32,11 +32,24 @@ export interface SighResultType {
   // date: Date;
 }
 
-// profile result (array)
-export type ProfileResultType = SighResultType[];
+// profile result
+export interface ProfileResultType {
+  calendar: {
+    date: string;
+    result: SighResultType;
+  }[];
+  error: null | string;
+  monthlyStatistics: {
+    [date: string]: {
+      positiveRatio: number;
+      negativeRatio: number;
+      neutralRatio: number;
+    };
+  };
+}
 
 // recoil user
-export interface IUserState {
+export interface UserStateType {
   userId: string;
   nickname: string;
   age: string;

@@ -10,40 +10,39 @@ import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
-import { SighResultType } from '@/types';
+import { ProfileResultType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 
 export default function ProfilePage() {
   const router = useRouter();
   const [modalDate, setModalDate] = useState<string>('');
-  // const [emoData, setEmoData] = useState<sighResultType[]>([]);
-  const [emoData, setEmoData] = useState({});
+  const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const backgroundRef = useRef(null);
 
   const [user, setUser] = useRecoilState(userState); // recoil
-  useEffect(() => {
-    console.log(user);
-  }, []); // recoil
 
   const getUserInfo = async () => {
     try {
-      const res = await fetch('http://localhost:8080/profile/dashboard', {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard`,
+        {
+          cache: 'no-store',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
 
-      const data = await res.json();
+      const data: ProfileResultType = await res.json();
       console.log('fetch data :: ', data);
 
       setEmoData(data);
@@ -53,8 +52,8 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    // console.log('로그인한 유저 :: ', user);
     getUserInfo();
-    // Call the function
   }, []);
 
   useEffect(() => {
@@ -84,11 +83,12 @@ export default function ProfilePage() {
         <div className="info-left">
           <p className="title">
             {/* {nickname}님, <br /> 오늘의 기분은 어떠신가요? */}
-            행복한 쿼카님, <br /> 오늘의 기분은 어떠신가요?
+            {user && `${user.nickname}님,`}
+            <br /> 오늘의 기분은 어떠신가요?
           </p>
           <div className="left-content">
             <div className="count">
-              <div>29</div>
+              <div>{emoData?.calendar?.length}</div>
               <div>
                 <p>THE NUMBER OF</p>
                 <p>SIGHS</p>
