@@ -6,19 +6,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ResultChart from './resultChart';
 
-async function resultFetchData() {
+export default async function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
-  const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-    next: { revalidate: 10 },
-  });
-  const data = await res.json();
-  return data;
-}
+  const res = await fetch(`http://localhost:8080/api/diary/${id}`);
+  const sighResult = await res.json();
 
-export default async function SighResultPage() {
-  const sighResult = await resultFetchData();
   console.log(sighResult);
 
   return (
@@ -33,15 +27,18 @@ export default async function SighResultPage() {
               className="result-painting"
             />
           )}
+          <button style={{ cursor: 'pointer' }}>공유하기</button>
         </section>
 
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
           {sighResult && sighResult.recommendedGif && (
-            <img
+            <Image
               src={sighResult.recommendedGif}
               alt="짤"
               className="result-memeImg"
+              width={600}
+              height={600}
             />
           )}
         </section>
