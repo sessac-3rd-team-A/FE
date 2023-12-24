@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 interface FetchResponse {
+  categories: any;
   success: boolean;
   ranking: {
     rank: number;

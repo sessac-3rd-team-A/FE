@@ -10,16 +10,19 @@ const MemeComponent = () => {
   const handleGenderChange = (e: any) => setGender(e.target.value);
   const handleAgeChange = (e: any) => setAge(e.target.value);
 
-  if (!gender || !age) return null;
-
   return (
-    <div>
-      <select value={gender} onChange={handleGenderChange}>
+    <>
+      <MemeComponentProps gender={gender} age={age} />
+      <select
+        value={gender}
+        onChange={handleGenderChange}
+        style={{ height: '20px' }}
+      >
         <option value="">전체</option>
         <option value="M">남자</option>
         <option value="F">여자</option>
       </select>
-      <select value={age} onChange={handleAgeChange}>
+      <select value={age} onChange={handleAgeChange} style={{ height: '20px' }}>
         <option value="">전체</option>
         <option value="10대">10대</option>
         <option value="20대">20대</option>
@@ -27,8 +30,7 @@ const MemeComponent = () => {
         <option value="40대">40대</option>
         <option value="50대">50대 이상</option>
       </select>
-      <MemeComponentProps gender={gender} age={age} />
-    </div>
+    </>
   );
 };
 

@@ -31,17 +31,33 @@ const MemeComponentProps: React.FC<MemeComponentProps> = ({ gender, age }) => {
   };
 
   return (
-    <div>
-      {data.ranking.map((meme, index) => (
-        <div key={index}>
-          <div>{meme.rank}</div>
-          <button onClick={() => handleClick(meme.rank)}>보기</button>
-          {selectedRank === meme.rank && (
-            <img src={meme.imageUrl} alt={`meme ${meme.rank}`} />
-          )}
-        </div>
-      ))}
-    </div>
+    <span>
+      <span style={{ display: 'flex', justifyContent: 'space-around' }}>
+        {data.ranking.map((meme, index) => (
+          <span key={index}>
+            <button onClick={() => handleClick(meme.rank)}>{meme.rank}</button>
+          </span>
+        ))}
+      </span>
+      <div style={{ width: '520px', height: '289px' }}>
+        {data.ranking
+          .filter((meme) => meme.rank === selectedRank)
+          .map((meme) => (
+            <img
+              key={meme.rank}
+              src={meme.imageUrl}
+              alt={`meme ${meme.rank}`}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                position: 'relative',
+                // right: '100px',
+              }}
+            />
+          ))}
+      </div>
+    </span>
   );
 };
 
