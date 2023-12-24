@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 
 export default function Header() {
   const [user, setUser] = useRecoilState(userState);
+  const resetUser = useResetRecoilState(userState);
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
   const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
 
@@ -25,7 +26,7 @@ export default function Header() {
   useEffect(() => {
     // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
-  }, [userState]); // recoil
+  }, [user.isLogin]); // recoil
 
   return (
     <header className="headerContainer">
@@ -46,13 +47,23 @@ export default function Header() {
           SIGN IN
         </Link>
       ) : (
-        <Link
-          href={'/profile'}
-          className="headerMenu signInBtn"
-          onClick={handleMenuBar}
-        >
-          profile
-        </Link>
+        <>
+          <Link
+            href={'/profile'}
+            className="headerMenu signInBtn"
+            onClick={handleMenuBar}
+          >
+            profile
+          </Link>
+          <div
+            onClick={() => {
+              resetUser()
+              localStorage.clear();
+            }}
+          >
+            로그아웃
+          </div>
+        </>
       )}
     </header>
   );

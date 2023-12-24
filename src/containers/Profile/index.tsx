@@ -10,40 +10,40 @@ import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
-import { SighResultType } from '@/types';
+import { ProfileResultType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 
 export default function ProfilePage() {
   const router = useRouter();
   const [modalDate, setModalDate] = useState<string>('');
-  // const [emoData, setEmoData] = useState<sighResultType[]>([]);
-  const [emoData, setEmoData] = useState({});
+  const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const backgroundRef = useRef(null);
 
-  const [user, setUser] = useRecoilState(userState); // recoil
-  useEffect(() => {
-    console.log(user);
-  }, []); // recoil
+  // recoil -> 닉네임을 설정하기 위한 상태값 추가로 설정
+  const [user, setUser] = useRecoilState(userState);
+  const [nickname, setNickname] = useState('');
 
   const getUserInfo = async () => {
     try {
-      const res = await fetch('http://localhost:8080/profile/dashboard', {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard`,
+        {
+          cache: 'no-store',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
 
-      const data = await res.json();
+      const data: ProfileResultType = await res.json();
       console.log('fetch data :: ', data);
 
       setEmoData(data);
@@ -52,11 +52,12 @@ export default function ProfilePage() {
     }
   };
 
+  // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
     getUserInfo();
-    // Call the function
   }, []);
 
+  // 모달창 외부 클릭 시 종료
   useEffect(() => {
     function handleClickOutside(this: Document, ev: MouseEvent): any {
       // 모달 바깥을 클릭하고, 모달이 열려있는 상태일 때 모달을 닫기
@@ -75,6 +76,10 @@ export default function ProfilePage() {
     };
   }, [isModalOpen]);
 
+  useEffect(() => {
+    setNickname(user.nickname);
+  }, []);
+
   return (
     <section className="profile-container">
       <div
@@ -84,11 +89,12 @@ export default function ProfilePage() {
         <div className="info-left">
           <p className="title">
             {/* {nickname}님, <br /> 오늘의 기분은 어떠신가요? */}
-            행복한 쿼카님, <br /> 오늘의 기분은 어떠신가요?
+            {nickname && `${nickname}님,`}
+            <br /> 오늘의 기분은 어떠신가요?
           </p>
           <div className="left-content">
             <div className="count">
-              <div>29</div>
+              <div>{emoData?.calendar?.length}</div>
               <div>
                 <p>THE NUMBER OF</p>
                 <p>SIGHS</p>
@@ -98,11 +104,11 @@ export default function ProfilePage() {
               style={{ cursor: 'pointer' }}
               className="link"
               onClick={() => {
-                router.push('/');
+                router.push('/sigh');
               }}
             >
               <Link
-                href="/"
+                href="/sigh"
                 style={{ display: 'flex', alignItems: 'center', gap: '20px' }}
               >
                 한숨 쉬러 가기 <CiCircleChevRight />

@@ -4,10 +4,10 @@ import Image from 'next/image';
 
 import '@/styles/profile/diaryModal.scss';
 import { useEffect, useState } from 'react';
+import { ProfileResultType } from '@/types';
 
 interface Props {
-  emoData: object;
-  // emoData: profileResultType;
+  emoData: ProfileResultType | null;
   modalDate: string;
 }
 
@@ -17,14 +17,16 @@ export default function DiaryModal({ emoData, modalDate }: Props) {
   const [isFront, setIsFront] = useState(true);
 
   useEffect(() => {
-    for (let key in emoData) {
-      if (key === modalDate) {
-        setDiaryPath(emoData[key].result.pictureDiary);
-        setGifPath(emoData[key].result.recommendedGif);
+    emoData?.calendar.map((el) => {
+      if (el.date === modalDate) {
+        setDiaryPath(el.result.pictureDiary);
+        setGifPath(el.result.recommendedGif);
       }
-    }
+    });
   }, [modalDate]);
 
+  // console.log(emoData);
+  console.log('path :: ', gifPath, diaryPath);
   const handleClick = () => {
     setIsFront(!isFront);
   };

@@ -1,10 +1,10 @@
 import { recoilPersist } from 'recoil-persist';
 import { atom } from 'recoil';
-import { IUserState } from '@/types';
+import { UserStateType } from '@/types';
 
 const { persistAtom } = recoilPersist();
 
-const userState = atom<IUserState>({
+const userState = atom<UserStateType>({
   key: 'userState',
   default: {
     userId: '',
@@ -27,4 +27,3 @@ const selectedImageState = atom({
 });
 
 export { userState, selectedIconState, selectedImageState };
-

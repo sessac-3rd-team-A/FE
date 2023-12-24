@@ -7,12 +7,13 @@ import moment from 'moment';
 import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
 import '@/styles/profile/_calendar.scss';
+import { ProfileResultType } from '@/types';
 // import Image from 'next/image';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setModalDate: Dispatch<SetStateAction<string>>;
-  emoData: object;
+  emoData: ProfileResultType | null;
 }
 
 export default function EmoCalendar({
@@ -21,18 +22,14 @@ export default function EmoCalendar({
   emoData,
 }: Props) {
   const [value, onChange] = useState<Date>(new Date()); // 클릭한 날짜 (초기값으로 현재 날짜 넣어줌)
+  const [dayList, setDayList] = useState<string[]>([]);
 
-  // const monthOfActiveDate = moment(value).format('YYYY-MM');
-  // const [activeMonth, setActiveMonth] = useState(monthOfActiveDate);
-
-  // const getActiveMonth = (activeStartDate: moment.MomentInput) => {
-  //   const newActiveMonth = moment(activeStartDate).format('YYYY-MM');
-  //   setActiveMonth(newActiveMonth);
-  // };
-
-  // console.log('변경된 날짜 :: ', value);
-
-  const dayList = Object.keys(emoData);
+  useEffect(() => {
+    const newDayList = emoData?.calendar?.map((el) => el.date);
+    if (newDayList) {
+      setDayList(newDayList);
+    }
+  }, [emoData]);
 
   // 각 날짜 타일에 컨텐츠 추가
   const addContent = ({ date }: any) => {
