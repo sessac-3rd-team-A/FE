@@ -25,7 +25,7 @@
   box-shadow:
     0px 4px 4px 0px rgba(255, 255, 255, 0.45) inset,
     0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
-  backdrop-filter: blur(180px);
+  backdrop-filter: blur(90px);
   backface-visibility: hidden; /* 뒷면이 화면에 보이지 않도록 설정 */
 }
 
@@ -56,11 +56,64 @@
 
 .sign-mainContainer {
   display: flex;
+  // position: relative;
   align-items: center;
   justify-content: center;
   width: 100vw;
+  padding-top: 40px;
   height: calc(100vh - $header-height);
   margin-top: $header-height;
+  @include media('<=1200px') {
+    padding-top: toSizeC(40, 1200);
+  }
+  .monster {
+    position: absolute;
+    &.mon1 {
+      width: 375px;
+      margin-right: 740px;
+      margin-bottom: 470px;
+      z-index: 1;
+      @include media('<=1200px') {
+        width: toSizeC(375, 1200);
+        margin-right: toSizeC(740, 1200);
+        margin-bottom: toSizeC(470, 1200);
+      }
+    }
+    &.mon2 {
+      width: 436px;
+      margin-right: 800px;
+      margin-top: 170px;
+      z-index: 2;
+      @include media('<=1200px') {
+        width: toSizeC(436, 1200);
+        margin-right: toSizeC(800, 1200);
+        margin-top: toSizeC(170, 1200);
+      }
+    }
+    &.mon3 {
+      width: 280px;
+      margin-left: 800px;
+      margin-bottom: 570px;
+      z-index: 1;
+      @include media('<=1200px') {
+        width: toSizeC(280, 1200);
+        margin-left: toSizeC(800, 1200);
+        margin-bottom: toSizeC(570, 1200);
+      }
+    }
+    &.mon4 {
+      width: 300px;
+      margin-left: 900px;
+      margin-top: 200px;
+      z-index: 1;
+      @include media('<=1200px') {
+        width: toSizeC(300, 1200);
+        margin-left: toSizeC(900, 1200);
+        margin-top: toSizeC(200, 1200);
+      }
+    }
+  }
+
   .sign-contentContainer {
     display: flex;
     flex-direction: column;
@@ -69,7 +122,7 @@
     width: 807px;
     height: 576px;
     border-radius: 28px;
-    z-index: 1;
+    z-index: 10;
     @include media('<=1200px') {
       width: toSizeC(807, 1200);
       height: toSizeC(576, 1200);
@@ -119,6 +172,8 @@
   }
   #id,
   #pw,
+  #reg-id,
+  #reg-pw,
   #nickname {
     margin-top: 100px;
     width: 560px;
@@ -154,7 +209,7 @@
   }
 }
 .sign-checkboxContainer {
-  margin-bottom: 725px;
+  margin-bottom: 700px;
   position: relative;
   display: block;
   text-align: center;
@@ -164,12 +219,44 @@
   padding: 0;
   // margin: 10px auto;
   cursor: pointer;
+  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #d2d2d2;
   @include media('<=1200px') {
     width: toSizeC(120, 1200);
     height: toSizeC(30, 1200);
     border-radius: toSizeC(30, 1200);
-    margin-bottom: toSizeC(725, 1200);
+    margin-bottom: toSizeC(700, 1200);
+    box-shadow: inset toSizeC(4, 1200) toSizeC(4, 1200) toSizeC(4, 1200)
+      rgba(0, 0, 0, 0.25);
+  }
+}
+.sign-text {
+  position: absolute;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: LEMON MILK;
+  margin-bottom: 700px;
+  color: #3a89ff;
+  // text-shadow:
+  //   0px 4px 4px #fff,
+  //   0 0 0 #000,
+  //   0px 4px 4px #fff;
+  @include media('<=1200px') {
+    font-size: toSizeC(30, 1200);
+    margin-bottom: toSizeC(700, 1200);
+  }
+  &.in {
+    z-index: 10;
+    margin-right: 300px;
+    @include media('<=1200px') {
+      margin-right: toSizeC(300, 1200);
+    }
+  }
+  &.up {
+    margin-left: 300px;
+    @include media('<=1200px') {
+      margin-left: toSizeC(300, 1200);
+    }
   }
 }
 
@@ -182,7 +269,7 @@
   color: #d2d2d2;
   background-color: #ffde8a;
   z-index: 20;
-  top: -8px;
+  top: -7px;
   left: -5px;
   line-height: 40px;
   font-size: 24px;
@@ -218,6 +305,13 @@
   margin-top: 13px;
   display: flex;
   gap: 12px;
+  @include media('<=1200px') {
+    width: toSizeC(560, 1200);
+    height: toSizeC(60, 1200);
+    margin-top: toSizeC(13, 1200);
+    display: flex;
+    gap: toSizeC(12, 1200);
+  }
 
   #age {
     width: 100%;
@@ -227,7 +321,14 @@
     padding-left: 31px;
     font-family: GMarketSans;
     font-size: 28px;
-    color: gray;
+    color: #a7a7a7;
+    cursor: pointer;
+    @include media('<=1200px') {
+      border: toSizeC(1, 1200) solid #3a89ff;
+      border-radius: toSizeC(12, 1200);
+      font-size: toSizeC(28, 1200);
+      padding-left: toSizeC(31, 1200);
+    }
   }
 
   #gender {
@@ -238,13 +339,101 @@
     padding-left: 31px;
     font-family: GMarketSans;
     font-size: 28px;
-    color: gray;
+    cursor: pointer;
+    color: #a7a7a7;
+    @include media('<=1200px') {
+      border: toSizeC(1, 1200) solid #3a89ff;
+      border-radius: toSizeC(12, 1200);
+      padding-left: toSizeC(31, 1200);
+      font-family: GMarketSans;
+      font-size: toSizeC(28, 1200);
+    }
+  }
+}
+
+.age-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .select-arrow {
+    width: 23px;
+    position: absolute;
+    left: 230px;
+    top: 22px;
+    @include media('<=1200px') {
+      width: toSizeC(23, 1200);
+      left: toSizeC(230, 1200);
+      top: toSizeC(22, 1200);
+    }
   }
 }
 
 select {
-  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
-    no-repeat right #fff;
-  -webkit-appearance: none;
-  background-position-x: 244px;
+  appearance: none;
+}
+
+.mon1-eye1 {
+  left: 160px;
+  top: 110px;
+  @include media('<=1200px') {
+    left: toSizeC(160, 1200);
+    top: toSizeC(110, 1200);
+  }
+}
+.mon1-eye2 {
+  left: 210px;
+  top: 110px;
+  @include media('<=1200px') {
+    left: toSizeC(210, 1200);
+    top: toSizeC(110, 1200);
+  }
+}
+.mon2-eye1 {
+  left: 150px;
+  top: 180px;
+  @include media('<=1200px') {
+    left: toSizeC(150, 1200);
+    top: toSizeC(180, 1200);
+  }
+}
+.mon2-eye2 {
+  left: 180px;
+  top: 140px;
+  @include media('<=1200px') {
+    left: toSizeC(180, 1200);
+    top: toSizeC(140, 1200);
+  }
+}
+.mon3-eye1 {
+  left: 120px;
+  top: 110px;
+  @include media('<=1200px') {
+    left: toSizeC(120, 1200);
+    top: toSizeC(110, 1200);
+  }
+}
+.mon3-eye2 {
+  left: 165px;
+  top: 95px;
+  @include media('<=1200px') {
+    left: toSizeC(165, 1200);
+    top: toSizeC(95, 1200);
+  }
+}
+.mon4-eye1 {
+  left: 190px;
+  top: 100px;
+  @include media('<=1200px') {
+    left: toSizeC(190, 1200);
+    top: toSizeC(100, 1200);
+  }
+}
+.mon4-eye2 {
+  left: 230px;
+  top: 130px;
+  @include media('<=1200px') {
+    left: toSizeC(230, 1200);
+    top: toSizeC(130, 1200);
+  }
 }
