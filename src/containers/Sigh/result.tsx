@@ -52,7 +52,7 @@ export default async function SighResultPage() {
   }, [id]);
 
   // 카톡 공유
-  //css에서만 실행
+  //crs에서만 실행
   if (typeof window !== 'undefined') {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -72,6 +72,19 @@ export default async function SighResultPage() {
     }
   }
 
+  // 링크 공유
+  const copyLinkToClipboard = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard
+      .writeText(currentUrl)
+      .then(() => {
+        alert('링크가 클립보드에 복사되었습니다!');
+      })
+      .catch((err) => {
+        console.error('링크 복사 실패:', err);
+      });
+  };
+
   return (
     <div className="result-container">
       <main className="result-mainContainer">
@@ -84,16 +97,29 @@ export default async function SighResultPage() {
               className="result-painting"
             />
           )}
-          <a
-            id="kakaotalk-sharing-btn"
-            href="javascript:;"
-            className="kakao-share"
-          >
-            <img
-              src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
-              alt="카카오톡 공유 보내기 버튼"
+          <div className="result-share">
+            <a
+              id="kakaotalk-sharing-btn"
+              href="javascript:;"
+              style={{ width: 'fit-content', height: 'fit-content' }}
+            >
+              <Image
+                src="/sigh/kakao.png"
+                alt="kakao"
+                width={50}
+                height={50}
+                className="result-kakao-btn"
+              />
+            </a>
+            <Image
+              src="/sigh/link.png"
+              alt="link"
+              width={50}
+              height={50}
+              className="result-link-btn"
+              onClick={copyLinkToClipboard}
             />
-          </a>
+          </div>
         </section>
 
         <section className="result-section result-meme">

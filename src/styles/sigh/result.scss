@@ -46,6 +46,7 @@
   .result-paint {
     grid-column: 1;
     grid-row: 1 / 4;
+    justify-content: space-between;
   }
   .result-meme {
     grid-column: 2;
@@ -70,6 +71,20 @@
   margin: 0 auto;
   object-fit: contain;
   border-radius: toSize(20);
+}
+
+.result-share {
+  text-align: center;
+  margin-bottom: toSize(50);
+  .result-kakao-btn {
+    width: toSize(50);
+    height: toSize(50);
+  }
+  .result-link-btn {
+    width: toSize(50);
+    height: toSize(50);
+    cursor: pointer;
+  }
 }
 
 .result-memeImg {
