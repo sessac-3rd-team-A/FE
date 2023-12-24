@@ -20,10 +20,11 @@ export default function ProfilePage() {
   const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const backgroundRef = useRef(null);
 
-  const [user, setUser] = useRecoilState(userState); // recoil
+  // recoil -> 닉네임을 설정하기 위한 상태값 추가로 설정
+  const [user, setUser] = useRecoilState(userState);
+  const [nickname, setNickname] = useState('');
 
   const getUserInfo = async () => {
     try {
@@ -51,11 +52,12 @@ export default function ProfilePage() {
     }
   };
 
+  // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
-    // console.log('로그인한 유저 :: ', user);
     getUserInfo();
   }, []);
 
+  // 모달창 외부 클릭 시 종료
   useEffect(() => {
     function handleClickOutside(this: Document, ev: MouseEvent): any {
       // 모달 바깥을 클릭하고, 모달이 열려있는 상태일 때 모달을 닫기
@@ -74,6 +76,10 @@ export default function ProfilePage() {
     };
   }, [isModalOpen]);
 
+  useEffect(() => {
+    setNickname(user.nickname);
+  }, []);
+
   return (
     <section className="profile-container">
       <div
@@ -83,7 +89,7 @@ export default function ProfilePage() {
         <div className="info-left">
           <p className="title">
             {/* {nickname}님, <br /> 오늘의 기분은 어떠신가요? */}
-            {user && `${user.nickname}님,`}
+            {nickname && `${nickname}님,`}
             <br /> 오늘의 기분은 어떠신가요?
           </p>
           <div className="left-content">
