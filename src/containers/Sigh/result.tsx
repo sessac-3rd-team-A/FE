@@ -46,13 +46,10 @@ export default async function SighResultPage() {
       console.error('Error fetching data:', error.message);
     }
   };
-  console.log(sighResult);
 
   useEffect(() => {
     getResultData();
-    console.log(sighResult);
   }, [id]);
-  console.log(sighResult);
 
   // 카톡 공유
   //css에서만 실행
@@ -63,11 +60,13 @@ export default async function SighResultPage() {
 
     if (sighResult && window.Kakao && window.Kakao.Share) {
       const kakaoImg = sighResult.pictureDiary;
+      const pathName = id;
       window.Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
         templateId: 102205,
         templateArgs: {
           kakaoImg,
+          pathName,
         },
       });
     }
