@@ -1,6 +1,7 @@
 import '@/styles/global.scss';
 import Header from '@/containers/common/header';
 import RecoilRootProvider from '@/utils/recoilRootProvider';
+import Script from 'next/script';
 
 export const metadata = {
   title: 'Ah-whew',
@@ -9,7 +10,7 @@ export const metadata = {
 
 declare global {
   interface Window {
-    kakao: any;
+    Kakao: any;
   }
 }
 
@@ -28,8 +29,12 @@ export default function RootLayout({
             {children}
           </RecoilRootProvider>
         </main>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js" />
       </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
+      <Script
+        type="text/javascript"
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false&libraries=services`}
+      />
     </html>
   );
 }

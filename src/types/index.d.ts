@@ -15,7 +15,7 @@ export interface ShopApiRes {
     category2: string;
     category3: string;
     category4: string;
-  }>
+  }>;
 }
 
 // diary result
