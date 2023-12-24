@@ -104,11 +104,11 @@ export default function ProfilePage() {
               style={{ cursor: 'pointer' }}
               className="link"
               onClick={() => {
-                router.push('/');
+                router.push('/sigh');
               }}
             >
               <Link
-                href="/"
+                href="/sigh"
                 style={{ display: 'flex', alignItems: 'center', gap: '20px' }}
               >
                 한숨 쉬러 가기 <CiCircleChevRight />
