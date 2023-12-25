@@ -1,47 +1,72 @@
-'use client'
+'use client';
 import '@/styles/main.scss';
 import { useRecoilState } from 'recoil'; // recoil
-import { userState } from '@/utils/state';// recoil
-import { useEffect } from 'react'; // recoil
+import { userState } from '@/utils/state'; // recoil
+import ReactFullpage, { fullpageOptions } from '@fullpage/react-fullpage';
+import { useEffect, useState } from 'react'; // recoil
+import Main1 from './main1';
+import Main2 from './main2';
+
+interface Section {
+  text: string;
+  id?: number;
+}
 
 export default function MainPage() {
-
   const [user, setUser] = useRecoilState(userState); // recoil
-
-  // useEffect(() => {
-  //   console.log( user)
-  // }, [])
-  
+  const [fullpages, setFullpages] = useState<Section[]>([
+    {
+      text: 'Section 1',
+    },
+    {
+      text: 'Section 2',
+    },
+  ]);
+  const onLeave = (origin: any, destination: any, direction: any) => {
+    // console.log('onLeave', { origin, destination, direction });
+  };
+  // const handleAddSection = () => {
+  //   setFullpages((prevFullpages) => [
+  //     ...prevFullpages,
+  //     {
+  //       text: `section ${prevFullpages.length + 1}`,
+  //       id: Math.random(),
+  //     },
+  //   ]);
+  // };
+  const pluginWrapper = () => {
+    /*
+     * require('../static/fullpage.scrollHorizontally.min.js'); // Optional. Required when using the "scrollHorizontally" extension.
+     */
+  };
+  type Credits = {
+    enabled?: boolean;
+    label?: string;
+    position?: 'left' | 'right';
+  };
+  const credits: Credits = {
+    enabled: false,
+    label: '',
+    position: 'left',
+  };
   return (
-    <div className="mainWindContainer">
-      <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" />
-      <img
-        className="mainFace mainSmileImg"
-        src="/main/main_smile.png"
-        alt="행복한얼굴"
-      />
-      <img className="mainFace mainStar3" src="/main/Star3.png" alt="스타3" />
-      <img className="mainFace mainStar4" src="/main/Star4.png" alt="스타4" />
-      <img className="mainFace mainStar1" src="/main/Star1.png" alt="스타1" />
-      <img
-        className="mainFace mainBadImg"
-        src="/main/main_bad.png"
-        alt="나쁜얼굴"
-      />
-      <img
-        className="mainFace mainSadImg"
-        src="/main/main_sad.png"
-        alt="슬픈얼굴"
-      />
-      <img
-        className="mainFace mainDieImg"
-        src="/main/main_die.png"
-        alt="죽은얼굴"
-      />
-      <p className="mainFace mainTitle">AH-WHEW!</p>
-      <p className="mainContent">
-        {`Give Me Your Sigh.\nI'll Give You Happiness.`}
-      </p>
-    </div>
+    <ReactFullpage
+      licenseKey={'OPEN-SOURCE-GPLV3-LICENSE'}
+      navigation
+      onLeave={onLeave}
+      // sectionsColor={sectionsColor}
+      pluginWrapper={pluginWrapper}
+      debug={false}
+      credits={credits}
+      render={(comp: any) => (
+        <ReactFullpage.Wrapper>
+          {fullpages.map(({ text }) => (
+            <div key={text} className="section">
+              {text == 'Section 1' ? <Main1 /> : <Main2 />}
+            </div>
+          ))}
+        </ReactFullpage.Wrapper>
+      )}
+    />
   );
 }

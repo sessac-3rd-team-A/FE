@@ -88,6 +88,8 @@
 
 .mainWindContainer {
   display: flex;
+  overflow-y: hidden;
+  // margin-top: $header-height;
   height: calc(100vh);
   position: relative;
   align-items: center;
@@ -98,14 +100,16 @@
     z-index: 1;
     position: absolute;
     width: toSize(1634);
-    animation: wind-slide-in 1s ease-in-out 0s 1,
+    animation:
+      wind-slide-in 1s ease-in-out 0s 1,
       cloudFloat 3s ease-in-out 2s infinite;
   }
 
   .mainFace {
     z-index: 2;
     position: absolute;
-    animation: bounce-in-fwd 1.1s both 0.8s,
+    animation:
+      bounce-in-fwd 1.1s both 0.8s,
       cloudFloat 3s ease-in-out 2s infinite;
 
     &.mainTitle {
@@ -114,7 +118,8 @@
       font-family: LEMON MILK;
       font-weight: bold;
       letter-spacing: toSize(16);
-      animation: 1s ease-in-out focus-in-expand both 0.8s,
+      animation:
+        1s ease-in-out focus-in-expand both 0.8s,
         cloudFloat 3s ease-in-out 2s infinite;
     }
 
@@ -168,5 +173,72 @@
     margin-top: toSize(800);
     white-space: pre-wrap;
     animation: puff-in-hor 1.8s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  }
+}
+
+.mainCardContainer {
+  display: flex;
+  // overflow-y: hidden;
+  // margin-top: $header-height;
+  height: calc(100vh);
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: #3a89ff;
+  .main2-intro {
+    font-family: Lemon Milk;
+    color: white;
+    font-size: toSize(96);
+    white-space: pre-wrap;
+  }
+  .main2-intro2 {
+    font-family: Lemon Milk;
+    font-weight: 'medium';
+    color: white;
+    font-size: toSize(25);
+    white-space: pre-wrap;
+    margin: toSize(24) 0px toSize(110) 0px;
+  }
+  .main2-start {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Lemon Milk;
+    color: black;
+    font-size: toSize(40);
+    width: toSize(286);
+    height: toSize(85);
+    border-radius: 50%;
+    border: 1px solid;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 toSize(9) black;
+  }
+  .main2-cardContainer {
+    display: flex;
+    position: relative;
+    width: toSize(700);
+    height: toSize(700);
+    align-items: center;
+    justify-content: center;
+  }
+  .main2-card {
+    position: absolute;
+    width: toSize(410);
+    height: toSize(550);
+    border-radius: toSize(28);
+    background-color: #e5e5e5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    &.card1 {
+      transform: rotate(21deg);
+    }
+    &.card2 {
+      transform: rotate(15deg);
+    }
+    &.card3 {
+      background-color: #fffb94;
+
+      transform: rotate(6deg);
+    }
   }
 }
