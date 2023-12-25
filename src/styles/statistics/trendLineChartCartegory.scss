@@ -39,15 +39,16 @@
   position: relative;
   display: block;
   width: toSize(80);
+  height: toSize(42);
   // padding: 0 84px 0 22px;
-  font-size: 22px;
+  font-size: toSize(20);
   font-weight: 300;
   color: #fff;
-  line-height: 60px;
+  // line-height: -60px;
   background: #5c9cd8;
   border-radius: 15px;
   cursor: pointer;
-  text-align: center;
+  text-align: start;
 }
 .custom-select-trigger:after {
   position: absolute;
@@ -87,6 +88,7 @@
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-15px);
+  z-index: 10;
 }
 .custom-select.opened .custom-options {
   opacity: 1;
@@ -115,7 +117,7 @@
 .custom-option {
   position: relative;
   display: block;
-  padding: 0 22px;
+  // padding: 0 22px;
   border-bottom: 1px solid #b5b5b5;
   font-size: 18px;
   font-weight: 600;
@@ -123,6 +125,7 @@
   line-height: 47px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
+  text-align: center;
 }
 .custom-option:first-of-type {
   border-radius: 4px 4px 0 0;
@@ -134,4 +137,10 @@
 .custom-option:hover,
 .custom-option.selection {
   background: #f9f9f9;
+}
+.custom-select-cover {
+  display: flex;
+  top: 25%;
+  position: absolute;
+  margin-left: 10%;
 }

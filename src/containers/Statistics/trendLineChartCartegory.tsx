@@ -210,67 +210,71 @@ export default function TrendLineChartCartegory() {
             </button>
           ));
         })()}
-      </div>
-      {/* 성별 선택 드롭다운 */}
-      <div className="custom-select-wrapper">
-        <div className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}>
-          <span
-            className="custom-select-trigger"
-            onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+        {/* 성별 선택 드롭다운 */}
+        <div className="custom-select-wrapper">
+          <div
+            className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
           >
-            {selectedGender === 'F' ? '여성' : '남성'}
-          </span>
-          <div className="custom-options">
             <span
-              className={`custom-option ${
-                selectedGender === 'F' ? 'selection' : ''
-              }`}
-              onClick={() => {
-                setSelectedGender('F');
-                setGenderDropdownOpen(false);
-              }}
+              className="custom-select-trigger"
+              onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
-              여성
+              <div className="custom-select-cover">
+                {selectedGender === 'F' ? '여성' : '남성'}
+              </div>
             </span>
-            <span
-              className={`custom-option ${
-                selectedGender === 'M' ? 'selection' : ''
-              }`}
-              onClick={() => {
-                setSelectedGender('M');
-                setGenderDropdownOpen(false);
-              }}
-            >
-              남성
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* 연령 선택 드롭다운 */}
-      <div className="custom-select-wrapper">
-        <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
-          <span
-            className="custom-select-trigger"
-            onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
-          >
-            {selectedAge}
-          </span>
-          <div className="custom-options">
-            {['10대', '20대', '30대', '40대', '50+'].map((age) => (
+            <div className="custom-options">
               <span
-                key={age}
                 className={`custom-option ${
-                  selectedAge === age ? 'selection' : ''
+                  selectedGender === 'F' ? 'selection' : ''
                 }`}
                 onClick={() => {
-                  setSelectedAge(age);
-                  setAgeDropdownOpen(false);
+                  setSelectedGender('F');
+                  setGenderDropdownOpen(false);
                 }}
               >
-                {age}
+                여성
               </span>
-            ))}
+              <span
+                className={`custom-option ${
+                  selectedGender === 'M' ? 'selection' : ''
+                }`}
+                onClick={() => {
+                  setSelectedGender('M');
+                  setGenderDropdownOpen(false);
+                }}
+              >
+                남성
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* 연령 선택 드롭다운 */}
+        <div className="custom-select-wrapper">
+          <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
+            <span
+              className="custom-select-trigger"
+              onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
+            >
+              <div className="custom-select-cover">{selectedAge}</div>
+            </span>
+            <div className="custom-options">
+              {['10대', '20대', '30대', '40대', '50+'].map((age) => (
+                <span
+                  key={age}
+                  className={`custom-option ${
+                    selectedAge === age ? 'selection' : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedAge(age);
+                    setAgeDropdownOpen(false);
+                  }}
+                >
+                  {age}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
