@@ -7,6 +7,7 @@ import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
 import MovingEye from '@/components/movingEye';
 import { useRafState } from 'react-use';
+import Cookies from 'js-cookie';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -77,6 +78,10 @@ export default function SignInPage() {
       // 토큰 값은 로컬스토리지에 저장
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
+      // 토큰 값 쿠키에 저장
+      Cookies.set('accessToken', data.accessToken, { expires: 1 });
+      Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
+      console.log('accessToken>>>',data);
 
       router.push('/');
     }
