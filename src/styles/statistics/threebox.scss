@@ -146,7 +146,7 @@ input[type='radio']:checked + .three-box-contents {
   width: 0;
   transition: all 0.1s ease-out;
   // z-index: -1;
-  // overflow: hidden;
+  overflow: hidden;
   border-radius: 40px;
   margin: 0 toSize(5);
 
