@@ -5,21 +5,85 @@ import resultDoodle from '/public/sigh/result_doodle_1.png';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ResultChart from './resultChart';
+import { useEffect, useState } from 'react';
+import { SighResultType } from '@/types';
 
-async function resultFetchData() {
+export default async function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
-  const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-    next: { revalidate: 10 },
-  });
-  const data = await res.json();
-  return data;
-}
+  const bearerToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-export default async function SighResultPage() {
-  const sighResult = await resultFetchData();
-  console.log(sighResult);
+  // const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
+  //   method: 'GET',
+  //   headers: {
+  //     Authorization: bearerToken ? `Bearer ${bearerToken}` : '',
+  //     'Content-Type': 'application/json',
+  //   },
+  // });
+  // const sighResult = await res.json();
+  const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+  const getResultData = async () => {
+    try {
+      const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
+        cache: 'no-store',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log('fetch data :: ', data);
+
+      setSighResult(data);
+    } catch (error: any) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    getResultData();
+  }, [id]);
+
+  // 카톡 공유
+  //crs에서만 실행
+  if (typeof window !== 'undefined') {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    }
+
+    if (sighResult && window.Kakao && window.Kakao.Share) {
+      const kakaoImg = sighResult.pictureDiary;
+      const pathName = id;
+      window.Kakao.Share.createCustomButton({
+        container: '#kakaotalk-sharing-btn',
+        templateId: 102205,
+        templateArgs: {
+          kakaoImg,
+          pathName,
+        },
+      });
+    }
+  }
+
+  // 링크 공유
+  const copyLinkToClipboard = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard
+      .writeText(currentUrl)
+      .then(() => {
+        alert('링크가 클립보드에 복사되었습니다!');
+      })
+      .catch((err) => {
+        console.error('링크 복사 실패:', err);
+      });
+  };
 
   return (
     <div className="result-container">
@@ -33,15 +97,40 @@ export default async function SighResultPage() {
               className="result-painting"
             />
           )}
+          <div className="result-share">
+            <a
+              id="kakaotalk-sharing-btn"
+              href="javascript:;"
+              style={{ width: 'fit-content', height: 'fit-content' }}
+            >
+              <Image
+                src="/sigh/kakao.png"
+                alt="kakao"
+                width={50}
+                height={50}
+                className="result-kakao-btn"
+              />
+            </a>
+            <Image
+              src="/sigh/link.png"
+              alt="link"
+              width={50}
+              height={50}
+              className="result-link-btn"
+              onClick={copyLinkToClipboard}
+            />
+          </div>
         </section>
 
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
           {sighResult && sighResult.recommendedGif && (
-            <img
+            <Image
               src={sighResult.recommendedGif}
               alt="짤"
               className="result-memeImg"
+              width={600}
+              height={600}
             />
           )}
         </section>

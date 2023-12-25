@@ -42,8 +42,8 @@ export default function SighPage() {
           const data = await response.json();
           console.log('POST request successful:', data);
           localStorage.setItem('sighResult', JSON.stringify(data));
-          router.push(`/sigh/result/${data.id}`);
           setIsLoading(false);
+          router.push(`/sigh/result/${data.id}`);
         } else {
           console.error(
             'POST request failed:',
