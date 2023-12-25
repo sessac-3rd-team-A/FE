@@ -1,0 +1,28 @@
+@import '/src/styles/global.scss';
+@import url('https://fonts.cdnfonts.com/css/lemon-milk');
+@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
+
+.chart {
+  width: 85%;
+  display: flex;
+}
+.legendBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: toSize(35);
+  .item {
+    width: toSize(145);
+    color: #000;
+    font-family: Gmarket Sans;
+    font-size: toSize(36);
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  img {
+    vertical-align: middle;
+    width: toSize(35);
+  }
+}

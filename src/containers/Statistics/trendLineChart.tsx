@@ -1,17 +1,17 @@
+import React, { useEffect, useState } from 'react';
+import '../../styles/statistics/trendLineChart.scss';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  Tooltip,
   PointElement,
   LineElement,
   Title,
+  Tooltip,
   Legend,
 } from 'chart.js';
-import { useEffect, useState } from 'react';
 
-// Register ChartJS components using ChartJS.register
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,6 +25,7 @@ ChartJS.register(
 export default function TrendLineChart() {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
+  const [visibleDataset, setVisibleDataset] = useState<string>('all');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,19 +45,7 @@ export default function TrendLineChart() {
 
         const data = [
           {
-            label: 'Negative',
-            data: Array.from({ length: 30 }, (_, index) => {
-              const targetDate = label[index];
-              const matchingData = info.find(
-                (entry: { date: string }) => entry.date === targetDate,
-              );
-              return matchingData ? matchingData.averageNegative : 0;
-            }),
-            borderColor: '#FF983A',
-            backgroundColor: '#FF983A',
-            borderWidth: 1,
-          },
-          {
+            id: 'positive',
             label: 'Positive',
             data: Array.from({ length: 30 }, (_, index) => {
               const targetDate = label[index];
@@ -70,6 +59,7 @@ export default function TrendLineChart() {
             borderWidth: 1,
           },
           {
+            id: 'neutral',
             label: 'Neutral',
             data: Array.from({ length: 30 }, (_, index) => {
               const targetDate = label[index];
@@ -82,6 +72,20 @@ export default function TrendLineChart() {
             backgroundColor: '#8F8F8F',
             borderWidth: 1,
           },
+          {
+            id: 'negative',
+            label: 'Negative',
+            data: Array.from({ length: 30 }, (_, index) => {
+              const targetDate = label[index];
+              const matchingData = info.find(
+                (entry: { date: string }) => entry.date === targetDate,
+              );
+              return matchingData ? matchingData.averageNegative : 0;
+            }),
+            borderColor: '#FF983A',
+            backgroundColor: '#FF983A',
+            borderWidth: 1,
+          },
         ];
 
         setDatasets(data);
@@ -91,53 +95,138 @@ export default function TrendLineChart() {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures this effect runs once on mount
+  }, []);
+
+  const handleButtonClick = (id: string) => {
+    if (visibleDataset === id) {
+      setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
+    } else {
+      setVisibleDataset(id); // 그렇지 않으면 선택
+    }
+  };
+
+  const filteredDatasets = datasets.filter(
+    (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
+  );
 
   return (
-    <Line
-      data={{ labels, datasets }}
-      options={{
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          y: {
-            min: 0,
-            max: 100,
-            grid: {
-              display: false,
+    <div className="chart">
+      <Line
+        data={{ labels, datasets: filteredDatasets }}
+        options={{
+          maintainAspectRatio: false,
+          responsive: true,
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              grid: {
+                display: false,
+              },
+            },
+            x: {
+              grid: {
+                display: false,
+              },
             },
           },
-          x: {
-            grid: {
-              display: false,
+          elements: {
+            point: {
+              radius: 0,
             },
           },
-        },
-        elements: {
-          point: {
-            radius: 0,
+          hover: {
+            mode: 'nearest',
+            intersect: true,
           },
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true,
-        },
-        plugins: {
-          legend: {
-            labels: { color: 'black' },
-            align: 'start',
-            position: 'right' as const,
+          plugins: {
+            legend: {
+              // labels: { color: 'black' },
+              // align: 'start',
+              // position: 'right' as const,
+              display: false,
+            },
+            title: {
+              display: true,
+            },
+            tooltip: {
+              mode: 'index' as const,
+              intersect: false,
+            },
           },
-          title: {
-            display: true,
-            // text: '당신의 기분을 알려드려요 : )',
-          },
-          tooltip: {
-            mode: 'index' as const,
-            intersect: false,
-          },
-        },
-      }}
-    />
+        }}
+      />
+      <div className="legendBox">
+        {(() => {
+          const totalAverage = datasets.reduce(
+            (total: number, current: any) => {
+              const average = current.data.filter(
+                (value: number) => value !== 0,
+              ).length
+                ? current.data.reduce((a: number, b: number) => a + b, 0) /
+                  current.data.filter((value: number) => value !== 0).length
+                : 0;
+              return total + average;
+            },
+            0,
+          );
+
+          let percentages = datasets.map((dataset: any) => {
+            const average = dataset.data.filter((value: number) => value !== 0)
+              .length
+              ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
+                dataset.data.filter((value: number) => value !== 0).length
+              : 0;
+            return {
+              id: dataset.id,
+              percentage: totalAverage
+                ? Math.round((average / totalAverage) * 100)
+                : 0,
+            };
+          });
+
+          if (percentages.length === 0) {
+            return null;
+          }
+
+          const total = percentages.reduce(
+            (total: number, current: { percentage: number }) =>
+              total + current.percentage,
+            0,
+          );
+          const difference = 100 - total;
+          const maxIndex = percentages.reduce(
+            (
+              iMax: number,
+              x: { percentage: number },
+              i: number,
+              arr: { percentage: number }[],
+            ) => (x.percentage > arr[iMax].percentage ? i : iMax),
+            0,
+          );
+          percentages[maxIndex].percentage += difference;
+
+          return percentages.map((item: { id: string; percentage: number }) => (
+            <button
+              key={item.id}
+              id={item.id}
+              className="item"
+              onClick={() => handleButtonClick(item.id)}
+            >
+              {item.id === 'positive' && (
+                <img src="/statistics/positive.svg" alt="" />
+              )}
+              {item.id === 'negative' && (
+                <img src="/statistics/negative.svg" alt="" />
+              )}
+              {item.id === 'neutral' && (
+                <img src="/statistics/neutral.svg" alt="" />
+              )}
+              &nbsp;{item.percentage}%
+            </button>
+          ));
+        })()}
+      </div>
+    </div>
   );
 }

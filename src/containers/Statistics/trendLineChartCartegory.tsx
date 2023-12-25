@@ -17,6 +17,9 @@ export default function TrendLineChartCartegory() {
   const [datasets, setDatasets] = useState<any>([]);
   const [selectedGender, setSelectedGender] = useState<string>('F');
   const [selectedAge, setSelectedAge] = useState<string>('20대');
+  const [visibleDataset, setVisibleDataset] = useState<string>('all');
+  const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
+  const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
 
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
@@ -37,18 +40,7 @@ export default function TrendLineChartCartegory() {
 
       const data = [
         {
-          label: 'Negative',
-          data: label.map((targetDate) => {
-            const matchingData = info.find(
-              (entry: { date: string }) => entry.date === targetDate,
-            );
-            return matchingData ? matchingData.averageNegative : 0;
-          }),
-          borderColor: '#FF983A',
-          backgroundColor: '#FF983A',
-          borderWidth: 1,
-        },
-        {
+          id: 'positive',
           label: 'Positive',
           data: label.map((targetDate) => {
             const matchingData = info.find(
@@ -60,7 +52,9 @@ export default function TrendLineChartCartegory() {
           backgroundColor: '#4866D2',
           borderWidth: 1,
         },
+
         {
+          id: 'neutral',
           label: 'Neutral',
           data: label.map((targetDate) => {
             const matchingData = info.find(
@@ -72,6 +66,19 @@ export default function TrendLineChartCartegory() {
           backgroundColor: '#8F8F8F',
           borderWidth: 1,
         },
+        {
+          id: 'negative',
+          label: 'Negative',
+          data: label.map((targetDate) => {
+            const matchingData = info.find(
+              (entry: { date: string }) => entry.date === targetDate,
+            );
+            return matchingData ? matchingData.averageNegative : 0;
+          }),
+          borderColor: '#FF983A',
+          backgroundColor: '#FF983A',
+          borderWidth: 1,
+        },
       ];
 
       setDatasets(data);
@@ -80,33 +87,16 @@ export default function TrendLineChartCartegory() {
     fetchData(); // Fetch data when component mounts or when selectedGender/selectedAge changes
   }, [selectedGender, selectedAge]);
 
+  const handleButtonClick = (id: string) => {
+    if (visibleDataset === id) {
+      setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
+    } else {
+      setVisibleDataset(id); // 그렇지 않으면 선택
+    }
+  };
+
   return (
-    <>
-      {/* <div style={{ position: 'relative' }}> */}
-      <div className="trend-select-gender">
-        {/* <label>Select Gender:</label> */}
-        <select
-          value={selectedGender}
-          onChange={(e) => setSelectedGender(e.target.value)}
-        >
-          <option value="F">여성</option>
-          <option value="M">남성</option>
-        </select>
-      </div>
-      <div className="trend-select-age">
-        {/* <label>Select Age:</label> */}
-        <select
-          value={selectedAge}
-          onChange={(e) => setSelectedAge(e.target.value)}
-        >
-          <option value="10대">10대</option>
-          <option value="20대">20대</option>
-          <option value="30대">30대</option>
-          <option value="40대">40대</option>
-          <option value="50대">50+</option>
-        </select>
-      </div>
-      {/* </div> */}
+    <div className="chart">
       <Line
         data={{ labels, datasets }}
         options={{
@@ -137,9 +127,7 @@ export default function TrendLineChartCartegory() {
           },
           plugins: {
             legend: {
-              labels: { color: 'black' },
-              align: 'start',
-              position: 'right' as const,
+              display: false,
             },
             title: {
               display: true,
@@ -152,6 +140,140 @@ export default function TrendLineChartCartegory() {
           },
         }}
       ></Line>
-    </>
+      <div className="legendBox">
+        {(() => {
+          const totalAverage = datasets.reduce(
+            (total: number, current: any) => {
+              const average = current.data.filter(
+                (value: number) => value !== 0,
+              ).length
+                ? current.data.reduce((a: number, b: number) => a + b, 0) /
+                  current.data.filter((value: number) => value !== 0).length
+                : 0;
+              return total + average;
+            },
+            0,
+          );
+
+          let percentages = datasets.map((dataset: any) => {
+            const average = dataset.data.filter((value: number) => value !== 0)
+              .length
+              ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
+                dataset.data.filter((value: number) => value !== 0).length
+              : 0;
+            return {
+              id: dataset.id,
+              percentage: totalAverage
+                ? Math.round((average / totalAverage) * 100)
+                : 0,
+            };
+          });
+
+          if (percentages.length === 0) {
+            return null;
+          }
+
+          const total = percentages.reduce(
+            (total: number, current: { percentage: number }) =>
+              total + current.percentage,
+            0,
+          );
+          const difference = 100 - total;
+          const maxIndex = percentages.reduce(
+            (
+              iMax: number,
+              x: { percentage: number },
+              i: number,
+              arr: { percentage: number }[],
+            ) => (x.percentage > arr[iMax].percentage ? i : iMax),
+            0,
+          );
+          percentages[maxIndex].percentage += difference;
+
+          return percentages.map((item: { id: string; percentage: number }) => (
+            <button
+              key={item.id}
+              id={item.id}
+              className="item"
+              onClick={() => handleButtonClick(item.id)}
+            >
+              {item.id === 'positive' && (
+                <img src="/statistics/positive.svg" alt="" />
+              )}
+              {item.id === 'negative' && (
+                <img src="/statistics/negative.svg" alt="" />
+              )}
+              {item.id === 'neutral' && (
+                <img src="/statistics/neutral.svg" alt="" />
+              )}
+              &nbsp;{item.percentage}%
+            </button>
+          ));
+        })()}
+      </div>
+      {/* 성별 선택 드롭다운 */}
+      <div className="custom-select-wrapper">
+        <div className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}>
+          <span
+            className="custom-select-trigger"
+            onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+          >
+            {selectedGender === 'F' ? '여성' : '남성'}
+          </span>
+          <div className="custom-options">
+            <span
+              className={`custom-option ${
+                selectedGender === 'F' ? 'selection' : ''
+              }`}
+              onClick={() => {
+                setSelectedGender('F');
+                setGenderDropdownOpen(false);
+              }}
+            >
+              여성
+            </span>
+            <span
+              className={`custom-option ${
+                selectedGender === 'M' ? 'selection' : ''
+              }`}
+              onClick={() => {
+                setSelectedGender('M');
+                setGenderDropdownOpen(false);
+              }}
+            >
+              남성
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* 연령 선택 드롭다운 */}
+      <div className="custom-select-wrapper">
+        <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
+          <span
+            className="custom-select-trigger"
+            onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
+          >
+            {selectedAge}
+          </span>
+          <div className="custom-options">
+            {['10대', '20대', '30대', '40대', '50+'].map((age) => (
+              <span
+                key={age}
+                className={`custom-option ${
+                  selectedAge === age ? 'selection' : ''
+                }`}
+                onClick={() => {
+                  setSelectedAge(age);
+                  setAgeDropdownOpen(false);
+                }}
+              >
+                {age}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
