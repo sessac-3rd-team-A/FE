@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import useFetch from './memeFetch';
-
+import '../../styles/statistics/memeComponentImg.scss';
 interface MemeComponentProps {
   gender: string | null;
   age: string | null;
 }
 
-const MemeComponentProps: React.FC<MemeComponentProps> = ({ gender, age }) => {
+const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
   let url = 'http://localhost:8080/api/statistics/meme';
   if (gender && age) {
     url += `?gender=${gender}&age=${age}`;
@@ -31,34 +31,35 @@ const MemeComponentProps: React.FC<MemeComponentProps> = ({ gender, age }) => {
   };
 
   return (
-    <span>
-      <span style={{ display: 'flex', justifyContent: 'space-around' }}>
-        {data.ranking.map((meme, index) => (
-          <span key={index}>
-            <button onClick={() => handleClick(meme.rank)}>{meme.rank}</button>
-          </span>
-        ))}
-      </span>
-      <div style={{ width: '520px', height: '289px' }}>
+    <span style={{ width: '100%', display: 'flex' }}>
+      <div className="meme-picture-container">
         {data.ranking
           .filter((meme) => meme.rank === selectedRank)
           .map((meme) => (
             <img
+              className="meme-picture"
               key={meme.rank}
               src={meme.imageUrl}
               alt={`meme ${meme.rank}`}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                position: 'relative',
-                // right: '100px',
-              }}
             />
           ))}
+      </div>
+      <div>
+        {data.ranking.map((meme, index) => (
+          <span key={index}>
+            <button
+              onClick={() => handleClick(meme.rank)}
+              className={`meme-rank-button ${
+                selectedRank === meme.rank ? 'selected' : ''
+              }`}
+            >
+              {meme.rank}
+            </button>
+          </span>
+        ))}
       </div>
     </span>
   );
 };
 
-export default MemeComponentProps;
+export default MemeComponentImg;
