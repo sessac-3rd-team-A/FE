@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useFetch from './memeFetch';
 import '../../styles/statistics/memeComponentImg.scss';
+
 interface MemeComponentProps {
   gender: string | null;
   age: string | null;
@@ -23,6 +24,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
       setSelectedRank(data.ranking[0].rank);
     }
   }, [data]);
+
   if (loading) return <div>로딩중...</div>;
   if (!data || !data.success) return <div>데이터가 없습니다.</div>;
 
@@ -53,7 +55,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
                 selectedRank === meme.rank ? 'selected' : ''
               }`}
             >
-              {meme.rank}
+              #{index + 1}
             </button>
           </span>
         ))}
