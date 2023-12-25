@@ -1,5 +1,4 @@
-// import '../styles/statistics/trend/cartegory.scss';
-
+import '../../styles/statistics/trendLineChartCartegory.scss';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -17,12 +16,11 @@ export default function TrendLineChartCartegory() {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [selectedGender, setSelectedGender] = useState<string>('F');
-  const [selectedAge, setSelectedAge] = useState<string>('10대');
+  const [selectedAge, setSelectedAge] = useState<string>('20대');
 
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
     const fetchData = async () => {
-      console.log('보내봄11');
       const response = await fetch(
         `http://localhost:8080/api/statistics?gender=${selectedGender}&age=${selectedAge}`,
         { cache: 'no-store' },
@@ -78,36 +76,37 @@ export default function TrendLineChartCartegory() {
 
       setDatasets(data);
     };
-    console.log('보내봄22');
 
     fetchData(); // Fetch data when component mounts or when selectedGender/selectedAge changes
   }, [selectedGender, selectedAge]);
 
   return (
-    <div className="trend-select-gender">
-      <div>
-        <label>Select Gender:</label>
+    <>
+      {/* <div style={{ position: 'relative' }}> */}
+      <div className="trend-select-gender">
+        {/* <label>Select Gender:</label> */}
         <select
           value={selectedGender}
           onChange={(e) => setSelectedGender(e.target.value)}
         >
-          <option value="F">Female</option>
-          <option value="M">Male</option>
+          <option value="F">여성</option>
+          <option value="M">남성</option>
         </select>
       </div>
       <div className="trend-select-age">
-        <label>Select Age:</label>
+        {/* <label>Select Age:</label> */}
         <select
           value={selectedAge}
           onChange={(e) => setSelectedAge(e.target.value)}
         >
-          <option value="10대">10s</option>
-          <option value="20대">20s</option>
-          <option value="30대">30s</option>
-          <option value="40대">40s</option>
-          <option value="50대">50s</option>
+          <option value="10대">10대</option>
+          <option value="20대">20대</option>
+          <option value="30대">30대</option>
+          <option value="40대">40대</option>
+          <option value="50대">50+</option>
         </select>
       </div>
+      {/* </div> */}
       <Line
         data={{ labels, datasets }}
         options={{
@@ -152,7 +151,7 @@ export default function TrendLineChartCartegory() {
             },
           },
         }}
-      />
-    </div>
+      ></Line>
+    </>
   );
 }
