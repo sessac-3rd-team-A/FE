@@ -1,6 +1,4 @@
 @import '/src/styles/global.scss';
-@import url('https://fonts.cdnfonts.com/css/lemon-milk');
-@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
 .trend-select-gender {
   position: absolute;
@@ -27,6 +25,7 @@
   position: relative;
   display: inline-block;
   user-select: none;
+  margin: 0 toSize(25);
 }
 .custom-select-wrapper select {
   display: none;
@@ -77,7 +76,7 @@
   left: 0;
   right: 0;
   min-width: 100%;
-  margin: 15px 0;
+  margin: toSize(10) 0;
   border: 1px solid #b5b5b5;
   border-radius: 4px;
   box-sizing: border-box;

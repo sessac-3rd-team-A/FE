@@ -1,4 +1,4 @@
-import '../../styles/statistics/trendLineChartCartegory.scss';
+import '../../styles/statistics/trendLineChartCategory.scss';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 import { useState, useEffect } from 'react';
 
-export default function TrendLineChartCartegory() {
+export default function TrendLineChartCategory() {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [selectedGender, setSelectedGender] = useState<string>('F');
@@ -98,10 +98,11 @@ export default function TrendLineChartCartegory() {
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
 
+  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
       <Line
-        data={{ labels, datasets: filteredDatasets }}
+        data={{ labels: newLabels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -112,10 +113,21 @@ export default function TrendLineChartCartegory() {
               grid: {
                 display: false,
               },
+              ticks: {
+                color: 'rgba(0, 0, 0)',
+              },
             },
             x: {
               grid: {
                 display: false,
+              },
+              ticks: {
+                maxRotation: 0,
+                minRotation: 0,
+                // font: {
+                //   size: 10,
+                // },
+                color: 'rgba(0, 0, 0)',
               },
             },
           },
@@ -139,6 +151,12 @@ export default function TrendLineChartCartegory() {
             tooltip: {
               mode: 'index' as const,
               intersect: false,
+              callbacks: {
+                title: function (context) {
+                  const index = context[0].dataIndex;
+                  return labels[index] ? labels[index].toString() : '';
+                },
+              },
             },
           },
         }}

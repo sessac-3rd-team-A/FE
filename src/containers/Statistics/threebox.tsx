@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../../styles/statistics/threeBox.scss';
+import '../../styles/statistics/threebox.scss';
 import TrendLineChart from './trendLineChart';
 
-import TrendLineChartCartegory from './trendLineChartCartegory';
+import TrendLineChartCategory from './trendLineChartCategory';
 import MemeComponent from './memeComponent';
 
 export default function ThreeBox() {
@@ -28,7 +28,7 @@ export default function ThreeBox() {
           const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
           const componentsToRender = [
             <TrendLineChart key="trendLineChart" />,
-            <TrendLineChartCartegory key="trendLineChart" />,
+            <TrendLineChartCategory key="trendLineChart" />,
             <MemeComponent key="memeComponent" />,
           ];
 
