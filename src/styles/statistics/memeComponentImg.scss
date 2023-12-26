@@ -6,12 +6,14 @@
   .meme-picture-message {
     display: flex;
     align-items: center;
-    font-family: 'GmarketSans';
+    font-family: 'LEMON MILK';
+    color: #0049b6;
+    font-size: toSize(48);
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: normal;
     position: relative;
-    left: 40%;
+    right: 3%;
   }
 
   .meme-picture-container {

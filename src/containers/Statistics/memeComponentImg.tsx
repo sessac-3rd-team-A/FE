@@ -41,14 +41,14 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
       //   </div>
       // </div>
       <div className="meme-left-container">
-        {/* <div className="meme-picture-container">
+        <div className="meme-picture-container">
           <img
             className="meme-picture"
-            src={'/statistics/nothing.png'} // 기본 이미지 URL
+            src={'/statistics/sorry.png'} // 기본 이미지 URL
             alt="default meme"
           />
-        </div> */}
-        <div className="meme-picture-message">데이터가 없습니다</div>
+        </div>
+        <div className="meme-picture-message">SORRY, NO DATA</div>
       </div>
     );
 

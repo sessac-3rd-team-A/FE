@@ -59,7 +59,7 @@ input[type='radio']:checked + .three-box-contents {
     transform-origin: left;
     // white-space: nowrap;
     left: toSize(50);
-    font-family: 'LEMON MILK', sans-serif;
+    font-family: 'LEMON MILK';
     font-size: toSize(28);
     font-style: normal;
     font-weight: 400;
@@ -140,7 +140,7 @@ input[type='radio']:checked + .three-box-contents {
   .label-message {
     position: absolute;
 
-    font-family: 'LEMON MILK', sans-serif;
+    font-family: 'LEMON MILK';
     font-size: toSize(28);
     font-style: normal;
     font-weight: 400;
@@ -151,7 +151,7 @@ input[type='radio']:checked + .three-box-contents {
     transform: rotate(270deg);
     transform-origin: left;
     left: toSize(1320);
-    font-family: 'LEMON MILK', sans-serif;
+    font-family: 'LEMON MILK';
 
     font-style: normal;
     font-weight: 400;
