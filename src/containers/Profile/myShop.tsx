@@ -59,7 +59,7 @@ const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 async function getUserInfo() {
   try {
     const bearerToken = Cookies.get('accessToken');
-    await console.log('bearerToken>>>>>>>>>>', bearerToken);
+    console.log('bearerToken>>>>>>>>>>', bearerToken);
     const res = await fetch('http://localhost:3000/profile/my-shop', {
       method: 'GET',
       headers: {
