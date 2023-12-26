@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../../styles/statistics/threeBox.scss';
+import '../../styles/statistics/threebox.scss';
 import TrendLineChart from './trendLineChart';
 
 import TrendLineChartCartegory from './trendLineChartCartegory';
@@ -29,7 +29,7 @@ export default function ThreeBox() {
           const componentsToRender = [
             <TrendLineChart key="trendLineChart" />,
             <TrendLineChartCartegory key="trendLineChart" />,
-            // <MemeComponent key="memeComponent" />,
+            <MemeComponent key="memeComponent" />,
           ];
 
           return (
@@ -75,9 +75,7 @@ export default function ThreeBox() {
           );
         })}
       </div>
-      <div>
-        <MemeComponent key="memeComponent" />,
-      </div>
+      <div>{/* <MemeComponent key="memeComponent" />, */}</div>
     </>
   );
 }

@@ -1,0 +1,70 @@
+@import '/src/styles/global.scss';
+.error-container {
+  display: grid;
+  grid-template-rows: 80vh auto;
+  grid-template-columns: toSize(570) auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.oops-doodles {
+  width: toSize(430);
+  height: toSize(430);
+
+  margin: 10vh auto;
+}
+.oops-doodle {
+  width: toSize(430);
+  height: toSize(430);
+  position: relative;
+}
+.oops-eyes {
+  margin-top: toSize(-275);
+  margin-left: toSize(157);
+  display: flex;
+  .oops-eye {
+    margin: 0 toSize(10);
+    width: toSize(40);
+    height: toSize(40);
+    position: relative;
+  }
+}
+.oops-tears {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  top: toSize(-200);
+  .oops-tears-left,
+  .oops-tears-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .oops-tear {
+    margin: 0 toSize(10) toSize(150) toSize(10);
+    width: toSize(50);
+    height: toSize(105);
+    position: relative;
+  }
+}
+.oops-wave {
+  grid-column: 1/3;
+}
+.oops-btn {
+  border: 1px solid black;
+  width: toSize(250);
+  aspect-ratio: 10/3;
+  background-color: #fff;
+  filter: drop-shadow(0px toSize(9) 0px #000);
+  border-radius: 50%;
+  font-family: 'LEMON MILK';
+  font-size: toSize(26);
+  z-index: 1;
+  margin-top: 3vh;
+  cursor: pointer;
+  animation: scaleAni 2s ease-in-out;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: #fffb94;
+  }
+}
