@@ -1,7 +1,9 @@
 @import '/src/styles/global.scss';
 
 .trend-container {
-  height: calc(100vh - toSize(100));
+  height: calc(100vh - toSize(170));
+  width: calc(100vw - toSize(99));
+  margin: toSize(170) 0 0 toSize(99);
 
   .chart-title {
     color: #000;
@@ -14,8 +16,9 @@
   }
 
   .chart-text {
-    margin: 0 0 0 toSize(90);
     width: toSize(860);
+    height: toSize(210);
+    margin: 0 0 0 toSize(4);
   }
   .floating {
     animation-name: floating;

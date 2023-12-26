@@ -18,7 +18,7 @@ export default function ThreeBox() {
     console.log(selectedMenu);
   }, [selectedMenu]);
 
-  const labeLText: string[] = ['MAIN', 'GROUP', 'MEME'];
+  const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function ThreeBox() {
                   {componentsToRender[index]}
                 </div>
                 <div className="three-box-description">
-                  <p>{`${labeLText[index]}`}</p>
+                  <div className="label-message">{`${labeLText[index]}`}</div>
                   {/* <h3>{`TITLE ${3 - index}`}</h3> */}
                   <div className="label-circle">
                     <br></br>
