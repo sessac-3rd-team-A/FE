@@ -1,10 +1,9 @@
-import SighPage from '@/containers/Sigh';
+'use client';
 import Error404 from '@/containers/common/error404';
 
-export default function Sigh() {
+export default function Error() {
   return (
     <>
-      {/* <SighPage /> */}
       <Error404 />
     </>
   );
