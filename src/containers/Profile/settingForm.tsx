@@ -1,11 +1,33 @@
 'use client';
 import React, { useState, FormEvent } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import '@/styles/profile/settingForm.scss';
+import { userState } from '@/utils/state';
+import { TokenType, userDataType } from '@/types'
 
-export default function SettingForm() {
+
+
+async function updateUser(accessToken: string, refreshToken: string) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      },
+    });
+    // console.log('res >>>',res);
+    return res;
+  } catch (err) {
+    throw new Error(`HTTP error! Status: ${err}`);
+  }
+}
+
+export default async function SettingForm(Token: TokenType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
+  const [user, setUser] = useRecoilState(userState);
   async function onSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
@@ -13,23 +35,35 @@ export default function SettingForm() {
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await fetch('/profile/setting', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-      });
+      const formattedData = Object.fromEntries(formData);
+      
+      console.log('formattedData >>>', formattedData);
 
-      if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.');
-      }
-      const data = await response.json();
-      console.log(data);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `accessToken=${Token.accessToken}; refreshToken=${Token.refreshToken}`
+      },
+      body: JSON.stringify({
+        userId: formattedData.id,
+        age: formattedData.age,
+        gender: formattedData.gender,
+      }),
+    });
+    console.log('res >>>', res);
+    if (!res.ok) {
+      throw new Error('Failed to submit the data. Please try again.');
+    }
+    const data = await res.json();
+    console.log(data);
     } catch (error) {
-      // setError(error.message)
       console.error(error);
     } finally {
       setIsLoading(false);
     }
-  }
+}
 
   return (
     <div className="setting-form-container2">
@@ -38,16 +72,16 @@ export default function SettingForm() {
         <input
           type="text"
           id="nickName"
-          placeholder="개피곤한 인간말종"
+          placeholder={user.nickname}
           readOnly
         />
         <input
           type="text"
           id="id"
+          name="id"
           placeholder="Your ID"
           minLength={2}
           maxLength={100}
-          readOnly
         />
         <div className="age-and-gender">
           <select id="age" name="age">
@@ -64,8 +98,8 @@ export default function SettingForm() {
             <option value="" disabled selected hidden>
               Gender
             </option>
-            <option value="female">여자</option>
-            <option value="male">남자</option>
+            <option value="F">여자</option>
+            <option value="M">남자</option>
           </select>
         </div>
         <button type="submit" disabled={isLoading} className="submit-button">

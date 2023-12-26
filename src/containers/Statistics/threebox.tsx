@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import '../../styles/statistics/threeBox.scss';
+import '../../styles/statistics/threebox.scss';
 import TrendLineChart from './trendLineChart';
 
 import TrendLineChartCartegory from './trendLineChartCartegory';

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ShopApiRes } from '@/types';
+import { ShopApiRes, ShoppingApiResponse } from '@/types';
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
 import ProfileMenu from './profileMenu';
@@ -9,76 +9,30 @@ import heart_eye from '/public/images/heart_eye.png';
 import Cookies from 'js-cookie';
 import myShopBack from '/public/images/myShopBack.svg';
 
-// HTTP 요청을 보내는 함수
-// function httpRequest(method, url, body, success, fail){
-//   fetch(url, {
-//       method: method,
-//       headers: {
-//           // 로컬 스토리지에서 액세스 토큰 값을 가져와 헤더에 추가한다.
-//           Authorization: "Bearer " + localStorage.getItem("access_token"),
-//           "Content-Type": "application/json"
-//       },
-//       body: body
-//   }).then((response) => {
-//       if (response.status === 200 || response.status == 201){
-//           return success()
-//       }
-//       const refresh_token = getCookie("refresh_token")
-//       // access_token 이 만료되어 권한이 없고, 리프레시 토큰이 있다면 그 리프레시 토큰을 이용해서 새로운 access token 을 요청
-//       if (response.status === 401 && refresh_token) {
-//           fetch("/api/token", {
-//               method: "POST",
-//               headers: {
-//                   Authorization: "Bearer " + localStorage.getItem("access_token"),
-//                   "Content-Type": "application/json"
-//               },
-//               body: JSON.stringify({
-//                   refresh_token: getCookie("refresh_token")
-//               })
-//           }).then((res) => {
-//               if (res.ok){
-//                   return res.json()
-//               }
-//           }).then((result) => {
-//               // refresh token 재발급에 성공하면 로컬 스토리지 값을 새로운 access token 으로 교체
-//               localStorage.setItem("access_token", result.accessToken)
-//               // 새로운 access token 으로 http 요청을 보낸다.
-//               httpRequest(method, url, body, success, fail)
-//           })
-//       }
-//       else {
-//           return fail()
-//       }
-//   })
-// }
-
 const API = 'https://openapi.naver.com/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
-async function getUserInfo() {
-  try {
-    const bearerToken = Cookies.get('accessToken');
-    console.log('bearerToken>>>>>>>>>>', bearerToken);
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-    const data = await res;
-    console.log('data>>>>>>>>>>>>>>>>>>>', data);
-    return data;
-  } catch (err) {
-    throw new Error(`HTTP error! Status: ${err}`);
-  }
-}
+// async function getUserInfo() {
+//   try {
+//     const bearerToken = Cookies.get('accessToken');
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}`, {
+//       method: 'GET',
+//       headers: {
+//         Authorization: `Bearer ${bearerToken}`,
+//         'Content-Type': 'application/json',
+//       },
+//     });
+//     const data = await res;
+//     console.log('data>>>>>>>>>>>>>>>>>>>',data);
+//     return data;
+//   } catch (err) {
+//     throw new Error(`HTTP error! Status: ${err}`);
+//   }
+// }
 
-async function SearchResult(): Promise<ShopApiRes> {
+
+async function SearchResult(): Promise<ShoppingApiResponse> {
   const query = '몰랑이 인형';
   const displayNum = 20;
   const url = `${API}?query=${encodeURIComponent(
@@ -102,10 +56,11 @@ async function SearchResult(): Promise<ShopApiRes> {
 }
 
 export default async function MyShopPage(): Promise<JSX.Element> {
-  await getUserInfo();
+  // await getUserInfo();
+  
+  const item: ShoppingApiResponse  = await SearchResult();
+  const itemsResult: ShopApiRes[] = item.items;
 
-  const items: object = await SearchResult();
-  const itemsResult = items.items;
 
   return (
     <div className="myShop-container">
