@@ -2,6 +2,7 @@
 import '../../styles/statistics/memeComponent.scss';
 import { useState } from 'react';
 import MemeComponentImg from './memeComponentImg';
+import { relative } from 'path';
 
 const MemeComponent = () => {
   const [gender, setGender] = useState('F');
@@ -26,55 +27,73 @@ const MemeComponent = () => {
   return (
     <>
       <MemeComponentImg gender={gender} age={age} />
-      <div className="custom-select-wrapper">
-        <div className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}>
-          <span
-            className="custom-select-trigger"
-            onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+      <div className="legendBox">
+        <button className="item">
+          {'positive' === 'positive' && (
+            <img src="/statistics/positive.svg" alt="" />
+          )}
+          <br />
+          {'negative' === 'negative' && (
+            <img src="/statistics/negative.svg" alt="" />
+          )}
+          <br />
+          {'neutral' === 'neutral' && (
+            <img src="/statistics/neutral.svg" alt="" />
+          )}
+          <br />
+        </button>
+        <div className="custom-select-wrapper">
+          <div
+            className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
           >
-            {genders.find((g) => g.value === gender)?.label}
-          </span>
-          <div className="custom-options">
-            {genders.map((g) => (
-              <span
-                key={g.value}
-                className={`custom-option ${
-                  gender === g.value ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setGender(g.value);
-                  setGenderDropdownOpen(false);
-                }}
-              >
-                {g.label}
-              </span>
-            ))}
+            <span
+              className="custom-select-trigger"
+              onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+            >
+              {genders.find((g) => g.value === gender)?.label}
+            </span>
+            <div className="custom-options">
+              {genders.map((g) => (
+                <span
+                  key={g.value}
+                  className={`custom-option ${
+                    gender === g.value ? 'selection' : ''
+                  }`}
+                  onClick={() => {
+                    setGender(g.value);
+                    setGenderDropdownOpen(false);
+                  }}
+                >
+                  {g.label}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="custom-select-wrapper">
-        <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
-          <span
-            className="custom-select-trigger"
-            onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
-          >
-            {ages.find((a) => a.value === age)?.label}
-          </span>
-          <div className="custom-options">
-            {ages.map((a) => (
-              <span
-                key={a.value}
-                className={`custom-option ${
-                  age === a.value ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setAge(a.value);
-                  setAgeDropdownOpen(false);
-                }}
-              >
-                {a.label}
-              </span>
-            ))}
+        <div className="custom-select-wrapper">
+          <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
+            <span
+              className="custom-select-trigger"
+              onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
+            >
+              {ages.find((a) => a.value === age)?.label}
+            </span>
+            <div className="custom-options">
+              {ages.map((a) => (
+                <span
+                  key={a.value}
+                  className={`custom-option ${
+                    age === a.value ? 'selection' : ''
+                  }`}
+                  onClick={() => {
+                    setAge(a.value);
+                    setAgeDropdownOpen(false);
+                  }}
+                >
+                  {a.label}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

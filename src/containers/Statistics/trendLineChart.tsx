@@ -47,7 +47,7 @@ export default function TrendLineChart() {
           {
             id: 'positive',
             label: 'Positive',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
               const matchingData = info.find(
                 (entry: { date: string }) => entry.date === targetDate,
@@ -108,11 +108,12 @@ export default function TrendLineChart() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
+  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
 
   return (
     <div className="chart">
       <Line
-        data={{ labels, datasets: filteredDatasets }}
+        data={{ labels: newLabels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -123,10 +124,21 @@ export default function TrendLineChart() {
               grid: {
                 display: false,
               },
+              ticks: {
+                color: 'rgba(0, 0, 0)',
+              },
             },
             x: {
               grid: {
                 display: false,
+              },
+              ticks: {
+                maxRotation: 0,
+                minRotation: 0,
+                // font: {
+                //   size: 10,
+                // },
+                color: 'rgba(0, 0, 0)',
               },
             },
           },
@@ -141,9 +153,6 @@ export default function TrendLineChart() {
           },
           plugins: {
             legend: {
-              // labels: { color: 'black' },
-              // align: 'start',
-              // position: 'right' as const,
               display: false,
             },
             title: {
@@ -152,6 +161,12 @@ export default function TrendLineChart() {
             tooltip: {
               mode: 'index' as const,
               intersect: false,
+              callbacks: {
+                title: function (context) {
+                  const index = context[0].dataIndex;
+                  return labels[index] ? labels[index].toString() : '';
+                },
+              },
             },
           },
         }}

@@ -52,7 +52,6 @@ export default function TrendLineChartCartegory() {
           backgroundColor: '#4866D2',
           borderWidth: 1,
         },
-
         {
           id: 'neutral',
           label: 'Neutral',
@@ -92,13 +91,17 @@ export default function TrendLineChartCartegory() {
       setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
     } else {
       setVisibleDataset(id); // 그렇지 않으면 선택
+      console.log(id);
     }
   };
+  const filteredDatasets = datasets.filter(
+    (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
+  );
 
   return (
     <div className="chart">
       <Line
-        data={{ labels, datasets }}
+        data={{ labels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -194,7 +197,7 @@ export default function TrendLineChartCartegory() {
             <button
               key={item.id}
               id={item.id}
-              className="item"
+              className={`item ${visibleDataset === item.id ? 'selected' : ''}`}
               onClick={() => handleButtonClick(item.id)}
             >
               {item.id === 'positive' && (

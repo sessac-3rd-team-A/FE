@@ -33,7 +33,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
   };
 
   return (
-    <span style={{ width: '100%', display: 'flex' }}>
+    <div style={{ width: '85%', display: 'flex' }}>
       <div className="meme-picture-container">
         {data.ranking
           .filter((meme) => meme.rank === selectedRank)
@@ -60,7 +60,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
           </span>
         ))}
       </div>
-    </span>
+    </div>
   );
 };
 
