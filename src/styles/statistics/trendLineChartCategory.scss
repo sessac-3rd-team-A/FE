@@ -26,6 +26,7 @@
   display: inline-block;
   user-select: none;
   margin: 0 toSize(25);
+  top: toSize(60);
 }
 .custom-select-wrapper select {
   display: none;

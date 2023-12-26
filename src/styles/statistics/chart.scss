@@ -4,6 +4,7 @@
   height: calc(100vh - toSize(170));
   width: calc(100vw - toSize(99));
   margin: toSize(170) 0 0 toSize(99);
+  overflow: hidden;
 
   .chart-title {
     color: #000;
@@ -64,4 +65,10 @@
     height: 500px;
     float: left;
   }
+}
+
+.animate__animated.animate__shakeY {
+  --animate-duration: 14s;
+  position: sticky;
+  z-index: -1;
 }

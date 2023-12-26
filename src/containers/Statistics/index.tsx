@@ -22,12 +22,14 @@ export default function StatisticsPage() {
   let arr;
   return (
     <div className="trend-container">
-      <div className="chart-title, animate__animated animate__bounce">
+      <div className="chart-title, animate__animated animate__bounce ">
         <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
 
       <ThreeBox />
-      {/* <Semo></Semo> */}
+      <div className=" animate__animated animate__shakeY animate__infinite">
+        <Semo />
+      </div>
     </div>
   );
 }
