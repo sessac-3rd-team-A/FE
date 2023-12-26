@@ -60,15 +60,18 @@ async function getUserInfo() {
   try {
     const bearerToken = Cookies.get('accessToken');
     console.log('bearerToken>>>>>>>>>>', bearerToken);
-    const res = await fetch('http://localhost:3000/profile/my-shop', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
-        'Content-Type': 'application/json',
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
     const data = await res;
-    console.log('data>>>>>>>>>>>>>>>>>>>',data);
+    console.log('data>>>>>>>>>>>>>>>>>>>', data);
     return data;
   } catch (err) {
     throw new Error(`HTTP error! Status: ${err}`);
@@ -100,7 +103,7 @@ async function SearchResult(): Promise<ShopApiRes> {
 
 export default async function MyShopPage(): Promise<JSX.Element> {
   await getUserInfo();
-  
+
   const items: object = await SearchResult();
   const itemsResult = items.items;
 
@@ -123,30 +126,35 @@ export default async function MyShopPage(): Promise<JSX.Element> {
         </p>
       </div>
       <div className="product-container">
-      {itemsResult.map((item, index) => (
-        <div className="product-detail-container" key={item.productId}>
-          {[...Array(4)].map((_, innerIndex) => {
-            const productIndex = index * 4 + innerIndex;
-            const product = itemsResult[productIndex];
-            return product?.title ? (
-              <Link href={product.link} key={`${product.productId}-${innerIndex}`}>
-                <div className="product-detail">
-                  <img src={product.image} className="product-image" />
-                  <div className="product-detail-explain">
-                    <div className="product-item-name">
-                      <span>상품명</span>
-                      <br />{' '}
-                      {product.title.replace(/<b>/g, '').replace(/<\/b>/g, '')}
+        {itemsResult.map((item, index) => (
+          <div className="product-detail-container" key={item.productId}>
+            {[...Array(4)].map((_, innerIndex) => {
+              const productIndex = index * 4 + innerIndex;
+              const product = itemsResult[productIndex];
+              return product?.title ? (
+                <Link
+                  href={product.link}
+                  key={`${product.productId}-${innerIndex}`}
+                >
+                  <div className="product-detail">
+                    <img src={product.image} className="product-image" />
+                    <div className="product-detail-explain">
+                      <div className="product-item-name">
+                        <span>상품명</span>
+                        <br />{' '}
+                        {product.title
+                          .replace(/<b>/g, '')
+                          .replace(/<\/b>/g, '')}
+                      </div>
+                      <br />
+                      <span>가격</span> {product.lprice}
                     </div>
-                    <br />
-                    <span>가격</span> {product.lprice}
                   </div>
-                </div>
-              </Link>
-            ) : null;
-          })}
-        </div>
-      ))}
+                </Link>
+              ) : null;
+            })}
+          </div>
+        ))}
       </div>
       <ProfileMenu />
     </div>
