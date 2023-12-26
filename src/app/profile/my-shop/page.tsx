@@ -1,4 +1,4 @@
-import MyShopPage from '@/containers/profile/myShop';
+import MyShopPage from '@/containers/Profile/myShop';
 
 export default function MyShop() {
   return (

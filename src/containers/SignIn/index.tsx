@@ -50,12 +50,13 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/auth/signin';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signin`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
 
     const response = await fetch(apiUrl, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -67,6 +68,7 @@ export default function SignInPage() {
     console.log(response);
     if (response.status == 200) {
       const data = await response.json();
+      console.log(data);
       // recoil 상태 설정
       setUser({
         userId: data.userId,
@@ -76,12 +78,12 @@ export default function SignInPage() {
         isLogin: true,
       });
       // 토큰 값은 로컬스토리지에 저장
-      localStorage.setItem('accessToken', data.accessToken);
-      localStorage.setItem('refreshToken', data.refreshToken);
+      // localStorage.setItem('accessToken', data.accessToken);
+      // localStorage.setItem('refreshToken', data.refreshToken);
       // 토큰 값 쿠키에 저장
       Cookies.set('accessToken', data.accessToken, { expires: 1 });
       Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
-      console.log('accessToken>>>',data);
+      console.log('accessToken>>>', data);
 
       router.push('/');
     }
@@ -90,7 +92,7 @@ export default function SignInPage() {
   async function onSubmitSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    const apiUrl = 'http://localhost:8080/auth/signup';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signup`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
     const response = await fetch(apiUrl, {

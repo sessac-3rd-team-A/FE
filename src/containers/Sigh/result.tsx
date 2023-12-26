@@ -26,13 +26,16 @@ export default async function SighResultPage() {
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const getResultData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/api/diary/${id}`,
+        {
+          cache: 'no-store',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);

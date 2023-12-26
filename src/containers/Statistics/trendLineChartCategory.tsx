@@ -25,7 +25,7 @@ export default function TrendLineChartCategory() {
     // Function to fetch data based on selectedGender and selectedAge
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:8080/api/statistics?gender=${selectedGender}&age=${selectedAge}`,
+        `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics?gender=${selectedGender}&age=${selectedAge}`,
         { cache: 'no-store' },
       );
       const info = await response.json();

@@ -26,8 +26,8 @@
         justify-content: center;
 
         .setting-form-container {
-            width: toSize(800);
-            height: toSize(600);
+            width: 50%;
+            height: 50%;
             border: 1px solid white;
             border-radius: toSize(15);
             display: flex;
@@ -39,6 +39,21 @@
             backdrop-filter: blur(90px);
             position: relative;
             z-index: 100;
+        }
+
+        @media screen and (min-width: 1280px) {
+            .setting-form-container {
+                width: 50%;
+                height: 60%;
+                margin-bottom: toSize(60);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .setting-form-container {
+                width: 60%;
+                height: 50%;
+            }
         }
     }
     
