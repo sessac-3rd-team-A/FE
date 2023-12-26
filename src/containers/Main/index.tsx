@@ -1,9 +1,9 @@
 'use client';
-import '@/styles/main.scss';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import ReactFullpage, { fullpageOptions } from '@fullpage/react-fullpage';
 import { useEffect, useState } from 'react'; // recoil
+import '@/styles/main.scss';
 import Main1 from './main1';
 import Main2 from './main2';
 

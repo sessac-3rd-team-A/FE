@@ -66,6 +66,7 @@ export default function SignInPage() {
     console.log(response);
     if (response.status == 200) {
       const data = await response.json();
+      console.log(data);
       // recoil 상태 설정
       setUser({
         userId: data.userId,
