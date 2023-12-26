@@ -38,7 +38,6 @@ export default function MainPage() {
           setIsFooter(true);
         }
       } else if (isFooter && (e === 'ArrowUp' || e.deltaY < 0)) {
-        console.log('aaaaaaaaaaa');
         setScroll(window.innerHeight);
         setIsPage2(true);
         setIsFooter(false);
@@ -67,42 +66,8 @@ export default function MainPage() {
         setIsPage2(false);
       }
     }
-
-    // console.log('Scroll position:', window.scrollY);
   };
-  // const debounce = (func: (event: WheelEvent) => void, delay: number) => {
-  //   let timeoutId: NodeJS.Timeout;
-  //   let lastEvent: WheelEvent | null = null;
 
-  //   const debouncedFunction = (event: WheelEvent) => {
-  //     lastEvent = event;
-  //     clearTimeout(timeoutId);
-  //     timeoutId = setTimeout(() => {
-  //       if (lastEvent) {
-  //         func(lastEvent);
-  //         lastEvent = null;
-  //       }
-  //     }, delay);
-  //   };
-
-  //   return debouncedFunction;
-  // };
-  // function handleResize() {
-  //   // console.log(e);
-  //   if (window.innerHeight > wHeight) {
-  //     console.log(window.innerHeight);
-  //     console.log(wHeight - window.innerHeight);
-  //     window.scrollTo({
-  //       top: window.innerHeight - wHeight,
-  //       left: 0,
-  //       behavior: 'smooth', // 부드러운 스크롤을 위해 추가
-  //     });
-  //     setWHeight(window.innerHeight);
-  //   }
-  //   // console.log(wHeight);
-  //   // console.log(innerHeight);
-  //   // console.log(innerWidth);
-  // }
   useEffect(() => {
     function preventDefaultForScrollKeys(e: KeyboardEvent) {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -139,9 +104,7 @@ export default function MainPage() {
         }, 500);
       }
     }
-    // const debounceResize = debounce(handleResize, 300);
-    // const debounceResize = debounce(handleResize, 300);
-    // window.addEventListener('resize', handleResize);
+
     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
     window.addEventListener('wheel', preventDefaultWheel, { passive: false }); // modern desktop
     window.addEventListener('touchmove', preventDefault, { passive: false }); // mobile
@@ -220,7 +183,13 @@ export default function MainPage() {
           <button className="main2-start">START</button>
         </div>
         <div className="main2-cardContainer">
-          <div className={`main2-card card1`}></div>
+          <div className={`main2-card card1`}>
+            <img
+              className="imgCard"
+              src="/main/mainCard1.png"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
           <div
             className={`main2-card card2 ${
               pageCount > 2 ? 'slide-out-tr' : ''
