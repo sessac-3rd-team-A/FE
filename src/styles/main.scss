@@ -176,6 +176,26 @@
   }
 }
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-tr {
+  0% {
+    transform: rotate(15deg) translateY(0) translateX(0);
+    // opacity: 1;
+  }
+  100% {
+    transform: rotate(15deg) translateY(-800px) translateX(1000px);
+    // opacity: 0;
+  }
+}
+
 .mainCardContainer {
   display: flex;
   // overflow-y: hidden;
@@ -185,19 +205,38 @@
   align-items: center;
   justify-content: center;
   background-color: #3a89ff;
+  .introContainer {
+    display: flex;
+    flex-direction: column;
+    width: toSize(1000);
+  }
   .main2-intro {
+    opacity: 0;
+    display: none;
+    transition: all 1s ease-in-out;
     font-family: Lemon Milk;
     color: white;
     font-size: toSize(96);
     white-space: pre-wrap;
+    &.fade-in {
+      animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      display: block;
+    }
   }
   .main2-intro2 {
+    opacity: 0;
+    display: none;
+    transition: all 1s ease-in-out;
     font-family: Lemon Milk;
     font-weight: 'medium';
     color: white;
     font-size: toSize(25);
     white-space: pre-wrap;
     margin: toSize(24) 0px toSize(110) 0px;
+    &.fade-in {
+      animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      display: block;
+    }
   }
   .main2-start {
     display: flex;
@@ -234,14 +273,22 @@
     }
     &.card2 {
       transform: rotate(15deg);
+
+      &.slide-out-tr {
+        animation: slide-out-tr 1.3s both;
+        transform: rotate(15deg);
+      }
     }
     &.card3 {
       background-color: #fffb94;
-
       transform: rotate(6deg);
+      &.slide-out-tr {
+        animation: slide-out-tr 1.3s both;
+      }
     }
   }
 }
+
 .fp-watermark {
   display: none;
 }

@@ -1,8 +1,7 @@
 'use client';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
-import ReactFullpage, { fullpageOptions } from '@fullpage/react-fullpage';
-import { useEffect, useState } from 'react'; // recoil
+import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
 import Main1 from './main1';
 import Main2 from './main2';
@@ -14,59 +13,227 @@ interface Section {
 
 export default function MainPage() {
   const [user, setUser] = useRecoilState(userState); // recoil
-  const [fullpages, setFullpages] = useState<Section[]>([
-    {
-      text: 'Section 1',
-    },
-    {
-      text: 'Section 2',
-    },
-  ]);
-  const onLeave = (origin: any, destination: any, direction: any) => {
-    // console.log('onLeave', { origin, destination, direction });
+  const [loading, setLoading] = useState(false); // recoil
+  const [isPage2, setIsPage2] = useState(false);
+  const [isFooter, setIsFooter] = useState(false);
+  const [pageCount, setPageCount] = useState(1); // 1, 2, 3
+  // const [wWeight, setWWeight] = useState(window.innerWidth);
+  // const [wHeight, setWHeight] = useState(window.innerHeight);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const setScroll = (y: any) => {
+    return window.scrollTo({
+      top: y,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
-  // const handleAddSection = () => {
-  //   setFullpages((prevFullpages) => [
-  //     ...prevFullpages,
-  //     {
-  //       text: `section ${prevFullpages.length + 1}`,
-  //       id: Math.random(),
-  //     },
-  //   ]);
+  const handleScroll = (e: any) => {
+    // 2번째 페이지에서 카드 모두 넘겼을 때
+    if (pageCount === 3) {
+      if (e === 'ArrowDown' || e.deltaY > 0) {
+        if (containerRef.current) {
+          setScroll(window.innerHeight * 2 + 300);
+          setIsPage2(false);
+          setIsFooter(true);
+        }
+      } else if (isFooter && (e === 'ArrowUp' || e.deltaY < 0)) {
+        console.log('aaaaaaaaaaa');
+        setScroll(window.innerHeight);
+        setIsPage2(true);
+        setIsFooter(false);
+      } else {
+        setPageCount(pageCount - 1);
+      }
+    } else if (isPage2) {
+      if (e === 'ArrowDown' || e.deltaY > 0) {
+        setPageCount(pageCount + 1);
+      } else if (e === 'ArrowUp' || e.deltaY < 0) {
+        if (pageCount === 1) {
+          setScroll(-window.innerHeight);
+          setIsPage2(false);
+        } else {
+          setPageCount(pageCount - 1);
+        }
+      }
+    } else {
+      if (e === 'ArrowDown' || e.deltaY > 0) {
+        if (containerRef.current) {
+          setScroll(window.innerHeight);
+          setIsPage2(true);
+        }
+      } else if (e === 'ArrowUp' || e.deltaY < 0) {
+        setScroll(0);
+        setIsPage2(false);
+      }
+    }
+
+    // console.log('Scroll position:', window.scrollY);
+  };
+  // const debounce = (func: (event: WheelEvent) => void, delay: number) => {
+  //   let timeoutId: NodeJS.Timeout;
+  //   let lastEvent: WheelEvent | null = null;
+
+  //   const debouncedFunction = (event: WheelEvent) => {
+  //     lastEvent = event;
+  //     clearTimeout(timeoutId);
+  //     timeoutId = setTimeout(() => {
+  //       if (lastEvent) {
+  //         func(lastEvent);
+  //         lastEvent = null;
+  //       }
+  //     }, delay);
+  //   };
+
+  //   return debouncedFunction;
   // };
-  const pluginWrapper = () => {
-    /*
-     * require('../static/fullpage.scrollHorizontally.min.js'); // Optional. Required when using the "scrollHorizontally" extension.
-     */
-  };
-  type Credits = {
-    enabled?: boolean;
-    label?: string;
-    position?: 'left' | 'right';
-  };
-  const credits: Credits = {
-    enabled: false,
-    label: '',
-    position: 'left',
-  };
+  // function handleResize() {
+  //   // console.log(e);
+  //   if (window.innerHeight > wHeight) {
+  //     console.log(window.innerHeight);
+  //     console.log(wHeight - window.innerHeight);
+  //     window.scrollTo({
+  //       top: window.innerHeight - wHeight,
+  //       left: 0,
+  //       behavior: 'smooth', // 부드러운 스크롤을 위해 추가
+  //     });
+  //     setWHeight(window.innerHeight);
+  //   }
+  //   // console.log(wHeight);
+  //   // console.log(innerHeight);
+  //   // console.log(innerWidth);
+  // }
+  useEffect(() => {
+    function preventDefaultForScrollKeys(e: KeyboardEvent) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!loading) {
+          setLoading(true);
+          handleScroll(e.key);
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
+        }
+        // handleScroll(e.key);
+        // return false;
+      }
+    }
+
+    function preventDefaultWheel(e: WheelEvent) {
+      e.preventDefault();
+      if (!loading) {
+        setLoading(true);
+        handleScroll(e);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    }
+    function preventDefault(e: Event) {
+      e.preventDefault();
+      if (!loading) {
+        setLoading(true);
+        handleScroll(e);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    }
+    // const debounceResize = debounce(handleResize, 300);
+    // const debounceResize = debounce(handleResize, 300);
+    // window.addEventListener('resize', handleResize);
+    window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+    window.addEventListener('wheel', preventDefaultWheel, { passive: false }); // modern desktop
+    window.addEventListener('touchmove', preventDefault, { passive: false }); // mobile
+    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+
+    return () => {
+      window.removeEventListener('DOMMouseScroll', preventDefault, false);
+      window.removeEventListener('wheel', preventDefaultWheel);
+      window.removeEventListener('touchmove', preventDefault);
+      window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    };
+  }, [isFooter, loading, isPage2, pageCount]);
+
+  useEffect(() => {}, []);
+
   return (
-    <ReactFullpage
-      licenseKey={'OPEN-SOURCE-GPLV3-LICENSE'}
-      navigation
-      onLeave={onLeave}
-      // sectionsColor={sectionsColor}
-      pluginWrapper={pluginWrapper}
-      debug={false}
-      credits={credits}
-      render={(comp: any) => (
-        <ReactFullpage.Wrapper>
-          {fullpages.map(({ text }) => (
-            <div key={text} className="section">
-              {text == 'Section 1' ? <Main1 /> : <Main2 />}
-            </div>
-          ))}
-        </ReactFullpage.Wrapper>
-      )}
-    />
+    <div ref={containerRef} style={{ overflow: 'hidden' }}>
+      {/* <Main1 />
+      <Main2 /> */}
+      <div className="mainWindContainer">
+        <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" />
+        <img
+          className="mainFace mainSmileImg"
+          src="/main/main_smile.png"
+          alt="행복한얼굴"
+        />
+        <img className="mainFace mainStar3" src="/main/Star3.png" alt="스타3" />
+        <img className="mainFace mainStar4" src="/main/Star4.png" alt="스타4" />
+        <img className="mainFace mainStar1" src="/main/Star1.png" alt="스타1" />
+        <img
+          className="mainFace mainBadImg"
+          src="/main/main_bad.png"
+          alt="나쁜얼굴"
+        />
+        <img
+          className="mainFace mainSadImg"
+          src="/main/main_sad.png"
+          alt="슬픈얼굴"
+        />
+        <img
+          className="mainFace mainDieImg"
+          src="/main/main_die.png"
+          alt="죽은얼굴"
+        />
+        <p className="mainFace mainTitle">AH-WHEW!</p>
+        <p className="mainContent">
+          {`Give Me Your Sigh.\nI'll Give You Happiness.`}
+        </p>
+      </div>
+      <div className={`mainCardContainer`}>
+        <div className="introContainer">
+          <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
+            {'TELL ME HOW WAS\nYOUR DAY?'}
+          </p>
+          <p className={`main2-intro ${pageCount === 2 ? 'fade-in' : ''}`}>
+            {'WE WANT YOU\nTO FEEL BETTER'}
+          </p>
+          <p className={`main2-intro ${pageCount === 3 ? 'fade-in' : ''}`}>
+            {'WE OFFER\nA MOOD CALENDAR'}
+          </p>
+          <p className={`main2-intro2 ${pageCount === 1 ? 'fade-in' : ''}`}>
+            {
+              '당신의 하루는 어땠나요?\n혹시 고민하는 일이 잘 안풀리나요?\n당신이 느끼는 모든 감정을 아휴에 풀어주세요.'
+            }
+          </p>
+          <p className={`main2-intro2 ${pageCount === 2 ? 'fade-in' : ''}`}>
+            {
+              '들려준 당신의 하루로 그림 일기를 그려드려요.\n기분이 좋아지는 밈은 덤입니다.\n기분이 나아지길 빌게요.'
+            }
+          </p>
+          <p className={`main2-intro2 ${pageCount === 3 ? 'fade-in' : ''}`}>
+            {
+              '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
+            }
+          </p>
+          <button className="main2-start">START</button>
+        </div>
+        <div className="main2-cardContainer">
+          <div className={`main2-card card1`}></div>
+          <div
+            className={`main2-card card2 ${
+              pageCount > 2 ? 'slide-out-tr' : ''
+            }`}
+          ></div>
+          <div
+            className={`main2-card card3 ${
+              pageCount > 1 ? 'slide-out-tr' : ''
+            }`}
+          ></div>
+        </div>
+      </div>
+      <footer style={{ height: '300px', backgroundColor: 'black' }}></footer>
+    </div>
   );
 }
