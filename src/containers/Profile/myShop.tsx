@@ -31,6 +31,7 @@ const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 //   }
 // }
 
+
 async function SearchResult(): Promise<ShoppingApiResponse> {
   const query = '몰랑이 인형';
   const displayNum = 20;
@@ -60,6 +61,7 @@ export default async function MyShopPage(): Promise<JSX.Element> {
   const item: ShoppingApiResponse  = await SearchResult();
   const itemsResult: ShopApiRes[] = item.items;
 
+
   return (
     <div className="myShop-container">
       <div className="header-temp" />
@@ -79,30 +81,35 @@ export default async function MyShopPage(): Promise<JSX.Element> {
         </p>
       </div>
       <div className="product-container">
-      {itemsResult.map((item, index) => (
-        <div className="product-detail-container" key={item.productId}>
-          {[...Array(4)].map((_, innerIndex) => {
-            const productIndex = index * 4 + innerIndex;
-            const product = itemsResult[productIndex];
-            return product?.title ? (
-              <Link href={product.link} key={`${product.productId}-${innerIndex}`}>
-                <div className="product-detail">
-                  <img src={product.image} className="product-image" />
-                  <div className="product-detail-explain">
-                    <div className="product-item-name">
-                      <span>상품명</span>
-                      <br />{' '}
-                      {product.title.replace(/<b>/g, '').replace(/<\/b>/g, '')}
+        {itemsResult.map((item, index) => (
+          <div className="product-detail-container" key={item.productId}>
+            {[...Array(4)].map((_, innerIndex) => {
+              const productIndex = index * 4 + innerIndex;
+              const product = itemsResult[productIndex];
+              return product?.title ? (
+                <Link
+                  href={product.link}
+                  key={`${product.productId}-${innerIndex}`}
+                >
+                  <div className="product-detail">
+                    <img src={product.image} className="product-image" />
+                    <div className="product-detail-explain">
+                      <div className="product-item-name">
+                        <span>상품명</span>
+                        <br />{' '}
+                        {product.title
+                          .replace(/<b>/g, '')
+                          .replace(/<\/b>/g, '')}
+                      </div>
+                      <br />
+                      <span>가격</span> {product.lprice}
                     </div>
-                    <br />
-                    <span>가격</span> {product.lprice}
                   </div>
-                </div>
-              </Link>
-            ) : null;
-          })}
-        </div>
-      ))}
+                </Link>
+              ) : null;
+            })}
+          </div>
+        ))}
       </div>
       <ProfileMenu />
     </div>

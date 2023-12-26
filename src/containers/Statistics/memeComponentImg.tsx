@@ -8,7 +8,7 @@ interface MemeComponentProps {
 }
 
 const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
-  let url = 'http://localhost:8080/api/statistics/meme';
+  let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
   if (gender && age) {
     url += `?gender=${gender}&age=${age}`;
   } else if (gender) {

@@ -50,7 +50,7 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/auth/signin';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signin`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
 
@@ -82,7 +82,7 @@ export default function SignInPage() {
       // 토큰 값 쿠키에 저장
       Cookies.set('accessToken', data.accessToken, { expires: 1 });
       Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
-      console.log('accessToken>>>',data);
+      console.log('accessToken>>>', data);
 
       router.push('/');
     }
@@ -91,7 +91,7 @@ export default function SignInPage() {
   async function onSubmitSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    const apiUrl = 'http://localhost:8080/auth/signup';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signup`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
     const response = await fetch(apiUrl, {

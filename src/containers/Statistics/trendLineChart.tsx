@@ -29,9 +29,12 @@ export default function TrendLineChart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/statistics', {
-          cache: 'no-store',
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`,
+          {
+            cache: 'no-store',
+          },
+        );
         const info = await res.json();
 
         const currentDate = new Date();
