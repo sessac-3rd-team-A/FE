@@ -13,6 +13,7 @@ import PRatio from './profileRatio';
 import { ProfileResultType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
+import Cookies from 'js-cookie';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -26,59 +27,62 @@ export default function ProfilePage() {
   const [user, setUser] = useRecoilState(userState);
   const [nickname, setNickname] = useState('');
 
-  const getUserInfo = async () => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard`,
-        {
-          cache: 'no-store',
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        },
-      );
+  // const getUserInfo = async () => {
+  //   console.log('쿠키 액세스 토큰 :: ', Cookies.get('accessToken'));
+  //   try {
+  //     const res = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/calendar`,
+  //       {
+  //         credentials: 'include',
+  //         cache: 'no-store',
+  //         method: 'GET',
+  //         // headers: {
+  //         //   'Content-Type': 'application/json',
+  //         //   Authorization: `Bearer ${Cookies.get('accessToken')}`,
+  //         // },
+  //       },
+  //     );
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
+  //     if (!res.ok) {
+  //       throw new Error(`HTTP error! Status: ${res.status}`);
+  //     }
 
-      const data: ProfileResultType = await res.json();
-      console.log('fetch data :: ', data);
+  //     const data: ProfileResultType = await res.json();
+  //     console.log('fetch data :: ', data);
 
-      setEmoData(data);
-    } catch (error: any) {
-      console.error('Error fetching data:', error.message);
-    }
-  };
+  //     setEmoData(data);
+  //   } catch (error: any) {
+  //     console.error('Error fetching data:', error.message);
+  //   }
+  // };
 
-  // 초기 렌더링 시 데이터 fetching
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  // // 초기 렌더링 시 데이터 fetching
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, []);
 
   // 모달창 외부 클릭 시 종료
-  useEffect(() => {
-    function handleClickOutside(this: Document, ev: MouseEvent): any {
-      // 모달 바깥을 클릭하고, 모달이 열려있는 상태일 때 모달을 닫기
-      if (
-        backgroundRef.current &&
-        (backgroundRef.current as HTMLElement).contains(ev.target as Node) &&
-        isModalOpen
-      ) {
-        setIsModalOpen(false);
-      }
-    }
-    document.addEventListener('click', handleClickOutside);
+  // useEffect(() => {
+  //   function handleClickOutside(this: Document, ev: MouseEvent): any {
+  //     // 모달 바깥을 클릭하고, 모달이 열려있는 상태일 때 모달을 닫기
+  //     if (
+  //       backgroundRef.current &&
+  //       (backgroundRef.current as HTMLElement).contains(ev.target as Node) &&
+  //       isModalOpen
+  //     ) {
+  //       setIsModalOpen(false);
+  //     }
+  //   }
+  //   document.addEventListener('click', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isModalOpen]);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, [isModalOpen]);
 
-  useEffect(() => {
-    setNickname(user.nickname);
-  }, []);
+  // useEffect(() => {
+  //   // setNickname(user.nickname);
+  // }, []);
 
   return (
     <section className="profile-container">
@@ -119,11 +123,11 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="info-right">
-          <EmoCalendar
+          {/* <EmoCalendar
             setModalDate={setModalDate}
             setIsModalOpen={setIsModalOpen}
             emoData={emoData}
-          />
+          /> */}
         </div>
       </div>
       <div className={`${isModalOpen ? 'modalOn' : ''}`}>
