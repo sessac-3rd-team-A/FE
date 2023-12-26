@@ -24,7 +24,7 @@ export default function SighPage() {
       setIsVisible((prevVisible) => !prevVisible);
       setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
     } else if (buttonText === 'OK') {
-      const apiUrl = 'http://localhost:8080/api/diary';
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/api/diary`;
       setIsLoading(true);
 
       try {
