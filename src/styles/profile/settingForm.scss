@@ -9,6 +9,10 @@ $border-radius-size: toSize(15);
     height: 60%;
     align-items: center;
     justify-content: center;
+    
+    p {
+        padding-bottom: toSize(10);
+    }
 
     .setting-form {
         display: flex;
