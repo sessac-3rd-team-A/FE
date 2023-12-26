@@ -12,8 +12,8 @@ const MemeComponent = () => {
 
   const genders = [
     { label: '전체', value: '' },
-    { label: '남자', value: 'M' },
-    { label: '여자', value: 'F' },
+    { label: '남성', value: 'M' },
+    { label: '여성', value: 'F' },
   ];
   const ages = [
     { label: '전체', value: '' },
@@ -21,25 +21,19 @@ const MemeComponent = () => {
     { label: '20대', value: '20대' },
     { label: '30대', value: '30대' },
     { label: '40대', value: '40대' },
-    { label: '50대', value: '50+' },
+    { label: '50+', value: '50대' },
   ];
 
   return (
     <>
       <MemeComponentImg gender={gender} age={age} />
       <div className="legendBox">
-        <button className="item">
-          {'positive' === 'positive' && (
-            <img src="/statistics/positive.svg" alt="" />
-          )}
+        <button className="item" style={{ visibility: 'hidden' }}>
+          {<img src="/statistics/positive.svg" alt="" />}
           <br />
-          {'negative' === 'negative' && (
-            <img src="/statistics/negative.svg" alt="" />
-          )}
+          {<img src="/statistics/negative.svg" alt="" />}
           <br />
-          {'neutral' === 'neutral' && (
-            <img src="/statistics/neutral.svg" alt="" />
-          )}
+          {<img src="/statistics/neutral.svg" alt="" />}
           <br />
         </button>
         <div className="custom-select-wrapper">
@@ -50,7 +44,9 @@ const MemeComponent = () => {
               className="custom-select-trigger"
               onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
-              {genders.find((g) => g.value === gender)?.label}
+              <div className="custom-select-cover">
+                {genders.find((g) => g.value === gender)?.label}
+              </div>
             </span>
             <div className="custom-options">
               {genders.map((g) => (
@@ -76,7 +72,9 @@ const MemeComponent = () => {
               className="custom-select-trigger"
               onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
             >
-              {ages.find((a) => a.value === age)?.label}
+              <div className="custom-select-cover">
+                {ages.find((a) => a.value === age)?.label}
+              </div>
             </span>
             <div className="custom-options">
               {ages.map((a) => (
