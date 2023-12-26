@@ -36,20 +36,20 @@ export default function Error404() {
             </div>
           </div>
           <div className="oops-tears-right">
-            <Image
-              src="/error404/oops_doodle_tear.svg"
-              alt="oops tear"
-              width={50}
-              height={105}
-              className="oops-tear"
-            />
-            <Image
-              src="/error404/oops_doodle_tear.svg"
-              alt="oops tear"
-              width={50}
-              height={105}
-              className="oops-tear"
-            />
+            <div className="oops-tear">
+              <Image
+                src="/error404/oops_doodle_tear.svg"
+                alt="oops tear"
+                fill
+              />
+            </div>
+            <div className="oops-tear">
+              <Image
+                src="/error404/oops_doodle_tear.svg"
+                alt="oops tear"
+                fill
+              />
+            </div>
           </div>
         </div>
       </div>

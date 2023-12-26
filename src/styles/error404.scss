@@ -1,17 +1,21 @@
 @import '/src/styles/global.scss';
 .error-container {
   display: grid;
-  grid-template-rows: 80vh auto;
-  grid-template-columns: toSize(570) auto;
+  grid-template-rows: 70vh auto;
+  grid-template-columns: 40vw auto;
   height: 100vh;
   overflow: hidden;
+  margin-top: 10vh;
 }
-
+.error-doodles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .oops-doodles {
   width: toSize(430);
   height: toSize(430);
-
-  margin: 10vh auto;
 }
 .oops-doodle {
   width: toSize(430);
@@ -30,10 +34,11 @@
   }
 }
 .oops-tears {
-  position: relative;
-  z-index: 1;
   display: flex;
-  top: toSize(-200);
+  margin: 0;
+  z-index: 1;
+  position: absolute;
+  top: 45vh;
   .oops-tears-left,
   .oops-tears-right {
     display: flex;
