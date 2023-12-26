@@ -1,36 +1,36 @@
 import Link from 'next/link';
-import { ShopApiRes, ShoppingApiResponse } from '@/types';
+import { ShopApiRes, ShoppingApiResponse, TokenType } from '@/types';
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
 import ProfileMenu from './profileMenu';
 import Image from 'next/image';
 import profile_char from '/public/images/profile_char.svg';
 import heart_eye from '/public/images/heart_eye.png';
-import Cookies from 'js-cookie';
 import myShopBack from '/public/images/myShopBack.svg';
+import { cookies } from 'next/headers'
+import myShopBackLetter from '/public/images/myShopBackLetter.svg';
 
 const API = 'https://openapi.naver.com/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
-// async function getUserInfo() {
-//   try {
-//     const bearerToken = Cookies.get('accessToken');
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}`, {
-//       method: 'GET',
-//       headers: {
-//         Authorization: `Bearer ${bearerToken}`,
-//         'Content-Type': 'application/json',
-//       },
-//     });
-//     const data = await res;
-//     console.log('data>>>>>>>>>>>>>>>>>>>',data);
-//     return data;
-//   } catch (err) {
-//     throw new Error(`HTTP error! Status: ${err}`);
-//   }
-// }
-
+async function getUserInfo(accessToken: string, refreshToken: string) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      },
+    });
+    const data = await res.json();
+    console.log('data>>>>>>>>>>>>>>>>>>>',data);
+    return data;
+  } catch (err) {
+    throw new Error(`HTTP error! Status: ${err}`);
+  }
+}
 
 async function SearchResult(): Promise<ShoppingApiResponse> {
   const query = '몰랑이 인형';
@@ -56,15 +56,22 @@ async function SearchResult(): Promise<ShoppingApiResponse> {
 }
 
 export default async function MyShopPage(): Promise<JSX.Element> {
-  // await getUserInfo();
+  const accessToken = cookies().get('accessToken')?.value || '';
+  const refreshToken = cookies().get('refreshToken')?.value || '';
+
+  const user = getUserInfo(accessToken, refreshToken);
+  // console.log('user >>>', user);
   
   const item: ShoppingApiResponse  = await SearchResult();
   const itemsResult: ShopApiRes[] = item.items;
 
-
   return (
     <div className="myShop-container">
       <div className="header-temp" />
+      <Image 
+        src={myShopBackLetter}
+        alt='배경 글자'
+      />
       <Image
         src={myShopBack}
         alt="배경 이미지"

@@ -40,6 +40,21 @@
             position: relative;
             z-index: 100;
         }
+
+        @media screen and (min-width: 1280px) {
+            .setting-form-container {
+                width: 50%;
+                height: 60%;
+                margin-bottom: toSize(60);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .setting-form-container {
+                width: 60%;
+                height: 50%;
+            }
+        }
     }
     
     .whiteGradientBg {
