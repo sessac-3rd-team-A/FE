@@ -5,29 +5,29 @@ import '@/styles/profile/settingForm.scss';
 import { userState } from '@/utils/state';
 import { TokenType, userDataType } from '@/types'
 
-
-
-async function updateUser(accessToken: string, refreshToken: string) {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
-      },
-    });
-    // console.log('res >>>',res);
-    return res;
-  } catch (err) {
-    throw new Error(`HTTP error! Status: ${err}`);
-  }
-}
+// async function updateUser(accessToken: string, refreshToken: string) {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
+//       method: 'POST',
+//       credentials: 'include',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
+//       },
+//     });
+//     // console.log('res >>>',res);
+//     return res;
+//   } catch (err) {
+//     throw new Error(`HTTP error! Status: ${err}`);
+//   }
+// }
 
 export default async function SettingForm(Token: TokenType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useRecoilState(userState);
+  console.log('Token >>>', Token);
+  
   async function onSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
@@ -59,7 +59,7 @@ export default async function SettingForm(Token: TokenType) {
     const data = await res.json();
     console.log(data);
     } catch (error) {
-      console.error(error);
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +67,7 @@ export default async function SettingForm(Token: TokenType) {
 
   return (
     <div className="setting-form-container2">
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <p>ACCOUNT</p>
       <form onSubmit={onSubmitForm} className="setting-form">
         <input
           type="text"
@@ -90,8 +90,8 @@ export default async function SettingForm(Token: TokenType) {
             </option>
             <option value="10대">10 대</option>
             <option value="20대">20 대</option>
-            <option value="20대">20 대</option>
-            <option value="20대">20 대</option>
+            <option value="30대">30 대</option>
+            <option value="40대">40 대</option>
             <option value="50대">50 대 이상</option>
           </select>
           <select id="gender" name="gender">
@@ -106,6 +106,7 @@ export default async function SettingForm(Token: TokenType) {
           {isLoading ? 'Loading...' : 'Submit'}
         </button>
       </form>
+      {error && <div className='error-box'>{error}</div>}
     </div>
   );
 }
