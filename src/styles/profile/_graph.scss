@@ -1,0 +1,41 @@
+.profile-graph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: LEMON MILK;
+  padding: toSize(21) toSize(35);
+
+  .graph {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+
+  .graphText {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-weight: 500;
+    padding: toSize(13) toSize(17);
+
+    p:first-child {
+      font-size: toSize(20);
+    }
+
+    p:last-child {
+      font-size: toSize(40);
+    }
+  }
+
+  span {
+    position: absolute;
+    padding: toSize(13) toSize(17);
+    bottom: 0;
+    right: 0;
+  }
+}

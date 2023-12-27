@@ -1,0 +1,52 @@
+@import '/src/styles/global.scss';
+
+.meme-left-container {
+  width: 85%;
+  display: flex;
+  .meme-picture-message {
+    display: flex;
+    align-items: center;
+    font-family: 'LEMON MILK';
+    color: #0049b6;
+    font-size: toSize(48);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: relative;
+    right: 3%;
+  }
+
+  .meme-picture-container {
+    width: toSize(520);
+    height: toSize(289);
+  }
+  .meme-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    top: toSize(50);
+    left: toSize(30);
+  }
+  .meme-rank-button {
+    color: #000;
+    font-family: 'GmarketSans';
+    font-size: toSize(18);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    left: toSize(80);
+    top: toSize(20);
+  }
+
+  .meme-rank-button.selected {
+    color: #3a89ff;
+    font-family: 'GmarketSans';
+    font-size: toSize(18);
+
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}

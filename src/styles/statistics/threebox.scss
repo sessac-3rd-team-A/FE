@@ -1,0 +1,196 @@
+@import '/src/styles/global.scss';
+
+/* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
+.three-box-wrap {
+  width: 100%;
+  height: toSize(454);
+  align-items: center;
+}
+/* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
+input.three-box-button {
+  display: none;
+}
+
+/* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
+input[type='radio']:checked + .three-box-contents {
+  visibility: visible;
+  width: toSize(1370);
+}
+
+/* 메뉴 버튼 디자인 */
+.three-box-label {
+  // height: toSize(876);
+  height: 100%;
+  width: toSize(100);
+  display: flex;
+  float: left;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  margin: 0 toSize(5);
+  border: toSize(10);
+  border-radius: toSize(40);
+}
+/*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
+      위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
+.three-box-label.a {
+  background: #7caaf0;
+}
+.three-box-label.b {
+  background: #06f;
+}
+.three-box-label.c {
+  background: #7caaf0;
+}
+
+.three-box-rotate {
+  display: inline-block;
+  height: fit-content;
+
+  position: relative;
+
+  p {
+    position: absolute;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    transform-origin: left;
+    // white-space: nowrap;
+    left: toSize(50);
+    font-family: 'LEMON MILK';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 30.8px */
+    color: #fff;
+    top: toSize(230);
+    // text-align: center;
+  }
+
+  //라벨 인덱싱 원
+  div {
+    width: toSize(74);
+    height: toSize(74);
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    color: #000;
+    font-family: 'GmarketSans';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    position: absolute;
+    top: toSize(320);
+    left: toSize(13);
+  }
+}
+
+/* 컨텐츠 본문 */
+.three-box-contents {
+  background-image: url('../../../public/statistics/box_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  visibility: collapse;
+  float: left;
+  height: 100%;
+  // height: toSize(876);
+  width: toSize(1370);
+  width: 0;
+  transition: all 0.1s ease-out;
+  // z-index: -1;
+  overflow: hidden;
+  border-radius: toSize(40);
+  margin: 0 toSize(5);
+}
+.three-box-inner {
+  display: flex; //가운데 회색박스 나옴
+  height: 90%;
+  margin: 1.5% 0 1.5% 1.5%;
+  width: 92%;
+  float: left;
+  border-radius: 28px;
+  border: 0.5px solid #fff;
+
+  background: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.22) -1.57%,
+    rgba(255, 255, 255, 0.28) 36.53%,
+    rgba(143, 143, 143, 0.26) 44.36%,
+    rgba(255, 255, 255, 0.28) 98.98%
+  );
+
+  background-blend-mode: overlay;
+  backdrop-filter: blur(90px);
+  // -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+}
+.three-box-description {
+  display: flex;
+  // width: toSize(90);
+  height: 100%;
+  // background: red;
+  // justify-content: center;
+
+  .label-message {
+    position: absolute;
+
+    font-family: 'LEMON MILK';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%;
+    color: #fff;
+    transition: all 0.1s ease-out;
+
+    transform: rotate(270deg);
+    transform-origin: left;
+    left: toSize(1320);
+    font-family: 'LEMON MILK';
+
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%;
+    color: #fff;
+    top: 11.9791666667vw;
+  }
+
+  //라벨 인덱싱 원
+  .label-circle {
+    width: toSize(74);
+    height: toSize(74);
+    border-radius: 50%;
+
+    background-color: white;
+    text-align: center;
+
+    font-family: 'GmarketSans';
+    font-size: toSize(28);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    position: absolute;
+    top: toSize(320);
+    right: toSize(10);
+  }
+}
+.three-box-description h3 {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 50px;
+  color: #37a4ab;
+  line-height: 1;
+  margin: 0;
+  text-shadow: rgb(36, 127, 132) 2px 2px 0px;
+  margin-bottom: 20px;
+}
+.three-box-description h3::first-letter {
+  font-size: 70px;
+  color: #0f848c;
+}

@@ -1,0 +1,42 @@
+.profile-ratio {
+  position: relative;
+  font-family: LEMON MILK;
+
+  .ratio {
+    height: 80%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 toSize(52) 0 0;
+    // position: absolute;
+    // right: 20%;
+    // top: 50%;
+    // transform: translateY(-50%);
+    canvas {
+      // width: 100% !important;
+    }
+  }
+
+  span {
+    padding: toSize(13) toSize(17);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .ratioText {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    padding: toSize(13) toSize(17);
+    font-weight: 500;
+
+    p:first-child {
+      font-size: toSize(20);
+    }
+
+    p:last-child {
+      font-size: toSize(40);
+    }
+  }
+}

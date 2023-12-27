@@ -1,0 +1,101 @@
+@import '/src/styles/global.scss';
+
+$primary-color: #3a89ff;
+$icon-circle-size: toSize(80);
+$icon-size: toSize(50);
+$container-size: toSize(200);
+
+.profile-menu-container {
+  width: 100%;
+  height: $container-size;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .profile-menu-nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    transform: translateY(50%);
+    position: relative;
+    z-index: 110;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: toSize(75);
+      transition: transform 0.3s;
+      border-radius: 50%;
+      cursor: pointer;
+
+      .icon-selected-circle {
+        background-color: $primary-color;
+        width: $icon-circle-size;
+        height: $icon-circle-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: bounce 1s ease-in-out;
+
+        .icon {
+          width: 80%;
+        }
+      }
+
+      .icon-unselected-circle {
+        transform: translateY(80%);
+        width: $icon-circle-size;
+        height: $icon-circle-size;
+
+        .icon {
+          width: 80%;
+        }
+      }
+
+      .icon-hidden {
+        display: none;
+      }
+    }
+  }
+}
+
+.profile-menu-bottom {
+  width: 100%;
+  position: relative;
+  z-index: 100;
+}
+
+@keyframes bounce {
+  0% {
+    top: 40px;
+    border-radius: 50%;
+  }
+  50% {
+    top: 120px;
+    height: 40px;
+    border-radius: 20% 20% 50% 50%;
+  }
+  55% {
+    top: 150px;
+    height: 25px;
+    border-radius: 50% 50% 20% 20%;
+  }
+  65% {
+    top: 120px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  95% {
+    top: 40px;
+    border-radius: 50%;
+  }
+  100% {
+    top: 40px;
+    border-radius: 50%;
+  }
+}

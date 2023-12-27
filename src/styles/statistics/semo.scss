@@ -1,0 +1,12 @@
+@import '/src/styles/global.scss';
+
+.semo-floating {
+  display: flex;
+  position: sticky;
+  width: toSize(654);
+  height: toSize(751);
+  transform: translate(toSize(1390), toSize(-600));
+
+  z-index: -1;
+  transition: all 0.1s ease-out;
+}

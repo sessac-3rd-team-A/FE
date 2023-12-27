@@ -1,0 +1,74 @@
+@import '/src/styles/global.scss';
+
+.trend-container {
+  height: calc(100vh - toSize(170));
+  width: calc(100vw - toSize(99));
+  margin: toSize(170) 0 0 toSize(99);
+  overflow: hidden;
+
+  .chart-title {
+    color: #000;
+
+    font-family: 'LEMON MILK';
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 70.4px */
+  }
+
+  .chart-text {
+    width: toSize(860);
+    height: toSize(210);
+    margin: 0 0 0 toSize(4);
+  }
+  .floating {
+    animation-name: floating;
+    -webkit-animation-name: floating;
+
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+  }
+
+  @keyframes floating {
+    0% {
+      transform: translateY(0%);
+    }
+    50% {
+      transform: translateY(8%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  @-webkit-keyframes floating {
+    0% {
+      -webkit-transform: translateY(0%);
+    }
+    50% {
+      -webkit-transform: translateY(8%);
+    }
+    100% {
+      -webkit-transform: translateY(0%);
+    }
+  }
+  .trend-box div {
+    display: flex;
+    background-color: aqua;
+    border: 5px solid black;
+
+    color: aquamarine;
+    width: 200px;
+    height: 500px;
+    float: left;
+  }
+}
+
+.animate__animated.animate__shakeY {
+  --animate-duration: 14s;
+  position: sticky;
+  z-index: -1;
+}

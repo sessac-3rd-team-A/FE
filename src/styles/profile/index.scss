@@ -1,0 +1,224 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/profile/calendar';
+@import '/src/styles/profile/graph';
+@import '/src/styles/profile/ratio';
+
+@mixin fadeIn($time) {
+  animation-name: fadeIn;
+  animation-duration: $time;
+  animation-timing-function: ease-in-out;
+}
+
+// 모달 나타났을 때 배경 설정
+.modalOn {
+  opacity: 0.3;
+}
+
+.whiteGradientBg {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    52.55% 51.94% at 48.18% 62.86%,
+    rgba(217, 217, 217, 0) 52.78%,
+    #fff 100%
+  );
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
+
+p {
+  margin: 0;
+}
+
+// container
+.profile-container {
+  background-image: url('/images/profile_background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+}
+
+// main contents
+.info-container {
+  height: calc(100vh - $header-height);
+  box-sizing: border-box;
+  padding: toSize(150) toSize(50) toSize(100) toSize(50);
+  width: toSize(1920);
+  display: flex;
+  gap: toSize(20);
+  align-items: stretch;
+  z-index: 2;
+  position: relative;
+}
+
+// main contents - left container
+.info-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: stretch;
+
+  .title {
+    font-size: toSize(64);
+    font-family: GMarketSans;
+    margin-bottom: 3%;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 110%;
+    @include fadeIn(0.3s);
+  }
+
+  .left-content {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 35% 60%;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: toSize(20);
+    column-gap: toSize(20);
+    @include fadeIn(0.5s);
+    // grid-auto-flow: row dense;
+
+    .link,
+    .profile-ratio,
+    .profile-graph,
+    .count {
+      animation: fadeIn 0.5s ease-in-out forwards;
+      border-radius: 10px;
+      border: 0.5px solid $calendar-color-border;
+      background-color: transparent;
+      backdrop-filter: blur(90px);
+      -webkit-backdrop-filter: blur(90px);
+    }
+
+    .count {
+      position: relative;
+      font-family: LEMON MILK;
+
+      div:first-child {
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 toSize(30);
+        // background-color: red;
+        -webkit-clip-path: polygon(
+          0 0,
+          100% 0,
+          100% 100%,
+          50% 100%,
+          50% 50%,
+          0 50%
+        );
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%, 0 50%);
+        font-size: toSize(60);
+      }
+
+      div:last-child {
+        z-index: 1;
+        position: absolute;
+        bottom: 0;
+        left: toSize(10);
+        border-radius: 10px;
+        padding: toSize(13) toSize(17);
+        font-weight: 500;
+
+        p:first-child {
+          font-size: toSize(20);
+          z-index: 10;
+        }
+
+        p:last-child {
+          font-size: toSize(40);
+          z-index: 10;
+        }
+      }
+    }
+
+    .link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        color: #fff;
+        font-family: GMarketSans;
+        font-size: toSize(40);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.info-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  @include fadeIn(1s);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1920px) {
+  .whiteGradientBg {
+    width: 100vw;
+    height: 100%;
+    background: radial-gradient(
+      52.55% 51.94% at 48.18% 62.86%,
+      rgba(217, 217, 217, 0) 52.78%,
+      #fff 100%
+    );
+    z-index: 1;
+    position: absolute;
+    top: 0;
+  }
+
+  .profile-container {
+    overflow-y: visible;
+    height: auto;
+    padding-bottom: toSize(80 + 50);
+  }
+
+  .info-container {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .info-left {
+    width: 100%;
+    gap: toSize(20);
+
+    .title {
+      margin-bottom: 0;
+    }
+
+    .left-content {
+      grid-template-rows: toSize(184) minmax(100px, auto);
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: toSize(20);
+      column-gap: toSize(20);
+
+      .link > a {
+        color: #000;
+      }
+    }
+  }
+
+  .info-right {
+    width: 100%;
+  }
+}
