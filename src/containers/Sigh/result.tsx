@@ -12,17 +12,7 @@ export default async function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
-  const bearerToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-  // const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-  //   method: 'GET',
-  //   headers: {
-  //     Authorization: bearerToken ? `Bearer ${bearerToken}` : '',
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-  // const sighResult = await res.json();
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const getResultData = async () => {
     try {
@@ -31,9 +21,6 @@ export default async function SighResultPage() {
         {
           cache: 'no-store',
           method: 'GET',
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-          },
         },
       );
 
