@@ -22,7 +22,7 @@ export default function SighPage() {
 
     const bearerToken =
       typeof window !== 'undefined'
-        ? localStorage.getItem('refreshToken')
+        ? localStorage.getItem('accessToken')
         : null;
 
     if (buttonText === 'START') {

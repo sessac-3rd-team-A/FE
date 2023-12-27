@@ -91,7 +91,6 @@ export default function SighResultPage() {
           <div className="result-share">
             <a
               id="kakaotalk-sharing-btn"
-              // href="javascript:;"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
               <Image
