@@ -34,6 +34,13 @@ export default function Error404() {
                 fill
               />
             </div>
+            <div className="oops-tear">
+              <Image
+                src="/error404/oops_doodle_tear.svg"
+                alt="oops tear"
+                fill
+              />
+            </div>
           </div>
           <div className="oops-tears-right">
             <div className="oops-tear">
