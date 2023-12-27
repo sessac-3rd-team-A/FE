@@ -42,7 +42,7 @@ export default async function SighResultPage() {
   }, [id]);
 
   // 카톡 공유
-  //crs에서만 실행
+  // csr에서만 실행
   if (typeof window !== 'undefined') {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -51,6 +51,7 @@ export default async function SighResultPage() {
     if (sighResult && window.Kakao && window.Kakao.Share) {
       const kakaoImg = sighResult.pictureDiary;
       const pathName = id;
+      console.log(pathName);
       window.Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
         templateId: 102205,
