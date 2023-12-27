@@ -48,8 +48,9 @@ export default function TrendLineChartCategory() {
             );
             return matchingData ? matchingData.averagePositive : 0;
           }),
-          borderColor: '#4866D2',
-          backgroundColor: '#4866D2',
+          borderColor: '#FF983A',
+          backgroundColor: '#FF983A',
+
           borderWidth: 1,
         },
         {
@@ -74,8 +75,8 @@ export default function TrendLineChartCategory() {
             );
             return matchingData ? matchingData.averageNegative : 0;
           }),
-          borderColor: '#FF983A',
-          backgroundColor: '#FF983A',
+          borderColor: '#4866D2',
+          backgroundColor: '#4866D2',
           borderWidth: 1,
         },
       ];
@@ -97,18 +98,8 @@ export default function TrendLineChartCategory() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
-  // 날짜의 마지막 두 자리를 가져오는 함수
-  function getLastTwoDigits(dateString: any) {
-    const lastTwoDigits = dateString.slice(-2);
-    return lastTwoDigits.startsWith('0')
-      ? lastTwoDigits.slice(-1)
-      : lastTwoDigits;
-  }
 
-  // labels 배열에서 각 날짜의 마지막 두 자리를 가져와서 새로운 배열을 생성
-  const newLabels = labels.map((dateString: any) =>
-    getLastTwoDigits(dateString),
-  );
+  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
       <Line
@@ -219,7 +210,15 @@ export default function TrendLineChartCategory() {
             ) => (x.percentage > arr[iMax].percentage ? i : iMax),
             0,
           );
-          percentages[maxIndex].percentage += difference;
+          if (difference > 0) {
+            percentages[maxIndex].percentage += difference;
+            // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
+            if (percentages[maxIndex].percentage >= 100) {
+              percentages = percentages.map((item: any) => {
+                return { ...item, percentage: 0 };
+              });
+            }
+          }
 
           return percentages.map((item: { id: string; percentage: number }) => (
             <button
