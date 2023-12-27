@@ -96,6 +96,7 @@
 .sigh-doodles {
   .sigh-doodle {
     position: fixed;
+    z-index: -1;
   }
   .doodleA {
     bottom: 0;
