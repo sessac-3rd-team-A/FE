@@ -20,14 +20,38 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
+  const genderOptions = [
+    { value: '전체', label: '전체' },
+    { value: 'F', label: '여성' },
+    { value: 'M', label: '남성' },
+  ];
+  const ageOptions = [
+    { value: '전체', label: '전체' },
+    { value: '10대', label: '10대' },
+    { value: '20대', label: '20대' },
+    { value: '30대', label: '30대' },
+    { value: '40대', label: '40대' },
+    { value: '50대', label: '50+' },
+  ];
 
+  let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`;
+  if (selectedGender !== '전체' || selectedAge !== '전체') {
+    url += '?';
+    if (selectedGender !== '전체') {
+      url += `gender=${selectedGender}`;
+    }
+    if (selectedAge !== '전체') {
+      if (url.endsWith('?')) {
+        url += `age=${selectedAge}`;
+      } else {
+        url += `&age=${selectedAge}`;
+      }
+    }
+  }
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
     const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics?gender=${selectedGender}&age=${selectedAge}`,
-        { cache: 'no-store' },
-      );
+      const response = await fetch(url, { cache: 'no-store' });
       const info = await response.json();
 
       const currentDate = new Date();
@@ -250,32 +274,28 @@ export default function TrendLineChartCategory() {
               onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
               <div className="custom-select-cover">
-                {selectedGender === 'F' ? '여성' : '남성'}
+                {
+                  genderOptions.find(
+                    (option) => option.value === selectedGender,
+                  )?.label
+                }
               </div>
             </span>
             <div className="custom-options">
-              <span
-                className={`custom-option ${
-                  selectedGender === 'F' ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setSelectedGender('F');
-                  setGenderDropdownOpen(false);
-                }}
-              >
-                여성
-              </span>
-              <span
-                className={`custom-option ${
-                  selectedGender === 'M' ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setSelectedGender('M');
-                  setGenderDropdownOpen(false);
-                }}
-              >
-                남성
-              </span>
+              {genderOptions.map((option) => (
+                <span
+                  className={`custom-option ${
+                    selectedGender === option.value ? 'selection' : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedGender(option.value);
+                    setGenderDropdownOpen(false);
+                  }}
+                  key={option.value}
+                >
+                  {option.label}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -287,21 +307,26 @@ export default function TrendLineChartCategory() {
               className="custom-select-trigger"
               onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
             >
-              <div className="custom-select-cover">{selectedAge}</div>
+              <div className="custom-select-cover">
+                {
+                  ageOptions.find((option) => option.value === selectedAge)
+                    ?.label
+                }
+              </div>
             </span>
             <div className="custom-options">
-              {['10대', '20대', '30대', '40대', '50+'].map((age) => (
+              {ageOptions.map((option) => (
                 <span
-                  key={age}
                   className={`custom-option ${
-                    selectedAge === age ? 'selection' : ''
+                    selectedAge === option.value ? 'selection' : ''
                   }`}
                   onClick={() => {
-                    setSelectedAge(age);
+                    setSelectedAge(option.value);
                     setAgeDropdownOpen(false);
                   }}
+                  key={option.value}
                 >
-                  {age}
+                  {option.label}
                 </span>
               ))}
             </div>
