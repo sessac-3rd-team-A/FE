@@ -2,8 +2,8 @@
 
 .trend-container {
   height: calc(100vh - toSize(170));
-  width: calc(100vw - toSize(99));
-  margin: toSize(170) 0 0 toSize(99);
+  width: calc(100vw - toSize(94));
+  margin: toSize(170) 0 0 toSize(94);
   overflow: hidden;
 
   .chart-title {
@@ -19,7 +19,7 @@
   .chart-text {
     width: toSize(860);
     height: toSize(210);
-    margin: 0 0 0 toSize(4);
+    margin: 0 0 0 toSize(9);
   }
   .floating {
     animation-name: floating;

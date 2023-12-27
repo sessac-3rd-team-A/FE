@@ -26,6 +26,7 @@ export default function TrendLineChart() {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
+  const [labelsFullDate, setLabelsFullDate] = useState<any>([]); // 새로운 state 추가
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,23 +43,31 @@ export default function TrendLineChart() {
         const label = Array.from({ length: 30 }, (_, index) => {
           const date = new Date(currentDate);
           date.setDate(date.getDate() - index);
-          return date.toISOString().slice(0, 10);
+          let day = date.getDate().toString(); // 일(day) 부분만 추출
+          return day.startsWith('0') ? day.slice(1) : day; // '0'으로 시작하면 '0'을 제거
         }).reverse();
         setLabels(label);
+
+        const labelFullDate = Array.from({ length: 30 }, (_, index) => {
+          const date = new Date(currentDate);
+          date.setDate(date.getDate() - index);
+          return date.toISOString().slice(0, 10); // yyyy-mm-dd 형식
+        }).reverse();
+        setLabelsFullDate(labelFullDate); // labelsFullDate 업데이트
 
         const data = [
           {
             id: 'positive',
             label: 'Positive',
-            data: Array.from({ length: 31 }, (_, index) => {
+            data: Array.from({ length: 30 }, (_, index) => {
               const targetDate = label[index];
               const matchingData = info.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averagePositive : 0;
             }),
-            borderColor: '#4866D2',
-            backgroundColor: '#4866D2',
+            borderColor: '#FF983A',
+            backgroundColor: '#FF983A',
             borderWidth: 1,
           },
           {
@@ -85,8 +94,9 @@ export default function TrendLineChart() {
               );
               return matchingData ? matchingData.averageNegative : 0;
             }),
-            borderColor: '#FF983A',
-            backgroundColor: '#FF983A',
+
+            borderColor: '#4866D2',
+            backgroundColor: '#4866D2',
             borderWidth: 1,
           },
         ];
@@ -111,12 +121,12 @@ export default function TrendLineChart() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
-  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
+  // const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
 
   return (
     <div className="chart">
       <Line
-        data={{ labels: newLabels, datasets: filteredDatasets }}
+        data={{ labels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -167,7 +177,9 @@ export default function TrendLineChart() {
               callbacks: {
                 title: function (context) {
                   const index = context[0].dataIndex;
-                  return labels[index] ? labels[index].toString() : '';
+                  return labelsFullDate[index]
+                    ? labelsFullDate[index].toString()
+                    : '';
                 },
               },
             },
