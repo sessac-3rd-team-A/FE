@@ -12,6 +12,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  height: 100%;
 }
 .oops-doodles {
   width: toSize(430);
@@ -85,6 +87,10 @@
   margin-top: 3vh;
   cursor: pointer;
   transition: all 0.5s;
+  @media screen and (max-width: 768px) {
+    width: toSize(350);
+    font-size: toSize(40);
+  }
 
   &:hover {
     background-color: #fffb94;
@@ -101,6 +107,10 @@
 }
 @keyframes fallingTears {
   0% {
+    transform: scale(0);
+  }
+  5% {
+    transform: scale(1);
     opacity: 100%;
   }
   100% {
