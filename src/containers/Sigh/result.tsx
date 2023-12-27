@@ -8,7 +8,7 @@ import ResultChart from './resultChart';
 import { useEffect, useState } from 'react';
 import { SighResultType } from '@/types';
 
-export default async function SighResultPage() {
+export default function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
@@ -90,7 +90,7 @@ export default async function SighResultPage() {
           <div className="result-share">
             <a
               id="kakaotalk-sharing-btn"
-              href="javascript:;"
+              // href="javascript:;"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
               <Image
