@@ -5,7 +5,7 @@ interface ResultChartProps {
   sighResult: SighResultType;
 }
 
-export default async function ResultChart({ sighResult }: ResultChartProps) {
+export default function ResultChart({ sighResult }: ResultChartProps) {
   const [negativeData, setNegativeData] = useState<number>(0);
   const [positiveData, setPositiveData] = useState<number>(0);
   const [neutralData, setNeutralData] = useState<number>(0);
