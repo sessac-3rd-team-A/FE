@@ -31,7 +31,7 @@ export default function TrendLineChartCategory() {
       const info = await response.json();
 
       const currentDate = new Date();
-      const label = Array.from({ length: 30 }, (_, index) => {
+      const label = Array.from({ length: 31 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
         return date.toISOString().slice(0, 10);
