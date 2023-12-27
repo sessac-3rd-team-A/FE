@@ -28,13 +28,17 @@ interface pie {
   plugins: {
     legend: {
       display: boolean;
-      position: 'center' | 'left' | 'top' | 'right' | 'bottom';
+      position?: 'center' | 'left' | 'top' | 'right' | 'bottom';
     };
   };
 }
 
 export const lineOptions = {
   responsive: true,
+  interaction: {
+    mode: 'index' as const,
+    intersect: false,
+  },
   plugins: {
     legend: {
       display: false,
@@ -70,8 +74,7 @@ export const pieOptions: pie = {
   responsive: true,
   plugins: {
     legend: {
-      display: true,
-      position: 'left',
+      display: false,
     },
   },
 };
