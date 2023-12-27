@@ -31,27 +31,47 @@ export default function PRatio() {
   };
 
   const getData = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
-      {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
+        {
+          cache: 'no-store',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
         },
-      },
-    );
-    if (res.status === 200 || res.status === 201) {
-      const data = await res.json();
-      console.log('response data :: ', data);
-      console.log({ ...data.currentMonthStatistics });
-      // setRatioList([Object.values(...data.currentMonthStatistics)]);
+      );
+
+      if (res.status === 200 || res.status === 201) {
+        const data = await res.json();
+        // console.log('response data :: ', data);
+
+        // 데이터의 타입을 확인하고, 해당 타입에 맞게 타입 지정
+        const { positiveRatio, negativeRatio, neutralRatio } =
+          data.currentMonthStatistics;
+
+        if (
+          typeof positiveRatio === 'number' &&
+          typeof negativeRatio === 'number' &&
+          typeof neutralRatio === 'number'
+        ) {
+          setRatioList([positiveRatio, negativeRatio, neutralRatio]);
+        } else {
+          console.error('Invalid data types for ratios');
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
     responseInterceptor();
+    // console.log('인터셉터 실행!!!');
+
     getData();
+    // console.log('getData 실행!!!!');
   }, []);
 
   return (
