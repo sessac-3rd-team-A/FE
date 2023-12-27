@@ -20,7 +20,6 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
-  const [labelsFullDate, setLabelsFullDate] = useState<any>([]); // 새로운 state 추가
 
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
@@ -35,17 +34,9 @@ export default function TrendLineChartCategory() {
       const label = Array.from({ length: 30 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
-        let day = date.getDate().toString(); // 일(day) 부분만 추출
-        return day.startsWith('0') ? day.slice(1) : day; // '0'으로 시작하면 '0'을 제거
+        return date.toISOString().slice(0, 10);
       }).reverse();
       setLabels(label);
-
-      const labelFullDate = Array.from({ length: 30 }, (_, index) => {
-        const date = new Date(currentDate);
-        date.setDate(date.getDate() - index);
-        return date.toISOString().slice(0, 10); // yyyy-mm-dd 형식
-      }).reverse();
-      setLabelsFullDate(labelFullDate); // labelsFullDate 업데이트
 
       const data = [
         {
@@ -106,11 +97,22 @@ export default function TrendLineChartCategory() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
+  // 날짜의 마지막 두 자리를 가져오는 함수
+  function getLastTwoDigits(dateString: any) {
+    const lastTwoDigits = dateString.slice(-2);
+    return lastTwoDigits.startsWith('0')
+      ? lastTwoDigits.slice(-1)
+      : lastTwoDigits;
+  }
 
+  // labels 배열에서 각 날짜의 마지막 두 자리를 가져와서 새로운 배열을 생성
+  const newLabels = labels.map((dateString: any) =>
+    getLastTwoDigits(dateString),
+  );
   return (
     <div className="chart">
       <Line
-        data={{ labels, datasets: filteredDatasets }}
+        data={{ labels: newLabels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -162,9 +164,7 @@ export default function TrendLineChartCategory() {
               callbacks: {
                 title: function (context) {
                   const index = context[0].dataIndex;
-                  return labelsFullDate[index]
-                    ? labelsFullDate[index].toString()
-                    : '';
+                  return labels[index] ? labels[index].toString() : '';
                 },
               },
             },
