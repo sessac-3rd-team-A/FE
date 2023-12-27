@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { useRafState } from 'react-use';
+import React, { useEffect } from 'react';
 import cx from 'clsx';
 import '../styles/signIn/movingEye.scss';
 

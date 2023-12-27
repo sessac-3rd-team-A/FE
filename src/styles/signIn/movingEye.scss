@@ -35,37 +35,45 @@
   }
 
   .eyeBall {
-    transition: 100ms;
+    transition: 200ms;
 
     &.top {
       bottom: -2px;
       top: auto;
+      transform: translateY(-2px);
       @include media('<=1200px') {
         bottom: toSizeC(-2, 1200);
+        transform: translateY(toSizeC(-2, 1200));
       }
     }
 
     &.left {
       left: auto;
       right: -2px;
+      transform: translateX(-2px);
       @include media('<=1200px') {
         right: toSizeC(-2, 1200);
+        transform: translateX(toSizeC(-2, 1200));
       }
     }
 
     &.bottom {
       bottom: auto;
       top: -2px;
+      transform: translateY(2px);
       @include media('<=1200px') {
         top: toSizeC(-2, 1200);
+        transform: translateY(toSizeC(2, 1200));
       }
     }
 
     &.right {
       left: -2px;
       right: auto;
+      transform: translateX(2px);
       @include media('<=1200px') {
         left: toSizeC(-2, 1200);
+        transform: translateX(toSizeC(2, 1200));
       }
     }
   }
