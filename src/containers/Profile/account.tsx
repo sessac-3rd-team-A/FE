@@ -1,32 +1,29 @@
-'use client';
-import React, { useState, FormEvent } from 'react';
+'use client'
+
+import '@/styles/profile/account.scss';
+import '@/styles/profile/accountForm.scss';
+import ProfileMenu from '@/containers/Profile/profileMenu';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import '@/styles/profile/settingForm.scss';
 import { userState } from '@/utils/state';
-import { TokenType, userDataType } from '@/types'
 
-// async function updateUser(accessToken: string, refreshToken: string) {
-//   try {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
-//       method: 'POST',
-//       credentials: 'include',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
-//       },
-//     });
-//     // console.log('res >>>',res);
-//     return res;
-//   } catch (err) {
-//     throw new Error(`HTTP error! Status: ${err}`);
-//   }
-// }
-
-export default async function SettingForm(Token: TokenType) {
+export default function MySettingPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useRecoilState(userState);
-  console.log('Token >>>', Token);
+  const [accessToken, setAccessToken] = useState('');
+  const [refreshToken, setRefreshToken] = useState('');
+  const [nickname, setNickname] = useState('')
+
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem('accessToken');
+    const storedRefreshToken = localStorage.getItem('refreshToken');
+
+    setAccessToken(storedAccessToken || '');
+    setRefreshToken(storedRefreshToken || '');
+    setNickname(user.nickname);
+
+  }, [nickname]);
   
   async function onSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,12 +41,15 @@ export default async function SettingForm(Token: TokenType) {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': `accessToken=${Token.accessToken}; refreshToken=${Token.refreshToken}`
+        'Authorization': `Bearer ${refreshToken}`
       },
       body: JSON.stringify({
         userId: formattedData.id,
         age: formattedData.age,
         gender: formattedData.gender,
+        // userId: 'asdf',
+        // age: '30대',
+        // gender: 'F',
       }),
     });
     console.log('res >>>', res);
@@ -59,20 +59,25 @@ export default async function SettingForm(Token: TokenType) {
     const data = await res.json();
     console.log(data);
     } catch (error) {
-      setError(error.message);
+      setError('Fail submit! Try again.');
     } finally {
       setIsLoading(false);
     }
-}
+  }
 
   return (
-    <div className="setting-form-container2">
+    <div className="setting-page-container">
+      <section className="whiteGradientBg" />
+      <div className='header-temp'></div>
+      <div className="setting-container">
+        <div className="setting-form-container">
+        <div className="setting-form-container2">
       <p>ACCOUNT</p>
       <form onSubmit={onSubmitForm} className="setting-form">
         <input
           type="text"
           id="nickName"
-          placeholder={user.nickname}
+          placeholder={nickname}
           readOnly
         />
         <input
@@ -84,8 +89,8 @@ export default async function SettingForm(Token: TokenType) {
           maxLength={100}
         />
         <div className="age-and-gender">
-          <select id="age" name="age">
-            <option value="" disabled selected hidden>
+          <select id="age" name="age" defaultValue='10대'>
+            <option value="" aria-disabled hidden>
               Age
             </option>
             <option value="10대">10 대</option>
@@ -94,8 +99,8 @@ export default async function SettingForm(Token: TokenType) {
             <option value="40대">40 대</option>
             <option value="50대">50 대 이상</option>
           </select>
-          <select id="gender" name="gender">
-            <option value="" disabled selected hidden>
+          <select id="gender" name="gender" defaultValue="F">
+            <option value="" disabled hidden>
               Gender
             </option>
             <option value="F">여자</option>
@@ -107,6 +112,10 @@ export default async function SettingForm(Token: TokenType) {
         </button>
       </form>
       {error && <div className='error-box'>{error}</div>}
+    </div>
+        </div>
+      </div>
+      <ProfileMenu />
     </div>
   );
 }
