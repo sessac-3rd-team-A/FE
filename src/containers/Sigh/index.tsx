@@ -19,17 +19,11 @@ export default function SighPage() {
 
   const handleStartButtonClick = async () => {
     console.log(isLoading);
-    let headers: Record<string, string> = {};
 
     const bearerToken =
       typeof window !== 'undefined'
-        ? localStorage.getItem('accessToken')
+        ? localStorage.getItem('refreshToken')
         : null;
-
-    if (bearerToken) {
-      headers['Authorization'] = `Bearer ${bearerToken}`;
-    }
-    console.log(bearerToken);
 
     if (buttonText === 'START') {
       setIsVisible((prevVisible) => !prevVisible);
@@ -41,7 +35,10 @@ export default function SighPage() {
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',
-          headers: headers,
+          headers: {
+            Authorization: bearerToken ? `Bearer ${bearerToken}` : '',
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
             textDiary: sighText,
           }),
@@ -51,7 +48,6 @@ export default function SighPage() {
           const data = await response.json();
           setIsLoading(false);
           router.push(`/sigh/result/${data.id}`);
-          console.log(headers);
         } else {
           console.error(
             'POST request failed:',
