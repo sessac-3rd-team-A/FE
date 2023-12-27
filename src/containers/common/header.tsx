@@ -47,7 +47,7 @@ export default function Header() {
           SIGN IN
         </Link>
       ) : (
-        <>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link
             href={'/profile'}
             className="headerMenu signInBtn"
@@ -56,14 +56,15 @@ export default function Header() {
             profile
           </Link>
           <div
+            className="headerMenu signInBtn logout"
             onClick={() => {
               resetUser();
               localStorage.clear();
             }}
           >
-            로그아웃
+            LOGOUT
           </div>
-        </>
+        </div>
       )}
     </header>
   );

@@ -15,7 +15,7 @@ const MovingEye = ({ cName, eRef, cord, setCord }: any) => {
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent): void => {
-      // if (!eRef.current) return;
+      if (!eRef.current) return;
 
       const { x: x1, y: y1 } = e;
       const { x: x2, y: y2 } = eRef?.current?.getBoundingClientRect();
