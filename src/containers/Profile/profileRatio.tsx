@@ -1,13 +1,18 @@
-import { Pie } from 'react-chartjs-2';
-import { pieOptions } from '@/utils/chartOptions';
-import { httpRequest } from '@/utils/httpRequest';
+// 'use client';
 
-export const ratioData = {
+// import { Pie } from 'react-chartjs-2';
+// import { pieOptions } from '@/utils/chartOptions';
+import { refreshAccess } from '@/utils/httpRequest';
+// import { useEffect, useState } from 'react';
+import { cookies } from 'next/headers';
+
+const ratioData = {
   labels: ['Positive', 'Negative', 'Neutral'],
   datasets: [
     {
       label: ' 감정 지수',
-      data: [],
+      // data: [positiveRatio, negativeRatio, neutralRatio],
+      data: [18, 30, 52],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -24,47 +29,55 @@ export const ratioData = {
   ],
 };
 
-async function getData() {
-  // // 예시 success 콜백 함수
-  // function handleSuccess(data: any) {
-  //   console.log('HTTP 요청이 성공했습니다. 받은 데이터:', data);
-  //   // 성공했을 때 추가적으로 처리해야 하는 로직을 여기에 추가
-  // }
+export default async function PRatio() {
+  // const [data, setData] = useState({});
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken');
+  const refreshToken = cookieStore.get('refreshToken');
 
-  // // 예시 fail 콜백 함수
-  // function handleFail() {
-  //   console.error('HTTP 요청이 실패했습니다.');
-  //   // 실패했을 때 추가적으로 처리해야 하는 로직을 여기에 추가
-  // }
-
-  // 예시: GET 요청을 보내는 경우
-  // return httpRequest(
-  //   'GET',
-  //   `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
-  //   null,
-  // );
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
     {
-      method: 'GET',
       credentials: 'include',
+      cache: 'no-store',
+      method: 'GET',
+      headers: {
+        Cookie: `accessToken=${accessToken.value}; refreshToken=${refreshToken.value}`,
+      },
     },
   );
-  // const data = await res.json();
-  return res;
-}
 
-export default async function PRatio() {
-  const data = await httpRequest(
-    'get',
-    `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
-    null,
-  );
-  console.log('데이터 :::: ', data);
+  console.log('profile ratio raw response :: ', res);
+
+  if (res.status === 401) {
+    await refreshAccess();
+    // const res2 = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/ratio`,
+    //   {
+    //     credentials: 'include',
+    //     cache: 'no-store',
+    //     method: 'GET',
+    //     headers: {
+    //       Cookie: `accessToken=${newAccessToken}`,
+    //     },
+    //   },
+    // );
+    // const realData = res2.json();
+    // setData(realData);
+  }
+
+  // useEffect(() => {
+  // getRatioData();
+  // }, []);
+
+  // useEffect(() => {
+  // console.log('데이터 ::: ', data);
+  // }, [data]);
+
   return (
     <div className="profile-ratio">
       <div className="ratio">
-        <Pie options={pieOptions} data={ratioData} />
+        {/* <Pie options={pieOptions} data={ratioData} /> */}
       </div>
       <div className="ratioText">
         <p>MOOD</p>

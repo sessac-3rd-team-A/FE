@@ -1,13 +1,12 @@
-'use client';
+// 'use client';
 
 import EmoCalendar from './emoCalendar';
 import '@/styles/profile/index.scss';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import ProfileMenu from './profileMenu';
 import { CiCircleChevRight } from 'react-icons/ci';
 import DiaryModal from './diaryModal';
-import { useEffect, useRef, useState } from 'react';
+// import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
 import { ProfileResultType } from '@/types';
@@ -16,16 +15,16 @@ import { userState } from '@/utils/state'; // recoil
 import Cookies from 'js-cookie';
 
 export default function ProfilePage() {
-  const router = useRouter();
-  const [modalDate, setModalDate] = useState<string>('');
-  const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
+  // const router = useRouter();
+  // const [modalDate, setModalDate] = useState<string>('');
+  // const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const backgroundRef = useRef(null);
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const backgroundRef = useRef(null);
 
   // recoil -> 닉네임을 설정하기 위한 상태값 추가로 설정
-  const [user, setUser] = useRecoilState(userState);
-  const [nickname, setNickname] = useState('');
+  // const [user, setUser] = useRecoilState(userState);
+  // const [nickname, setNickname] = useState('');
 
   // const getUserInfo = async () => {
   //   console.log('쿠키 액세스 토큰 :: ', Cookies.get('accessToken'));
@@ -87,18 +86,20 @@ export default function ProfilePage() {
   return (
     <section className="profile-container">
       <div
-        ref={backgroundRef}
-        className={`info-container ${isModalOpen ? 'modalOn' : ''}`}
+      // ref={backgroundRef}
+      // className={`info-container ${isModalOpen ? 'modalOn' : ''}`}
       >
         <div className="info-left">
           <p className="title">
             {/* {nickname}님, <br /> 오늘의 기분은 어떠신가요? */}
-            {nickname && `${nickname}님,`}
+            {/* {nickname && `${nickname}님,`} */}
+            {/* {user.nickname} */}
             <br /> 오늘의 기분은 어떠신가요?
           </p>
           <div className="left-content">
             <div className="count">
-              <div>{emoData?.calendar?.length}</div>
+              {/* <div>{emoData?.calendar?.length}</div> */}
+              <div>29</div>
               <div>
                 <p>THE NUMBER OF</p>
                 <p>SIGHS</p>
@@ -107,9 +108,9 @@ export default function ProfilePage() {
             <div
               style={{ cursor: 'pointer' }}
               className="link"
-              onClick={() => {
-                router.push('/sigh');
-              }}
+              // onClick={() => {
+              //   // router.push('/sigh');
+              // }}
             >
               <Link
                 href="/sigh"
@@ -119,7 +120,7 @@ export default function ProfilePage() {
               </Link>
             </div>
             <PRatio />
-            <PGraph />
+            {/* <PGraph /> */}
           </div>
         </div>
         <div className="info-right">
@@ -130,11 +131,11 @@ export default function ProfilePage() {
           /> */}
         </div>
       </div>
-      <div className={`${isModalOpen ? 'modalOn' : ''}`}>
-        <ProfileMenu />
-        <section className="whiteGradientBg" />
-      </div>
-      {isModalOpen && <DiaryModal emoData={emoData} modalDate={modalDate} />}
+      {/* <div className={`${isModalOpen ? 'modalOn' : ''}`}> */}
+      <ProfileMenu />
+      <section className="whiteGradientBg" />
+      {/* </div> */}
+      {/* {isModalOpen && <DiaryModal emoData={emoData} modalDate={modalDate} />} */}
     </section>
   );
 }

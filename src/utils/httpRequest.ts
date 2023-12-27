@@ -1,54 +1,28 @@
-import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
 
-export async function httpRequest(method, url, body) {
-  try {
-    const res = await fetch(url, {
-      method: method,
+export const refreshAccess = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken');
+  const refreshToken = cookieStore.get('refreshToken');
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER}/auth/newToken`,
+    {
+      cache: 'no-store',
       credentials: 'include',
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        Cookie: `accessToken=${accessToken.value}; refreshToken=${refreshToken.value}`,
       },
-      body: body,
-    });
-
-    // 응답 성공했을 때
-    if (res.status === 200 || res.status === 201) {
-      const data = await res.json();
-      return data;
-    }
-
-    // access 토큰이 없거나 하는 경우로 응답 실패했을 때
-    let refreshToken = Cookies.get('refreshToken');
-
-    // if (!refreshToken) {
-    //   console.log('서버 사이드 쿠키!!!');
-    //   const cookieStore = cookies();
-    //   refreshToken = cookieStore.get('refreshToken');
-    // }
-
-    console.log('http 요청 중 refresh token :: ', refreshToken);
-
-    if (res.status === 401 && refreshToken) {
-      const res2 = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER}/auth/newToken`,
-        {
-          method: 'POST',
-          credentials: 'include',
-        },
-      );
-
-      console.log('res2 :: ', await res2.json());
-
-      if (res2.ok) {
-        const data = await res2.json();
-        Cookies.remove('accessToken');
-        Cookies.set('accessToken', data.accessToken, { expires: 1 });
-        return httpRequest(method, url, body);
-      }
-    }
-  } catch (error) {
-    console.error('Error during HTTP request:', error.message);
-    // Handle the error as needed (logging, notifying the user, etc.)
-    throw error; // Re-throw the error to propagate it to the caller
+    },
+  );
+  console.log('refresh raw response :: ', res);
+  if (res.status === 200) {
+    const data = await res.json();
+    // 새로운 토큰을 사용하여 추가 작업 수행
+    console.log('새로운 토큰 갱신 완료:', data);
+    return data.accessToken;
+  } else {
+    // 토큰 갱신 실패 처리
+    console.error('토큰 갱신 실패:', res.status);
   }
-}
+};
