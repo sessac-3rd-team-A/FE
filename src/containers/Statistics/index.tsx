@@ -25,15 +25,14 @@ export default function StatisticsPage() {
   let arr;
   return (
     <div className="trend-container">
-      <h2 className="chart-title" style={{ visibility: 'hidden' }}>
-        이 페이지는 {str}페이지 입니다.
-      </h2>
-      <div className="chart-title, animate__animated animate__bounce">
+      <div className="chart-title, animate__animated animate__bounce ">
         <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
 
       <ThreeBox />
-      {/* <Semo></Semo> */}
+      <div className=" animate__animated animate__shakeY animate__infinite">
+        <Semo />
+      </div>
     </div>
   );
 }
