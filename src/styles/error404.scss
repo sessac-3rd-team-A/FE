@@ -1,17 +1,23 @@
 @import '/src/styles/global.scss';
 .error-container {
   display: grid;
-  grid-template-rows: 80vh auto;
-  grid-template-columns: toSize(570) auto;
+  grid-template-rows: 70vh auto;
+  grid-template-columns: 40vw auto;
   height: 100vh;
   overflow: hidden;
+  margin-top: 10vh;
 }
-
+.error-doodles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+}
 .oops-doodles {
   width: toSize(430);
   height: toSize(430);
-
-  margin: 10vh auto;
 }
 .oops-doodle {
   width: toSize(430);
@@ -19,31 +25,50 @@
   position: relative;
 }
 .oops-eyes {
-  margin-top: toSize(-275);
+  margin-top: toSize(-270);
   margin-left: toSize(157);
   display: flex;
   .oops-eye {
-    margin: 0 toSize(10);
-    width: toSize(40);
-    height: toSize(40);
+    margin: 0 toSize(15);
+    width: toSize(30);
+    height: toSize(30);
     position: relative;
+    animation: turnEye 7s linear infinite;
   }
 }
 .oops-tears {
-  position: relative;
-  z-index: 1;
   display: flex;
-  top: toSize(-200);
+  margin: 0;
+  z-index: 1;
+  position: absolute;
+  top: 45vh;
   .oops-tears-left,
   .oops-tears-right {
     display: flex;
     flex-direction: column;
   }
+  .oops-tears-left .oops-tear {
+    animation: fallingTears 3s ease-in infinite;
+  }
+  .oops-tears-right .oops-tear {
+    animation: fallingTears 3s ease-in infinite;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
   .oops-tear {
-    margin: 0 toSize(10) toSize(150) toSize(10);
+    margin: 0 toSize(10) toSize(200) toSize(10);
     width: toSize(50);
     height: toSize(105);
     position: relative;
+  }
+}
+.oops-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    font-family: 'LEMON MILK';
+    font-size: toSize(96);
   }
 }
 .oops-wave {
@@ -61,10 +86,35 @@
   z-index: 1;
   margin-top: 3vh;
   cursor: pointer;
-  animation: scaleAni 2s ease-in-out;
   transition: all 0.5s;
+  @media screen and (max-width: 768px) {
+    width: toSize(350);
+    font-size: toSize(40);
+  }
 
   &:hover {
     background-color: #fffb94;
+  }
+}
+
+@keyframes turnEye {
+  50% {
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+@keyframes fallingTears {
+  0% {
+    transform: scale(0);
+  }
+  5% {
+    transform: scale(1);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateY(35vh);
+    opacity: 0%;
   }
 }

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import '@/styles/error404.scss';
+import Link from 'next/link';
 
 export default function Error404() {
   return (
@@ -27,6 +28,8 @@ export default function Error404() {
                 fill
               />
             </div>
+          </div>
+          <div className="oops-tears-right">
             <div className="oops-tear">
               <Image
                 src="/error404/oops_doodle_tear.svg"
@@ -34,22 +37,6 @@ export default function Error404() {
                 fill
               />
             </div>
-          </div>
-          <div className="oops-tears-right">
-            <Image
-              src="/error404/oops_doodle_tear.svg"
-              alt="oops tear"
-              width={50}
-              height={105}
-              className="oops-tear"
-            />
-            <Image
-              src="/error404/oops_doodle_tear.svg"
-              alt="oops tear"
-              width={50}
-              height={105}
-              className="oops-tear"
-            />
           </div>
         </div>
       </div>
@@ -59,7 +46,9 @@ export default function Error404() {
           <br />
           PAGE NOT FOUND
         </h1>
-        <button className="oops-btn">GO HOME</button>
+        <Link href={'/'}>
+          <button className="oops-btn">GO HOME</button>
+        </Link>
       </div>
       <div className="oops-wave">
         <svg
