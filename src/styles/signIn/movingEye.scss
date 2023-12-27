@@ -15,8 +15,8 @@
     z-index: 10;
     border-radius: 999px;
     @include media('<=1200px') {
-      width: toSizeC(20, 1200);
-      height: toSizeC(22, 1200);
+      width: toSize(20, 1200);
+      height: toSize(22, 1200);
     }
   }
 
@@ -29,8 +29,8 @@
     // background-color: lightcyan;
     z-index: 1;
     @include media('<=1200px') {
-      width: toSizeC(44, 1200);
-      height: toSizeC(44, 1200);
+      width: toSize(44, 1200);
+      height: toSize(44, 1200);
     }
   }
 
@@ -42,8 +42,8 @@
       top: auto;
       transform: translateY(-2px);
       @include media('<=1200px') {
-        bottom: toSizeC(-2, 1200);
-        transform: translateY(toSizeC(-2, 1200));
+        bottom: toSize(-2, 1200);
+        transform: translateY(toSize(-2, 1200));
       }
     }
 
@@ -52,8 +52,8 @@
       right: -2px;
       transform: translateX(-2px);
       @include media('<=1200px') {
-        right: toSizeC(-2, 1200);
-        transform: translateX(toSizeC(-2, 1200));
+        right: toSize(-2, 1200);
+        transform: translateX(toSize(-2, 1200));
       }
     }
 
@@ -62,8 +62,8 @@
       top: -2px;
       transform: translateY(2px);
       @include media('<=1200px') {
-        top: toSizeC(-2, 1200);
-        transform: translateY(toSizeC(2, 1200));
+        top: toSize(-2, 1200);
+        transform: translateY(toSize(2, 1200));
       }
     }
 
@@ -72,8 +72,8 @@
       right: auto;
       transform: translateX(2px);
       @include media('<=1200px') {
-        left: toSizeC(-2, 1200);
-        transform: translateX(toSizeC(2, 1200));
+        left: toSize(-2, 1200);
+        transform: translateX(toSize(2, 1200));
       }
     }
   }
