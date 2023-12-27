@@ -19,6 +19,9 @@
 // header 높이
 $header-height: toSize(20 * 2 + 55);
 
+// mobile header 높이
+$mobile-header-height: toSize(92, 768);
+
 // 캘린더 보더 색상
 $calendar-color-border: rgb(220, 220, 220);
 

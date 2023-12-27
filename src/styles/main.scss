@@ -286,6 +286,7 @@
     -webkit-mask: var(--mask);
     mask: var(--mask);
     @include media('<=768px') {
+      height: calc(100vh - $mobile-header-height);
       flex-direction: column;
       --mask: linear-gradient(to bottom, #0000 30px, #000 0),
         radial-gradient(30px, #000 98%, #0000) top/55.50px 60px;
@@ -364,8 +365,8 @@
     align-items: center;
     justify-content: center;
     @include media('<=768px') {
-      margin-top: toSize(300);
-      transform: scale(1.4);
+      margin-top: toSize(400);
+      transform: scale(1.6);
     }
   }
   .main2-card {

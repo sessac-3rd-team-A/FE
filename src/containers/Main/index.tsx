@@ -108,6 +108,8 @@ export default function MainPage() {
 
     function preventDefaultTouch(e: TouchEvent) {
       e.preventDefault();
+      // console.log(e.touches[0].clientX);
+
       if (!loading) {
         setLoading(true);
         const startY = e.touches[0].clientY;
@@ -129,15 +131,15 @@ export default function MainPage() {
 
     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
     window.addEventListener('wheel', preventDefaultWheel, { passive: false }); // modern desktop
-    window.addEventListener('touchstart', preventDefaultTouch, {
-      passive: false,
-    }); // mobile
+    // window.addEventListener('touchstart', preventDefaultTouch, {
+    //   passive: false,
+    // }); // mobile
     window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
     return () => {
       window.removeEventListener('DOMMouseScroll', preventDefault, false);
       window.removeEventListener('wheel', preventDefaultWheel);
-      window.removeEventListener('touchstart', preventDefaultTouch);
+      // window.removeEventListener('touchstart', preventDefaultTouch);
       window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
     };
   }, [isFooter, loading, isPage2, pageCount]);

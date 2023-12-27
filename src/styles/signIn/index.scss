@@ -63,6 +63,10 @@
   padding-top: 40px;
   height: calc(100vh - $header-height);
   margin-top: $header-height;
+  @include media('<=768px') {
+    height: calc(100vh - $mobile-header-height);
+    margin-top: $mobile-header-height;
+  }
   @include media('<=1200px') {
     padding-top: toSize(40, 1200);
   }
