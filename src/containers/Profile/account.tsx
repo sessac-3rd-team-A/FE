@@ -1,11 +1,10 @@
 'use client'
 
-import '@/styles/profile/setting.scss';
+import '@/styles/profile/account.scss';
+import '@/styles/profile/accountForm.scss';
 import ProfileMenu from '@/containers/Profile/profileMenu';
-// import SettingForm from '@/containers/Profile/settingForm';
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import '@/styles/profile/settingForm.scss';
 import { userState } from '@/utils/state';
 
 export default function MySettingPage() {
