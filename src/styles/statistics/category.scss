@@ -1,0 +1,17 @@
+@import '/src/styles/global.scss';
+
+.trend-select-container {
+  position: relative;
+
+  .trend-select-gender,
+  .trend-select-age {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .trend-select-age {
+    // 만약 두 요소가 겹치지 않게 하려면 추가로 조정이 필요합니다.
+    transform: translateY(-100%);
+  }
+}

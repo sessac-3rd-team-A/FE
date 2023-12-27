@@ -1,6 +1,5 @@
 // my-shop details
 export interface ShopApiRes {
-  items: Array<{
     title: string;
     link: string;
     image: string;
@@ -15,7 +14,25 @@ export interface ShopApiRes {
     category2: string;
     category3: string;
     category4: string;
-  }>;
+}
+
+export interface ShoppingApiResponse {
+  lastBuildDate: string;
+  total: number;
+  start: number;
+  display: number;
+  items: ShoppingItem[];
+}
+
+export interface TokenType {
+  accessToken: string | null,
+  refreshToken: string | null,
+}
+
+export interface userDataType {
+  userId: string;
+  age: string;
+  gender: string;
 }
 
 // diary result

@@ -1,0 +1,120 @@
+@import '/src/styles/global.scss';
+.error-container {
+  display: grid;
+  grid-template-rows: 70vh auto;
+  grid-template-columns: 40vw auto;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 10vh;
+}
+.error-doodles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+}
+.oops-doodles {
+  width: toSize(430);
+  height: toSize(430);
+}
+.oops-doodle {
+  width: toSize(430);
+  height: toSize(430);
+  position: relative;
+}
+.oops-eyes {
+  margin-top: toSize(-270);
+  margin-left: toSize(157);
+  display: flex;
+  .oops-eye {
+    margin: 0 toSize(15);
+    width: toSize(30);
+    height: toSize(30);
+    position: relative;
+    animation: turnEye 7s linear infinite;
+  }
+}
+.oops-tears {
+  display: flex;
+  margin: 0;
+  z-index: 1;
+  position: absolute;
+  top: 45vh;
+  .oops-tears-left,
+  .oops-tears-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .oops-tears-left .oops-tear {
+    animation: fallingTears 3s ease-in infinite;
+  }
+  .oops-tears-right .oops-tear {
+    animation: fallingTears 3s ease-in infinite;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
+  .oops-tear {
+    margin: 0 toSize(10) toSize(200) toSize(10);
+    width: toSize(50);
+    height: toSize(105);
+    position: relative;
+  }
+}
+.oops-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    font-family: 'LEMON MILK';
+    font-size: toSize(96);
+  }
+}
+.oops-wave {
+  grid-column: 1/3;
+}
+.oops-btn {
+  border: 1px solid black;
+  width: toSize(250);
+  aspect-ratio: 10/3;
+  background-color: #fff;
+  filter: drop-shadow(0px toSize(9) 0px #000);
+  border-radius: 50%;
+  font-family: 'LEMON MILK';
+  font-size: toSize(26);
+  z-index: 1;
+  margin-top: 3vh;
+  cursor: pointer;
+  transition: all 0.5s;
+  @media screen and (max-width: 768px) {
+    width: toSize(350);
+    font-size: toSize(40);
+  }
+
+  &:hover {
+    background-color: #fffb94;
+  }
+}
+
+@keyframes turnEye {
+  50% {
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+@keyframes fallingTears {
+  0% {
+    transform: scale(0);
+  }
+  5% {
+    transform: scale(1);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateY(35vh);
+    opacity: 0%;
+  }
+}

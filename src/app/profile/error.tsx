@@ -1,10 +1,10 @@
-'use client'
-import Error404 from "@/containers/common/error404";
+'use client';
+import Error404 from '@/containers/common/error404';
 
 export default function Error() {
-  return(
+  return (
     <>
       <Error404 />
     </>
-  )
+  );
 }

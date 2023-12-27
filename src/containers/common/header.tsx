@@ -31,7 +31,7 @@ export default function Header() {
   return (
     <header className="headerContainer">
       <img src="/logo.svg" alt="logo" className="headerLogo" />
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link href={'/'} className="headerMenu">
           Main
         </Link>
@@ -57,7 +57,7 @@ export default function Header() {
           </Link>
           <div
             onClick={() => {
-              resetUser()
+              resetUser();
               localStorage.clear();
             }}
           >

@@ -12,27 +12,17 @@ export default async function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
-  const bearerToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-  // const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-  //   method: 'GET',
-  //   headers: {
-  //     Authorization: bearerToken ? `Bearer ${bearerToken}` : '',
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-  // const sighResult = await res.json();
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const getResultData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/api/diary/${id}`,
+        {
+          cache: 'no-store',
+          method: 'GET',
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);

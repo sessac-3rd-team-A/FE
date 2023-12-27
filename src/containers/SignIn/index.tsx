@@ -43,14 +43,15 @@ export default function SignInPage() {
     left: false,
   });
 
-  useEffect(() => {
-    console.log('Updated user state:', user);
-  }, [user]); // recoil
+  // useEffect(() => {
+  //   console.log('Updated user state:', user);
+  // }, [user]); // recoil
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const apiUrl = 'http://localhost:8080/auth/signin';
+    setIsLoading(true);
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signin`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
 
@@ -65,9 +66,6 @@ export default function SignInPage() {
         password: formattedData.password,
       }),
     });
-
-    console.log('로그인 response :: ', response);
-
     if (response.status == 200) {
       const data = await response.json();
       // recoil 상태 설정
@@ -87,13 +85,22 @@ export default function SignInPage() {
       console.log('accessToken>>>', data);
 
       router.push('/');
+    } else {
+      const data = await response.json();
+      if (data.error == 'wrong userId') {
+        alert('아이디가 틀렸습니다');
+        setIsLoading(false);
+      } else if (data.error == 'wrong password') {
+        alert('비밀번호가 틀렸습니다');
+        setIsLoading(false);
+      }
     }
   }
 
   async function onSubmitSignUp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    const apiUrl = 'http://localhost:8080/auth/signup';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signup`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
     const response = await fetch(apiUrl, {
@@ -152,8 +159,12 @@ export default function SignInPage() {
               minLength={4}
               maxLength={12}
             />
-            <button type="submit" className="submit-button">
-              SUBMIT
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="submit-button"
+            >
+              {isLoading ? 'LOADING' : 'SUBMIT'}
             </button>
           </form>
 

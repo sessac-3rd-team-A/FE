@@ -8,29 +8,31 @@ import trendText from '../../../public/statistics/trendText.svg';
 import ThreeBox from '@/containers/Statistics/threebox';
 
 export default function StatisticsPage() {
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:8080/api/statistics/meme', {
-      cache: 'no-store',
-    });
-    const info = await response.json();
-    console.log(info);
-  };
+  // const fetchData = async () => {
+  //   const response = await fetch(
+  //     `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`,
+  //     {
+  //       cache: 'no-store',
+  //     },
+  //   );
+  //   const info = await response.json();
+  //   console.log(info);
+  // };
 
-  fetchData();
+  // fetchData();
 
   let str: string = '트렌드';
   let arr;
   return (
     <div className="trend-container">
-      <h2 className="chart-title" style={{ visibility: 'hidden' }}>
-        이 페이지는 {str}페이지 입니다.
-      </h2>
-      <div className="chart-title, animate__animated animate__bounce">
+      <div className="chart-title, animate__animated animate__bounce ">
         <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
 
       <ThreeBox />
-      {/* <Semo></Semo> */}
+      <div className=" animate__animated animate__shakeY animate__infinite">
+        <Semo />
+      </div>
     </div>
   );
 }
