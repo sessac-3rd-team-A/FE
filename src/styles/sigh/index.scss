@@ -73,8 +73,8 @@
     background-color: transparent;
     width: 100%;
     height: 90%;
-    font-family: 'Gmarket Sans';
-    font-size: toSize(26);
+    font-family: GmarketSans;
+    font-size: 1em;
     font-weight: 300;
     line-height: 145%;
     resize: none;
@@ -101,6 +101,7 @@
   .doodleA {
     bottom: 0;
     width: toSize(383);
+    height: toSize(319);
     --startPoint: -100vh;
     animation: doodleFalling 0.7s linear;
   }
@@ -109,6 +110,7 @@
     bottom: 0;
     left: toSize(375);
     width: toSize(448);
+    height: toSize(141);
     --startPoint: -120vh;
     animation: doodleFalling 0.6s linear;
   }
@@ -116,6 +118,7 @@
     bottom: 0;
     left: toSize(815);
     width: toSize(327);
+    height: toSize(304);
     --startPoint: -200vh;
     animation: doodleFalling 1s linear;
   }
@@ -123,6 +126,7 @@
     bottom: 0;
     left: toSize(1140);
     width: toSize(240);
+    height: toSize(214);
     --startPoint: -100vh;
     animation: doodleFalling 0.5s linear;
   }
@@ -130,6 +134,7 @@
     bottom: 0;
     left: toSize(1320);
     width: toSize(306);
+    height: toSize(278);
     --startPoint: -200vh;
     animation: doodleFalling 0.7s linear;
   }
@@ -137,6 +142,7 @@
     bottom: 0;
     right: 0;
     width: toSize(361);
+    height: toSize(211);
     --startPoint: -100vh;
     animation: doodleFalling 0.5s linear;
   }
@@ -144,6 +150,7 @@
     right: 0;
     bottom: toSize(200);
     width: toSize(366);
+    height: toSize(361);
     --startPoint: -300vh;
     animation: doodleFalling 1s linear;
   }
@@ -151,6 +158,7 @@
     left: toSize(100);
     bottom: toSize(260);
     width: toSize(289);
+    height: toSize(288);
     --startPoint: -200vh;
     animation: doodleFalling 0.8s linear;
   }
@@ -158,6 +166,7 @@
     left: toSize(335);
     bottom: toSize(140);
     width: toSize(375);
+    height: toSize(261.484);
     --startPoint: -150vh;
     animation: doodleFalling 1s linear;
   }
@@ -165,6 +174,7 @@
     left: toSize(685);
     bottom: toSize(220);
     width: toSize(240);
+    height: toSize(286);
     --startPoint: -300vh;
     animation: doodleFalling 1.2s linear;
   }

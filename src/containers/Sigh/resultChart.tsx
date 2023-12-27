@@ -9,6 +9,27 @@ export default function ResultChart({ sighResult }: ResultChartProps) {
   const [negativeData, setNegativeData] = useState<number>(0);
   const [positiveData, setPositiveData] = useState<number>(0);
   const [neutralData, setNeutralData] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const updateWindowDimensions = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowDimensions);
+    return () => {
+      window.removeEventListener('resize', updateWindowDimensions);
+    };
+  }, []);
+
+  const leftStyle = (dataValue: number) => {
+    if (windowWidth <= 1080) {
+      return { left: dataValue >= 0 && dataValue < 3 ? '-1%' : '-2%' };
+    }
+    return {
+      left: dataValue >= 0 && dataValue < 3 ? '-1.5%' : '-3%',
+    };
+  };
 
   useEffect(() => {
     if (sighResult) {
@@ -35,9 +56,7 @@ export default function ResultChart({ sighResult }: ResultChartProps) {
           <img
             src="/sigh/negative.svg"
             alt="😢"
-            style={{
-              left: negativeData >= 0 && negativeData < 3 ? '-1.5%' : '-3%',
-            }}
+            style={leftStyle(negativeData)}
           />
         </div>
         <div className="result-sentimentData result-positiveData">
@@ -49,9 +68,7 @@ export default function ResultChart({ sighResult }: ResultChartProps) {
           <img
             src="/sigh/positive.svg"
             alt="😄"
-            style={{
-              left: positiveData >= 0 && positiveData < 3 ? '-1.5%' : '-3%',
-            }}
+            style={leftStyle(negativeData)}
           />
         </div>
         <div className="result-sentimentData result-neutralData">
@@ -63,9 +80,7 @@ export default function ResultChart({ sighResult }: ResultChartProps) {
           <img
             src="/sigh/neutral.svg"
             alt="😐"
-            style={{
-              left: neutralData >= 0 && neutralData < 3 ? '-1.5%' : '-3%',
-            }}
+            style={leftStyle(negativeData)}
           />
         </div>
       </div>

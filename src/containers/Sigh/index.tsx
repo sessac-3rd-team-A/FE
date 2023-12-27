@@ -4,6 +4,7 @@ import '@/styles/sigh/index.scss';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoadingPage from '@/app/sigh/loading';
+import Image from 'next/image';
 
 export default function SighPage() {
   const [sighText, setSighText] = useState<string>('');
@@ -88,56 +89,36 @@ export default function SighPage() {
         </button>
       </main>
       <div className="sigh-doodles">
-        <img
-          src="/sigh/sigh_doodle_1.png"
-          alt="doodle"
-          className="sigh-doodle doodleA"
-        />
-        <img
-          src="/sigh/sigh_doodle_2.png"
-          alt="doodle"
-          className="sigh-doodle doodleB"
-        />
-        <img
-          src="/sigh/sigh_doodle_3.png"
-          alt="doodle"
-          className="sigh-doodle doodleC"
-        />
-        <img
-          src="/sigh/sigh_doodle_4.png"
-          alt="doodle"
-          className="sigh-doodle doodleD"
-        />
-        <img
-          src="/sigh/sigh_doodle_5.png"
-          alt="doodle"
-          className="sigh-doodle doodleE"
-        />
-        <img
-          src="/sigh/sigh_doodle_6.png"
-          alt="doodle"
-          className="sigh-doodle doodleF"
-        />
-        <img
-          src="/sigh/sigh_doodle_7.png"
-          alt="doodle"
-          className="sigh-doodle doodleG"
-        />
-        <img
-          src="/sigh/sigh_doodle_8.png"
-          alt="doodle"
-          className="sigh-doodle doodleH"
-        />
-        <img
-          src="/sigh/sigh_doodle_9.png"
-          alt="doodle"
-          className="sigh-doodle doodleI"
-        />
-        <img
-          src="/sigh/sigh_doodle_10.png"
-          alt="doodle"
-          className="sigh-doodle doodleJ"
-        />
+        <div className="sigh-doodle doodleA">
+          <Image src="/sigh/sigh_doodle_1.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleB">
+          <Image src="/sigh/sigh_doodle_2.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleC">
+          <Image src="/sigh/sigh_doodle_3.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleD">
+          <Image src="/sigh/sigh_doodle_4.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleE">
+          <Image src="/sigh/sigh_doodle_5.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleF">
+          <Image src="/sigh/sigh_doodle_6.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleG">
+          <Image src="/sigh/sigh_doodle_7.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleH">
+          <Image src="/sigh/sigh_doodle_8.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleI">
+          <Image src="/sigh/sigh_doodle_9.png" alt="doodle" fill />
+        </div>
+        <div className="sigh-doodle doodleJ">
+          <Image src="/sigh/sigh_doodle_10.png" alt="doodle" fill />
+        </div>
       </div>
     </div>
   );

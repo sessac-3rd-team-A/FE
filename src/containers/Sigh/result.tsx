@@ -14,6 +14,7 @@ export default function SighResultPage() {
   console.log(id);
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+
   const getResultData = async () => {
     try {
       const res = await fetch(
@@ -32,8 +33,8 @@ export default function SighResultPage() {
       console.log('fetch data :: ', data);
 
       setSighResult(data);
-    } catch (error: any) {
-      console.error('Error fetching data:', error.message);
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   };
 
@@ -114,15 +115,16 @@ export default function SighResultPage() {
 
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
-          {sighResult && sighResult.recommendedGif && (
-            <Image
-              src={sighResult.recommendedGif}
-              alt="짤"
-              className="result-memeImg"
-              width={600}
-              height={600}
-            />
-          )}
+          <div className="result-memeImg">
+            {sighResult && sighResult.recommendedGif && (
+              <Image
+                src={sighResult.recommendedGif}
+                alt="짤"
+                fill
+                style={{ borderRadius: '20px' }}
+              />
+            )}
+          </div>
         </section>
         <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>
@@ -139,7 +141,9 @@ export default function SighResultPage() {
         <p>AH-</p>
         <p>WHEW!</p>
       </div>
-      <Image src={resultDoodle} alt="doodle" className="result-doodle" />
+      <div className="result-doodle">
+        <Image src={resultDoodle} alt="doodle" fill />
+      </div>
     </div>
   );
 }
