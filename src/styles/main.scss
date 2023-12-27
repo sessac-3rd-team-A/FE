@@ -246,12 +246,20 @@
 .mainCardContainer {
   display: flex;
   // overflow-y: hidden;
-  // margin-top: $header-height;
   height: calc(100vh);
   position: relative;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  background-color: #3a89ff;
+  &.inner {
+    width: 100%;
+    align-items: center;
+    height: calc(100vh - $header-height);
+    background-color: #3a89ff;
+    --mask: linear-gradient(to bottom, #0000 100px, #000 0),
+      radial-gradient(100px, #000 98%, #0000) top/185.00px 200px;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+  }
   .introContainer {
     display: flex;
     flex-direction: column;

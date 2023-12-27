@@ -94,6 +94,7 @@ export default function MainPage() {
         }, 500);
       }
     }
+
     function preventDefault(e: Event) {
       e.preventDefault();
       if (!loading) {
@@ -105,15 +106,38 @@ export default function MainPage() {
       }
     }
 
+    function preventDefaultTouch(e: TouchEvent) {
+      e.preventDefault();
+      if (!loading) {
+        setLoading(true);
+        const startY = e.touches[0].clientY;
+        const handleMove = (moveEvent: TouchEvent) => {
+          const deltaY = moveEvent.touches[0].clientY - startY;
+          if (deltaY > 0) {
+            handleScroll('ArrowUp');
+          } else if (deltaY < 0) {
+            handleScroll('ArrowDown');
+          }
+          window.removeEventListener('touchmove', handleMove);
+        };
+        window.addEventListener('touchmove', handleMove);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    }
+
     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
     window.addEventListener('wheel', preventDefaultWheel, { passive: false }); // modern desktop
-    window.addEventListener('touchmove', preventDefault, { passive: false }); // mobile
+    window.addEventListener('touchstart', preventDefaultTouch, {
+      passive: false,
+    }); // mobile
     window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 
     return () => {
       window.removeEventListener('DOMMouseScroll', preventDefault, false);
       window.removeEventListener('wheel', preventDefaultWheel);
-      window.removeEventListener('touchmove', preventDefault);
+      window.removeEventListener('touchstart', preventDefaultTouch);
       window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
     };
   }, [isFooter, loading, isPage2, pageCount]);
@@ -155,51 +179,53 @@ export default function MainPage() {
         </p>
       </div>
       <div className={`mainCardContainer`}>
-        <div className="introContainer">
-          <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
-            {'TELL ME HOW WAS\nYOUR DAY?'}
-          </p>
-          <p className={`main2-intro ${pageCount === 2 ? 'fade-in' : ''}`}>
-            {'WE WANT YOU\nTO FEEL BETTER'}
-          </p>
-          <p className={`main2-intro ${pageCount === 3 ? 'fade-in' : ''}`}>
-            {'WE OFFER\nA MOOD CALENDAR'}
-          </p>
-          <p className={`main2-intro2 ${pageCount === 1 ? 'fade-in' : ''}`}>
-            {
-              '당신의 하루는 어땠나요?\n혹시 고민하는 일이 잘 안풀리나요?\n당신이 느끼는 모든 감정을 아휴에 풀어주세요.'
-            }
-          </p>
-          <p className={`main2-intro2 ${pageCount === 2 ? 'fade-in' : ''}`}>
-            {
-              '들려준 당신의 하루로 그림 일기를 그려드려요.\n기분이 좋아지는 밈은 덤입니다.\n기분이 나아지길 빌게요.'
-            }
-          </p>
-          <p className={`main2-intro2 ${pageCount === 3 ? 'fade-in' : ''}`}>
-            {
-              '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
-            }
-          </p>
-          <button className="main2-start">START</button>
-        </div>
-        <div className="main2-cardContainer">
-          <div className={`main2-card card1`}>
-            <img
-              className="imgCard"
-              src="/main/mainCard1.png"
-              style={{ objectFit: 'cover' }}
-            />
+        <div className={`mainCardContainer inner`}>
+          <div className="introContainer">
+            <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
+              {'TELL ME HOW WAS\nYOUR DAY?'}
+            </p>
+            <p className={`main2-intro ${pageCount === 2 ? 'fade-in' : ''}`}>
+              {'WE WANT YOU\nTO FEEL BETTER'}
+            </p>
+            <p className={`main2-intro ${pageCount === 3 ? 'fade-in' : ''}`}>
+              {'WE OFFER\nA MOOD CALENDAR'}
+            </p>
+            <p className={`main2-intro2 ${pageCount === 1 ? 'fade-in' : ''}`}>
+              {
+                '당신의 하루는 어땠나요?\n혹시 고민하는 일이 잘 안풀리나요?\n당신이 느끼는 모든 감정을 아휴에 풀어주세요.'
+              }
+            </p>
+            <p className={`main2-intro2 ${pageCount === 2 ? 'fade-in' : ''}`}>
+              {
+                '들려준 당신의 하루로 그림 일기를 그려드려요.\n기분이 좋아지는 밈은 덤입니다.\n기분이 나아지길 빌게요.'
+              }
+            </p>
+            <p className={`main2-intro2 ${pageCount === 3 ? 'fade-in' : ''}`}>
+              {
+                '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
+              }
+            </p>
+            <button className="main2-start">START</button>
           </div>
-          <div
-            className={`main2-card card2 ${
-              pageCount > 2 ? 'slide-out-tr' : ''
-            }`}
-          ></div>
-          <div
-            className={`main2-card card3 ${
-              pageCount > 1 ? 'slide-out-tr' : ''
-            }`}
-          ></div>
+          <div className="main2-cardContainer">
+            <div className={`main2-card card1`}>
+              <img
+                className="imgCard"
+                src="/main/mainCard1.png"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+            <div
+              className={`main2-card card2 ${
+                pageCount > 2 ? 'slide-out-tr' : ''
+              }`}
+            ></div>
+            <div
+              className={`main2-card card3 ${
+                pageCount > 1 ? 'slide-out-tr' : ''
+              }`}
+            ></div>
+          </div>
         </div>
       </div>
       <footer style={{ height: '300px', backgroundColor: 'black' }}></footer>
