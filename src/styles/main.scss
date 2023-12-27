@@ -86,6 +86,30 @@
   }
 }
 
+@keyframes jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
 .mainWindContainer {
   display: flex;
   overflow-y: hidden;
@@ -222,12 +246,20 @@
 .mainCardContainer {
   display: flex;
   // overflow-y: hidden;
-  // margin-top: $header-height;
   height: calc(100vh);
   position: relative;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  background-color: #3a89ff;
+  &.inner {
+    width: 100%;
+    align-items: center;
+    height: calc(100vh - $header-height);
+    background-color: #3a89ff;
+    --mask: linear-gradient(to bottom, #0000 100px, #000 0),
+      radial-gradient(100px, #000 98%, #0000) top/185.00px 200px;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+  }
   .introContainer {
     display: flex;
     flex-direction: column;
@@ -276,6 +308,9 @@
     background-color: white;
     box-shadow: 0 toSize(9) black;
   }
+  .main2-start:hover {
+    animation: jello-vertical 0.9s both;
+  }
   .main2-cardContainer {
     display: flex;
     position: relative;
@@ -315,4 +350,12 @@
 
 .fp-watermark {
   display: none;
+}
+.imgCard {
+  width: toSize(410);
+  height: toSize(550);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: top; /* 이미지를 상단에 위치시킴 */
+  border-radius: toSize(28);
 }
