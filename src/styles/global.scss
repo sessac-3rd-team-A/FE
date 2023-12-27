@@ -5,16 +5,15 @@
 
 // header height: vertical padding + content height
 
-// 반응형 크기 계산 (1920px 기준)
-@function toSize($size) {
-  $calculatedSize: ($size / 1920) * 100;
-  @return #{$calculatedSize * 1vw};
-}
-
-// 반응형 크기 계산 (개발자 입력 픽셀 기준)
-@function toSizeC($size, $standard) {
-  $calculatedSize: ($size / $standard) * 100;
-  @return #{$calculatedSize * 1vw};
+// 반응형 크기 계산 (1920px or 개발자 입력 픽셀 기준)
+@function toSize($size, $standard: null) {
+  @if ($standard) {
+    $calculatedSize: ($size / $standard) * 100;
+    @return #{$calculatedSize * 1vw};
+  } @else {
+    $calculatedSize: ($size / 1920) * 100;
+    @return #{$calculatedSize * 1vw};
+  }
 }
 
 // header 높이
