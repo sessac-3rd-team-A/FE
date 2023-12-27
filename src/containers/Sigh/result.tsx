@@ -14,6 +14,7 @@ export default function SighResultPage() {
   console.log(id);
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+
   const getResultData = async () => {
     try {
       const res = await fetch(
@@ -32,8 +33,8 @@ export default function SighResultPage() {
       console.log('fetch data :: ', data);
 
       setSighResult(data);
-    } catch (error: any) {
-      console.error('Error fetching data:', error.message);
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   };
 
@@ -42,7 +43,7 @@ export default function SighResultPage() {
   }, [id]);
 
   // 카톡 공유
-  //crs에서만 실행
+  // csr에서만 실행
   if (typeof window !== 'undefined') {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -51,6 +52,7 @@ export default function SighResultPage() {
     if (sighResult && window.Kakao && window.Kakao.Share) {
       const kakaoImg = sighResult.pictureDiary;
       const pathName = id;
+      console.log(pathName);
       window.Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
         templateId: 102205,
@@ -90,7 +92,6 @@ export default function SighResultPage() {
           <div className="result-share">
             <a
               id="kakaotalk-sharing-btn"
-              // href="javascript:;"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
               <Image
@@ -114,15 +115,16 @@ export default function SighResultPage() {
 
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
-          {sighResult && sighResult.recommendedGif && (
-            <Image
-              src={sighResult.recommendedGif}
-              alt="짤"
-              className="result-memeImg"
-              width={600}
-              height={600}
-            />
-          )}
+          <div className="result-memeImg">
+            {sighResult && sighResult.recommendedGif && (
+              <Image
+                src={sighResult.recommendedGif}
+                alt="짤"
+                fill
+                style={{ borderRadius: '20px' }}
+              />
+            )}
+          </div>
         </section>
         <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>
@@ -139,7 +141,9 @@ export default function SighResultPage() {
         <p>AH-</p>
         <p>WHEW!</p>
       </div>
-      <Image src={resultDoodle} alt="doodle" className="result-doodle" />
+      <div className="result-doodle">
+        <Image src={resultDoodle} alt="doodle" fill />
+      </div>
     </div>
   );
 }
