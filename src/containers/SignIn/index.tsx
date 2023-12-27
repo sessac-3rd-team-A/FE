@@ -65,7 +65,9 @@ export default function SignInPage() {
         password: formattedData.password,
       }),
     });
-    console.log(response);
+
+    console.log('로그인 response :: ', response);
+
     if (response.status == 200) {
       const data = await response.json();
       // recoil 상태 설정
@@ -77,8 +79,8 @@ export default function SignInPage() {
         isLogin: true,
       });
       // 토큰 값은 로컬스토리지에 저장
-      // localStorage.setItem('accessToken', data.accessToken);
-      // localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
       // 토큰 값 쿠키에 저장
       // Cookies.set('accessToken', data.accessToken, { expires: 1 });
       // Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
