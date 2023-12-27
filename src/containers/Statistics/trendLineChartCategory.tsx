@@ -20,6 +20,7 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
+  const [labelsFullDate, setLabelsFullDate] = useState<any>([]); // 새로운 state 추가
 
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
@@ -34,9 +35,17 @@ export default function TrendLineChartCategory() {
       const label = Array.from({ length: 30 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
-        return date.toISOString().slice(0, 10);
+        let day = date.getDate().toString(); // 일(day) 부분만 추출
+        return day.startsWith('0') ? day.slice(1) : day; // '0'으로 시작하면 '0'을 제거
       }).reverse();
       setLabels(label);
+
+      const labelFullDate = Array.from({ length: 30 }, (_, index) => {
+        const date = new Date(currentDate);
+        date.setDate(date.getDate() - index);
+        return date.toISOString().slice(0, 10); // yyyy-mm-dd 형식
+      }).reverse();
+      setLabelsFullDate(labelFullDate); // labelsFullDate 업데이트
 
       const data = [
         {
@@ -98,11 +107,10 @@ export default function TrendLineChartCategory() {
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
 
-  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
       <Line
-        data={{ labels: newLabels, datasets: filteredDatasets }}
+        data={{ labels, datasets: filteredDatasets }}
         options={{
           maintainAspectRatio: false,
           responsive: true,
@@ -154,7 +162,9 @@ export default function TrendLineChartCategory() {
               callbacks: {
                 title: function (context) {
                   const index = context[0].dataIndex;
-                  return labels[index] ? labels[index].toString() : '';
+                  return labelsFullDate[index]
+                    ? labelsFullDate[index].toString()
+                    : '';
                 },
               },
             },

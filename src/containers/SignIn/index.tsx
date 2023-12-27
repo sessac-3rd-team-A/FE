@@ -43,13 +43,14 @@ export default function SignInPage() {
     left: false,
   });
 
-  useEffect(() => {
-    console.log('Updated user state:', user);
-  }, [user]); // recoil
+  // useEffect(() => {
+  //   console.log('Updated user state:', user);
+  // }, [user]); // recoil
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsLoading(true);
     const apiUrl = `${process.env.NEXT_PUBLIC_API_SERVER}/auth/signin`;
     const formData = new FormData(event.currentTarget);
     const formattedData = Object.fromEntries(formData);
@@ -65,10 +66,8 @@ export default function SignInPage() {
         password: formattedData.password,
       }),
     });
-    console.log(response);
     if (response.status == 200) {
       const data = await response.json();
-      console.log(data);
       // recoil 상태 설정
       setUser({
         userId: data.userId,
@@ -83,9 +82,18 @@ export default function SignInPage() {
       // 토큰 값 쿠키에 저장
       // Cookies.set('accessToken', data.accessToken, { expires: 1 });
       // Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
-      // console.log('accessToken>>>', data);
+      console.log('accessToken>>>', data);
 
       router.push('/');
+    } else {
+      const data = await response.json();
+      if (data.error == 'wrong userId') {
+        alert('아이디가 틀렸습니다');
+        setIsLoading(false);
+      } else if (data.error == 'wrong password') {
+        alert('비밀번호가 틀렸습니다');
+        setIsLoading(false);
+      }
     }
   }
 
@@ -151,8 +159,12 @@ export default function SignInPage() {
               minLength={4}
               maxLength={12}
             />
-            <button type="submit" className="submit-button">
-              SUBMIT
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="submit-button"
+            >
+              {isLoading ? 'LOADING' : 'SUBMIT'}
             </button>
           </form>
 
