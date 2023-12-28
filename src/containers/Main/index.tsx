@@ -5,8 +5,6 @@ import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Main1 from './main1';
-import Main2 from './main2';
 
 interface Section {
   text: string;
@@ -163,7 +161,13 @@ export default function MainPage() {
       <Main2 /> */}
       <div className="mainWindContainer">
         <div className="mainWindImg">
-          <Image src="/main/mainBlow.png" priority={false} alt="바람" fill />
+          <Image
+            src="/main/mainBlow.png"
+            priority
+            alt="바람"
+            fill
+            sizes="null"
+          />
         </div>
         {/* <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" /> */}
         <img
