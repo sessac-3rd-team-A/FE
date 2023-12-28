@@ -43,11 +43,11 @@ export default function ProfileMenu() {
                     : 'icon-unselected-circle'
                 }
                 onClick={() =>
-                  handleIconClick(`/images/profileMenu_${index}.svg`, index)
+                  handleIconClick(`/images/profileMenu/profileMenu_${index}.svg`, index)
                 }
               >
               <img
-                src={`/images/profileMenu_icon${index}.svg`}
+                src={`/images/profileMenu/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
                 className={`icon`}
               />

@@ -6,8 +6,12 @@
   width: 100%;
   height: toSize(454);
   align-items: center;
+  // background-color: pink;
+
   @include media('<=768px') {
-    height: toSizeM(974);
+    // height: toSizeM(974);
+    flex-direction: column;
+    height: 100%;
     // justify-content: center;
   }
 }
@@ -21,6 +25,11 @@ input.three-box-button {
 input[type='radio']:checked + .three-box-contents {
   visibility: visible;
   width: toSize(1370);
+
+  @include media('<=768px') {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
 }
 
 /* 메뉴 버튼 디자인 */
@@ -36,6 +45,12 @@ input[type='radio']:checked + .three-box-contents {
   margin: 0 toSize(5);
   border: toSize(10);
   border-radius: toSize(40);
+
+
+  @include media('<=768px') {
+    width: 100%;
+  }
+
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
@@ -108,15 +123,23 @@ input[type='radio']:checked + .three-box-contents {
   float: left;
   height: 100%;
   // height: toSize(876);
-  width: toSize(1370);
+  // width: toSize(1370);
   width: 0;
   transition: all 0.1s ease-out;
   // z-index: -1;
   overflow: hidden;
   border-radius: toSize(40);
   margin: 0 toSize(5);
+  // background-color: red;
+
   @include media('<=768px') {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
   }
+
 }
 .three-box-inner {
   display: flex; //가운데 회색박스 나옴
@@ -134,12 +157,19 @@ input[type='radio']:checked + .three-box-contents {
     rgba(143, 143, 143, 0.26) 44.36%,
     rgba(255, 255, 255, 0.28) 98.98%
   );
-
+  // background-color: blue;
   background-blend-mode: overlay;
   backdrop-filter: blur(90px);
   // -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+
+  @include media('<=768px') {
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+  }
 }
 .three-box-description {
   display: flex;
@@ -147,6 +177,14 @@ input[type='radio']:checked + .three-box-contents {
   height: 100%;
   // background: red;
   // justify-content: center;
+
+  @include media('<=768px') {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 
   .label-message {
     position: absolute;
@@ -169,6 +207,15 @@ input[type='radio']:checked + .three-box-contents {
     line-height: 110%;
     color: #fff;
     top: 11.9791666667vw;
+
+    @include media('<=768px') {
+      top: 0px;
+      left: 0px;
+      transform: rotate(0deg);
+      position: relative;
+    }
+
+
   }
 
   //라벨 인덱싱 원
@@ -188,8 +235,11 @@ input[type='radio']:checked + .three-box-contents {
     position: absolute;
     top: toSize(320);
     right: toSize(10);
+
     @include media('<=768px') {
       top: 0;
+      position: relative;
+
     }
   }
 }

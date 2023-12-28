@@ -23,7 +23,7 @@ const selectedIconState = atom({
 
 const selectedImageState = atom({
   key: 'selectedImageState',
-  default: '/images/profileMenu_2.svg',
+  default: '/images/profileMenu/profileMenu_2.svg',
 });
 
 const modalState = atom({

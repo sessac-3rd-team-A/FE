@@ -3,6 +3,11 @@
 .chart {
   width: 85%;
   display: flex;
+
+  @include media('<=768px') {
+    flex-direction: column;
+    height: 80%;
+  }
 }
 .legendBox {
   display: flex;
@@ -23,5 +28,12 @@
   img {
     vertical-align: middle;
     width: toSize(35);
+  }
+
+  @include media('<=768px') {
+    flex-direction: row;
+    height: 50%;
+    align-items: center;
+    justify-content: space-around;
   }
 }
