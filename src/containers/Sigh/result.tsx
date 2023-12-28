@@ -122,6 +122,7 @@ export default function SighResultPage() {
                 alt="짤"
                 fill
                 style={{ borderRadius: '20px' }}
+                sizes="null"
               />
             )}
           </div>
@@ -142,7 +143,7 @@ export default function SighResultPage() {
         <p>WHEW!</p>
       </div>
       <div className="result-doodle">
-        <Image src={resultDoodle} alt="doodle" fill />
+        <Image src={resultDoodle} alt="doodle" fill sizes="null" />
       </div>
     </div>
   );
