@@ -3,6 +3,8 @@ import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import Main1 from './main1';
 import Main2 from './main2';
 
@@ -12,6 +14,7 @@ interface Section {
 }
 
 export default function MainPage() {
+  const router = useRouter();
   const [user, setUser] = useRecoilState(userState); // recoil
   const [loading, setLoading] = useState(false); // recoil
   const [isPage2, setIsPage2] = useState(false);
@@ -67,6 +70,14 @@ export default function MainPage() {
       }
     }
   };
+
+  function navigateStart() {
+    if (pageCount == 3) {
+      router.push('/profile');
+    } else {
+      router.push('/sigh');
+    }
+  }
 
   useEffect(() => {
     function preventDefaultForScrollKeys(e: KeyboardEvent) {
@@ -151,7 +162,10 @@ export default function MainPage() {
       {/* <Main1 />
       <Main2 /> */}
       <div className="mainWindContainer">
-        <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" />
+        <div className="mainWindImg">
+          <Image src="/main/mainBlow.png" priority={false} alt="바람" fill />
+        </div>
+        {/* <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" /> */}
         <img
           className="mainFace mainSmileImg"
           src="/main/main_smile.png"
@@ -209,17 +223,25 @@ export default function MainPage() {
                   '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
                 }
               </p>
-              <button className="main2-start">START</button>
+              <button onClick={navigateStart} className="main2-start">
+                START
+              </button>
             </div>
           </div>
           <div className="main2-cardContainer">
             <div className={`main2-card card1`}>
-              <img
+              <Image
+                alt="imgCard"
                 className="imgCard"
                 src="/main/mainCard1.png"
-                style={{ objectFit: 'cover' }}
+                priority={false}
+                sizes="null"
+                fill
               />
             </div>
+            {/* <div className={`main2-card card1`}>
+              <img className="imgCard" src="/main/mainCard1.png" />
+            </div> */}
             <div
               className={`main2-card card2 ${
                 pageCount > 2 ? 'slide-out-tr' : ''
@@ -229,7 +251,15 @@ export default function MainPage() {
               className={`main2-card card3 ${
                 pageCount > 1 ? 'slide-out-tr' : ''
               }`}
-            ></div>
+            >
+              <Image
+                alt="imgCard"
+                className="imgCard"
+                src="/main/mainCard3.png"
+                fill
+                sizes="null"
+              />
+            </div>
           </div>
         </div>
       </div>
