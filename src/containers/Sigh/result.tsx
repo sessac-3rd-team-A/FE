@@ -8,6 +8,7 @@ import ResultChart from './resultChart';
 import { useEffect, useState } from 'react';
 import { SighResultType } from '@/types';
 import Error404 from '../common/error404';
+import { useRouter } from 'next/navigation';
 
 export default function SighResultPage() {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export default function SighResultPage() {
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
+  const router = useRouter();
   console.log(isError);
 
   const getResultData = async () => {
@@ -85,6 +87,24 @@ export default function SighResultPage() {
       });
   };
 
+  // saveBtn
+  const recoilData =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('recoil-persist')
+      : null;
+
+  const saveBtn = () => {
+    console.log(recoilData);
+    if (recoilData != null) {
+      const parsedData = JSON.parse(recoilData);
+      if (parsedData && Object.keys(parsedData).length === 0) {
+        router.push('/'); // 메인
+      } else {
+        router.push('/profile'); // 프로필
+      }
+    }
+  };
+
   return (
     <div className="result-container">
       <main className="result-mainContainer">
@@ -134,7 +154,7 @@ export default function SighResultPage() {
           <Link href={'/sigh'}>
             <button>RESTART</button>
           </Link>
-          <button>SAVE</button>
+          <button onClick={saveBtn}>SAVE</button>
         </section>
       </main>
       <div className="result-bgText">
