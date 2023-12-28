@@ -10,6 +10,7 @@ import {
   selectedImageState,
 } from '@/utils/state';
 import { useEffect, useState } from 'react';
+import responseInterceptor from '@/utils/fetch';
 
 export default function Header() {
   const router = useRouter();
@@ -29,6 +30,11 @@ export default function Header() {
     // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [user.isLogin]); // recoil
+
+  useEffect(() => {
+    // access token 만료됐는지 검증하는 interceptor
+    responseInterceptor();
+  }, []);
 
   return (
     <header className="headerContainer">
