@@ -3,8 +3,6 @@
 @import url('https://fonts.cdnfonts.com/css/lemon-milk');
 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
-// header height: vertical padding + content height
-
 // 반응형 크기 계산 (1920px or 개발자 입력 픽셀 기준)
 @function toSize($size, $standard: null) {
   @if ($standard) {
@@ -16,7 +14,7 @@
   }
 }
 
-// header 높이
+// header height: vertical padding + content height
 $header-height: toSize(20 * 2 + 55);
 
 // 캘린더 보더 색상
@@ -44,4 +42,10 @@ button {
 /* 스크롤바 전체 기본 꾸미기 */
 body::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 80%;
+  }
 }

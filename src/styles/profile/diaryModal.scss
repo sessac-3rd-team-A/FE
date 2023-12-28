@@ -21,6 +21,9 @@
   align-items: center;
   z-index: 1000;
   animation: onModal 0.3s ease-in-out 0s 1 normal forwards;
+  @media (max-width: 768px) {
+    transform: translate(-50%, -50%) rotate(6.388deg) scale(0.8);
+  }
 
   .diaryImg,
   .gifImg {
@@ -73,9 +76,8 @@
   }
 }
 
-@media (min-width: 1920px) {
+@media (max-width: 1920px) {
   .diaryModal-container {
-    width: 25vw;
-    height: 35vw;
+    transform: translate(-50%, -50%) rotate(6.388deg) scale(0.9);
   }
 }

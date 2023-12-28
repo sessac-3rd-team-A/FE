@@ -39,14 +39,17 @@ p {
   background-size: cover;
   height: 100vh;
   position: relative;
+  overflow-y: hidden;
 }
 
 // main contents
 .info-container {
   height: calc(100vh - $header-height);
+  margin-top: $header-height;
   box-sizing: border-box;
-  padding: toSize(150) toSize(50) toSize(100) toSize(50);
-  width: toSize(1920);
+  // padding: toSize(150) toSize(100) toSize(100) toSize(100);
+  padding: toSize(50) toSize(100) toSize(150) toSize(100);
+  width: 100vw;
   display: flex;
   gap: toSize(20);
   align-items: stretch;
@@ -99,25 +102,16 @@ p {
       font-family: LEMON MILK;
 
       div:first-child {
-        box-sizing: border-box;
-        position: absolute;
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 0 toSize(30);
+        // padding: 0 toSize(30);
+        padding-right: toSize(77);
+
         // background-color: red;
-        -webkit-clip-path: polygon(
-          0 0,
-          100% 0,
-          100% 100%,
-          50% 100%,
-          50% 50%,
-          0 50%
-        );
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%, 0 50%);
-        font-size: toSize(60);
+        font-size: toSize(64);
       }
 
       div:last-child {
@@ -173,7 +167,7 @@ p {
   }
 }
 
-@media (max-width: 1920px) {
+@media (max-width: 1440px) {
   .whiteGradientBg {
     width: 100vw;
     height: 100%;
@@ -207,7 +201,7 @@ p {
     }
 
     .left-content {
-      grid-template-rows: toSize(184) minmax(100px, auto);
+      grid-template-rows: minmax(toSize(184), auto) minmax(100px, auto);
       grid-template-columns: repeat(2, 1fr);
       row-gap: toSize(20);
       column-gap: toSize(20);
@@ -220,5 +214,53 @@ p {
 
   .info-right {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-left {
+    .title {
+      font-size: 2rem;
+    }
+
+    .left-content {
+      .count {
+        height: 100px;
+
+        div:first-child {
+          font-size: 3rem;
+        }
+        div:last-child {
+          left: toSize(10, 480);
+          bottom: toSize(10, 480);
+          p:first-child {
+            font-size: 1rem;
+          }
+
+          p:last-child {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .link {
+        a {
+          font-size: toSize(20, 480);
+        }
+      }
+    }
+
+    .profile-ratio,
+    .profile-graph {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    .profile-ratio {
+      padding: 20px 0;
+    }
+
+    .profile-graph {
+    }
   }
 }
