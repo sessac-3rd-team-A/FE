@@ -6,20 +6,25 @@ import TrendLineChart from './trendLineChart';
 import TrendLineChartCategory from './trendLineChartCategory';
 import MemeComponent from './memeComponent';
 
-export default function ThreeBox() {
+export default function ThreeBox(
+  { statisticsInfo, statisticsCategoryInfo, memeImgInfo }: any,
+  // { gender }: { gender: string | null },
+  // { age }: { age: string | null },
+) {
+  //메뉴클릭 확인 로직
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
-
-  //임시 주석처리
+  //메뉴클릭 확인 로직
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
   };
-
+  //메뉴클릭 확인 로직
   useEffect(() => {
     console.log(selectedMenu);
   }, [selectedMenu]);
 
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
-
+  // console.log(age);
+  // console.log(gender);
   return (
     <>
       <div className="three-box-wrap">
@@ -27,9 +32,20 @@ export default function ThreeBox() {
         {Array.from({ length: 3 }, (_, index) => {
           const menuId = `menu${index + 1}`; // 반복도는 메뉴이름
           const componentsToRender = [
-            <TrendLineChart key="trendLineChart" />,
-            <TrendLineChartCategory key="trendLineChart" />,
-            <MemeComponent key="memeComponent" />,
+            <TrendLineChart
+              key="trendLineChart"
+              statisticsInfo={statisticsInfo}
+            />,
+            <TrendLineChartCategory
+              key="trendLineChart"
+              // statisticsCategoryInfo={statisticsCategoryInfo}
+            />,
+            <MemeComponent
+              key="memeComponent"
+              // memeImgInfo={memeImgInfo}
+              // gender={gender}
+              // age={age}
+            />,
           ];
 
           return (

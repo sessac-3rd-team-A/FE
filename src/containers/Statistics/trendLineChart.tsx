@@ -22,7 +22,7 @@ ChartJS.register(
   Legend,
 );
 
-export default function TrendLineChart() {
+export default function TrendLineChart({ statisticsInfo }: any) {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
@@ -30,44 +30,35 @@ export default function TrendLineChart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`,
-          {
-            cache: 'no-store',
-          },
-        );
-        const info = await res.json();
-
         const currentDate = new Date();
-        const label = Array.from({ length: 30 }, (_, index) => {
+        const label = Array.from({ length: 31 }, (_, index) => {
           const date = new Date(currentDate);
           date.setDate(date.getDate() - index);
           return date.toISOString().slice(0, 10);
         }).reverse();
         setLabels(label);
-        console.log(label);
 
         const data = [
           {
             id: 'positive',
             label: 'Positive',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averagePositive : 0;
             }),
-            borderColor: '#4866D2',
-            backgroundColor: '#4866D2',
+            borderColor: '#FF983A',
+            backgroundColor: '#FF983A',
             borderWidth: 1,
           },
           {
             id: 'neutral',
             label: 'Neutral',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averageNeutral : 0;
@@ -79,15 +70,15 @@ export default function TrendLineChart() {
           {
             id: 'negative',
             label: 'Negative',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averageNegative : 0;
             }),
-            borderColor: '#FF983A',
-            backgroundColor: '#FF983A',
+            borderColor: '#4866D2',
+            backgroundColor: '#4866D2',
             borderWidth: 1,
           },
         ];
@@ -112,19 +103,7 @@ export default function TrendLineChart() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
-
-  // 날짜의 마지막 두 자리를 가져오는 함수
-  function getLastTwoDigits(dateString: any) {
-    const lastTwoDigits = dateString.slice(-2);
-    return lastTwoDigits.startsWith('0')
-      ? lastTwoDigits.slice(-1)
-      : lastTwoDigits;
-  }
-
-  // labels 배열에서 각 날짜의 마지막 두 자리를 가져와서 새로운 배열을 생성
-  const newLabels = labels.map((dateString: any) =>
-    getLastTwoDigits(dateString),
-  );
+  const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
 
   return (
     <div className="chart">
