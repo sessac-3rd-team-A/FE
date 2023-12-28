@@ -13,6 +13,16 @@
     @return #{$calculatedSize * 1vw};
   }
 }
+//반응형 크기 계산 768px 기준
+@function toSizeM($size, $standard: null) {
+  @if ($standard) {
+    $calculatedSize: ($size / $standard) * 100;
+    @return #{$calculatedSize * 1vw};
+  } @else {
+    $calculatedSize: ($size / 768) * 100;
+    @return #{$calculatedSize * 1vw};
+  }
+}
 
 // header height: vertical padding + content height
 $header-height: toSize(20 * 2 + 55);
