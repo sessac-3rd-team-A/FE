@@ -27,6 +27,7 @@
     0px 2px 41.4px -10px rgba(0, 0, 0, 0.14);
   backdrop-filter: blur(90px);
   backface-visibility: hidden; /* 뒷면이 화면에 보이지 않도록 설정 */
+  -webkit-backface-visibility: hidden;
 }
 
 /* 초기 상태 */
@@ -63,6 +64,10 @@
   padding-top: 40px;
   height: calc(100vh - $header-height);
   margin-top: $header-height;
+  @include media('<=768px') {
+    height: calc(100vh - $mobile-header-height);
+    margin-top: $mobile-header-height;
+  }
   @include media('<=1200px') {
     padding-top: toSize(40, 1200);
   }
@@ -262,7 +267,9 @@
 
 .sign-arrowlane {
   position: absolute;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 43px;
   height: 43px;
   border-radius: 50%;
@@ -355,6 +362,9 @@
   width: 100%;
   height: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .select-arrow {
     width: 23px;
