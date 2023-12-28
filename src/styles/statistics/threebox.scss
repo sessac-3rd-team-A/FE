@@ -7,8 +7,9 @@
   height: toSize(454);
   align-items: center;
   @include media('<=768px') {
-    height: toSizeM(974);
-    // justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
   }
 }
 
@@ -21,6 +22,14 @@ input.three-box-button {
 input[type='radio']:checked + .three-box-contents {
   visibility: visible;
   width: toSize(1370);
+  @include media('<=768px') {
+    width: 100%;
+    height: toSizeM(734);
+
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
 
 /* 메뉴 버튼 디자인 */
@@ -35,15 +44,28 @@ input[type='radio']:checked + .three-box-contents {
   transition: all 0.1s ease-out;
   margin: 0 toSize(5);
   border: toSize(10);
-  border-radius: toSize(40);
+  border-radius: 40px;
+
+  @include media('<=768px') {
+    width: 100%;
+    height: toSizeM(100);
+    margin: toSizeM(5);
+    justify-content: center;
+
+    transition: none;
+  }
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
 .three-box-label.a {
   background: #7caaf0;
+  @include media('<=768px') {
+  }
 }
 .three-box-label.b {
   background: #06f;
+  @include media('<=768px') {
+  }
 }
 .three-box-label.c {
   background: #7caaf0;
@@ -73,6 +95,13 @@ input[type='radio']:checked + .three-box-contents {
     color: #fff;
     top: toSize(230);
     // text-align: center;
+    @include media('<=768px') {
+      transform: rotate(0deg);
+      top: toSizeM(32);
+      font-size: toSizeM(28);
+      left: toSizeM(-15);
+      // position: unset;
+    }
   }
 
   //라벨 인덱싱 원
@@ -91,8 +120,13 @@ input[type='radio']:checked + .three-box-contents {
     position: absolute;
     top: toSize(320);
     left: toSize(13);
+
     @include media('<=768px') {
-      top: 0;
+      width: toSizeM(74);
+      height: toSizeM(74);
+      top: toSizeM(12);
+
+      left: toSizeM(-330);
     }
   }
 }
@@ -116,6 +150,10 @@ input[type='radio']:checked + .three-box-contents {
   border-radius: toSize(40);
   margin: 0 toSize(5);
   @include media('<=768px') {
+    display: none;
+    margin: 5px;
+    height: unset;
+    transition: none;
   }
 }
 .three-box-inner {
@@ -147,6 +185,11 @@ input[type='radio']:checked + .three-box-contents {
   height: 100%;
   // background: red;
   // justify-content: center;
+  @include media('<=768px') {
+    align-items: center;
+    height: 50%;
+    width: toSizeM(170);
+  }
 
   .label-message {
     position: absolute;
@@ -167,8 +210,11 @@ input[type='radio']:checked + .three-box-contents {
     font-style: normal;
     font-weight: 400;
     line-height: 110%;
-    color: #fff;
     top: 11.9791666667vw;
+    @include media('<=768px') {
+      transition: none;
+      transform: none;
+    }
   }
 
   //라벨 인덱싱 원
@@ -189,7 +235,13 @@ input[type='radio']:checked + .three-box-contents {
     top: toSize(320);
     right: toSize(10);
     @include media('<=768px') {
+      width: toSizeM(74);
+      height: toSizeM(74);
+
+      right: 0;
       top: 0;
+      float: left;
+      // position: unset;
     }
   }
 }
