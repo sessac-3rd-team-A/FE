@@ -39,6 +39,5 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "typescript": "^5"
-  },
-  "proxy":"https://openapi.naver.com"
+  }
 }

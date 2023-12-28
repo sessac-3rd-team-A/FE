@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  async rewrites() {
+    return [
+      {
+        source: '/naver/:path*',
+        destination: 'https://openapi.naver.com/:path*',
+      }
+    ]
+  },
   images: {
     domains: [
       'media1.jjalkey.com',

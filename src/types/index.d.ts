@@ -35,6 +35,18 @@ export interface userDataType {
   gender: string;
 }
 
+export interface userDetailType {
+  userInfo: {
+    tag: string;
+    sentiment: string,
+    jobRelatedWords: string;
+    jobCategories: string;
+  }
+  error?: {
+    message: string;
+  }
+}
+
 // diary result
 export interface SighResultType {
   id: number;
