@@ -246,7 +246,15 @@ export default function MainPage() {
               className={`main2-card card2 ${
                 pageCount > 2 ? 'slide-out-tr' : ''
               }`}
-            ></div>
+            >
+              <Image
+                alt="imgCard"
+                className="imgCard"
+                src="/main/mainCard2.png"
+                fill
+                sizes="null"
+              />
+            </div>
             <div
               className={`main2-card card3 ${
                 pageCount > 1 ? 'slide-out-tr' : ''
