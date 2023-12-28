@@ -8,31 +8,22 @@ import ResultChart from './resultChart';
 import { useEffect, useState } from 'react';
 import { SighResultType } from '@/types';
 
-export default async function SighResultPage() {
+export default function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
   console.log(id);
-  const bearerToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
-  // const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-  //   method: 'GET',
-  //   headers: {
-  //     Authorization: bearerToken ? `Bearer ${bearerToken}` : '',
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-  // const sighResult = await res.json();
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+
   const getResultData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/diary/${id}`, {
-        cache: 'no-store',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/api/diary/${id}`,
+        {
+          cache: 'no-store',
+          method: 'GET',
         },
-      });
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -42,8 +33,8 @@ export default async function SighResultPage() {
       console.log('fetch data :: ', data);
 
       setSighResult(data);
-    } catch (error: any) {
-      console.error('Error fetching data:', error.message);
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   };
 
@@ -52,7 +43,7 @@ export default async function SighResultPage() {
   }, [id]);
 
   // 카톡 공유
-  //crs에서만 실행
+  // csr에서만 실행
   if (typeof window !== 'undefined') {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -61,6 +52,7 @@ export default async function SighResultPage() {
     if (sighResult && window.Kakao && window.Kakao.Share) {
       const kakaoImg = sighResult.pictureDiary;
       const pathName = id;
+      console.log(pathName);
       window.Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
         templateId: 102205,
@@ -100,7 +92,6 @@ export default async function SighResultPage() {
           <div className="result-share">
             <a
               id="kakaotalk-sharing-btn"
-              href="javascript:;"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
               <Image
@@ -124,15 +115,16 @@ export default async function SighResultPage() {
 
         <section className="result-section result-meme">
           <h3>MAYBE... YOU NEED THIS GIF</h3>
-          {sighResult && sighResult.recommendedGif && (
-            <Image
-              src={sighResult.recommendedGif}
-              alt="짤"
-              className="result-memeImg"
-              width={600}
-              height={600}
-            />
-          )}
+          <div className="result-memeImg">
+            {sighResult && sighResult.recommendedGif && (
+              <Image
+                src={sighResult.recommendedGif}
+                alt="짤"
+                fill
+                style={{ borderRadius: '20px' }}
+              />
+            )}
+          </div>
         </section>
         <section className="result-section result-sentiment">
           <h3>SENTIMENT</h3>
@@ -149,7 +141,9 @@ export default async function SighResultPage() {
         <p>AH-</p>
         <p>WHEW!</p>
       </div>
-      <Image src={resultDoodle} alt="doodle" className="result-doodle" />
+      <div className="result-doodle">
+        <Image src={resultDoodle} alt="doodle" fill />
+      </div>
     </div>
   );
 }

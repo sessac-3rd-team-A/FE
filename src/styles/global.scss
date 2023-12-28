@@ -1,23 +1,26 @@
 @use 'sass:math';
+@import '~include-media/dist/include-media';
 @import url('https://fonts.cdnfonts.com/css/lemon-milk');
 @import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
 // header height: vertical padding + content height
 
-// 반응형 크기 계산 (1920px 기준)
-@function toSize($size) {
-  $calculatedSize: ($size / 1920) * 100;
-  @return #{$calculatedSize * 1vw};
-}
-
-// 반응형 크기 계산 (개발자 입력 픽셀 기준)
-@function toSizeC($size, $standard) {
-  $calculatedSize: ($size / $standard) * 100;
-  @return #{$calculatedSize * 1vw};
+// 반응형 크기 계산 (1920px or 개발자 입력 픽셀 기준)
+@function toSize($size, $standard: null) {
+  @if ($standard) {
+    $calculatedSize: ($size / $standard) * 100;
+    @return #{$calculatedSize * 1vw};
+  } @else {
+    $calculatedSize: ($size / 1920) * 100;
+    @return #{$calculatedSize * 1vw};
+  }
 }
 
 // header 높이
 $header-height: toSize(20 * 2 + 55);
+
+// mobile header 높이
+$mobile-header-height: toSize(92, 768);
 
 // 캘린더 보더 색상
 $calendar-color-border: rgb(220, 220, 220);

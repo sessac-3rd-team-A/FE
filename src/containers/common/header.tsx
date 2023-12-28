@@ -2,6 +2,7 @@
 import '@/styles/main.scss';
 import '@/styles/header.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import {
   userState,
@@ -11,6 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const router = useRouter();
   const [user, setUser] = useRecoilState(userState);
   const resetUser = useResetRecoilState(userState);
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
@@ -30,10 +32,12 @@ export default function Header() {
 
   return (
     <header className="headerContainer">
-      <img src="/logo.svg" alt="logo" className="headerLogo" />
-      <div>
-        <Link href={'/'} className="headerMenu">
-          Main
+      <Link href={'/'} className="headerLogo">
+        <img src="/logo.svg" alt="logo" className="headerLogo" />
+      </Link>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Link href={isLogin ? '/profile' : '/'} className="headerMenu">
+          {isLogin ? 'PROFILE' : 'Main'}
         </Link>
         <Link href={'/sigh'} className="headerMenu middle">
           SIGH
@@ -47,23 +51,16 @@ export default function Header() {
           SIGN IN
         </Link>
       ) : (
-        <>
-          <Link
-            href={'/profile'}
-            className="headerMenu signInBtn"
-            onClick={handleMenuBar}
-          >
-            profile
-          </Link>
-          <div
-            onClick={() => {
-              resetUser()
-              localStorage.clear();
-            }}
-          >
-            로그아웃
-          </div>
-        </>
+        <div
+          className="headerMenu signInBtn"
+          onClick={() => {
+            resetUser();
+            localStorage.clear();
+            router.replace('/');
+          }}
+        >
+          SIGNOUT
+        </div>
       )}
     </header>
   );

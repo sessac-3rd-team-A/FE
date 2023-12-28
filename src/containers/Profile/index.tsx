@@ -3,21 +3,22 @@
 import EmoCalendar from './emoCalendar';
 import '@/styles/profile/index.scss';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import ProfileMenu from './profileMenu';
 import { CiCircleChevRight } from 'react-icons/ci';
 import DiaryModal from './diaryModal';
 import { useEffect, useRef, useState } from 'react';
 import PGraph from './profileGraph';
 import PRatio from './profileRatio';
-import { ProfileResultType } from '@/types';
+import { ProfileCalendarType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
+import { useRouter } from 'next/navigation';
+import responseInterceptor from '@/utils/fetch';
 
 export default function ProfilePage() {
   const router = useRouter();
   const [modalDate, setModalDate] = useState<string>('');
-  const [emoData, setEmoData] = useState<ProfileResultType | null>(null);
+  const [emoData, setEmoData] = useState<ProfileCalendarType | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const backgroundRef = useRef(null);
@@ -29,7 +30,7 @@ export default function ProfilePage() {
   const getUserInfo = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard`,
+        `${process.env.NEXT_PUBLIC_API_SERVER}/profile/dashboard/calendar`,
         {
           cache: 'no-store',
           method: 'GET',
@@ -43,18 +44,22 @@ export default function ProfilePage() {
         throw new Error(`HTTP error! Status: ${res.status}`);
       }
 
-      const data: ProfileResultType = await res.json();
-      console.log('fetch data :: ', data);
+      const data: ProfileCalendarType = await res.json();
+      // console.log('fetch data :: ', data);
 
       setEmoData(data);
-    } catch (error: any) {
-      console.error('Error fetching data:', error.message);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
+    // responseInterceptor();
+    // console.log('인터셉터 실행!!!');
     getUserInfo();
+    // console.log('getUserInfo 실행!!!!');
+    setNickname(user.nickname);
   }, []);
 
   // 모달창 외부 클릭 시 종료
@@ -76,10 +81,6 @@ export default function ProfilePage() {
     };
   }, [isModalOpen]);
 
-  useEffect(() => {
-    setNickname(user.nickname);
-  }, []);
-
   return (
     <section className="profile-container">
       <div
@@ -88,9 +89,7 @@ export default function ProfilePage() {
       >
         <div className="info-left">
           <p className="title">
-            {/* {nickname}님, <br /> 오늘의 기분은 어떠신가요? */}
-            {nickname && `${nickname}님,`}
-            <br /> 오늘의 기분은 어떠신가요?
+            {nickname}님, <br /> 오늘의 기분은 어떠신가요?
           </p>
           <div className="left-content">
             <div className="count">
@@ -115,7 +114,7 @@ export default function ProfilePage() {
               </Link>
             </div>
             <PRatio />
-            <PGraph />
+            <PGraph emoData={emoData} />
           </div>
         </div>
         <div className="info-right">

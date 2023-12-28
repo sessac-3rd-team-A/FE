@@ -8,6 +8,12 @@
   justify-content: center;
   overflow: hidden;
   padding: toSize(120) toSize(100) toSize(40) toSize(100);
+
+  @media (max-width: 1080px) {
+    overflow: auto;
+    padding: toSize(80, 1080) toSize(100, 1080) toSize(40, 1080)
+      toSize(100, 1080);
+  }
 }
 
 .result-mainContainer {
@@ -17,6 +23,10 @@
   //   row-gap: 2vh;
   column-gap: toSize(40);
   height: 100%;
+  @media (max-width: 1080px) {
+    display: flex;
+    flex-direction: column;
+  }
 
   .result-section {
     display: flex;
@@ -41,6 +51,18 @@
       font-size: toSize(24);
       text-align: center;
     }
+
+    @media (max-width: 1080px) {
+      margin-bottom: toSize(20, 1080);
+      h3 {
+        font-size: toSize(24, 1080);
+      }
+    }
+    @media (max-width: 768px) {
+      h3 {
+        font-size: toSize(24, 768);
+      }
+    }
   }
 
   .result-paint {
@@ -52,11 +74,17 @@
     grid-column: 2;
     grid-row: 1;
     height: 40vh;
+    @media (max-width: 1080px) {
+      height: fit-content;
+    }
   }
   .result-sentiment {
     grid-column: 2;
     grid-row: 2;
     height: 25vh;
+    @media (max-width: 1080px) {
+      height: fit-content;
+    }
   }
   .result-btns {
     grid-column: 2;
@@ -71,6 +99,15 @@
   margin: 0 auto;
   object-fit: contain;
   border-radius: toSize(20);
+
+  @media (max-width: 1080px) {
+    width: toSize(500, 1080);
+    height: toSize(500, 1080);
+  }
+  @media (max-width: 768px) {
+    width: toSize(500, 768);
+    height: toSize(500, 768);
+  }
 }
 
 .result-share {
@@ -85,14 +122,22 @@
     height: toSize(50);
     cursor: pointer;
   }
+  @media (max-width: 1080px) {
+    margin-top: toSize(50);
+  }
 }
 
 .result-memeImg {
+  position: relative;
   width: 80%;
   height: 70%;
-  margin: 0 auto;
+  margin: 0 auto toSize(50) auto;
   object-fit: contain;
   border-radius: toSize(20);
+  @media (max-width: 1080px) {
+    height: toSize(400, 1080);
+    margin: toSize(50, 1080) auto;
+  }
 }
 
 // sentiment chart
@@ -100,6 +145,9 @@
   display: flex;
   margin: 0 toSize(50) toSize(20) toSize(50);
   height: 60%;
+  @media (max-width: 1080px) {
+    height: toSize(200, 1080);
+  }
 }
 
 .result-sentimentLabel {
@@ -110,6 +158,9 @@
   font-size: toSize(24);
   font-weight: 700;
   margin-right: toSize(30);
+  @media (max-width: 1080px) {
+    font-size: toSize(24, 1080);
+  }
 }
 
 .result-sentimentChart {
@@ -160,6 +211,12 @@
     transition: all 0.5s;
     margin: toSize(30);
     z-index: 3;
+    @media (max-width: 1080px) {
+      width: toSize(250, 1080);
+      font-size: toSize(30, 1080);
+      margin-top: toSize(50, 1080);
+      margin-bottom: toSize(100, 1080);
+    }
 
     &:hover {
       background-color: #fffb94;
@@ -193,5 +250,9 @@
   bottom: -5vh;
   right: -5vw;
   width: toSize(350);
+  height: toSize(350);
   z-index: 2;
+  @media (max-width: 1080px) {
+    display: none;
+  }
 }

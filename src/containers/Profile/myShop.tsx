@@ -10,6 +10,7 @@ import heart_eye from '/public/images/heart_eye.png';
 import myShopBack from '/public/images/profileShop_background.jpg';
 import { useEffect, useState } from 'react';
 
+
 const API = 'https://openapi.naver.com/v1/search/shop.json';
 // const API = '/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
@@ -39,7 +40,6 @@ export default function MyShopPage():JSX.Element {
     fetchData();
   }, [accessToken]);
   
-
   async function getUserInfo(accessToken: string) {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`, {
@@ -84,6 +84,10 @@ export default function MyShopPage():JSX.Element {
   return (
     <div className="myShop-container">
       <div className="header-temp" />
+      <Image 
+        src={myShopBackLetter}
+        alt='배경 글자'
+      />
       <Image
         src={myShopBack}
         alt="배경 이미지"

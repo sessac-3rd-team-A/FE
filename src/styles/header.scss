@@ -13,18 +13,18 @@ a {
   30%,
   50%,
   70% {
-    transform: translateY(-8px);
+    transform: translateY(toSize(-8));
   }
   20%,
   40%,
   60% {
-    transform: translateY(8px);
+    transform: translateY(toSize(8));
   }
   80% {
-    transform: translateY(6.4px);
+    transform: translateY(toSize(6.4));
   }
   90% {
-    transform: translateY(-6.4px);
+    transform: translateY(toSize(-6.4));
   }
 }
 
@@ -32,17 +32,23 @@ a {
   top: 0;
   display: flex;
   position: fixed;
-  top: 0;
   z-index: 100;
-  background-color: transparent;
+  height: $header-height;
+  background-color: white;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 1px solid;
+  border-bottom: toSize(1) solid;
   padding: toSize(20) toSize(55);
+  @include media('<=768px') {
+    height: $mobile-header-height;
+  }
 
   .headerLogo {
     width: toSize(50);
+    @include media('<=768px') {
+      width: toSize(50, 768);
+    }
   }
 
   & div:first-of-type {
@@ -54,6 +60,10 @@ a {
     font-family: Lemon Milk;
     font-size: toSize(25);
     cursor: pointer;
+    line-height: 0;
+    @include media('<=768px') {
+      font-size: toSize(25, 768);
+    }
 
     &.middle {
       margin: 0 toSize(80);
@@ -66,8 +76,16 @@ a {
       width: toSize(185);
       height: toSize(55);
       border-radius: 50%;
-      border: 1px solid;
+      border: toSize(1) solid;
       box-shadow: 0 toSize(9) #3a89ff;
+      @include media('<=768px') {
+        width: toSize(141, 768);
+        height: toSize(48, 768);
+      }
+
+      &.logout {
+        margin-left: toSize(40);
+      }
     }
   }
 }

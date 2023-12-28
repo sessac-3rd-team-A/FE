@@ -7,8 +7,11 @@ interface MemeComponentProps {
   age: string | null;
 }
 
-const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
-  let url = 'http://localhost:8080/api/statistics/meme';
+const MemeComponentImg: React.FC<MemeComponentProps> = (
+  { gender, age },
+  // memeImgInfo: any
+) => {
+  let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
   if (gender && age) {
     url += `?gender=${gender}&age=${age}`;
   } else if (gender) {
@@ -26,18 +29,42 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
   }, [data]);
 
   if (loading) return <div>로딩중...</div>;
-  if (!data || !data.success) return <div>데이터가 없습니다.</div>;
+  if (!data || !data.success)
+    return (
+      // <div>데이터가 없습니다</div>
+      // <div style={{ width: '85%', display: 'flex' }}>
+      //   데이터가 없습니다.
+      //   <div className="meme-picture-container">
+      //     <img
+      //       className="meme-picture"
+      //       src={
+      //         'https://media1.jjalkey.com/media/1545404456423-feb7500233.png'
+      //       }
+      //     />
+      //   </div>
+      // </div>
+      <div className="meme-left-container">
+        <div className="meme-picture-container">
+          <img
+            className="meme-picture"
+            src={'/statistics/sorry.png'} // 기본 이미지 URL
+            alt="default meme"
+          />
+        </div>
+        <div className="meme-picture-message">SORRY, NO DATA</div>
+      </div>
+    );
 
   const handleClick = (rank: number) => {
     setSelectedRank(rank);
   };
 
   return (
-    <span style={{ width: '100%', display: 'flex' }}>
+    <div className="meme-left-container">
       <div className="meme-picture-container">
         {data.ranking
-          .filter((meme) => meme.rank === selectedRank)
-          .map((meme) => (
+          .filter((meme: any) => meme.rank === selectedRank)
+          .map((meme: any) => (
             <img
               className="meme-picture"
               key={meme.rank}
@@ -47,7 +74,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
           ))}
       </div>
       <div>
-        {data.ranking.map((meme, index) => (
+        {data.ranking.map((meme: any, index: any) => (
           <span key={index}>
             <button
               onClick={() => handleClick(meme.rank)}
@@ -60,8 +87,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
           </span>
         ))}
       </div>
-    </span>
+    </div>
   );
 };
-
 export default MemeComponentImg;

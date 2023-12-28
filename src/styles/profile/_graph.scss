@@ -1,4 +1,5 @@
 .profile-graph {
+  z-index: 1000;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -6,8 +7,8 @@
   font-family: LEMON MILK;
   padding: toSize(21) toSize(35);
 
-  .graph {
-    height: 50%;
+  .profile-graphChart {
+    height: 70%;
     display: flex;
     justify-content: center;
     canvas {
@@ -16,7 +17,7 @@
     }
   }
 
-  .graphText {
+  .profile-graphText {
     position: absolute;
     left: 0;
     bottom: 0;

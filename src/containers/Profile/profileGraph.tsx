@@ -1,42 +1,103 @@
+'use client';
+
 // PGraph.js
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import { lineOptions } from '@/utils/chartOptions'; // 공통 옵션 가져오기
+import { ProfileCalendarType } from '@/types';
+import { useEffect, useState } from 'react';
 
-const today = Date.now();
-const dayList = [];
-for (let i = 0; i < 7; i++) {
-  dayList.push(
-    new Date(today - i * 1000 * 60 * 60 * 24)
-      .toString()
-      .split(' ')
-      .slice(1, 3)
-      .join(' '),
-  );
+interface Props {
+  emoData: ProfileCalendarType | null;
 }
 
-const labels = dayList.reverse();
+export default function PGraph({ emoData }: Props) {
+  const [data1, setData1] = useState<number[]>([]);
+  const [data2, setData2] = useState<number[]>([]);
+  const [data3, setData3] = useState<number[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      fill: 'start',
-      data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
-      borderColor: 'rgb(255, 229, 99)',
-      backgroundColor: 'rgba(255, 211, 99, 0.1)',
-    },
-  ],
-};
+  useEffect(() => {
+    console.log('graph component emoData ::: ', emoData);
 
-export default function PGraph() {
+    const today = Date.now();
+    const dayList: string[] = [];
+
+    for (let i = 0; i < 7; i++) {
+      const newDate = new Date(today - i * 1000 * 60 * 60 * 24);
+      const year = newDate.getFullYear();
+      const month = newDate.getMonth() + 1;
+      const day = newDate.getDate();
+      const newString = `${year}-${month}-${day}`;
+      dayList.push(newString);
+    }
+
+    setLabels(dayList.reverse());
+
+    const newData1: number[] = [];
+    const newData2: number[] = [];
+    const newData3: number[] = [];
+
+    dayList.forEach((newString) => {
+      // console.log('뉴스트링 :: ', newString);
+      const emoItem = emoData?.calendar.find((el) => el.date === newString);
+      // console.log('이 때 있나 ?? ', emoItem);
+
+      if (emoItem) {
+        newData1.push(emoItem.result.positiveRatio);
+        newData2.push(emoItem.result.negativeRatio);
+        newData3.push(emoItem.result.neutralRatio);
+      } else {
+        newData1.push(0);
+        newData2.push(0);
+        newData3.push(0);
+      }
+    });
+
+    setData1(newData1);
+    setData2(newData2);
+    setData3(newData3);
+  }, [emoData]);
+
+  // useEffect(() => {
+  //   console.log('제발 잘 들어와라.. 1', data1);
+  //   console.log('제발 잘 들어와라.. 2', data2);
+  //   console.log('제발 잘 들어와라.. 3', data3);
+  // }, [data1, data2, data3]);
+
+  const lineData = {
+    labels,
+    datasets: [
+      {
+        label: 'Positive',
+        fill: 'start',
+        data: data1,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+      },
+      {
+        label: 'Negative',
+        fill: 'start',
+        data: data2,
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.1)',
+      },
+      {
+        label: 'Neutral',
+        fill: 'start',
+        data: data3,
+        borderColor: 'rgb(255, 205, 86)',
+        backgroundColor: 'rgba(255, 205, 86, 0.1)',
+      },
+    ],
+  };
+
   return (
     <div className="profile-graph">
-      <div className="graph">
-        <Line options={lineOptions} data={data} />
+      <div className="profile-graphChart">
+        {/* Line 컴포넌트를 주석 해제하고 data prop에 실제 데이터를 전달 */}
+        <Line options={lineOptions} data={lineData} />
       </div>
-      <div className="graphText">
+      <div className="profile-graphText">
         <p>MOOD</p>
         <p>GRAPH</p>
       </div>

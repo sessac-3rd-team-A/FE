@@ -11,6 +11,7 @@ export default function MySettingPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [complete, setComplete] = useState<string | null>(null);
+
   const [user, setUser] = useRecoilState(userState);
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
@@ -36,12 +37,14 @@ export default function MySettingPage() {
       const formattedData = Object.fromEntries(formData);
       
       console.log('formattedData >>>', formattedData);
+
       console.log('accessToken >>>', accessToken);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`
+
       },
       body: JSON.stringify({
         userId: formattedData.id,
@@ -50,6 +53,7 @@ export default function MySettingPage() {
       }),
 
     });
+
     if (!res.ok) {
       throw new Error('Failed to submit the data. Please try again.');
     }
@@ -112,7 +116,9 @@ export default function MySettingPage() {
         </button>
       </form>
       {error && <div className='error-box'>{error}</div>}
+
       {complete && <div className='complete-box'>{complete}</div>}
+
     </div>
         </div>
       </div>
