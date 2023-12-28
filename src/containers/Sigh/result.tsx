@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import ResultChart from './resultChart';
 import { useEffect, useState } from 'react';
 import { SighResultType } from '@/types';
+import Error404 from '../common/error404';
 
 export default function SighResultPage() {
   const pathname = usePathname();
@@ -14,6 +15,8 @@ export default function SighResultPage() {
   console.log(id);
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+  console.log(isError);
 
   const getResultData = async () => {
     try {
@@ -35,12 +38,17 @@ export default function SighResultPage() {
       setSighResult(data);
     } catch (error) {
       console.error('Fetch error:', error);
+      setIsError(true);
     }
   };
 
   useEffect(() => {
     getResultData();
   }, [id]);
+
+  if (isError) {
+    return <Error404 />;
+  }
 
   // 카톡 공유
   // csr에서만 실행
