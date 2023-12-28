@@ -8,6 +8,7 @@ export default function responseInterceptor() {
     console.log('options :: ', options);
 
     // 원래 fetch 실행 (응답 가로챌거니까)
+    console.log('원래 fetch 실행!!!!');
     const response: Response = await originalFetch(resource, options);
     if (response.status === 401) {
       const res2 = await fetch(
@@ -26,6 +27,8 @@ export default function responseInterceptor() {
         console.log('액세스 삭제 완료');
         localStorage.setItem('accessToken', newAccessToken);
         console.log('액세스 재설정 완료');
+        console.log('액세스 바꾸고 재실행!!!');
+
         const result: Response = await originalFetch(resource, {
           ...options,
           headers: { Authorization: `Bearer ${newAccessToken}` },

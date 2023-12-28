@@ -50,19 +50,20 @@ export interface SighResultType {
 }
 
 // profile result
-export interface ProfileResultType {
+export interface ProfileRatioType {
+  currentMonthStatistics: {
+    positiveRatio: number;
+    negativeRatio: number;
+    neutralRatio: number;
+  };
+}
+
+export interface ProfileCalendarType {
+  error: null | string;
   calendar: {
     date: string;
     result: SighResultType;
   }[];
-  error: null | string;
-  monthlyStatistics: {
-    [date: string]: {
-      positiveRatio: number;
-      negativeRatio: number;
-      neutralRatio: number;
-    };
-  };
 }
 
 // recoil user
