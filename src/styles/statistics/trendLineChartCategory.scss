@@ -52,6 +52,14 @@
   cursor: pointer;
   text-align: start;
   border: 1px solid #3a89ff;
+
+  @include media('<=768px') {
+    width: toSizeM(90);
+    height: toSizeM(32);
+    font-size: toSizeM(20);
+    bottom: toSizeM(35);
+    left: toSizeM(80);
+  }
 }
 .custom-select-trigger:after {
   position: absolute;
@@ -92,6 +100,9 @@
   pointer-events: none;
   transform: translateY(-15px);
   z-index: 10;
+  @include media('<=768px') {
+    left: toSizeM(80);
+  }
 }
 .custom-select.opened .custom-options {
   opacity: 1;
@@ -129,7 +140,11 @@
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   text-align: center;
+  @include media('<=768px') {
+    font-size: toSizeM(30);
+  }
 }
+
 .custom-option:first-of-type {
   border-radius: 4px 4px 0 0;
 }
