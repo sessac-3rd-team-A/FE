@@ -5,6 +5,10 @@
     height: 100%;
     padding-bottom: toSize(100);
 
+    @media screen and (min-width: 1920px) {
+        width: 1280px;
+    }
+
     .header-temp {
         width: 100%;
         height: $header-height;
@@ -14,7 +18,6 @@
     .myShop-image-background {
         width: 100%;
         padding: toSize(30);
-        filter: grayscale(100%);
         height: fit-content;
     }
 
@@ -112,7 +115,7 @@
       transform: translate(-350%, 260%);
     }
     to {
-      transform: translate(-280%, 260%);
+      transform: translate(-310%, 260%);
     }
   }
 

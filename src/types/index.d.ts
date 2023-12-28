@@ -21,7 +21,7 @@ export interface ShoppingApiResponse {
   total: number;
   start: number;
   display: number;
-  items: ShoppingItem[];
+  items: ShopApiRes[];
 }
 
 export interface TokenType {
