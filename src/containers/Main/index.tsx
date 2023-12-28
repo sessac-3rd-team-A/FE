@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Footer from '../common/footer';
 
 interface Section {
   text: string;
@@ -153,12 +154,8 @@ export default function MainPage() {
     };
   }, [isFooter, loading, isPage2, pageCount]);
 
-  useEffect(() => {}, []);
-
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
-      {/* <Main1 />
-      <Main2 /> */}
       <div className="mainWindContainer">
         <div className="mainWindImg">
           <Image
@@ -275,7 +272,7 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-      <footer style={{ height: '300px', backgroundColor: 'black' }}></footer>
+      <Footer />
     </div>
   );
 }
