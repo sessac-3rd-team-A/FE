@@ -23,6 +23,7 @@ export default function Header() {
   const handleMenuBar = () => {
     setSelectedIcon(2);
     setSelectedImage('/images/profileMenu_2.svg');
+    router.push(isLogin ? '/profile' : '/');
   };
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function Header() {
         <img src="/logo.svg" alt="logo" className="headerLogo" />
       </Link>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link href={isLogin ? '/profile' : '/'} className="headerMenu">
+        <Link href={isLogin ? '/profile' : '/'} className="headerMenu" onClick={handleMenuBar}>
           {isLogin ? 'PROFILE' : 'Main'}
         </Link>
         <Link href={'/sigh'} className="headerMenu middle">
