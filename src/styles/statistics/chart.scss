@@ -94,13 +94,3 @@
   position: sticky;
   z-index: -1;
 }
-
-@function toSizeM($size, $standard: null) {
-  @if ($standard) {
-    $calculatedSize: ($size / $standard) * 100;
-    @return #{$calculatedSize * 1vw};
-  } @else {
-    $calculatedSize: ($size / 768) * 100;
-    @return #{$calculatedSize * 1vw};
-  }
-}
