@@ -7,7 +7,7 @@
   font-family: LEMON MILK;
   padding: toSize(21) toSize(35);
 
-  .graph {
+  .profile-graphChart {
     height: 70%;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@
     }
   }
 
-  .graphText {
+  .profile-graphText {
     position: absolute;
     left: 0;
     bottom: 0;

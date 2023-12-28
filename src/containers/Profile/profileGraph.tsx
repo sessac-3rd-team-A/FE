@@ -93,11 +93,11 @@ export default function PGraph({ emoData }: Props) {
 
   return (
     <div className="profile-graph">
-      <div className="graph">
+      <div className="profile-graphChart">
         {/* Line 컴포넌트를 주석 해제하고 data prop에 실제 데이터를 전달 */}
         <Line options={lineOptions} data={lineData} />
       </div>
-      <div className="graphText">
+      <div className="profile-graphText">
         <p>MOOD</p>
         <p>GRAPH</p>
       </div>
