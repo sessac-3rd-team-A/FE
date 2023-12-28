@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import { ShopApiRes, ShoppingApiResponse, TokenType } from '@/types';
+import { ShopApiRes, ShoppingApiResponse, UserStateType, userDetailType } from '@/types';
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
 import ProfileMenu from './profileMenu';
@@ -9,10 +9,12 @@ import profile_char from '/public/images/profile_char.svg';
 import heart_eye from '/public/images/heart_eye.png';
 import myShopBack from '/public/images/profileShop_background.jpg';
 import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '@/utils/state';
+// import axios, { AxiosResponse } from "axios";
 
+const API = '/naver/v1/search/shop.json';
 
-const API = 'https://openapi.naver.com/v1/search/shop.json';
-// const API = '/v1/search/shop.json';
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
@@ -20,18 +22,19 @@ export default function MyShopPage():JSX.Element {
   const [accessToken, setAccessToken] = useState('');
   const [item, setItems] = useState<ShoppingApiResponse>();
   const [itemsResult, setItemsResult] = useState<ShopApiRes[]>();
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setAccessToken(localStorage.getItem('accessToken') || '');
-        const user = await getUserInfo(accessToken);
-        console.log('user >>>', user);
-  
-        const result = await SearchResult();
+
+        const userDetail = await getUserInfo(accessToken);
+        const algorithmRes = await algorithm(user, userDetail);
+        const result = await SearchResult(algorithmRes);
+
         setItems(result);
         setItemsResult(result.items || []);
-        console.log('item >>>', item);
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
       }
@@ -55,9 +58,26 @@ export default function MyShopPage():JSX.Element {
       throw new Error(`HTTP error! Status: ${err}`);
     }
   }
-  
-  async function SearchResult(): Promise<ShoppingApiResponse> {
-    const query = '인형';
+
+  async function algorithm(user: UserStateType, userDetail: userDetailType): Promise<String> {
+    const queryDefault = `${user.age} ${user.gender == 'F'? '여자' : '남자'}`;
+    if (!userDetail.error) {
+        if (userDetail.userInfo.sentiment === 'positive') {
+          return `${queryDefault} 인형`
+        }
+        if (userDetail.userInfo.sentiment === 'negative') {
+          return `${queryDefault} 스트레스`
+        }
+    }
+    return `${queryDefault}`
+    
+  }
+
+  // fetch ver
+  async function SearchResult(algorithmRes: string): Promise<ShoppingApiResponse> {
+
+    const query = `${algorithmRes}`;
+    console.log('query >>>>', query);
     const displayNum = 20;
     const url = `${API}?query=${encodeURIComponent(
       query,
@@ -68,12 +88,10 @@ export default function MyShopPage():JSX.Element {
       headers.append('X-Naver-Client-Id', NAVER_CLIENT_ID || '');
       headers.append('X-Naver-Client-Secret', NAVER_CLIENT_SECRET || '');
 
-      // console.log('header까진 됨!!!!!!!!!!');
       const res = await fetch(url, {
         method: 'GET',
         headers: headers,
       });
-      console.log('naver res >>>> ', res);
       return res.json();
     } catch (err) {
       console.error('fetch error:', err);
@@ -81,13 +99,31 @@ export default function MyShopPage():JSX.Element {
     }
   }
 
+  // axios ver
+  // async function SearchResult(): Promise<ShoppingApiResponse> {
+  //   const query = '인형';
+  //   const displayNum = 20;
+  //   const url = `${API}?query=${encodeURIComponent(query)}&display=${displayNum}&start=1&sort=date`;
+  
+  //   try {
+  //     const response = await axios.get(url, {
+  //       headers: {
+  //         'X-Naver-Client-Id': NAVER_CLIENT_ID || '',
+  //         'X-Naver-Client-Secret': NAVER_CLIENT_SECRET || '',
+  //       },
+  //     });
+  //     console.log('naver res >>>> ', response);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('axios error:', error);
+  //     throw error;
+  //   }
+  // }
+
   return (
+    <div style={{display: 'flex', alignItems: 'center'}}>
     <div className="myShop-container">
       <div className="header-temp" />
-      <Image 
-        src={myShopBackLetter}
-        alt='배경 글자'
-      />
       <Image
         src={myShopBack}
         alt="배경 이미지"
@@ -125,7 +161,7 @@ export default function MyShopPage():JSX.Element {
                           .replace(/<\/b>/g, '')}
                       </div>
                       <br />
-                      <span>가격</span> {product.lprice}
+                      <span>가격</span> {product.lprice}원
                     </div>
                   </div>
                 </Link>
@@ -134,6 +170,7 @@ export default function MyShopPage():JSX.Element {
           </div>
         ))}
       </div>
+    </div>
       <ProfileMenu />
     </div>
   );

@@ -6,13 +6,17 @@
     padding-bottom: toSize(100);
 
     @media screen and (min-width: 1920px) {
-        width: 1280px;
+        width: 1600px;
+        margin-left: toSize(350);
     }
 
     .header-temp {
         width: 100%;
         height: $header-height;
-        background-color: white;
+
+        @media screen and (max-width: 768px) {
+            height: toSize(220);
+        }
     }
 
     .myShop-image-background {
@@ -30,6 +34,10 @@
             width: toSize(300);
             height: toSize(400);
             transform: translate(-5%, -30%);
+
+            @media screen and (min-width: 1920px) {
+                width: 280px;
+            }
         }
 
         .char-eye {
@@ -37,6 +45,10 @@
             height: toSize(20);
             transform: translate(-350%, 250%);
             animation: slideIn 1s ease infinite alternate;
+            
+            @media screen and (min-width: 1920px) {
+                transform: translate(-500%, 250%);
+            }
         }
     }
     .myShop-explain-container {
@@ -51,12 +63,20 @@
             font-size: toSize(64);
             margin: toSize(10);
             margin-top: toSize(20);
+
+            @media screen and (min-width: 1920px) {
+                font-size: 45px;
+            }
         }
 
         #RECOMMAND2 {
             font-family: lemonSans;
             font-size: toSize(30);
             margin: 0px;
+
+            @media screen and (min-width: 1920px) {
+                font-size: 25px;
+            }
         }
     }
 
@@ -83,6 +103,12 @@
                 cursor: pointer;
                 box-shadow: 0 4px 0px -2px #0066FF; 
                 font-size: toSize(30);
+
+                @media screen and (min-width: 1920px) {
+                    width: 300px;
+                    height: 500px;
+                    font-size: 20px;
+                }
 
                 span {
                     font-weight: bold;

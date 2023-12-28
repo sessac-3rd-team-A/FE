@@ -11,8 +11,8 @@ export default function ProfileMenu() {
   const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
 
   const handleIconClick = (newImage: string, index: number) => {
-    setSelectedImage(newImage);
-    setSelectedIcon(index);
+    setSelectedImage(newImage)
+    setSelectedIcon(index)
   };
 
   useEffect(() => {}, [selectedImage]);
@@ -46,11 +46,11 @@ export default function ProfileMenu() {
                   handleIconClick(`/images/profileMenu_${index}.svg`, index)
                 }
               >
-                <img
-                  src={`/images/profileMenu_icon${index}.svg`}
-                  alt={`아이콘 ${index}`}
-                  className={`icon ${selectedIcon === index ? '' : ''}`}
-                />
+              <img
+                src={`/images/profileMenu_icon${index}.svg`}
+                alt={`아이콘 ${index}`}
+                className={`icon`}
+              />
               </div>
             </Link>
           ))}
