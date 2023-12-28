@@ -6,20 +6,28 @@ $border-radius-size: toSize(15);
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 60%;
+    height: 100%;
     align-items: center;
     justify-content: center;
+
+    p {
+        padding-bottom: toSize(10);
+    }
 
     .setting-form {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        width: 70%;
+        height: 50%;
+        padding: toSize(20);
 
         #nickName {
             margin-bottom: toSize(20);
             width: 100%;
             border: 1px solid #3A89FF;
-            height: toSize(60);
+            height: 20%;
             border-radius: $border-radius-size;
             padding: toSize(15);
             font-family: GMarketSans;
@@ -30,7 +38,7 @@ $border-radius-size: toSize(15);
             margin-bottom: toSize(20);
             width: 100%;
             border: 1px solid #3A89FF;
-            height: toSize(60);
+            height: 20%;
             border-radius: $border-radius-size;
             padding: toSize(15);
             font-family: GMarketSans;
@@ -40,12 +48,14 @@ $border-radius-size: toSize(15);
         .age-and-gender {
             display: flex;
             gap: toSize(20);
+            width: 100%;
+            height: 20%;
 
             #age {
                 margin-bottom: toSize(20);
                 width: 100%;
                 border: 1px solid #3A89FF;
-                height: toSize(60);
+                height: 100%;
                 border-radius: $border-radius-size;
                 padding-left: toSize(10);
                 font-family: GMarketSans;
@@ -57,24 +67,36 @@ $border-radius-size: toSize(15);
                 margin-bottom: toSize(20);
                 width: 100%;
                 border: 1px solid #3A89FF;
-                height: toSize(60);
+                height: 100%;
                 border-radius: $border-radius-size;
                 padding-left: toSize(15);
                 font-family: GMarketSans;
                 font-size: toSize(20);
                 color: gray;
-
             }
 
         }
         .submit-button {
             background-color: #3A89FF;
             color: white;
-            width: toSize(150);
+            width: 30%;
             font-size: toSize(20);
-            height: toSize(50);
+            height: 15%;
             border-radius: $border-radius-size;
             font-family: Lemon Milk;
+            margin-top: toSize(20);
         }
+    }
+
+    .error-box {
+        color: red;
+        font-size: toSize(20);
+        margin-top: toSize(10);
+    }
+
+    .complete-box {
+        color: green;
+        font-size: toSize(20);
+        margin-top: toSize(10);
     }
 }
