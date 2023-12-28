@@ -3,6 +3,19 @@
 .chart {
   width: 85%;
   display: flex;
+
+  @include media('<=768px') {
+    width: 100%;
+    padding: 0 30px;
+  }
+  .chart-inner-box {
+    display: flex;
+    width: 100%;
+    @include media('<=768px') {
+      height: 80%;
+      flex-direction: column-reverse;
+    }
+  }
 }
 .legendBox {
   display: flex;
@@ -10,6 +23,10 @@
   align-items: flex-end;
   justify-content: flex-start;
   margin-top: toSize(35);
+  @include media('<=768px') {
+    flex-direction: row;
+    padding: 0 0 toSizeM(30) 0;
+  }
   .item {
     width: toSize(145);
     color: #000;
@@ -19,9 +36,16 @@
     font-weight: 700;
     line-height: normal;
     cursor: pointer;
+    @include media('<=768px') {
+      width: 20%;
+      font-size: toSizeM(18);
+    }
   }
   img {
     vertical-align: middle;
     width: toSize(35);
+    @include media('<=768px') {
+      width: toSizeM(25);
+    }
   }
 }

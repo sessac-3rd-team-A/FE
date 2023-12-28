@@ -24,7 +24,7 @@ input[type='radio']:checked + .three-box-contents {
   width: toSize(1370);
   @include media('<=768px') {
     width: 100%;
-    height: toSizeM(734);
+    height: toSizeM(714);
 
     display: flex;
     flex-direction: column-reverse;
@@ -99,7 +99,7 @@ input[type='radio']:checked + .three-box-contents {
       transform: rotate(0deg);
       top: toSizeM(32);
       font-size: toSizeM(28);
-      left: toSizeM(-15);
+      transform: translate(-50%, 0);
       // position: unset;
     }
   }
@@ -125,7 +125,7 @@ input[type='radio']:checked + .three-box-contents {
       width: toSizeM(74);
       height: toSizeM(74);
       top: toSizeM(12);
-
+      font-size: toSizeM(30);
       left: toSizeM(-330);
     }
   }
@@ -188,7 +188,8 @@ input[type='radio']:checked + .three-box-contents {
   @include media('<=768px') {
     align-items: center;
     height: 50%;
-    width: toSizeM(170);
+    // width: toSizeM(170);
+    width: 100%;
   }
 
   .label-message {
@@ -212,8 +213,14 @@ input[type='radio']:checked + .three-box-contents {
     line-height: 110%;
     top: 11.9791666667vw;
     @include media('<=768px') {
+      font-size: toSizeM(28);
       transition: none;
       transform: none;
+
+      transform-origin: 0;
+      top: toSizeM(32);
+      left: 50%;
+      transform: translate(-50%, 0);
     }
   }
 
@@ -237,10 +244,10 @@ input[type='radio']:checked + .three-box-contents {
     @include media('<=768px') {
       width: toSizeM(74);
       height: toSizeM(74);
-
+      font-size: toSizeM(30);
       right: 0;
       top: 0;
-      float: left;
+
       // position: unset;
     }
   }
