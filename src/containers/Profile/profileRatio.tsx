@@ -62,6 +62,10 @@ export default function PRatio() {
         } else {
           console.error('Invalid data types for ratios');
         }
+      } else if (res.status === 405) {
+        console.error('액세스 토큰 만료됐을듯?');
+      } else {
+        console.error('완전 다른 에러');
       }
     } catch (error) {
       console.error(error);
@@ -69,11 +73,7 @@ export default function PRatio() {
   };
 
   useEffect(() => {
-    responseInterceptor();
-    // console.log('인터셉터 실행!!!');
-
     getData();
-    // console.log('getData 실행!!!!');
   }, []);
 
   return (
