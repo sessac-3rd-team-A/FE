@@ -10,6 +10,11 @@ export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
   const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
 
+  useEffect(() => {
+    setSelectedIcon(2)
+    setSelectedImage('/images/profileMenu_2.svg')
+  }, [])
+
   const handleIconClick = (newImage: string, index: number) => {
     setSelectedImage(newImage)
     setSelectedIcon(index)
