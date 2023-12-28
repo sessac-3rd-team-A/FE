@@ -14,6 +14,9 @@
     padding: toSize(80, 1080) toSize(100, 1080) toSize(40, 1080)
       toSize(100, 1080);
   }
+  @media (max-width: 768px) {
+    padding-top: 9vh;
+  }
 }
 
 .result-mainContainer {
