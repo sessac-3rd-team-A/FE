@@ -26,4 +26,11 @@ const selectedImageState = atom({
   default: '/images/profileMenu_2.svg',
 });
 
-export { userState, selectedIconState, selectedImageState };
+const modalState = atom({
+  key: 'modalState',
+  default: {
+    isModalOpen: false,
+  },
+});
+
+export { userState, selectedIconState, selectedImageState, modalState };

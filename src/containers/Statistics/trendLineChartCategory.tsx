@@ -20,18 +20,42 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
+  const genderOptions = [
+    { value: '전체', label: '전체' },
+    { value: 'F', label: '여성' },
+    { value: 'M', label: '남성' },
+  ];
+  const ageOptions = [
+    { value: '전체', label: '전체' },
+    { value: '10대', label: '10대' },
+    { value: '20대', label: '20대' },
+    { value: '30대', label: '30대' },
+    { value: '40대', label: '40대' },
+    { value: '50대', label: '50+' },
+  ];
 
+  let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`;
+  if (selectedGender !== '전체' || selectedAge !== '전체') {
+    url += '?';
+    if (selectedGender !== '전체') {
+      url += `gender=${selectedGender}`;
+    }
+    if (selectedAge !== '전체') {
+      if (url.endsWith('?')) {
+        url += `age=${selectedAge}`;
+      } else {
+        url += `&age=${selectedAge}`;
+      }
+    }
+  }
   useEffect(() => {
     // Function to fetch data based on selectedGender and selectedAge
     const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics?gender=${selectedGender}&age=${selectedAge}`,
-        { cache: 'no-store' },
-      );
+      const response = await fetch(url, { cache: 'no-store' });
       const info = await response.json();
 
       const currentDate = new Date();
-      const label = Array.from({ length: 30 }, (_, index) => {
+      const label = Array.from({ length: 31 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
         return date.toISOString().slice(0, 10);
@@ -48,8 +72,9 @@ export default function TrendLineChartCategory() {
             );
             return matchingData ? matchingData.averagePositive : 0;
           }),
-          borderColor: '#4866D2',
-          backgroundColor: '#4866D2',
+          borderColor: '#FF983A',
+          backgroundColor: '#FF983A',
+
           borderWidth: 1,
         },
         {
@@ -74,8 +99,8 @@ export default function TrendLineChartCategory() {
             );
             return matchingData ? matchingData.averageNegative : 0;
           }),
-          borderColor: '#FF983A',
-          backgroundColor: '#FF983A',
+          borderColor: '#4866D2',
+          backgroundColor: '#4866D2',
           borderWidth: 1,
         },
       ];
@@ -209,7 +234,15 @@ export default function TrendLineChartCategory() {
             ) => (x.percentage > arr[iMax].percentage ? i : iMax),
             0,
           );
-          percentages[maxIndex].percentage += difference;
+          if (difference > 0) {
+            percentages[maxIndex].percentage += difference;
+            // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
+            if (percentages[maxIndex].percentage >= 100) {
+              percentages = percentages.map((item: any) => {
+                return { ...item, percentage: 0 };
+              });
+            }
+          }
 
           return percentages.map((item: { id: string; percentage: number }) => (
             <button
@@ -241,32 +274,28 @@ export default function TrendLineChartCategory() {
               onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
               <div className="custom-select-cover">
-                {selectedGender === 'F' ? '여성' : '남성'}
+                {
+                  genderOptions.find(
+                    (option) => option.value === selectedGender,
+                  )?.label
+                }
               </div>
             </span>
             <div className="custom-options">
-              <span
-                className={`custom-option ${
-                  selectedGender === 'F' ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setSelectedGender('F');
-                  setGenderDropdownOpen(false);
-                }}
-              >
-                여성
-              </span>
-              <span
-                className={`custom-option ${
-                  selectedGender === 'M' ? 'selection' : ''
-                }`}
-                onClick={() => {
-                  setSelectedGender('M');
-                  setGenderDropdownOpen(false);
-                }}
-              >
-                남성
-              </span>
+              {genderOptions.map((option) => (
+                <span
+                  className={`custom-option ${
+                    selectedGender === option.value ? 'selection' : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedGender(option.value);
+                    setGenderDropdownOpen(false);
+                  }}
+                  key={option.value}
+                >
+                  {option.label}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -278,21 +307,26 @@ export default function TrendLineChartCategory() {
               className="custom-select-trigger"
               onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
             >
-              <div className="custom-select-cover">{selectedAge}</div>
+              <div className="custom-select-cover">
+                {
+                  ageOptions.find((option) => option.value === selectedAge)
+                    ?.label
+                }
+              </div>
             </span>
             <div className="custom-options">
-              {['10대', '20대', '30대', '40대', '50+'].map((age) => (
+              {ageOptions.map((option) => (
                 <span
-                  key={age}
                   className={`custom-option ${
-                    selectedAge === age ? 'selection' : ''
+                    selectedAge === option.value ? 'selection' : ''
                   }`}
                   onClick={() => {
-                    setSelectedAge(age);
+                    setSelectedAge(option.value);
                     setAgeDropdownOpen(false);
                   }}
+                  key={option.value}
                 >
-                  {age}
+                  {option.label}
                 </span>
               ))}
             </div>

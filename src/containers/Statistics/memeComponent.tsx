@@ -4,7 +4,11 @@ import { useState } from 'react';
 import MemeComponentImg from './memeComponentImg';
 import { relative } from 'path';
 
-const MemeComponent = () => {
+const MemeComponent = (
+  { memeImgInfo }: any,
+  // { gender }: { gender: string | null },
+  // { age }: { age: string | null },
+) => {
   const [gender, setGender] = useState('F');
   const [age, setAge] = useState('20대');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
@@ -26,7 +30,11 @@ const MemeComponent = () => {
 
   return (
     <>
-      <MemeComponentImg gender={gender} age={age} />
+      <MemeComponentImg
+        gender={gender}
+        age={age}
+        // memeImgInfo={memeImgInfo}
+      />
       <div className="legendBox">
         <button className="item" style={{ visibility: 'hidden' }}>
           {<img src="/statistics/positive.svg" alt="" />}

@@ -174,38 +174,41 @@ export default function MainPage() {
           alt="죽은얼굴"
         />
         <p className="mainFace mainTitle">AH-WHEW!</p>
-        <p className="mainContent">
-          {`Give Me Your Sigh.\nI'll Give You Happiness.`}
-        </p>
+        <div className="mainContent">
+          <p className="introLetter">{`Give Me Your Sigh.\nI'll Give You Happiness.`}</p>
+        </div>
       </div>
+
       <div className={`mainCardContainer`}>
         <div className={`mainCardContainer inner`}>
-          <div className="introContainer">
-            <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
-              {'TELL ME HOW WAS\nYOUR DAY?'}
-            </p>
-            <p className={`main2-intro ${pageCount === 2 ? 'fade-in' : ''}`}>
-              {'WE WANT YOU\nTO FEEL BETTER'}
-            </p>
-            <p className={`main2-intro ${pageCount === 3 ? 'fade-in' : ''}`}>
-              {'WE OFFER\nA MOOD CALENDAR'}
-            </p>
-            <p className={`main2-intro2 ${pageCount === 1 ? 'fade-in' : ''}`}>
-              {
-                '당신의 하루는 어땠나요?\n혹시 고민하는 일이 잘 안풀리나요?\n당신이 느끼는 모든 감정을 아휴에 풀어주세요.'
-              }
-            </p>
-            <p className={`main2-intro2 ${pageCount === 2 ? 'fade-in' : ''}`}>
-              {
-                '들려준 당신의 하루로 그림 일기를 그려드려요.\n기분이 좋아지는 밈은 덤입니다.\n기분이 나아지길 빌게요.'
-              }
-            </p>
-            <p className={`main2-intro2 ${pageCount === 3 ? 'fade-in' : ''}`}>
-              {
-                '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
-              }
-            </p>
-            <button className="main2-start">START</button>
+          <div className={`mobileC`}>
+            <div className="introContainer">
+              <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
+                {'TELL ME HOW WAS\nYOUR DAY?'}
+              </p>
+              <p className={`main2-intro ${pageCount === 2 ? 'fade-in' : ''}`}>
+                {'WE WANT YOU\nTO FEEL BETTER'}
+              </p>
+              <p className={`main2-intro ${pageCount === 3 ? 'fade-in' : ''}`}>
+                {'WE OFFER\nA MOOD CALENDAR'}
+              </p>
+              <p className={`main2-intro2 ${pageCount === 1 ? 'fade-in' : ''}`}>
+                {
+                  '당신의 하루는 어땠나요?\n혹시 고민하는 일이 잘 안풀리나요?\n당신이 느끼는 모든 감정을 아휴에 풀어주세요.'
+                }
+              </p>
+              <p className={`main2-intro2 ${pageCount === 2 ? 'fade-in' : ''}`}>
+                {
+                  '들려준 당신의 하루로 그림 일기를 그려드려요.\n기분이 좋아지는 밈은 덤입니다.\n기분이 나아지길 빌게요.'
+                }
+              </p>
+              <p className={`main2-intro2 ${pageCount === 3 ? 'fade-in' : ''}`}>
+                {
+                  '하루 하루의 그림 일기를 저장해드려요.\n당신만의 기분 달력을 완성해 보세요.'
+                }
+              </p>
+              <button className="main2-start">START</button>
+            </div>
           </div>
           <div className="main2-cardContainer">
             <div className={`main2-card card1`}>

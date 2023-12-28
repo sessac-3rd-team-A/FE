@@ -70,6 +70,10 @@ a {
       border-radius: 50%;
       border: toSize(1) solid;
       box-shadow: 0 toSize(9) #3a89ff;
+
+      &.logout {
+        margin-left: toSize(40);
+      }
     }
   }
 }

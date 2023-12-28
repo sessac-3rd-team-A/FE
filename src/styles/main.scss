@@ -110,15 +110,29 @@
   }
 }
 
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .mainWindContainer {
   display: flex;
-  overflow-y: hidden;
+  overflow: hidden;
   // margin-top: $header-height;
   height: calc(100vh);
   position: relative;
   align-items: center;
   justify-content: center;
   background-color: transparent;
+  @include media('<=768px') {
+    transform: rotate(-38deg) scale(1.3);
+  }
 
   .mainWindImg {
     z-index: 1;
@@ -196,7 +210,18 @@
     margin-left: toSize(1000);
     margin-top: toSize(800);
     white-space: pre-wrap;
-    animation: puff-in-hor 1.8s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    animation: scale-in-center 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s
+      both;
+
+    .introLetter {
+      @include media('<=768px') {
+        width: toSize(550);
+        font-size: toSize(32, 768);
+        margin-top: toSize(600);
+        margin-right: toSize(900);
+        transform: rotate(38deg);
+      }
+    }
   }
 }
 
@@ -234,6 +259,7 @@
     transform: rotate(6deg) translateY(-800px) translateX(1000px);
   }
 }
+
 @keyframes slide-in-tr2 {
   0% {
     transform: rotate(6deg) translateY(-800px) translateX(1000px);
@@ -259,6 +285,18 @@
       radial-gradient(100px, #000 98%, #0000) top/185.00px 200px;
     -webkit-mask: var(--mask);
     mask: var(--mask);
+    @include media('<=768px') {
+      flex-direction: column;
+      --mask: linear-gradient(to bottom, #0000 30px, #000 0),
+        radial-gradient(30px, #000 98%, #0000) top/55.50px 60px;
+      -webkit-mask: var(--mask);
+      mask: var(--mask);
+    }
+  }
+  .mobileC {
+    @include media('<=768px') {
+      transform: scale(1.3);
+    }
   }
   .introContainer {
     display: flex;
@@ -283,11 +321,15 @@
     display: none;
     transition: all 1s ease-in-out;
     font-family: Lemon Milk;
-    font-weight: 'medium';
+    font-weight: 500;
     color: white;
     font-size: toSize(25);
     white-space: pre-wrap;
     margin: toSize(24) 0px toSize(110) 0px;
+    @include media('<=768px') {
+      height: toSize(200);
+      font-size: toSize(45);
+    }
     &.fade-in {
       animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
       display: block;
@@ -307,6 +349,9 @@
     cursor: pointer;
     background-color: white;
     box-shadow: 0 toSize(9) black;
+    @include media('<=768px') {
+      align-self: center;
+    }
   }
   .main2-start:hover {
     animation: jello-vertical 0.9s both;
@@ -318,6 +363,10 @@
     height: toSize(700);
     align-items: center;
     justify-content: center;
+    @include media('<=768px') {
+      margin-top: toSize(300);
+      transform: scale(1.4);
+    }
   }
   .main2-card {
     position: absolute;

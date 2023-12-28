@@ -2,7 +2,7 @@
 import '@/styles/signIn/index.scss';
 import { FormEvent, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRecoilState } from 'recoil'; // recoil
+import { useRecoilState, useResetRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
 import MovingEye from '@/components/movingEye';
@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 
 export default function SignInPage() {
   const router = useRouter();
+  const resetUser = useResetRecoilState(userState);
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [user, setUser] = useRecoilState(userState); // recoil
   const eyeRef1 = useRef<HTMLDivElement>(null);
@@ -43,9 +44,18 @@ export default function SignInPage() {
     left: false,
   });
 
-  // useEffect(() => {
-  //   console.log('Updated user state:', user);
-  // }, [user]); // recoil
+  // 사용자의 임의적인 페이지 접근 막기
+  useEffect(() => {
+    if (user.isLogin) {
+      if (window.confirm('이미 로그인된 상태입니다.\n로그아웃 하시겠습니까?')) {
+        resetUser();
+        localStorage.clear();
+      } else {
+        router.replace('/');
+      }
+    }
+    // console.log('Updated user state:', user);
+  }, []); // recoil
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   async function onSubmitSignIn(event: FormEvent<HTMLFormElement>) {
@@ -65,34 +75,40 @@ export default function SignInPage() {
         userId: formattedData.userId,
         password: formattedData.password,
       }),
+    }).catch((error) => {
+      console.log(error);
+      alert(error);
+      setIsLoading(false);
     });
-    if (response.status == 200) {
-      const data = await response.json();
-      // recoil 상태 설정
-      setUser({
-        userId: data.userId,
-        nickname: data.nickname,
-        age: data.age,
-        gender: data.gender,
-        isLogin: true,
-      });
-      // 토큰 값은 로컬스토리지에 저장
-      // localStorage.setItem('accessToken', data.accessToken);
-      // localStorage.setItem('refreshToken', data.refreshToken);
-      // 토큰 값 쿠키에 저장
-      Cookies.set('accessToken', data.accessToken, { expires: 1 });
-      Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
-      console.log('accessToken>>>', data);
+    if (response) {
+      if (response.status == 200) {
+        const data = await response.json();
+        // recoil 상태 설정
+        setUser({
+          userId: data.userId,
+          nickname: data.nickname,
+          age: data.age,
+          gender: data.gender,
+          isLogin: true,
+        });
+        // 토큰 값은 로컬스토리지에 저장
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        // 토큰 값 쿠키에 저장
+        // Cookies.set('accessToken', data.accessToken, { expires: 1 });
+        // Cookies.set('refreshToken', data.refreshToken, { expires: 1 });
 
-      router.push('/');
-    } else {
-      const data = await response.json();
-      if (data.error == 'wrong userId') {
-        alert('아이디가 틀렸습니다');
-        setIsLoading(false);
-      } else if (data.error == 'wrong password') {
-        alert('비밀번호가 틀렸습니다');
-        setIsLoading(false);
+        router.push('/');
+      } else {
+        console.log(response.statusText);
+        const data = await response.json();
+        if (data.error == 'wrong userId') {
+          alert('아이디가 틀렸습니다');
+          setIsLoading(false);
+        } else if (data.error == 'wrong password') {
+          alert('비밀번호가 틀렸습니다');
+          setIsLoading(false);
+        }
       }
     }
   }
@@ -121,6 +137,9 @@ export default function SignInPage() {
     if (response?.status == 200) {
       setIsLoading(false);
       setIsLogin(true);
+    } else {
+      alert('이미 존재하는 아이디입니다.');
+      setIsLoading(false);
     }
   }
 

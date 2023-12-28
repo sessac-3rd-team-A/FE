@@ -2,18 +2,17 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
 import moment from 'moment';
 import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
 import '@/styles/profile/_calendar.scss';
-import { ProfileResultType } from '@/types';
+import { ProfileCalendarType } from '@/types';
 // import Image from 'next/image';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setModalDate: Dispatch<SetStateAction<string>>;
-  emoData: ProfileResultType | null;
+  emoData: ProfileCalendarType | null;
 }
 
 export default function EmoCalendar({
@@ -88,7 +87,7 @@ export default function EmoCalendar({
         onActiveStartDateChange={
           ({ activeStartDate }) =>
             // getActiveMonth(activeStartDate)
-            console.log('하이')
+            console.log('달 이동!!')
           // alert(`next, prev 눌러서 설정된 시작 일자 : ${activeStartDate}`)
         }
       />

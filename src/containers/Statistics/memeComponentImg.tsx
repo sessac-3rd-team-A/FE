@@ -7,7 +7,10 @@ interface MemeComponentProps {
   age: string | null;
 }
 
-const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
+const MemeComponentImg: React.FC<MemeComponentProps> = (
+  { gender, age },
+  // memeImgInfo: any
+) => {
   let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
   if (gender && age) {
     url += `?gender=${gender}&age=${age}`;
@@ -60,8 +63,8 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
     <div className="meme-left-container">
       <div className="meme-picture-container">
         {data.ranking
-          .filter((meme) => meme.rank === selectedRank)
-          .map((meme) => (
+          .filter((meme: any) => meme.rank === selectedRank)
+          .map((meme: any) => (
             <img
               className="meme-picture"
               key={meme.rank}
@@ -71,7 +74,7 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
           ))}
       </div>
       <div>
-        {data.ranking.map((meme, index) => (
+        {data.ranking.map((meme: any, index: any) => (
           <span key={index}>
             <button
               onClick={() => handleClick(meme.rank)}
@@ -87,5 +90,4 @@ const MemeComponentImg: React.FC<MemeComponentProps> = ({ gender, age }) => {
     </div>
   );
 };
-
 export default MemeComponentImg;

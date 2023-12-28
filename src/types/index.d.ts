@@ -1,19 +1,19 @@
 // my-shop details
 export interface ShopApiRes {
-    title: string;
-    link: string;
-    image: string;
-    lprice: number;
-    hprice: number;
-    mallName: string;
-    productId: number;
-    productType: number;
-    brand: string;
-    maker: string;
-    category1: string;
-    category2: string;
-    category3: string;
-    category4: string;
+  title: string;
+  link: string;
+  image: string;
+  lprice: number;
+  hprice: number;
+  mallName: string;
+  productId: number;
+  productType: number;
+  brand: string;
+  maker: string;
+  category1: string;
+  category2: string;
+  category3: string;
+  category4: string;
 }
 
 export interface ShoppingApiResponse {
@@ -25,8 +25,8 @@ export interface ShoppingApiResponse {
 }
 
 export interface TokenType {
-  accessToken: string | null,
-  refreshToken: string | null,
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 export interface userDataType {
@@ -50,19 +50,20 @@ export interface SighResultType {
 }
 
 // profile result
-export interface ProfileResultType {
+export interface ProfileRatioType {
+  currentMonthStatistics: {
+    positiveRatio: number;
+    negativeRatio: number;
+    neutralRatio: number;
+  };
+}
+
+export interface ProfileCalendarType {
+  error: null | string;
   calendar: {
     date: string;
     result: SighResultType;
   }[];
-  error: null | string;
-  monthlyStatistics: {
-    [date: string]: {
-      positiveRatio: number;
-      negativeRatio: number;
-      neutralRatio: number;
-    };
-  };
 }
 
 // recoil user
@@ -73,3 +74,21 @@ export interface UserStateType {
   gender: string;
   isLogin: boolean;
 }
+
+//statistic all
+export interface StatisticsType {
+  date: string;
+  averagePositive: number;
+  averageNegative: number;
+  averageNeutral: number;
+  count: number;
+}
+
+export interface StatisticsTypeArray extends Array<StatisticsType> {}
+
+// class Word {
+//   constructor(
+//       public term: string,
+//       public def: string
+//   ) {}
+// }

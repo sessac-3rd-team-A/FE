@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { useRafState } from 'react-use';
+import React, { useEffect } from 'react';
 import cx from 'clsx';
 import '../styles/signIn/movingEye.scss';
 
@@ -15,7 +14,7 @@ const MovingEye = ({ cName, eRef, cord, setCord }: any) => {
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent): void => {
-      // if (!eRef.current) return;
+      if (!eRef.current) return;
 
       const { x: x1, y: y1 } = e;
       const { x: x2, y: y2 } = eRef?.current?.getBoundingClientRect();

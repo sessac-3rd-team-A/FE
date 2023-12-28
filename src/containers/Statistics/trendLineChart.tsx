@@ -22,7 +22,7 @@ ChartJS.register(
   Legend,
 );
 
-export default function TrendLineChart() {
+export default function TrendLineChart({ statisticsInfo }: any) {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
@@ -30,16 +30,8 @@ export default function TrendLineChart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`,
-          {
-            cache: 'no-store',
-          },
-        );
-        const info = await res.json();
-
         const currentDate = new Date();
-        const label = Array.from({ length: 30 }, (_, index) => {
+        const label = Array.from({ length: 31 }, (_, index) => {
           const date = new Date(currentDate);
           date.setDate(date.getDate() - index);
           return date.toISOString().slice(0, 10);
@@ -52,21 +44,21 @@ export default function TrendLineChart() {
             label: 'Positive',
             data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averagePositive : 0;
             }),
-            borderColor: '#4866D2',
-            backgroundColor: '#4866D2',
+            borderColor: '#FF983A',
+            backgroundColor: '#FF983A',
             borderWidth: 1,
           },
           {
             id: 'neutral',
             label: 'Neutral',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averageNeutral : 0;
@@ -78,15 +70,15 @@ export default function TrendLineChart() {
           {
             id: 'negative',
             label: 'Negative',
-            data: Array.from({ length: 30 }, (_, index) => {
+            data: Array.from({ length: 31 }, (_, index) => {
               const targetDate = label[index];
-              const matchingData = info.find(
+              const matchingData = statisticsInfo.find(
                 (entry: { date: string }) => entry.date === targetDate,
               );
               return matchingData ? matchingData.averageNegative : 0;
             }),
-            borderColor: '#FF983A',
-            backgroundColor: '#FF983A',
+            borderColor: '#4866D2',
+            backgroundColor: '#4866D2',
             borderWidth: 1,
           },
         ];
