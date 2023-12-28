@@ -6,6 +6,28 @@
   margin: toSize(170) 0 0 toSize(94);
   overflow: hidden;
 
+  // top: 0;
+
+  // position: fixed;
+  // z-index: 100;
+  // height: $header-height;
+  // background-color: white;
+  // justify-content: space-between;
+  // align-items: center;
+
+  // border-bottom: toSize(1) solid;
+  // padding: toSize(20) toSize(55);
+
+  @include media('<=768px') {
+    height: calc(100vh - $mobile-header-height);
+    margin: toSize(250) 0 0 0;
+    // width: calc(100vw - toSize(45));
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
   .chart-title {
     color: #000;
 
@@ -71,4 +93,14 @@
   --animate-duration: 14s;
   position: sticky;
   z-index: -1;
+}
+
+@function toSizeM($size, $standard: null) {
+  @if ($standard) {
+    $calculatedSize: ($size / $standard) * 100;
+    @return #{$calculatedSize * 1vw};
+  } @else {
+    $calculatedSize: ($size / 768) * 100;
+    @return #{$calculatedSize * 1vw};
+  }
 }

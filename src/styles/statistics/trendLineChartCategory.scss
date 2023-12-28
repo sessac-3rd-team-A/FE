@@ -26,7 +26,9 @@
   display: inline-block;
   user-select: none;
   margin: 0 toSize(25);
-  top: toSize(60);
+  height: toSize(32);
+  top: toSize(50);
+  margin-top: toSize(5);
 }
 .custom-select-wrapper select {
   display: none;
@@ -38,7 +40,7 @@
 .custom-select-trigger {
   position: relative;
   display: block;
-  width: toSize(80);
+  width: toSize(90);
   height: toSize(32);
   // padding: 0 84px 0 22px;
   font-size: toSize(20);
@@ -122,7 +124,7 @@
   border-bottom: 1px solid #b5b5b5;
   font-size: toSize(18);
   font-weight: 600;
-  color: #b5b5b5;
+  color: black;
   // line-height: 7px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;

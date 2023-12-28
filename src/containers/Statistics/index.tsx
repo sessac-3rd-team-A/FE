@@ -69,7 +69,7 @@ export default async function StatisticsPage() {
 
   return (
     <div className="trend-container">
-      <div className="chart-title, animate__animated animate__bounce ">
+      <div className="chart-title">
         <Image src={trendText} alt="Picture of me" className="chart-text" />
       </div>
       <ThreeBox

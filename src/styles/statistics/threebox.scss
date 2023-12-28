@@ -2,10 +2,16 @@
 
 /* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
 .three-box-wrap {
+  display: flex;
   width: 100%;
   height: toSize(454);
   align-items: center;
+  @include media('<=768px') {
+    height: toSizeM(974);
+    // justify-content: center;
+  }
 }
+
 /* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
 input.three-box-button {
   display: none;
@@ -85,6 +91,9 @@ input[type='radio']:checked + .three-box-contents {
     position: absolute;
     top: toSize(320);
     left: toSize(13);
+    @include media('<=768px') {
+      top: 0;
+    }
   }
 }
 
@@ -106,6 +115,8 @@ input[type='radio']:checked + .three-box-contents {
   overflow: hidden;
   border-radius: toSize(40);
   margin: 0 toSize(5);
+  @include media('<=768px') {
+  }
 }
 .three-box-inner {
   display: flex; //가운데 회색박스 나옴
@@ -177,6 +188,9 @@ input[type='radio']:checked + .three-box-contents {
     position: absolute;
     top: toSize(320);
     right: toSize(10);
+    @include media('<=768px') {
+      top: 0;
+    }
   }
 }
 .three-box-description h3 {
