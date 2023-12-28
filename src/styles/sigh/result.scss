@@ -115,18 +115,29 @@
 
 .result-share {
   text-align: center;
-  margin-bottom: toSize(50);
+  margin: toSize(50) auto;
+  display: flex;
+  justify-content: center;
   .result-kakao-btn {
     width: toSize(50);
     height: toSize(50);
+    position: relative;
   }
   .result-link-btn {
     width: toSize(50);
     height: toSize(50);
     cursor: pointer;
+    position: relative;
   }
   @media (max-width: 1080px) {
-    margin-top: toSize(50);
+    .result-kakao-btn {
+      width: toSize(50, 1080);
+      height: toSize(50, 1080);
+    }
+    .result-link-btn {
+      width: toSize(50, 1080);
+      height: toSize(50, 1080);
+    }
   }
 }
 

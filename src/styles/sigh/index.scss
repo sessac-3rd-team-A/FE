@@ -43,6 +43,12 @@
   &:hover {
     background-color: #fffb94;
   }
+  @media (max-width: 1080px) {
+    width: toSize(250, 1080);
+    font-size: toSize(30, 1080);
+    margin-top: toSize(50, 1080);
+    margin-bottom: toSize(100, 1080);
+  }
 }
 
 .sigh-write {

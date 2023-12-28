@@ -102,22 +102,13 @@ export default function SighResultPage() {
               id="kakaotalk-sharing-btn"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
-              <Image
-                src="/sigh/kakao.png"
-                alt="kakao"
-                width={50}
-                height={50}
-                className="result-kakao-btn"
-              />
+              <div className="result-kakao-btn">
+                <Image src="/sigh/kakao.png" alt="kakao" fill sizes="null" />
+              </div>
             </a>
-            <Image
-              src="/sigh/link.png"
-              alt="link"
-              width={50}
-              height={50}
-              className="result-link-btn"
-              onClick={copyLinkToClipboard}
-            />
+            <div className="result-link-btn" onClick={copyLinkToClipboard}>
+              <Image src="/sigh/link.png" alt="link" fill sizes="null" />
+            </div>
           </div>
         </section>
 
