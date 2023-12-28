@@ -238,7 +238,7 @@ export default function MainPage() {
                 alt="imgCard"
                 className="imgCard"
                 src="/main/mainCard1.png"
-                priority={false}
+                priority
                 sizes="null"
                 fill
               />
