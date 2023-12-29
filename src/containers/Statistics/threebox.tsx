@@ -12,14 +12,13 @@ export default function ThreeBox(
   // { age }: { age: string | null },
 ) {
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
-  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);  //메뉴클릭 확인 로직
+
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
   };
 
+
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
-  // console.log(age);
-  // console.log(gender);
   return (
     <>
       <div className="three-box-wrap">

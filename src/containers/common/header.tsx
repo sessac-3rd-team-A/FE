@@ -4,11 +4,7 @@ import '@/styles/header.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import {
-  userState,
-  selectedIconState,
-  selectedImageState,
-} from '@/utils/state';
+import { userState, selectedIconState } from '@/utils/state';
 import { useEffect, useState } from 'react';
 import responseInterceptor from '@/utils/fetch';
 
@@ -23,12 +19,11 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState<boolean | undefined>();
 
   const handleMenuBar = () => {
-    setSelectedIcon(2);
+    // setSelectedIcon(2);
     router.push(isLogin ? '/profile' : '/');
   };
 
   useEffect(() => {
-    // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [user.isLogin]); // recoil
 

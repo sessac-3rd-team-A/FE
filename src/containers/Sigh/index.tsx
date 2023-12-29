@@ -22,8 +22,6 @@ export default function SighPage() {
   const formattedSighText = sighText.replace(/\r\n|\r|\n/g, '');
 
   const handleStartButtonClick = async () => {
-    console.log(isLoading);
-
     const bearerToken =
       typeof window !== 'undefined'
         ? localStorage.getItem('accessToken')
@@ -57,7 +55,6 @@ export default function SighPage() {
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        console.log(isLoading);
       }
     }
   };
@@ -102,7 +99,13 @@ export default function SighPage() {
           <Image src="/sigh/sigh_doodle_3.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleD">
-          <Image src="/sigh/sigh_doodle_4.png" alt="doodle" fill sizes="null" />
+          <Image
+            src="/sigh/sigh_doodle_4.png"
+            alt="doodle"
+            fill
+            sizes="null"
+            priority
+          />
         </div>
         <div className="sigh-doodle doodleE">
           <Image src="/sigh/sigh_doodle_5.png" alt="doodle" fill sizes="null" />

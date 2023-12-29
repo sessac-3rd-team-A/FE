@@ -88,30 +88,25 @@ $container-size: toSize(200);
 
 @keyframes bounce {
   0% {
-    top: 40px;
+    // top: 40px;
+    top: toSize(10);
     border-radius: 50%;
   }
   50% {
-    top: 120px;
-    height: 40px;
+    // top: 120px;
+    top: toSize(50);
+    // height: 40px;
+    height: toSize(50);
     border-radius: 20% 20% 50% 50%;
   }
-  55% {
-    top: 150px;
-    height: 25px;
-    border-radius: 50% 50% 20% 20%;
-  }
-  65% {
-    top: 120px;
-    height: 40px;
-    border-radius: 50%;
-  }
   95% {
-    top: 40px;
+    // top: 40px;
+    top: toSize(10);
     border-radius: 50%;
   }
   100% {
-    top: 40px;
+    // top: 40px;
+    top: toSize(30);
     border-radius: 50%;
   }
 }

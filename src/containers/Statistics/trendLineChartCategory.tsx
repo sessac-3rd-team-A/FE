@@ -116,7 +116,6 @@ export default function TrendLineChartCategory() {
       setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
     } else {
       setVisibleDataset(id); // 그렇지 않으면 선택
-      console.log(id);
     }
   };
 

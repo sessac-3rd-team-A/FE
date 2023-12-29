@@ -19,6 +19,7 @@ export default async function StatisticsPage() {
   );
   statisticsInfo = await statisticsResponse.json();
 
+
   return (
     <div className="trend-container">
       <div className="chart-title">

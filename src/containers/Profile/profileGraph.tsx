@@ -17,8 +17,6 @@ export default function PGraph({ emoData }: Props) {
   const [labels, setLabels] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log('graph component emoData ::: ', emoData);
-
     const today = Date.now();
     const dayList: string[] = [];
 
@@ -38,9 +36,7 @@ export default function PGraph({ emoData }: Props) {
     const newData3: number[] = [];
 
     dayList.forEach((newString) => {
-      // console.log('뉴스트링 :: ', newString);
       const emoItem = emoData?.calendar.find((el) => el.date === newString);
-      // console.log('이 때 있나 ?? ', emoItem);
 
       if (emoItem) {
         newData1.push(emoItem.result.positiveRatio);
@@ -57,12 +53,6 @@ export default function PGraph({ emoData }: Props) {
     setData2(newData2);
     setData3(newData3);
   }, [emoData]);
-
-  // useEffect(() => {
-  //   console.log('제발 잘 들어와라.. 1', data1);
-  //   console.log('제발 잘 들어와라.. 2', data2);
-  //   console.log('제발 잘 들어와라.. 3', data3);
-  // }, [data1, data2, data3]);
 
   const lineData = {
     labels,
