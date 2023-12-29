@@ -6,7 +6,7 @@ import ProfileMenu from '@/containers/Profile/profileMenu';
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState } from '@/utils/state';
-
+import { useRouter } from 'next/navigation';
 
 export default function MySettingPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -17,6 +17,8 @@ export default function MySettingPage() {
   const [refreshToken, setRefreshToken] = useState('');
   const [nickname, setNickname] = useState('');
 
+  const router = useRouter();
+
   useEffect(() => {
     const storedAccessToken = localStorage.getItem('accessToken');
     const storedRefreshToken = localStorage.getItem('refreshToken');
@@ -25,6 +27,15 @@ export default function MySettingPage() {
     setRefreshToken(storedRefreshToken || '');
     setNickname(user.nickname);
   }, [nickname]);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      if (!user.isLogin) {
+        router.push('/');
+      }
+    };
+    checkAuth();
+  }, []);
 
   async function onSubmitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -72,7 +83,6 @@ export default function MySettingPage() {
         gender: data.gender,
         isLogin: true,
       });
-
     } catch (error) {
       setError('값을 다 안채웠거나, 이미 존재하는 아이디입니다.');
     } finally {
@@ -114,7 +124,11 @@ export default function MySettingPage() {
                   <option value="40대">40 대</option>
                   <option value="50대">50 대 이상</option>
                 </select>
-                <select id="gender" name="gender" defaultValue={user.gender === 'F' ? '여자' : '남자'}>
+                <select
+                  id="gender"
+                  name="gender"
+                  defaultValue={user.gender === 'F' ? '여자' : '남자'}
+                >
                   <option value="" disabled hidden>
                     Gender
                   </option>

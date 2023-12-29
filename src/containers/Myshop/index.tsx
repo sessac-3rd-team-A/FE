@@ -16,6 +16,7 @@ import myShopBack from '/public/images/profileShop_background.jpg';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState } from '@/utils/state';
+import { useRouter } from 'next/navigation';
 // import axios, { AxiosResponse } from "axios";
 
 const API = '/naver/v1/search/shop.json';
@@ -28,6 +29,17 @@ export default function MyShopPage(): JSX.Element {
   const [item, setItems] = useState<ShoppingApiResponse>();
   const [itemsResult, setItemsResult] = useState<ShopApiRes[]>();
   const [user, setUser] = useRecoilState(userState);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      if (!user.isLogin) {
+        router.push('/');
+      }
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
