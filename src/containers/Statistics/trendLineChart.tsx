@@ -223,7 +223,9 @@ export default function TrendLineChart({ statisticsInfo }: any) {
                 <button
                   key={item.id}
                   id={item.id}
-                  className="item"
+                  className={`item ${
+                    visibleDataset === item.id ? 'selected' : ''
+                  }`}
                   onClick={() => handleButtonClick(item.id)}
                 >
                   {item.id === 'positive' && (
