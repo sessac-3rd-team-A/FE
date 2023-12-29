@@ -42,7 +42,7 @@ input[type='radio']:checked + .three-box-contents {
   float: left;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.1s ease-out;
+  // transition: all 0.1s ease-out;
   margin: 0 toSize(5);
   border: toSize(10);
   border-radius: 40px;
@@ -77,6 +77,9 @@ input[type='radio']:checked + .three-box-contents {
   height: fit-content;
 
   position: relative;
+  @include media('<=768px') {
+    width: 100%;
+  }
 
   p {
     position: absolute;
@@ -100,7 +103,8 @@ input[type='radio']:checked + .three-box-contents {
       transform: rotate(0deg);
       top: toSizeM(32);
       font-size: toSizeM(28);
-      transform: translate(-50%, 0);
+      transform: translate(-30%, 0);
+      left: 50%;
       // position: unset;
     }
   }
@@ -128,7 +132,8 @@ input[type='radio']:checked + .three-box-contents {
       height: toSizeM(74);
       top: toSizeM(12);
       font-size: toSizeM(30);
-      left: toSizeM(-330);
+      // left: toSizeM(-330);
+      left: 3%;
     }
   }
 }
@@ -146,7 +151,7 @@ input[type='radio']:checked + .three-box-contents {
   // height: toSize(876);
   width: toSize(1370);
   width: 0;
-  transition: all 0.1s ease-out;
+  // transition: all 0.1s ease-out;
   // z-index: -1;
   overflow: hidden;
   border-radius: toSize(40);
@@ -180,6 +185,10 @@ input[type='radio']:checked + .three-box-contents {
   // -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  @include media('<=768px') {
+    height: 100%;
+    margin: 0;
+  }
 }
 .three-box-description {
   display: flex;
@@ -189,7 +198,7 @@ input[type='radio']:checked + .three-box-contents {
   // justify-content: center;
   @include media('<=768px') {
     align-items: center;
-    height: 35%;
+    height: toSizeM(200);
     // width: toSizeM(170);
     width: 100%;
     // left: 50%;
@@ -205,7 +214,7 @@ input[type='radio']:checked + .three-box-contents {
     font-weight: 400;
     line-height: 110%;
     color: #fff;
-    transition: all 0.1s ease-out;
+    // transition: all 0.1s ease-out;
 
     transform: rotate(270deg);
     transform-origin: left;

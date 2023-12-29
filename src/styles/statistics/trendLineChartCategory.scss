@@ -58,7 +58,7 @@
     height: toSizeM(32);
     font-size: toSizeM(20);
     bottom: toSizeM(35);
-    left: toSizeM(80);
+    left: 70%;
   }
 }
 .custom-select-trigger:after {
@@ -75,7 +75,13 @@
   transform: rotate(45deg) translateY(-50%);
   transition: all 0.4s ease-in-out;
   transform-origin: 50% 0;
+  @include media('<=768px') {
+    width: toSizeM(10);
+    height: toSizeM(10);
+    right: toSizeM(10);
+  }
 }
+
 .custom-select.opened .custom-select-trigger:after {
   margin-top: 3px;
   transform: rotate(-135deg) translateY(-50%);
@@ -87,7 +93,7 @@
   left: 0;
   right: 0;
   min-width: 100%;
-  margin: toSize(10) 0;
+  // margin: toSize(10) 0;
   border: 1px solid #b5b5b5;
   border-radius: 4px;
   box-sizing: border-box;
