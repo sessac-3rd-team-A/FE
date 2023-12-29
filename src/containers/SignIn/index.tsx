@@ -7,7 +7,6 @@ import { userState } from '@/utils/state'; // recoil
 import { useEffect } from 'react'; // recoil
 import MovingEye from '@/components/movingEye';
 import { useRafState } from 'react-use';
-import Cookies from 'js-cookie';
 
 export default function SignInPage() {
   const router = useRouter();

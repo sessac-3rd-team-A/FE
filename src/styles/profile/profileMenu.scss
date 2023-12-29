@@ -33,6 +33,10 @@ $container-size: toSize(200);
       border-radius: 50%;
       cursor: pointer;
 
+      @media screen and (max-width: 768px) {
+        gap: toSize(230);
+      }
+
         .icon-selected-circle {
           background-color: $primary-color;
           width: $icon-circle-size;
@@ -41,6 +45,10 @@ $container-size: toSize(200);
           align-items: center;
           justify-content: center;
           animation: bounce 1s ease-in-out;
+
+          @media screen and (max-width: 768px) {
+            transform: scale(2) translateY(-60%);
+          }
 
           .icon {
             width: 80%;
@@ -51,6 +59,10 @@ $container-size: toSize(200);
           transform: translateY(80%);
           width: $icon-circle-size;
           height: $icon-circle-size;
+
+          @media screen and (max-width: 768px) {
+            transform: scale(1.5);
+          }
 
           .icon {
             width: 80%;
@@ -68,6 +80,10 @@ $container-size: toSize(200);
   width: 100%;
   position: relative;
   z-index: 100;
+  
+  @media screen and (max-width: 768px) {
+    transform: scale(2);
+  }
 }
 
 @keyframes bounce {
