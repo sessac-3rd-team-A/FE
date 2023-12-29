@@ -63,9 +63,9 @@ export default function PRatio() {
           console.error('Invalid data types for ratios');
         }
       } else if (res.status === 405) {
-        console.error('액세스 토큰 만료됐을듯?');
+        console.error('Access Token Expired');
       } else {
-        console.error('완전 다른 에러');
+        console.error('Please Login');
       }
     } catch (error) {
       console.error(error);

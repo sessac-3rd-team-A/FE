@@ -55,12 +55,19 @@ export default function ProfilePage() {
 
   // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
+    checkAuth();
     // responseInterceptor();
     // console.log('인터셉터 실행!!!');
     getUserInfo();
     // console.log('getUserInfo 실행!!!!');
     setNickname(user.nickname);
   }, []);
+
+  const checkAuth = () => {
+    if (!user.isLogin) {
+      router.push('/');
+    }
+  };
 
   // 모달창 외부 클릭 시 종료
   useEffect(() => {
