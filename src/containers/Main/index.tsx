@@ -30,6 +30,14 @@ export default function MainPage() {
       behavior: 'smooth',
     });
   };
+  const handleCard = (isLeft: boolean) => {
+    if (isLeft && pageCount > 1) {
+      setPageCount(pageCount - 1);
+    } else if (!isLeft && pageCount < 3) {
+      setPageCount(pageCount + 1);
+    }
+  };
+
   const handleScroll = (e: any) => {
     // 2번째 페이지에서 카드 모두 넘겼을 때
     if (pageCount === 3) {
@@ -116,6 +124,10 @@ export default function MainPage() {
       }
     }
 
+    function handleTouch(x: number, y: number) {
+      console.log(x, y);
+    }
+
     function preventDefaultTouch(e: TouchEvent) {
       e.preventDefault();
       // console.log(e.touches[0].clientX);
@@ -123,12 +135,17 @@ export default function MainPage() {
       if (!loading) {
         setLoading(true);
         const startY = e.touches[0].clientY;
+        console.log(startY);
         const handleMove = (moveEvent: TouchEvent) => {
           const deltaY = moveEvent.touches[0].clientY - startY;
+
           if (deltaY > 0) {
             handleScroll('ArrowUp');
           } else if (deltaY < 0) {
             handleScroll('ArrowDown');
+          } else {
+            console.log('aaa');
+            handleTouch(e.touches[0].clientX, e.touches[0].clientY);
           }
           window.removeEventListener('touchmove', handleMove);
         };
@@ -230,6 +247,16 @@ export default function MainPage() {
             </div>
           </div>
           <div className="main2-cardContainer">
+            <img
+              onClick={() => handleCard(false)}
+              className="mobile-arrow"
+              src="/main/tArrow.svg"
+            />
+            <img
+              onClick={() => handleCard(true)}
+              className="mobile-arrow left"
+              src="/main/tArrow.svg"
+            />
             <div className={`main2-card card1`}>
               <Image
                 alt="imgCard"
@@ -240,9 +267,6 @@ export default function MainPage() {
                 fill
               />
             </div>
-            {/* <div className={`main2-card card1`}>
-              <img className="imgCard" src="/main/mainCard1.png" />
-            </div> */}
             <div
               className={`main2-card card2 ${
                 pageCount > 2 ? 'slide-out-tr' : ''
