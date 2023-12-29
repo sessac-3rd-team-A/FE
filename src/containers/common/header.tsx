@@ -48,7 +48,7 @@ export default function Header() {
           className="headerMenu"
           onClick={handleMenuBar}
         >
-          {isLogin ? 'PROFILE' : 'Main'}
+          {isLogin ? 'PROFILE' : 'MAIN'}
         </Link>
         <Link href={'/sigh'} className="headerMenu middle">
           SIGH
