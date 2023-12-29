@@ -7,7 +7,7 @@ import TrendLineChartCategory from './trendLineChartCategory';
 import MemeComponent from './memeComponent';
 
 export default function ThreeBox(
-  { statisticsInfo, statisticsCategoryInfo, memeImgInfo }: any,
+  { statisticsInfo }: any,
   // { gender }: { gender: string | null },
   // { age }: { age: string | null },
 ) {

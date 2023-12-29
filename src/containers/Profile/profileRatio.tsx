@@ -17,15 +17,11 @@ export default function PRatio() {
         label: ' 감정 지수',
         data: ratioList,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
+          'rgba(58, 137, 255, 1)',
+          'rgba(255, 114, 70, 1)',
+          'rgba(156, 230, 208, 1)',
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-        ],
+        borderColor: ['#FFFFFF', '#FFFFFF', '#FFFFFF'],
         borderWidth: 1,
         cutout: '75%',
       },
@@ -66,6 +62,10 @@ export default function PRatio() {
         } else {
           console.error('Invalid data types for ratios');
         }
+      } else if (res.status === 405) {
+        console.error('액세스 토큰 만료됐을듯?');
+      } else {
+        console.error('완전 다른 에러');
       }
     } catch (error) {
       console.error(error);
@@ -73,11 +73,7 @@ export default function PRatio() {
   };
 
   useEffect(() => {
-    responseInterceptor();
-    // console.log('인터셉터 실행!!!');
-
     getData();
-    // console.log('getData 실행!!!!');
   }, []);
 
   return (

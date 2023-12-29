@@ -10,6 +10,8 @@ import { userState } from '@/utils/state';
 export default function MySettingPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [complete, setComplete] = useState<string | null>(null);
+
   const [user, setUser] = useRecoilState(userState);
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
@@ -36,30 +38,32 @@ export default function MySettingPage() {
       
       console.log('formattedData >>>', formattedData);
 
+      console.log('accessToken >>>', accessToken);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${refreshToken}`
+        Authorization: `Bearer ${accessToken}`
+
       },
       body: JSON.stringify({
         userId: formattedData.id,
         age: formattedData.age,
         gender: formattedData.gender,
-        // userId: 'asdf',
-        // age: '30대',
-        // gender: 'F',
       }),
+
     });
-    console.log('res >>>', res);
+
     if (!res.ok) {
       throw new Error('Failed to submit the data. Please try again.');
     }
     const data = await res.json();
-    console.log(data);
+    console.log('res.body >>>',res.body);
+    setComplete(`${formattedData.id}와 ${formattedData.age}, ${formattedData.gender=='F'? '여자' : '남자'}로 변경 완료되었습니다.`)
+
     } catch (error) {
-      setError('Fail submit! Try again.');
+      setError('값을 다 안채웠거나, 이미 존재하는 아이디입니다.');
+      
     } finally {
       setIsLoading(false);
     }
@@ -112,6 +116,9 @@ export default function MySettingPage() {
         </button>
       </form>
       {error && <div className='error-box'>{error}</div>}
+
+      {complete && <div className='complete-box'>{complete}</div>}
+
     </div>
         </div>
       </div>

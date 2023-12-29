@@ -31,7 +31,10 @@ export default function responseInterceptor() {
 
         const result: Response = await originalFetch(resource, {
           ...options,
-          headers: { Authorization: `Bearer ${newAccessToken}` },
+          headers: {
+            Authorization: `Bearer ${newAccessToken}`,
+            'Content-Type': 'application/json',
+          },
         });
         return result;
       } else {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import useFetch from './memeFetch';
 import '../../styles/statistics/memeComponentImg.scss';
 
 interface MemeComponentProps {
@@ -7,11 +6,9 @@ interface MemeComponentProps {
   age: string | null;
 }
 
-const MemeComponentImg: React.FC<MemeComponentProps> = (
-  { gender, age },
-  // memeImgInfo: any
-) => {
-  let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
+// API 요청 URL 생성 함수
+const createURL = (gender: string | null, age: string | null): string => {
+  let url: string = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
   if (gender && age) {
     url += `?gender=${gender}&age=${age}`;
   } else if (gender) {
@@ -19,7 +16,24 @@ const MemeComponentImg: React.FC<MemeComponentProps> = (
   } else if (age) {
     url += `?age=${age}`;
   }
-  const [data, loading] = useFetch(url);
+  return url;
+};
+
+export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
+  const url = createURL(gender, age);
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => console.error(error));
+  }, [url]);
+
   const [selectedRank, setSelectedRank] = useState<number | null>(null);
 
   useEffect(() => {
@@ -28,21 +42,13 @@ const MemeComponentImg: React.FC<MemeComponentProps> = (
     }
   }, [data]);
 
+  const handleClick = (rank: number) => {
+    setSelectedRank(rank);
+  };
+
   if (loading) return <div>로딩중...</div>;
   if (!data || !data.success)
     return (
-      // <div>데이터가 없습니다</div>
-      // <div style={{ width: '85%', display: 'flex' }}>
-      //   데이터가 없습니다.
-      //   <div className="meme-picture-container">
-      //     <img
-      //       className="meme-picture"
-      //       src={
-      //         'https://media1.jjalkey.com/media/1545404456423-feb7500233.png'
-      //       }
-      //     />
-      //   </div>
-      // </div>
       <div className="meme-left-container">
         <div className="meme-picture-container">
           <img
@@ -54,10 +60,6 @@ const MemeComponentImg: React.FC<MemeComponentProps> = (
         <div className="meme-picture-message">SORRY, NO DATA</div>
       </div>
     );
-
-  const handleClick = (rank: number) => {
-    setSelectedRank(rank);
-  };
 
   return (
     <div className="meme-left-container">
@@ -89,5 +91,4 @@ const MemeComponentImg: React.FC<MemeComponentProps> = (
       </div>
     </div>
   );
-};
-export default MemeComponentImg;
+}

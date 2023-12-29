@@ -21,7 +21,7 @@ export interface ShoppingApiResponse {
   total: number;
   start: number;
   display: number;
-  items: ShoppingItem[];
+  items: ShopApiRes[];
 }
 
 export interface TokenType {
@@ -33,6 +33,18 @@ export interface userDataType {
   userId: string;
   age: string;
   gender: string;
+}
+
+export interface userDetailType {
+  userInfo: {
+    tag: string;
+    sentiment: string,
+    jobRelatedWords: string;
+    jobCategories: string;
+  }
+  error?: {
+    message: string;
+  }
 }
 
 // diary result

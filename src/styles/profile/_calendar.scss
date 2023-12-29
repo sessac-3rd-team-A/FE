@@ -18,6 +18,12 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   align-items: stretch;
 }
 
+.react-calendar__month-view__days,
+.react-calendar__navigation,
+.react-calendar__month-view__weekdays {
+  transform: scale(0.9);
+}
+
 .react-calendar__navigation {
   background: transparent;
   height: 5rem;
@@ -31,6 +37,9 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
     font-size: 2rem;
     font-weight: 900;
     color: $calendar-color-text;
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
   }
 
   .react-calendar__navigation__label {
@@ -89,6 +98,9 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
     font-size: 1.5rem;
     font-weight: 900;
     text-decoration: none;
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -108,6 +120,14 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   justify-content: flex-start;
   align-items: flex-start;
   transition: 0.3s;
+  @media (max-width: 768px) {
+    height: 4rem !important;
+  }
+  abbr {
+    @media (max-width: 768px) {
+      font-size: 80%;
+    }
+  }
 
   /*hover, focus, 선택됐을 시 */
   &:enabled:hover,
@@ -137,7 +157,7 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
   overflow: visible !important;
 }
 
-@media (max-width: 1920px) {
+@media (max-width: 1440px) {
   .react-calendar__month-view__days {
     margin-top: 2rem;
     margin-bottom: 2rem;

@@ -1,0 +1,89 @@
+@import '/src/styles/global.scss';
+@import '~include-media/dist/include-media';
+
+.footerContainer {
+  width: 100vw;
+  height: toSize(350);
+  background-color: black;
+  padding-top: toSize(40);
+
+  @include media('<768px') {
+    padding-top: toSize(90);
+    height: auto;
+  }
+
+  .footers {
+    width: toSize(1500);
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    color: white;
+    text-align: left;
+
+    @include media('<768px') {
+      flex-direction: column;
+    }
+
+    .footerBBInfo {
+      font-size: toSize(16);
+      font-weight: 300;
+
+      @include media('<768px') {
+        font-size: 2vw;
+      }
+    }
+
+    .footerTeamInfo {
+      display: flex;
+      margin-top: toSize(25);
+      font-size: toSize(18);
+      font-weight: 500;
+      width: toSize(500);
+      justify-content: space-between;
+
+      @include media('<768px') {
+        font-size: 2.5vw;
+        width: auto;
+        justify-content: left;
+      }
+
+      .personInfo {
+        margin-top: toSize(20);
+        display: flex;
+        font-size: toSize(16);
+        font-weight: normal;
+
+        @include media('<768px') {
+          font-size: 2vw;
+          margin-right: 10vw;
+          margin-bottom: 5vh;
+        }
+
+        a {
+          color: white;
+        }
+      }
+
+      .teamPerson {
+        margin-right: toSize(27);
+      }
+    }
+  }
+
+  .footerLogo {
+    width: toSize(80);
+    height: toSize(80);
+    margin-bottom: toSize(20);
+  }
+  .notionIcon,
+  .githubIcon {
+    margin-top: toSize(60);
+    width: toSize(40);
+    margin-left: toSize(15);
+
+    @include media('<768px') {
+      width: 3vw;
+      margin: 2vh 2vw 2vh 0;
+    }
+  }
+}

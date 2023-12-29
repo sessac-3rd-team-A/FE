@@ -5,8 +5,7 @@ import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Main1 from './main1';
-import Main2 from './main2';
+import Footer from '../common/footer';
 
 interface Section {
   text: string;
@@ -155,15 +154,17 @@ export default function MainPage() {
     };
   }, [isFooter, loading, isPage2, pageCount]);
 
-  useEffect(() => {}, []);
-
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
-      {/* <Main1 />
-      <Main2 /> */}
       <div className="mainWindContainer">
         <div className="mainWindImg">
-          <Image src="/main/mainBlow.png" priority={false} alt="바람" fill />
+          <Image
+            src="/main/mainBlow.png"
+            priority
+            alt="바람"
+            fill
+            sizes="null"
+          />
         </div>
         {/* <img className="mainWindImg" src="/main/mainBlow.png" alt="바람" /> */}
         <img
@@ -234,7 +235,7 @@ export default function MainPage() {
                 alt="imgCard"
                 className="imgCard"
                 src="/main/mainCard1.png"
-                priority={false}
+                priority
                 sizes="null"
                 fill
               />
@@ -246,7 +247,15 @@ export default function MainPage() {
               className={`main2-card card2 ${
                 pageCount > 2 ? 'slide-out-tr' : ''
               }`}
-            ></div>
+            >
+              <Image
+                alt="imgCard"
+                className="imgCard"
+                src="/main/mainCard2.png"
+                fill
+                sizes="null"
+              />
+            </div>
             <div
               className={`main2-card card3 ${
                 pageCount > 1 ? 'slide-out-tr' : ''
@@ -263,7 +272,7 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-      <footer style={{ height: '300px', backgroundColor: 'black' }}></footer>
+      <Footer />
     </div>
   );
 }

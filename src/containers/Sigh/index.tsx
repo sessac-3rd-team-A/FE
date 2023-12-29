@@ -50,11 +50,7 @@ export default function SighPage() {
           setIsLoading(false);
           router.push(`/sigh/result/${data.id}`);
         } else {
-          console.error(
-            'POST request failed:',
-            response.status,
-            response.statusText,
-          );
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
       } catch (error) {
         console.error('Fetch error:', error);
@@ -90,34 +86,51 @@ export default function SighPage() {
       </main>
       <div className="sigh-doodles">
         <div className="sigh-doodle doodleA">
-          <Image src="/sigh/sigh_doodle_1.png" alt="doodle" fill />
+          <Image
+            src="/sigh/sigh_doodle_1.png"
+            alt="doodle"
+            fill
+            sizes="null"
+            priority
+          />
         </div>
         <div className="sigh-doodle doodleB">
-          <Image src="/sigh/sigh_doodle_2.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_2.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleC">
-          <Image src="/sigh/sigh_doodle_3.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_3.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleD">
-          <Image src="/sigh/sigh_doodle_4.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_4.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleE">
-          <Image src="/sigh/sigh_doodle_5.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_5.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleF">
-          <Image src="/sigh/sigh_doodle_6.png" alt="doodle" fill />
+          <Image
+            src="/sigh/sigh_doodle_6.png"
+            alt="doodle"
+            fill
+            sizes="null"
+            priority
+          />
         </div>
         <div className="sigh-doodle doodleG">
-          <Image src="/sigh/sigh_doodle_7.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_7.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleH">
-          <Image src="/sigh/sigh_doodle_8.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_8.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleI">
-          <Image src="/sigh/sigh_doodle_9.png" alt="doodle" fill />
+          <Image src="/sigh/sigh_doodle_9.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleJ">
-          <Image src="/sigh/sigh_doodle_10.png" alt="doodle" fill />
+          <Image
+            src="/sigh/sigh_doodle_10.png"
+            alt="doodle"
+            fill
+            sizes="null"
+          />
         </div>
       </div>
     </div>

@@ -1,77 +1,129 @@
+'use client'
 import Link from 'next/link';
-import { ShopApiRes, ShoppingApiResponse, TokenType } from '@/types';
+import { ShopApiRes, ShoppingApiResponse, UserStateType, userDetailType } from '@/types';
 import '/src/styles/global.scss';
 import '@/styles/profile/myShop.scss';
 import ProfileMenu from './profileMenu';
 import Image from 'next/image';
 import profile_char from '/public/images/profile_char.svg';
 import heart_eye from '/public/images/heart_eye.png';
-import myShopBack from '/public/images/myShopBack.svg';
-import { cookies } from 'next/headers'
-import myShopBackLetter from '/public/images/myShopBackLetter.svg';
+import myShopBack from '/public/images/profileShop_background.jpg';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '@/utils/state';
+// import axios, { AxiosResponse } from "axios";
 
-const API = 'https://openapi.naver.com/v1/search/shop.json';
+const API = '/naver/v1/search/shop.json';
+
 const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_ID;
 const NAVER_CLIENT_SECRET = process.env.NEXT_PUBLIC_NAVER_API_CLIENT_SECRET;
 
-async function getUserInfo(accessToken: string, refreshToken: string) {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': `accessToken=${accessToken}; refreshToken=${refreshToken}`
-      },
-    });
-    const data = await res.json();
-    console.log('data>>>>>>>>>>>>>>>>>>>',data);
-    return data;
-  } catch (err) {
-    throw new Error(`HTTP error! Status: ${err}`);
-  }
-}
+export default function MyShopPage():JSX.Element {
+  const [accessToken, setAccessToken] = useState('');
+  const [item, setItems] = useState<ShoppingApiResponse>();
+  const [itemsResult, setItemsResult] = useState<ShopApiRes[]>();
+  const [user, setUser] = useRecoilState(userState);
 
-async function SearchResult(): Promise<ShoppingApiResponse> {
-  const query = '몰랑이 인형';
-  const displayNum = 20;
-  const url = `${API}?query=${encodeURIComponent(
-    query,
-  )}&display=${displayNum}&start=1&sort=date`;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setAccessToken(localStorage.getItem('accessToken') || '');
 
-  try {
-    const headers = new Headers();
-    headers.append('X-Naver-Client-Id', NAVER_CLIENT_ID || '');
-    headers.append('X-Naver-Client-Secret', NAVER_CLIENT_SECRET || '');
+        const userDetail = await getUserInfo(accessToken);
+        const algorithmRes = await algorithm(user, userDetail);
+        const result = await SearchResult(algorithmRes);
 
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: headers,
-    });
-    return res.json();
-  } catch (err) {
-    console.error('fetch error:', err);
-    throw err;
-  }
-}
-
-export default async function MyShopPage(): Promise<JSX.Element> {
-  const accessToken = cookies().get('accessToken')?.value || '';
-  const refreshToken = cookies().get('refreshToken')?.value || '';
-
-  const user = getUserInfo(accessToken, refreshToken);
-  // console.log('user >>>', user);
+        setItems(result);
+        setItemsResult(result.items || []);
+      } catch (error) {
+        console.error('데이터를 불러오는 중 에러 발생:', error);
+      }
+    };
   
-  const item: ShoppingApiResponse  = await SearchResult();
-  const itemsResult: ShopApiRes[] = item.items;
+    fetchData();
+  }, [accessToken]);
+  
+  async function getUserInfo(accessToken: string) {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER}/profile/my-shop`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      throw new Error(`HTTP error! Status: ${err}`);
+    }
+  }
+
+  async function algorithm(user: UserStateType, userDetail: userDetailType): Promise<String> {
+    const queryDefault = `${user.age} ${user.gender == 'F'? '여자' : '남자'}`;
+    if (!userDetail.error) {
+        if (userDetail.userInfo.sentiment === 'positive') {
+          return `${queryDefault} 인형`
+        }
+        if (userDetail.userInfo.sentiment === 'negative') {
+          return `${queryDefault} 스트레스`
+        }
+    }
+    return `${queryDefault}`
+    
+  }
+
+  // fetch ver
+  async function SearchResult(algorithmRes: string): Promise<ShoppingApiResponse> {
+
+    const query = `${algorithmRes}`;
+    console.log('query >>>>', query);
+    const displayNum = 20;
+    const url = `${API}?query=${encodeURIComponent(
+      query,
+    )}&display=${displayNum}&start=1&sort=date`;
+      console.log('완성된 url >>>>', url);
+    try {
+      const headers = new Headers();
+      headers.append('X-Naver-Client-Id', NAVER_CLIENT_ID || '');
+      headers.append('X-Naver-Client-Secret', NAVER_CLIENT_SECRET || '');
+
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: headers,
+      });
+      return res.json();
+    } catch (err) {
+      console.error('fetch error:', err);
+      throw err;
+    }
+  }
+
+  // axios ver
+  // async function SearchResult(): Promise<ShoppingApiResponse> {
+  //   const query = '인형';
+  //   const displayNum = 20;
+  //   const url = `${API}?query=${encodeURIComponent(query)}&display=${displayNum}&start=1&sort=date`;
+  
+  //   try {
+  //     const response = await axios.get(url, {
+  //       headers: {
+  //         'X-Naver-Client-Id': NAVER_CLIENT_ID || '',
+  //         'X-Naver-Client-Secret': NAVER_CLIENT_SECRET || '',
+  //       },
+  //     });
+  //     console.log('naver res >>>> ', response);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('axios error:', error);
+  //     throw error;
+  //   }
+  // }
 
   return (
+    <div style={{display: 'flex', alignItems: 'center'}}>
     <div className="myShop-container">
       <div className="header-temp" />
-      <Image 
-        src={myShopBackLetter}
-        alt='배경 글자'
-      />
       <Image
         src={myShopBack}
         alt="배경 이미지"
@@ -88,7 +140,7 @@ export default async function MyShopPage(): Promise<JSX.Element> {
         </p>
       </div>
       <div className="product-container">
-        {itemsResult.map((item, index) => (
+        {Array.isArray(itemsResult) && itemsResult.map((item, index) => (
           <div className="product-detail-container" key={item.productId}>
             {[...Array(4)].map((_, innerIndex) => {
               const productIndex = index * 4 + innerIndex;
@@ -109,7 +161,7 @@ export default async function MyShopPage(): Promise<JSX.Element> {
                           .replace(/<\/b>/g, '')}
                       </div>
                       <br />
-                      <span>가격</span> {product.lprice}
+                      <span>가격</span> {product.lprice}원
                     </div>
                   </div>
                 </Link>
@@ -118,6 +170,7 @@ export default async function MyShopPage(): Promise<JSX.Element> {
           </div>
         ))}
       </div>
+    </div>
       <ProfileMenu />
     </div>
   );

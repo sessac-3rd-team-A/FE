@@ -6,6 +6,9 @@
   justify-content: flex-start;
   font-family: LEMON MILK;
   padding: toSize(21) toSize(35);
+  @media (max-width: 768px) {
+    padding: toSize(40, 768) toSize(35, 768);
+  }
 
   .profile-graphChart {
     height: 70%;
@@ -19,7 +22,7 @@
 
   .profile-graphText {
     position: absolute;
-    left: 0;
+    left: toSize(10);
     bottom: 0;
     font-weight: 500;
     padding: toSize(13) toSize(17);
@@ -38,5 +41,25 @@
     padding: toSize(13) toSize(17);
     bottom: 0;
     right: 0;
+
+    @media (max-width: 768px) {
+      padding: toSize(13, 768) toSize(17, 768);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-graph {
+    .profile-graphText {
+      left: toSize(10, 480);
+      bottom: toSize(10, 480);
+      p:first-child {
+        font-size: 1rem;
+      }
+
+      p:last-child {
+        font-size: 1.5rem;
+      }
+    }
   }
 }

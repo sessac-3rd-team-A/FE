@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation';
 import ResultChart from './resultChart';
 import { useEffect, useState } from 'react';
 import { SighResultType } from '@/types';
+import Error404 from '../common/error404';
+import { useRouter } from 'next/navigation';
 
 export default function SighResultPage() {
   const pathname = usePathname();
@@ -14,6 +16,9 @@ export default function SighResultPage() {
   console.log(id);
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+  const router = useRouter();
+  console.log(isError);
 
   const getResultData = async () => {
     try {
@@ -35,12 +40,17 @@ export default function SighResultPage() {
       setSighResult(data);
     } catch (error) {
       console.error('Fetch error:', error);
+      setIsError(true);
     }
   };
 
   useEffect(() => {
     getResultData();
   }, [id]);
+
+  if (isError) {
+    return <Error404 />;
+  }
 
   // 카톡 공유
   // csr에서만 실행
@@ -77,6 +87,24 @@ export default function SighResultPage() {
       });
   };
 
+  // saveBtn
+  const recoilData =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('recoil-persist')
+      : null;
+
+  const saveBtn = () => {
+    console.log(recoilData);
+    if (recoilData != null) {
+      const parsedData = JSON.parse(recoilData);
+      if (parsedData && Object.keys(parsedData).length === 0) {
+        router.push('/'); // 메인
+      } else {
+        router.push('/profile'); // 프로필
+      }
+    }
+  };
+
   return (
     <div className="result-container">
       <main className="result-mainContainer">
@@ -94,22 +122,13 @@ export default function SighResultPage() {
               id="kakaotalk-sharing-btn"
               style={{ width: 'fit-content', height: 'fit-content' }}
             >
-              <Image
-                src="/sigh/kakao.png"
-                alt="kakao"
-                width={50}
-                height={50}
-                className="result-kakao-btn"
-              />
+              <div className="result-kakao-btn">
+                <Image src="/sigh/kakao.png" alt="kakao" fill sizes="null" />
+              </div>
             </a>
-            <Image
-              src="/sigh/link.png"
-              alt="link"
-              width={50}
-              height={50}
-              className="result-link-btn"
-              onClick={copyLinkToClipboard}
-            />
+            <div className="result-link-btn" onClick={copyLinkToClipboard}>
+              <Image src="/sigh/link.png" alt="link" fill sizes="null" />
+            </div>
           </div>
         </section>
 
@@ -122,6 +141,7 @@ export default function SighResultPage() {
                 alt="짤"
                 fill
                 style={{ borderRadius: '20px' }}
+                sizes="null"
               />
             )}
           </div>
@@ -134,7 +154,7 @@ export default function SighResultPage() {
           <Link href={'/sigh'}>
             <button>RESTART</button>
           </Link>
-          <button>SAVE</button>
+          <button onClick={saveBtn}>SAVE</button>
         </section>
       </main>
       <div className="result-bgText">
@@ -142,7 +162,7 @@ export default function SighResultPage() {
         <p>WHEW!</p>
       </div>
       <div className="result-doodle">
-        <Image src={resultDoodle} alt="doodle" fill />
+        <Image src={resultDoodle} alt="doodle" fill sizes="null" />
       </div>
     </div>
   );

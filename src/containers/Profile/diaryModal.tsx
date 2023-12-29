@@ -4,10 +4,10 @@ import Image from 'next/image';
 
 import '@/styles/profile/diaryModal.scss';
 import { useEffect, useState } from 'react';
-import { ProfileResultType } from '@/types';
+import { ProfileCalendarType } from '@/types';
 
 interface Props {
-  emoData: ProfileResultType | null;
+  emoData: ProfileCalendarType | null;
   modalDate: string;
 }
 
