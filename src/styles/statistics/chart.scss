@@ -38,9 +38,9 @@
     font-style: normal;
     font-weight: 400;
     line-height: 110%; /* 70.4px */
+    padding: 0 0 3vh 0;
     @include media('<=768px') {
-      // min-width: 255px;
-      // min-height: 71px;
+      padding: 0;
     }
   }
 

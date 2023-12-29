@@ -140,12 +140,13 @@
   // padding: 0 22px;
   border-bottom: 1px solid #b5b5b5;
   font-size: toSize(18);
-  font-weight: 600;
+  font-weight: 300;
   color: black;
   // line-height: 7px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   text-align: center;
+  font-family: 'GmarketSans';
   @include media('<=768px') {
     font-size: toSizeM(30);
   }
@@ -167,4 +168,6 @@
   top: 10%;
   position: absolute;
   margin-left: 10%;
+  font-weight: 400;
+  font-family: 'GmarketSans';
 }
