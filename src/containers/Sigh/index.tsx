@@ -99,7 +99,13 @@ export default function SighPage() {
           <Image src="/sigh/sigh_doodle_3.png" alt="doodle" fill sizes="null" />
         </div>
         <div className="sigh-doodle doodleD">
-          <Image src="/sigh/sigh_doodle_4.png" alt="doodle" fill sizes="null" />
+          <Image
+            src="/sigh/sigh_doodle_4.png"
+            alt="doodle"
+            fill
+            sizes="null"
+            priority
+          />
         </div>
         <div className="sigh-doodle doodleE">
           <Image src="/sigh/sigh_doodle_5.png" alt="doodle" fill sizes="null" />
