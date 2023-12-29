@@ -41,6 +41,7 @@
     padding: 0 0 3vh 0;
     @include media('<=768px') {
       padding: 0;
+      // align-self: center;
     }
   }
 
@@ -48,6 +49,9 @@
     width: toSize(860);
     height: toSize(210);
     margin: 0 0 0 toSize(9);
+    @include media('<=768px') {
+      // width: 100%;
+    }
   }
   .floating {
     animation-name: floating;

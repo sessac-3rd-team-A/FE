@@ -155,13 +155,14 @@ input[type='radio']:checked + .three-box-contents {
   // transition: all 0.1s ease-out;
   // z-index: -1;
   overflow: hidden;
-  border-radius: toSize(40);
+  border-radius: 40px;
   margin: 0 toSize(5);
   @include media('<=768px') {
     display: none;
     margin: 5px;
     height: unset;
     transition: none;
+    border-radius: toSizeM(40);
   }
 }
 .three-box-inner {
@@ -199,7 +200,7 @@ input[type='radio']:checked + .three-box-contents {
   // justify-content: center;
   @include media('<=768px') {
     align-items: center;
-    height: toSizeM(200);
+    height: toSizeM(240);
     // width: toSizeM(170);
     width: 100%;
     // left: 50%;
