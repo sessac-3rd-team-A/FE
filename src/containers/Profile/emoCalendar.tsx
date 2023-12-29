@@ -7,7 +7,7 @@ import { GrCaretNext } from 'react-icons/gr';
 import { GrCaretPrevious } from 'react-icons/gr';
 import '@/styles/profile/_calendar.scss';
 import { ProfileCalendarType } from '@/types';
-// import Image from 'next/image';
+import Image from 'next/image';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -35,8 +35,42 @@ export default function EmoCalendar({
     // 해당 날짜(하루)에 추가할 컨텐츠의 배열
     let content;
 
+    const emotionIndex = dayList.findIndex(
+      (day) => day === (moment(date).format('YYYY-MM-DD') as string),
+    );
     // date(각 날짜)가 리스트의 날짜와 일치하면 해당 컨텐츠(이모티콘) 추가
-    if (dayList.find((day) => day === moment(date).format('YYYY-MM-DD'))) {
+    if (emotionIndex !== -1) {
+      const emotion = emoData?.calendar[emotionIndex].result.sentiment;
+
+      let path;
+
+      switch (emotion) {
+        case 'positive':
+          path = '/statistics/positive.svg';
+          break;
+
+        case 'negative':
+          path = '/statistics/negative.svg';
+          break;
+
+        case 'neutral':
+          path = '/statistics/neutral.svg';
+          break;
+      }
+
+      console.log(path);
+
+      if (path) {
+        content = (
+          <Image
+            src={path}
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 100vw"
+            alt="calendar emotion"
+          />
+        );
+      }
+
       // contents.push(
       //   <>
       //     {/* <div className="dot"></div> */}
@@ -50,9 +84,9 @@ export default function EmoCalendar({
       //     🥲
       //   </>,
       // );
-      content = '🥲';
+      // content = '🥲';
     }
-    return <div>{content}</div>; // 각 날짜마다 해당 요소가 들어감
+    return <div style={{ cursor: 'pointer' }}>{content}</div>; // 각 날짜마다 해당 요소가 들어감
   };
 
   return (

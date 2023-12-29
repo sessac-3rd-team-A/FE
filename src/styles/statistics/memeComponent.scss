@@ -64,7 +64,7 @@
   transform: translateY(-15px);
   z-index: 10;
   @include media('<=768px') {
-    // left: toSizeM(80);
+    left: toSizeM(60);
   }
 }
 .custom-select.opened .custom-options-testing {
@@ -73,7 +73,7 @@
   pointer-events: all;
   transform: translateY(0);
   @include media('<=768px') {
-    // left: toSizeM(60);
+    left: toSizeM(60);
   }
 }
 .custom-options-testing:before {

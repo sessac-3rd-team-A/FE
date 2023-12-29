@@ -40,12 +40,15 @@
     line-height: normal;
     cursor: pointer;
     .selected {
-      color: blue;
+      color: #3a89ff;
     }
     @include media('<=768px') {
       width: 20%;
       font-size: toSizeM(18);
     }
+  }
+  .item.selected {
+    color: #3a89ff;
   }
   img {
     vertical-align: middle;
