@@ -4,11 +4,7 @@ import '@/styles/header.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import {
-  userState,
-  selectedIconState,
-  selectedImageState,
-} from '@/utils/state';
+import { userState, selectedIconState } from '@/utils/state';
 import { useEffect, useState } from 'react';
 import responseInterceptor from '@/utils/fetch';
 
