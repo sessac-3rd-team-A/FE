@@ -6,14 +6,23 @@ const nextConfig = {
       {
         source: '/naver/:path*',
         destination: 'https://openapi.naver.com/:path*',
-      }
-    ]
+      },
+    ];
   },
   images: {
-    domains: [
-      'media1.jjalkey.com',
-      'localhost',
-      'example-bucket-seeun.s3.ap-northeast-2.amazonaws.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media1.jjalkey.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'example-bucket-seeun.s3.ap-northeast-2.amazonaws.com',
+      },
     ],
   },
 };
