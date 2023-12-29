@@ -50,7 +50,6 @@ export default function SighPage() {
 
         if (response.ok) {
           const data = await response.json();
-          setIsLoading(false);
           router.push(`/sigh/result/${data.id}`);
         } else {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -58,7 +57,6 @@ export default function SighPage() {
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        setIsLoading(false);
         console.log(isLoading);
       }
     }
