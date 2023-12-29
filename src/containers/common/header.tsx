@@ -23,6 +23,10 @@ export default function Header() {
     router.push(isLogin ? '/profile' : '/');
   };
 
+  const onClickResetRecoil = () => {
+    setSelectedIcon(2);
+  };
+
   useEffect(() => {
     // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
@@ -46,10 +50,10 @@ export default function Header() {
         >
           {isLogin ? 'PROFILE' : 'MAIN'}
         </Link>
-        <Link href={'/sigh'} className="headerMenu middle">
+        <Link href={'/sigh'} className="headerMenu middle" onClick={onClickResetRecoil}>
           SIGH
         </Link>
-        <Link href={'/statistics'} className="headerMenu">
+        <Link href={'/statistics'} className="headerMenu" onClick={onClickResetRecoil}>
           TREND
         </Link>
       </div>

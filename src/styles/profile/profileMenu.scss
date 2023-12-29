@@ -45,6 +45,7 @@ $container-size: toSize(200);
           align-items: center;
           justify-content: center;
           animation: bounce 1s ease-in-out;
+          filter : blur(0px);
 
           @media screen and (max-width: 768px) {
             transform: scale(2) translateY(-60%);
@@ -59,6 +60,7 @@ $container-size: toSize(200);
           transform: translateY(80%);
           width: $icon-circle-size;
           height: $icon-circle-size;
+          filter : blur(0px);
 
           @media screen and (max-width: 768px) {
             transform: scale(1.5);
