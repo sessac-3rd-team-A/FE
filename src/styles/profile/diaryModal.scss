@@ -1,8 +1,8 @@
 @import '/src/styles/global.scss';
 
 .diaryModal-container {
-  width: 30vw;
-  height: 40vw;
+  width: 20vw;
+  height: 30vw;
   min-width: 400px;
   min-height: 500px;
   padding: 2rem 3rem;
@@ -79,5 +79,11 @@
 @media (max-width: 1920px) {
   .diaryModal-container {
     transform: translate(-50%, -50%) rotate(6.388deg) scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  .diaryModal-container {
+    transform: translate(-50%, -50%) rotate(6.388deg) scale(0.7);
   }
 }
