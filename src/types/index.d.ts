@@ -87,6 +87,11 @@ export interface UserStateType {
   isLogin: boolean;
 }
 
+export interface recoilState extends UserStateType{
+  userState: UserStateType;
+  selectedIconState: number;
+}
+
 //statistic all
 export interface StatisticsType {
   date: string;

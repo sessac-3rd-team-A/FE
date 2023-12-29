@@ -5,34 +5,21 @@ import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedIconState } from '@/utils/state';
 import Link from 'next/link';
+import { recoilState } from '@/types'
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
   const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
-  // const [isMobile, setIsMobile] = useState(true);
+  const [icon, setIcon] = useState<number>()
+
+  useEffect(() => {
+    setIcon(selectedIcon)
+  }, [])
 
   const handleIconClick = (index: number) => {
     setSelectedImage(`/images/profileMenu/profileMenu_${index}.svg`)
     setSelectedIcon(index)
   };
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth < 768);
-  //   };
-  //   window.addEventListener('resize', handleResize);
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }
-  // }, []);
-
-  // const getIconImagePath = (index: number) => {
-  //   const suffix = isMobile ? '_mobile' : '';
-  //   console.log('suffix >>>', suffix);
-  //   return `/images/profileMenu/profileMenu_${index}${suffix}.svg`;
-  // };
 
   const link: (index: number) => string = (index: number) => {
     switch (index) {
@@ -56,7 +43,7 @@ export default function ProfileMenu() {
               <div
                 key={index}
                 className={
-                  selectedIcon === index
+                  icon === index
                     ? 'icon-selected-circle'
                     : 'icon-unselected-circle'
                 }
@@ -74,8 +61,7 @@ export default function ProfileMenu() {
           ))}
         </div>
       </nav>
-      <img src={selectedImage} alt="메뉴바" className="profile-menu-bottom" />
-      {/* <img src={getIconImagePath(selectedIcon)} alt="메뉴바" className="profile-menu-bottom" /> */}
+      <img src={`/images/profileMenu/profileMenu_${icon}.svg`} alt="메뉴바" className="profile-menu-bottom" />
     </div>
   );
 }
