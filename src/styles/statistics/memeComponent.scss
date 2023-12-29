@@ -73,7 +73,7 @@
   pointer-events: all;
   transform: translateY(0);
   @include media('<=768px') {
-    left: toSizeM(60);
+    // left: toSizeM(60);
   }
 }
 .custom-options-testing:before {
