@@ -328,6 +328,7 @@
     font-size: toSize(25);
     white-space: pre-wrap;
     margin: toSize(24) 0px toSize(110) 0px;
+    height: toSize(100);
     @include media('<=768px') {
       height: toSize(200);
       font-size: toSize(45);
@@ -368,6 +369,21 @@
     @include media('<=768px') {
       margin-top: toSize(400);
       transform: scale(1.6);
+    }
+    .mobile-arrow {
+      display: none;
+      position: absolute;
+      z-index: 10;
+      width: toSize(80);
+      margin-left: toSize(800);
+      @include media('<=768px') {
+        display: block;
+      }
+      &.left {
+        margin-left: 0;
+        margin-right: toSize(800);
+        transform: rotate(180deg);
+      }
     }
   }
   .main2-card {
