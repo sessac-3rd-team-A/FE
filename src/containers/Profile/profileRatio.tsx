@@ -43,7 +43,6 @@ export default function PRatio() {
 
       if (res.status === 200 || res.status === 201) {
         const data: ProfileRatioType = await res.json();
-        // console.log('response data :: ', data);
 
         // 데이터의 타입을 확인하고, 해당 타입에 맞게 타입 지정
         const { positiveRatio, negativeRatio, neutralRatio } =
@@ -63,9 +62,9 @@ export default function PRatio() {
           console.error('Invalid data types for ratios');
         }
       } else if (res.status === 405) {
-        console.error('액세스 토큰 만료됐을듯?');
+        console.error('Access Token Expired');
       } else {
-        console.error('완전 다른 에러');
+        console.error('Please Login');
       }
     } catch (error) {
       console.error(error);

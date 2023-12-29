@@ -54,7 +54,6 @@ export default function SignInPage() {
         router.replace('/');
       }
     }
-    // console.log('Updated user state:', user);
   }, []); // recoil
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -76,7 +75,6 @@ export default function SignInPage() {
         password: formattedData.password,
       }),
     }).catch((error) => {
-      console.log(error);
       alert(error);
       setIsLoading(false);
     });
@@ -100,7 +98,6 @@ export default function SignInPage() {
 
         router.push('/');
       } else {
-        console.log(response.statusText);
         const data = await response.json();
         if (data.error == 'wrong userId') {
           alert('아이디가 틀렸습니다');
