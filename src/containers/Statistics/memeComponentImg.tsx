@@ -53,7 +53,7 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
         <div className="meme-picture-container">
           <img
             className="meme-picture"
-            src={'/statistics/sorry.png'} // 기본 이미지 URL
+            src={'statistics/sorry.png'} // 기본 이미지 URL
             alt="default meme"
           />
         </div>

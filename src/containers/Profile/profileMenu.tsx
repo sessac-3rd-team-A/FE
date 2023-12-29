@@ -3,19 +3,24 @@ import '@/styles/main.scss';
 import '@/styles/profile/profileMenu.scss';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { selectedIconState, selectedImageState } from '@/utils/state';
+import { selectedIconState } from '@/utils/state';
 import Link from 'next/link';
+import { recoilState } from '@/types'
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
+  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
+  const [icon, setIcon] = useState<number>()
 
-  const handleIconClick = (newImage: string, index: number) => {
-    setSelectedImage(newImage)
+  useEffect(() => {
+    setIcon(selectedIcon)
+  }, [])
+
+  const handleIconClick = (index: number) => {
+    setSelectedImage(`/images/profileMenu/profileMenu_${index}.svg`)
     setSelectedIcon(index)
   };
 
-  useEffect(() => {}, [selectedImage]);
   const link: (index: number) => string = (index: number) => {
     switch (index) {
       case 1:
@@ -38,16 +43,16 @@ export default function ProfileMenu() {
               <div
                 key={index}
                 className={
-                  selectedIcon === index
+                  icon === index
                     ? 'icon-selected-circle'
                     : 'icon-unselected-circle'
                 }
                 onClick={() =>
-                  handleIconClick(`/images/profileMenu_${index}.svg`, index)
+                  handleIconClick(index)
                 }
               >
               <img
-                src={`/images/profileMenu_icon${index}.svg`}
+                src={`/images/profileMenu/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
                 className={`icon`}
               />
@@ -56,7 +61,7 @@ export default function ProfileMenu() {
           ))}
         </div>
       </nav>
-      <img src={selectedImage} alt="메뉴바" className="profile-menu-bottom" />
+      <img src={`/images/profileMenu/profileMenu_${icon}.svg`} alt="메뉴바" className="profile-menu-bottom" />
     </div>
   );
 }

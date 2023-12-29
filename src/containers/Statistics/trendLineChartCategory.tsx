@@ -119,6 +119,7 @@ export default function TrendLineChartCategory() {
       console.log(id);
     }
   };
+
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );

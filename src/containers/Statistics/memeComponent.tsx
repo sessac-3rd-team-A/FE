@@ -45,7 +45,7 @@ const MemeComponent = (
           {<img src="/statistics/neutral.svg" alt="" />}
           <br />
         </button>
-        <div className="custom-select-wrapper ">
+        <div className="custom-select-wrapper-testing">
           <div
             className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
           >
@@ -58,7 +58,7 @@ const MemeComponent = (
                 {genders.find((g) => g.value === gender)?.label}
               </div>
             </span>
-            <div className="custom-options">
+            <div className="custom-options-testing">
               {genders.map((g) => (
                 <span
                   key={g.value}
@@ -76,7 +76,7 @@ const MemeComponent = (
             </div>
           </div>
         </div>
-        <div className="custom-select-wrapper">
+        <div className="custom-select-wrapper-testing">
           <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
             <span
               className="custom-select-trigger"
@@ -86,7 +86,7 @@ const MemeComponent = (
                 {ages.find((a) => a.value === age)?.label}
               </div>
             </span>
-            <div className="custom-options">
+            <div className="custom-options-testing">
               {ages.map((a) => (
                 <span
                   key={a.value}

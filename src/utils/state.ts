@@ -19,11 +19,7 @@ const userState = atom<UserStateType>({
 const selectedIconState = atom({
   key: 'selectedIconState',
   default: 2,
-});
-
-const selectedImageState = atom({
-  key: 'selectedImageState',
-  default: '/images/profileMenu_2.svg',
+  effects_UNSTABLE: [persistAtom],
 });
 
 const modalState = atom({
@@ -33,4 +29,4 @@ const modalState = atom({
   },
 });
 
-export { userState, selectedIconState, selectedImageState, modalState };
+export { userState, selectedIconState, modalState };

@@ -17,13 +17,13 @@ export default function Header() {
   const [user, setUser] = useRecoilState(userState);
   const resetUser = useResetRecoilState(userState);
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
+  // const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
+  const [selectedImage, setSelectedImage] = useState<string>();
 
   const [isLogin, setIsLogin] = useState<boolean | undefined>();
 
   const handleMenuBar = () => {
-    setSelectedIcon(2);
-    setSelectedImage('/images/profileMenu_2.svg');
+    // setSelectedIcon(2);
     router.push(isLogin ? '/profile' : '/');
   };
 
@@ -48,7 +48,7 @@ export default function Header() {
           className="headerMenu"
           onClick={handleMenuBar}
         >
-          {isLogin ? 'PROFILE' : 'Main'}
+          {isLogin ? 'PROFILE' : 'MAIN'}
         </Link>
         <Link href={'/sigh'} className="headerMenu middle">
           SIGH
