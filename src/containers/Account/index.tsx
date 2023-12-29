@@ -104,7 +104,7 @@ export default function MySettingPage() {
                 maxLength={100}
               />
               <div className="age-and-gender">
-                <select id="age" name="age" defaultValue="10대">
+                <select id="age" name="age" defaultValue={user.age}>
                   <option value="" aria-disabled hidden>
                     Age
                   </option>
@@ -114,7 +114,7 @@ export default function MySettingPage() {
                   <option value="40대">40 대</option>
                   <option value="50대">50 대 이상</option>
                 </select>
-                <select id="gender" name="gender" defaultValue="F">
+                <select id="gender" name="gender" defaultValue={user.gender === 'F' ? '여자' : '남자'}>
                   <option value="" disabled hidden>
                     Gender
                   </option>

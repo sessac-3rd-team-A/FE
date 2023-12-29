@@ -8,15 +8,32 @@ import Link from 'next/link';
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  // const [selectedIcon, setSelectedIcon] = useState(2);
   const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
+  // const [isMobile, setIsMobile] = useState(true);
 
   const handleIconClick = (index: number) => {
     setSelectedImage(`/images/profileMenu/profileMenu_${index}.svg`)
     setSelectedIcon(index)
   };
 
-  useEffect(() => {}, [selectedImage]);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth < 768);
+  //   };
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }
+  // }, []);
+
+  // const getIconImagePath = (index: number) => {
+  //   const suffix = isMobile ? '_mobile' : '';
+  //   console.log('suffix >>>', suffix);
+  //   return `/images/profileMenu/profileMenu_${index}${suffix}.svg`;
+  // };
+
   const link: (index: number) => string = (index: number) => {
     switch (index) {
       case 1:
@@ -58,6 +75,7 @@ export default function ProfileMenu() {
         </div>
       </nav>
       <img src={selectedImage} alt="메뉴바" className="profile-menu-bottom" />
+      {/* <img src={getIconImagePath(selectedIcon)} alt="메뉴바" className="profile-menu-bottom" /> */}
     </div>
   );
 }
