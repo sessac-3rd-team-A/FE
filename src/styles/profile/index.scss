@@ -145,6 +145,23 @@ p {
         font-family: GMarketSans;
         font-size: toSize(40);
         font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        span:last-child {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            // width: toSize(80);
+            // height: toSize(80);
+            stroke-width: 1px;
+            stroke: #ff7246;
+          }
+        }
       }
     }
   }
@@ -218,6 +235,10 @@ p {
 }
 
 @media (max-width: 768px) {
+  .info-container {
+    margin-top: $mobile-header-height;
+  }
+
   .info-left {
     .title {
       font-size: 2rem;
@@ -234,11 +255,11 @@ p {
           left: toSize(10, 480);
           bottom: toSize(10, 480);
           p:first-child {
-            font-size: 1rem;
+            font-size: 0.8rem;
           }
 
           p:last-child {
-            font-size: 1.5rem;
+            font-size: 2rem;
           }
         }
       }
