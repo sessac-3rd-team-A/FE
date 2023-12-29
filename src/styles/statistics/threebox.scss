@@ -77,6 +77,9 @@ input[type='radio']:checked + .three-box-contents {
   height: fit-content;
 
   position: relative;
+  @include media('<=768px') {
+    width: 100%;
+  }
 
   p {
     position: absolute;
@@ -100,7 +103,8 @@ input[type='radio']:checked + .three-box-contents {
       transform: rotate(0deg);
       top: toSizeM(32);
       font-size: toSizeM(28);
-      transform: translate(-50%, 0);
+      transform: translate(-30%, 0);
+      left: 50%;
       // position: unset;
     }
   }
@@ -128,7 +132,8 @@ input[type='radio']:checked + .three-box-contents {
       height: toSizeM(74);
       top: toSizeM(12);
       font-size: toSizeM(30);
-      left: toSizeM(-330);
+      // left: toSizeM(-330);
+      left: 3%;
     }
   }
 }
