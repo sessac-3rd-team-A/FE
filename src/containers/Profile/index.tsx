@@ -45,7 +45,6 @@ export default function ProfilePage() {
       }
 
       const data: ProfileCalendarType = await res.json();
-      // console.log('fetch data :: ', data);
 
       setEmoData(data);
     } catch (error) {
@@ -57,9 +56,7 @@ export default function ProfilePage() {
   useEffect(() => {
     checkAuth();
     // responseInterceptor();
-    // console.log('인터셉터 실행!!!');
     getUserInfo();
-    // console.log('getUserInfo 실행!!!!');
     setNickname(user.nickname);
   }, []);
 

@@ -25,8 +25,6 @@ export default function DiaryModal({ emoData, modalDate }: Props) {
     });
   }, [modalDate]);
 
-  // console.log(emoData);
-  console.log('path :: ', gifPath, diaryPath);
   const handleClick = () => {
     setIsFront(!isFront);
   };

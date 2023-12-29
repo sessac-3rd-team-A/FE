@@ -100,12 +100,10 @@ export default function MyShopPage(): JSX.Element {
     algorithmRes: string,
   ): Promise<ShoppingApiResponse> {
     const query = `${algorithmRes}`;
-    console.log('query >>>>', query);
     const displayNum = 20;
     const url = `${API}?query=${encodeURIComponent(
       query,
     )}&display=${displayNum}&start=1&sort=date`;
-    console.log('완성된 url >>>>', url);
     try {
       const headers = new Headers();
       headers.append('X-Naver-Client-Id', NAVER_CLIENT_ID || '');
@@ -135,7 +133,6 @@ export default function MyShopPage(): JSX.Element {
   //         'X-Naver-Client-Secret': NAVER_CLIENT_SECRET || '',
   //       },
   //     });
-  //     console.log('naver res >>>> ', response);
   //     return response.data;
   //   } catch (error) {
   //     console.error('axios error:', error);

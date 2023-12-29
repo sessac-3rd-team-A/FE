@@ -19,8 +19,6 @@ export default function SighTexting(Token: TokenType) {
   };
 
   const handleStartButtonClick = async () => {
-    console.log(isLoading);
-
     if (buttonText === 'START') {
       setIsVisible((prevVisible) => !prevVisible);
       setButtonText((prevText) => (prevText === 'START' ? 'OK' : 'START'));
@@ -47,9 +45,7 @@ export default function SighTexting(Token: TokenType) {
         });
 
         if (response.ok) {
-          console.log(headers);
           const data = await response.json();
-          console.log('POST request successful:', data);
           setIsLoading(false);
           router.push(`/sigh/result/${data.id}`);
         } else {
@@ -62,7 +58,6 @@ export default function SighTexting(Token: TokenType) {
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        console.log(isLoading);
       }
     }
   };

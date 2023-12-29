@@ -58,7 +58,6 @@ export default function EmoCalendar({
           break;
       }
 
-      console.log(path);
 
       if (path) {
         content = (
@@ -121,7 +120,6 @@ export default function EmoCalendar({
         onActiveStartDateChange={
           ({ activeStartDate }) =>
             // getActiveMonth(activeStartDate)
-            console.log('달 이동!!')
           // alert(`next, prev 눌러서 설정된 시작 일자 : ${activeStartDate}`)
         }
       />

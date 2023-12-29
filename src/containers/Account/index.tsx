@@ -45,10 +45,6 @@ export default function MySettingPage() {
     try {
       const formData = new FormData(event.currentTarget);
       const formattedData = Object.fromEntries(formData);
-
-      console.log('formattedData >>>', formattedData);
-
-      console.log('accessToken >>>', accessToken);
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_SERVER}/profile/account`,
         {
@@ -69,7 +65,6 @@ export default function MySettingPage() {
         throw new Error('Failed to submit the data. Please try again.');
       }
       const data = await res.json();
-      console.log('res.body >>>', res.body);
       setComplete(
         `${formattedData.id}와 ${formattedData.age}, ${
           formattedData.gender == 'F' ? '여자' : '남자'
