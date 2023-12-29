@@ -3,15 +3,16 @@ import '@/styles/main.scss';
 import '@/styles/profile/profileMenu.scss';
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { selectedIconState, selectedImageState } from '@/utils/state';
+import { selectedIconState } from '@/utils/state';
 import Link from 'next/link';
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  const [selectedImage, setSelectedImage] = useRecoilState(selectedImageState);
+  // const [selectedIcon, setSelectedIcon] = useState(2);
+  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
 
-  const handleIconClick = (newImage: string, index: number) => {
-    setSelectedImage(newImage)
+  const handleIconClick = (index: number) => {
+    setSelectedImage(`/images/profileMenu/profileMenu_${index}.svg`)
     setSelectedIcon(index)
   };
 
@@ -43,11 +44,11 @@ export default function ProfileMenu() {
                     : 'icon-unselected-circle'
                 }
                 onClick={() =>
-                  handleIconClick(`/images/profileMenu_${index}.svg`, index)
+                  handleIconClick(index)
                 }
               >
               <img
-                src={`/images/profileMenu_icon${index}.svg`}
+                src={`/images/profileMenu/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
                 className={`icon`}
               />
