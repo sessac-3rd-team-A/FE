@@ -23,7 +23,7 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState<boolean | undefined>();
 
   const handleMenuBar = () => {
-    setSelectedIcon(2);
+    // setSelectedIcon(2);
     router.push(isLogin ? '/profile' : '/');
   };
 
