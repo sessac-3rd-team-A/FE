@@ -4,14 +4,14 @@ import '@/styles/profile/account.scss';
 import '@/styles/profile/accountForm.scss';
 import ProfileMenu from '@/containers/Profile/profileMenu';
 import React, { useState, FormEvent, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '@/utils/state';
+
 
 export default function MySettingPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [complete, setComplete] = useState<string | null>(null);
-
   const [user, setUser] = useRecoilState(userState);
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
@@ -64,6 +64,15 @@ export default function MySettingPage() {
           formattedData.gender == 'F' ? '여자' : '남자'
         }로 변경 완료되었습니다.`,
       );
+      // recoil 상태 업데이트
+      setUser({
+        userId: data.userId,
+        nickname: data.nickname,
+        age: data.age,
+        gender: data.gender,
+        isLogin: true,
+      });
+
     } catch (error) {
       setError('값을 다 안채웠거나, 이미 존재하는 아이디입니다.');
     } finally {
@@ -95,7 +104,7 @@ export default function MySettingPage() {
                 maxLength={100}
               />
               <div className="age-and-gender">
-                <select id="age" name="age" defaultValue="10대">
+                <select id="age" name="age" defaultValue={user.age}>
                   <option value="" aria-disabled hidden>
                     Age
                   </option>
@@ -105,7 +114,7 @@ export default function MySettingPage() {
                   <option value="40대">40 대</option>
                   <option value="50대">50 대 이상</option>
                 </select>
-                <select id="gender" name="gender" defaultValue="F">
+                <select id="gender" name="gender" defaultValue={user.gender === 'F' ? '여자' : '남자'}>
                   <option value="" disabled hidden>
                     Gender
                   </option>

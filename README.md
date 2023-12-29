@@ -80,11 +80,13 @@ $ npm run dev
 - 언어: <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
 - 프레임워크 및 라이브러리: <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white"/> ![image](https://github.com/sesac-ydp5-2nd-C/2nd-project-beatbay-back/assets/63192543/6e39c358-8bdc-43b7-90b4-562ed01caf3d) <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=Recoil&logoColor=white"/> <img src="https://img.shields.io/badge/AmCharts 5-007396?style=flat-square&logo=AmCharts 5&logoColor=white" />
   <img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=Chart.js&logoColor=white"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=Sass&logoColor=white" />
+- Open API : <img src="https://img.shields.io/badge/네이버 쇼핑검색 API-03C75A?style=flat-square&logo=Naver&logoColor=white" />
 
 ### Back-end
 
 - 언어: <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white" />
-- 프레임워크 및 라이브러리: <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=Spring Boot&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat&logo=Spring Security&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/Jpa-6DB33F?style=flat-square&logo=Java&logoColor=white" />
+- 프레임워크 및 라이브러리: <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=Spring Boot&logoColor=white"/> <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=flat&logo=Spring Security&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/Jpa-6DB33F?style=flat-square&logo=Java&logoColor=white" /> <img src="https://img.shields.io/badge/JSON-000000?style=flat-square&logo=JSON&logoColor=white" /> <img src="https://img.shields.io/badge/Amazon s3-569A31?style=flat-square&logo=Amazon s3&logoColor=white" /> <img src="https://img.shields.io/badge/KOMORAN-007396?style=flat-square&logo=KOMORAN&logoColor=white" />
+- Open API : <img src="https://img.shields.io/badge/CLOVA Sentiment-03C75A?style=flat-square&logo=Naver&logoColor=white" /> <img src="https://img.shields.io/badge/Papago Translation-03C75A?style=flat-square&logo=Naver&logoColor=white" /> <img src="https://img.shields.io/badge/Karlo-007396?style=flat-square&logo=&logoColor=white" /> <img src="https://img.shields.io/badge/한국어 별명 생성기-007396?style=flat-square&logo=&logoColor=white" />
 
 ## 🖥️ ERD
 

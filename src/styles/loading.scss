@@ -20,6 +20,37 @@
     font-family: 'LEMON MILK';
     font-size: toSize(40);
   }
+
+  .loading-messages {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .message1 {
+      animation: toggleMessage 4s infinite;
+      position: absolute;
+      opacity: 0;
+    }
+
+    .message2 {
+      animation: toggleMessage 4s infinite;
+      animation-delay: 2s;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes toggleMessage {
+  0%,
+  70%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes circle {
