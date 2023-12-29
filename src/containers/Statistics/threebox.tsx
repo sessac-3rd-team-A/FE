@@ -24,15 +24,12 @@ export default function ThreeBox(
     setSelectedMenu(menuId);
   };
   //메뉴클릭 확인 로직
-  useEffect(() => {
-    console.log(selectedMenu);
-    // window.addEventListener('resize', updateMedia);
-    // return () => window.removeEventListener('resize', updateMedia);
-  }, [selectedMenu]);
+  // useEffect(() => {
+  //   // window.addEventListener('resize', updateMedia);
+  //   // return () => window.removeEventListener('resize', updateMedia);
+  // }, [selectedMenu]);
 
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
-  // console.log(age);
-  // console.log(gender);
   return (
     <>
       {/* const componentsToRender = isMobile ? [] */}

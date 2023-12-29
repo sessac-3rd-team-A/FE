@@ -39,7 +39,6 @@ export default async function StatisticsPage() {
   //     },
   //   );
   //   memeImgInfo = await response.json();
-  //   // console.log(memeImgInfo);
   // };
 
   // fetchMemeImg();
@@ -51,7 +50,6 @@ export default async function StatisticsPage() {
     },
   );
   statisticsInfo = await statisticsResponse.json();
-  // console.log(statisticsInfo);
 
   // const statisticsCategoryResponse = await fetch(
   //   `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics?gender=${selectedGender}&age=${selectedAge}`,

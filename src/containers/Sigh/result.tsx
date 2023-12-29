@@ -13,12 +13,10 @@ import { useRouter } from 'next/navigation';
 export default function SighResultPage() {
   const pathname = usePathname();
   const id = pathname.split('/').pop();
-  console.log(id);
 
   const [sighResult, setSighResult] = useState<SighResultType | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
   const router = useRouter();
-  console.log(isError);
 
   const getResultData = async () => {
     try {
@@ -35,7 +33,6 @@ export default function SighResultPage() {
       }
 
       const data = await res.json();
-      console.log('fetch data :: ', data);
 
       setSighResult(data);
     } catch (error) {
@@ -62,7 +59,6 @@ export default function SighResultPage() {
     if (sighResult && window.Kakao && window.Kakao.Share) {
       const kakaoImg = sighResult.pictureDiary;
       const pathName = id;
-      console.log(pathName);
       window.Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
         templateId: 102205,
@@ -94,7 +90,6 @@ export default function SighResultPage() {
       : null;
 
   const saveBtn = () => {
-    console.log(recoilData);
     if (recoilData != null) {
       const parsedData = JSON.parse(recoilData);
       if (parsedData && Object.keys(parsedData).length === 0) {

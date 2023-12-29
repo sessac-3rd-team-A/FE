@@ -22,8 +22,6 @@ export default function SighPage() {
   const formattedSighText = sighText.replace(/\r\n|\r|\n/g, '');
 
   const handleStartButtonClick = async () => {
-    console.log(isLoading);
-
     const bearerToken =
       typeof window !== 'undefined'
         ? localStorage.getItem('accessToken')
@@ -57,7 +55,6 @@ export default function SighPage() {
       } catch (error) {
         console.error('Fetch error:', error);
       } finally {
-        console.log(isLoading);
       }
     }
   };

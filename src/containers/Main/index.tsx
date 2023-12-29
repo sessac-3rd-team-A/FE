@@ -124,18 +124,12 @@ export default function MainPage() {
       }
     }
 
-    function handleTouch(x: number, y: number) {
-      console.log(x, y);
-    }
-
     function preventDefaultTouch(e: TouchEvent) {
       e.preventDefault();
-      // console.log(e.touches[0].clientX);
 
       if (!loading) {
         setLoading(true);
         const startY = e.touches[0].clientY;
-        console.log(startY);
         const handleMove = (moveEvent: TouchEvent) => {
           const deltaY = moveEvent.touches[0].clientY - startY;
 
@@ -144,8 +138,6 @@ export default function MainPage() {
           } else if (deltaY < 0) {
             handleScroll('ArrowDown');
           } else {
-            console.log('aaa');
-            handleTouch(e.touches[0].clientX, e.touches[0].clientY);
           }
           window.removeEventListener('touchmove', handleMove);
         };

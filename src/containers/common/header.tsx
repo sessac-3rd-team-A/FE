@@ -24,7 +24,6 @@ export default function Header() {
   };
 
   useEffect(() => {
-    // console.log('user >>>>', user);
     user.isLogin ? setIsLogin(true) : setIsLogin(false);
   }, [user.isLogin]); // recoil
 
