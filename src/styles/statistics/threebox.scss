@@ -7,8 +7,9 @@
   height: toSize(454);
   align-items: center;
   @include media('<=768px') {
-    height: toSizeM(974);
-    // justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
   }
 }
 
@@ -21,6 +22,15 @@ input.three-box-button {
 input[type='radio']:checked + .three-box-contents {
   visibility: visible;
   width: toSize(1370);
+  @include media('<=768px') {
+    width: 100%;
+    height: toSizeM(714);
+
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 0 0 toSizeM(60) 0;
+  }
 }
 
 /* 메뉴 버튼 디자인 */
@@ -35,15 +45,28 @@ input[type='radio']:checked + .three-box-contents {
   transition: all 0.1s ease-out;
   margin: 0 toSize(5);
   border: toSize(10);
-  border-radius: toSize(40);
+  border-radius: 40px;
+
+  @include media('<=768px') {
+    width: 100%;
+    height: toSizeM(100);
+    margin: toSizeM(5);
+    justify-content: center;
+    // z-index: -1;
+    transition: none;
+  }
 }
 /*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
       위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
 .three-box-label.a {
   background: #7caaf0;
+  @include media('<=768px') {
+  }
 }
 .three-box-label.b {
   background: #06f;
+  @include media('<=768px') {
+  }
 }
 .three-box-label.c {
   background: #7caaf0;
@@ -73,6 +96,13 @@ input[type='radio']:checked + .three-box-contents {
     color: #fff;
     top: toSize(230);
     // text-align: center;
+    @include media('<=768px') {
+      transform: rotate(0deg);
+      top: toSizeM(32);
+      font-size: toSizeM(28);
+      transform: translate(-50%, 0);
+      // position: unset;
+    }
   }
 
   //라벨 인덱싱 원
@@ -91,8 +121,14 @@ input[type='radio']:checked + .three-box-contents {
     position: absolute;
     top: toSize(320);
     left: toSize(13);
+
     @include media('<=768px') {
-      top: 0;
+      position: absolute;
+      width: toSizeM(74);
+      height: toSizeM(74);
+      top: toSizeM(12);
+      font-size: toSizeM(30);
+      left: toSizeM(-330);
     }
   }
 }
@@ -116,6 +152,10 @@ input[type='radio']:checked + .three-box-contents {
   border-radius: toSize(40);
   margin: 0 toSize(5);
   @include media('<=768px') {
+    display: none;
+    margin: 5px;
+    height: unset;
+    transition: none;
   }
 }
 .three-box-inner {
@@ -147,6 +187,14 @@ input[type='radio']:checked + .three-box-contents {
   height: 100%;
   // background: red;
   // justify-content: center;
+  @include media('<=768px') {
+    align-items: center;
+    height: 35%;
+    // width: toSizeM(170);
+    width: 100%;
+    // left: 50%;
+    // transform: translate(-50%, 0);
+  }
 
   .label-message {
     position: absolute;
@@ -167,8 +215,17 @@ input[type='radio']:checked + .three-box-contents {
     font-style: normal;
     font-weight: 400;
     line-height: 110%;
-    color: #fff;
     top: 11.9791666667vw;
+    @include media('<=768px') {
+      font-size: toSizeM(28);
+      transition: none;
+      transform: none;
+      color: black;
+      transform-origin: 0;
+      top: toSizeM(32);
+      left: 50%;
+      transform: translate(-30%, 0);
+    }
   }
 
   //라벨 인덱싱 원
@@ -189,7 +246,13 @@ input[type='radio']:checked + .three-box-contents {
     top: toSize(320);
     right: toSize(10);
     @include media('<=768px') {
-      top: 0;
+      width: toSizeM(74);
+      height: toSizeM(74);
+      font-size: toSizeM(30);
+      right: 87%;
+      top: toSize(26);
+
+      // position: unset;
     }
   }
 }
@@ -207,4 +270,58 @@ input[type='radio']:checked + .three-box-contents {
 .three-box-description h3::first-letter {
   font-size: 70px;
   color: #0f848c;
+}
+
+@import '/src/styles/global.scss';
+
+.chart {
+  width: 85%;
+  display: flex;
+
+  @include media('<=768px') {
+    width: 100%;
+    padding: 0 30px 0 0;
+  }
+  .chart-inner-box {
+    display: flex;
+    width: 100%;
+    @include media('<=768px') {
+      height: 80%;
+      flex-direction: column-reverse;
+    }
+  }
+}
+.legendBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: toSize(35);
+  @include media('<=768px') {
+    // flex-direction: column;
+    // justify-content: flex-start;
+    flex-direction: row;
+    padding: 0 0 toSizeM(30) 0;
+  }
+  .item {
+    width: toSize(145);
+    color: #000;
+    font-family: 'GmarketSans';
+    font-size: toSize(18);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+    @include media('<=768px') {
+      width: 18%;
+      font-size: toSizeM(18);
+    }
+  }
+  img {
+    vertical-align: middle;
+    width: toSize(35);
+    @include media('<=768px') {
+      width: toSizeM(25);
+    }
+  }
 }

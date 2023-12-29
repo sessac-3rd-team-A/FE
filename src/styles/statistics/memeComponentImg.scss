@@ -3,6 +3,10 @@
 .meme-left-container {
   width: 85%;
   display: flex;
+  @include media('<=768px') {
+    flex-direction: column-reverse;
+  }
+
   .meme-picture-message {
     display: flex;
     align-items: center;
@@ -19,6 +23,12 @@
   .meme-picture-container {
     width: toSize(520);
     height: toSize(289);
+    @include media('<=768px') {
+      position: relative;
+      top: toSizeM(-40);
+      width: toSizeM(643);
+      height: toSizeM(363);
+    }
   }
   .meme-picture {
     width: 100%;
@@ -28,6 +38,7 @@
     top: toSize(50);
     left: toSize(30);
   }
+
   .meme-rank-button {
     color: #000;
     font-family: 'GmarketSans';
@@ -38,6 +49,11 @@
     position: relative;
     left: toSize(80);
     top: toSize(20);
+    @include media('<=768px') {
+      font-size: toSizeM(20);
+      top: toSizeM(-55);
+      width: 10%;
+    }
   }
 
   .meme-rank-button.selected {
@@ -48,5 +64,8 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    @include media('<=768px') {
+      font-size: toSizeM(20);
+    }
   }
 }
