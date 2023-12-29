@@ -11,28 +11,16 @@ export default function ThreeBox(
   // { gender }: { gender: string | null },
   // { age }: { age: string | null },
 ) {
-  //메뉴클릭 확인 로직
-
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
-  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // const updateMedia = () => {
-  //   setIsMobile(window.innerWidth <= 768);
-  // };
-  //메뉴클릭 확인 로직
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
   };
-  //메뉴클릭 확인 로직
-  // useEffect(() => {
-  //   // window.addEventListener('resize', updateMedia);
-  //   // return () => window.removeEventListener('resize', updateMedia);
-  // }, [selectedMenu]);
+
 
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
   return (
     <>
-      {/* const componentsToRender = isMobile ? [] */}
       <div className="three-box-wrap">
         {/* Repeat the structure for each menu */}
         {Array.from({ length: 3 }, (_, index) => {
@@ -42,16 +30,8 @@ export default function ThreeBox(
               key="trendLineChart"
               statisticsInfo={statisticsInfo}
             />,
-            <TrendLineChartCategory
-              key="trendLineChart"
-              // statisticsCategoryInfo={statisticsCategoryInfo}
-            />,
-            <MemeComponent
-              key="memeComponent"
-              // memeImgInfo={memeImgInfo}
-              // gender={gender}
-              // age={age}
-            />,
+            <TrendLineChartCategory key="trendLineChart" />,
+            <MemeComponent key="memeComponent" />,
           ];
 
           return (
@@ -86,7 +66,7 @@ export default function ThreeBox(
                 </div>
                 <div className="three-box-description">
                   <div className="label-message">{`${labeLText[index]}`}</div>
-                  {/* <h3>{`TITLE ${3 - index}`}</h3> */}
+
                   <div className="label-circle">
                     <br></br>
                     {`0${index + 1}`}
@@ -97,7 +77,7 @@ export default function ThreeBox(
           );
         })}
       </div>
-      <div>{/* <MemeComponent key="memeComponent" />, */}</div>
+      <div></div>
     </>
   );
 }

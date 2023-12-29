@@ -36,8 +36,8 @@
   top: toSize(50);
   margin-top: toSize(5);
   @include media('<=768px') {
-    left: toSizeM(-230);
-    top: toSizeM(-480);
+    left: toSizeM(-200);
+    top: toSizeM(-456);
   }
 }
 .custom-select-wrapper-testing select {
