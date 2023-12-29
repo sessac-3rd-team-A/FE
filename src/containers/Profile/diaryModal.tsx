@@ -32,30 +32,38 @@ export default function DiaryModal({ emoData, modalDate }: Props) {
   };
 
   return (
-    <div className="diaryModal-container">
-      <div className="date">{modalDate.split('-').join('.')}</div>
-      {diaryPath && isFront && (
-        <div className="diaryImg" onClick={handleClick}>
-          <Image
-            src={diaryPath}
-            alt="picture diary"
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 100vw"
-          />
-          <span>그림일기</span>
+    <div className="diaryModal-3d-wrap">
+      <div className={`diaryModal-3d-wrapper ${isFront ? 'flip' : ''}`}>
+        <div className="diaryModal-container front" onClick={handleClick}>
+          <div className="date">{modalDate.split('-').join('.')}</div>
+          {diaryPath && (
+            <div className="diaryImg">
+              <Image
+                src={diaryPath}
+                alt="picture diary"
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 100vw"
+              />
+              <span>그림일기</span>
+            </div>
+          )}
         </div>
-      )}
-      {gifPath && !isFront && (
-        <div className="gifImg" onClick={handleClick}>
-          <Image
-            src={gifPath}
-            alt="picture diary"
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 100vw"
-          />
-          <span>추천짤</span>
+        <div className="diaryModal-container back" onClick={handleClick}>
+          <div className="date">{modalDate.split('-').join('.')}</div>
+
+          {gifPath && (
+            <div className={`gifImg`}>
+              <Image
+                src={gifPath}
+                alt="picture diary"
+                fill
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 100vw"
+              />
+              <span>추천짤</span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

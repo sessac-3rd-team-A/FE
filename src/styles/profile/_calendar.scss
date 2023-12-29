@@ -145,7 +145,8 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: toSize(24);
+    width: 30%;
+    height: 30%;
   }
 }
 
@@ -168,6 +169,15 @@ $theme-color-purple: rgba(124, 63, 124, 0.857);
     height: 6rem;
     abbr {
       height: 100%;
+    }
+    div {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      // font-size: toSize(24);
+      width: 20%;
+      height: 20%;
     }
   }
 }
