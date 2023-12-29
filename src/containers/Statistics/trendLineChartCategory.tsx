@@ -126,209 +126,217 @@ export default function TrendLineChartCategory() {
   const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
-      <Line
-        data={{ labels: newLabels, datasets: filteredDatasets }}
-        options={{
-          maintainAspectRatio: false,
-          responsive: true,
-          scales: {
-            y: {
-              min: 0,
-              max: 100,
-              grid: {
-                display: false,
+      <div className="chart-inner-box">
+        <Line
+          data={{ labels: newLabels, datasets: filteredDatasets }}
+          options={{
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+              y: {
+                min: 0,
+                max: 100,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  color: 'rgba(0, 0, 0)',
+                },
               },
-              ticks: {
-                color: 'rgba(0, 0, 0)',
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                maxRotation: 0,
-                minRotation: 0,
-                // font: {
-                //   size: 10,
-                // },
-                color: 'rgba(0, 0, 0)',
-              },
-            },
-          },
-          elements: {
-            point: {
-              radius: 0,
-            },
-          },
-          hover: {
-            mode: 'nearest',
-            intersect: true,
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            title: {
-              display: true,
-              // text: '당신의 기분을 알려드려요 : )',
-            },
-            tooltip: {
-              mode: 'index' as const,
-              intersect: false,
-              callbacks: {
-                title: function (context) {
-                  const index = context[0].dataIndex;
-                  return labels[index] ? labels[index].toString() : '';
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  maxRotation: 0,
+                  minRotation: 0,
+                  // font: {
+                  //   size: 10,
+                  // },
+                  color: 'rgba(0, 0, 0)',
                 },
               },
             },
-          },
-        }}
-      ></Line>
-      <div className="legendBox">
-        {(() => {
-          const totalAverage = datasets.reduce(
-            (total: number, current: any) => {
-              const average = current.data.filter(
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true,
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              title: {
+                display: true,
+                // text: '당신의 기분을 알려드려요 : )',
+              },
+              tooltip: {
+                mode: 'index' as const,
+                intersect: false,
+                callbacks: {
+                  title: function (context) {
+                    const index = context[0].dataIndex;
+                    return labels[index] ? labels[index].toString() : '';
+                  },
+                },
+              },
+            },
+          }}
+        ></Line>
+
+        <div className="legendBox">
+          {(() => {
+            const totalAverage = datasets.reduce(
+              (total: number, current: any) => {
+                const average = current.data.filter(
+                  (value: number) => value !== 0,
+                ).length
+                  ? current.data.reduce((a: number, b: number) => a + b, 0) /
+                    current.data.filter((value: number) => value !== 0).length
+                  : 0;
+                return total + average;
+              },
+              0,
+            );
+
+            let percentages = datasets.map((dataset: any) => {
+              const average = dataset.data.filter(
                 (value: number) => value !== 0,
               ).length
-                ? current.data.reduce((a: number, b: number) => a + b, 0) /
-                  current.data.filter((value: number) => value !== 0).length
+                ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
+                  dataset.data.filter((value: number) => value !== 0).length
                 : 0;
-              return total + average;
-            },
-            0,
-          );
+              return {
+                id: dataset.id,
+                percentage: totalAverage
+                  ? Math.round((average / totalAverage) * 100)
+                  : 0,
+              };
+            });
 
-          let percentages = datasets.map((dataset: any) => {
-            const average = dataset.data.filter((value: number) => value !== 0)
-              .length
-              ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
-                dataset.data.filter((value: number) => value !== 0).length
-              : 0;
-            return {
-              id: dataset.id,
-              percentage: totalAverage
-                ? Math.round((average / totalAverage) * 100)
-                : 0,
-            };
-          });
-
-          if (percentages.length === 0) {
-            return null;
-          }
-
-          const total = percentages.reduce(
-            (total: number, current: { percentage: number }) =>
-              total + current.percentage,
-            0,
-          );
-          const difference = 100 - total;
-          const maxIndex = percentages.reduce(
-            (
-              iMax: number,
-              x: { percentage: number },
-              i: number,
-              arr: { percentage: number }[],
-            ) => (x.percentage > arr[iMax].percentage ? i : iMax),
-            0,
-          );
-          if (difference > 0) {
-            percentages[maxIndex].percentage += difference;
-            // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
-            if (percentages[maxIndex].percentage >= 100) {
-              percentages = percentages.map((item: any) => {
-                return { ...item, percentage: 0 };
-              });
+            if (percentages.length === 0) {
+              return null;
             }
-          }
 
-          return percentages.map((item: { id: string; percentage: number }) => (
-            <button
-              key={item.id}
-              id={item.id}
-              className={`item ${visibleDataset === item.id ? 'selected' : ''}`}
-              onClick={() => handleButtonClick(item.id)}
-            >
-              {item.id === 'positive' && (
-                <img src="/statistics/positive.svg" alt="" />
-              )}
-              {item.id === 'negative' && (
-                <img src="/statistics/negative.svg" alt="" />
-              )}
-              {item.id === 'neutral' && (
-                <img src="/statistics/neutral.svg" alt="" />
-              )}
-              &nbsp;{item.percentage}%
-            </button>
-          ));
-        })()}
-        {/* 성별 선택 드롭다운 */}
-        <div className="custom-select-wrapper">
-          <div
-            className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
-          >
-            <span
-              className="custom-select-trigger"
-              onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
-            >
-              <div className="custom-select-cover">
-                {
-                  genderOptions.find(
-                    (option) => option.value === selectedGender,
-                  )?.label
-                }
-              </div>
-            </span>
-            <div className="custom-options">
-              {genderOptions.map((option) => (
-                <span
-                  className={`custom-option ${
-                    selectedGender === option.value ? 'selection' : ''
+            const total = percentages.reduce(
+              (total: number, current: { percentage: number }) =>
+                total + current.percentage,
+              0,
+            );
+            const difference = 100 - total;
+            const maxIndex = percentages.reduce(
+              (
+                iMax: number,
+                x: { percentage: number },
+                i: number,
+                arr: { percentage: number }[],
+              ) => (x.percentage > arr[iMax].percentage ? i : iMax),
+              0,
+            );
+            if (difference > 0) {
+              percentages[maxIndex].percentage += difference;
+              // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
+              if (percentages[maxIndex].percentage >= 100) {
+                percentages = percentages.map((item: any) => {
+                  return { ...item, percentage: 0 };
+                });
+              }
+            }
+
+            return percentages.map(
+              (item: { id: string; percentage: number }) => (
+                <button
+                  key={item.id}
+                  id={item.id}
+                  className={`item ${
+                    visibleDataset === item.id ? 'selected' : ''
                   }`}
-                  onClick={() => {
-                    setSelectedGender(option.value);
-                    setGenderDropdownOpen(false);
-                  }}
-                  key={option.value}
+                  onClick={() => handleButtonClick(item.id)}
                 >
-                  {option.label}
-                </span>
-              ))}
+                  {item.id === 'positive' && (
+                    <img src="/statistics/positive.svg" alt="" />
+                  )}
+                  {item.id === 'negative' && (
+                    <img src="/statistics/negative.svg" alt="" />
+                  )}
+                  {item.id === 'neutral' && (
+                    <img src="/statistics/neutral.svg" alt="" />
+                  )}
+                  &nbsp;{item.percentage}%
+                </button>
+              ),
+            );
+          })()}
+          {/* 성별 선택 드롭다운 */}
+          <div className="custom-select-wrapper">
+            <div
+              className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
+            >
+              <span
+                className="custom-select-trigger"
+                onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
+              >
+                <div className="custom-select-cover">
+                  {
+                    genderOptions.find(
+                      (option) => option.value === selectedGender,
+                    )?.label
+                  }
+                </div>
+              </span>
+              <div className="custom-options">
+                {genderOptions.map((option) => (
+                  <span
+                    className={`custom-option ${
+                      selectedGender === option.value ? 'selection' : ''
+                    }`}
+                    onClick={() => {
+                      setSelectedGender(option.value);
+                      setGenderDropdownOpen(false);
+                    }}
+                    key={option.value}
+                  >
+                    {option.label}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* 연령 선택 드롭다운 */}
-        <div className="custom-select-wrapper">
-          <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
-            <span
-              className="custom-select-trigger"
-              onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
-            >
-              <div className="custom-select-cover">
-                {
-                  ageOptions.find((option) => option.value === selectedAge)
-                    ?.label
-                }
+          {/* 연령 선택 드롭다운 */}
+          <div className="custom-select-wrapper">
+            <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
+              <span
+                className="custom-select-trigger"
+                onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
+              >
+                <div className="custom-select-cover">
+                  {
+                    ageOptions.find((option) => option.value === selectedAge)
+                      ?.label
+                  }
+                </div>
+              </span>
+              <div className="custom-options">
+                {ageOptions.map((option) => (
+                  <span
+                    className={`custom-option ${
+                      selectedAge === option.value ? 'selection' : ''
+                    }`}
+                    onClick={() => {
+                      setSelectedAge(option.value);
+                      setAgeDropdownOpen(false);
+                    }}
+                    key={option.value}
+                  >
+                    {option.label}
+                  </span>
+                ))}
               </div>
-            </span>
-            <div className="custom-options">
-              {ageOptions.map((option) => (
-                <span
-                  className={`custom-option ${
-                    selectedAge === option.value ? 'selection' : ''
-                  }`}
-                  onClick={() => {
-                    setSelectedAge(option.value);
-                    setAgeDropdownOpen(false);
-                  }}
-                  key={option.value}
-                >
-                  {option.label}
-                </span>
-              ))}
             </div>
           </div>
         </div>

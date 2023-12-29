@@ -43,7 +43,11 @@ export default function Header() {
         <img src="/logo.svg" alt="logo" className="headerLogo" />
       </Link>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link href={isLogin ? '/profile' : '/'} className="headerMenu" onClick={handleMenuBar}>
+        <Link
+          href={isLogin ? '/profile' : '/'}
+          className="headerMenu"
+          onClick={handleMenuBar}
+        >
           {isLogin ? 'PROFILE' : 'Main'}
         </Link>
         <Link href={'/sigh'} className="headerMenu middle">
@@ -66,7 +70,7 @@ export default function Header() {
             router.replace('/');
           }}
         >
-          SIGNOUT
+          SIGN OUT
         </div>
       )}
     </header>

@@ -107,135 +107,140 @@ export default function TrendLineChart({ statisticsInfo }: any) {
 
   return (
     <div className="chart">
-      <Line
-        data={{ labels: newLabels, datasets: filteredDatasets }}
-        options={{
-          maintainAspectRatio: false,
-          responsive: true,
-          scales: {
-            y: {
-              min: 0,
-              max: 100,
-              grid: {
-                display: false,
+      <div className="chart-inner-box">
+        <Line
+          data={{ labels: newLabels, datasets: filteredDatasets }}
+          options={{
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+              y: {
+                min: 0,
+                max: 100,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  color: 'rgba(0, 0, 0)',
+                },
               },
-              ticks: {
-                color: 'rgba(0, 0, 0)',
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                maxRotation: 0,
-                minRotation: 0,
-                // font: {
-                //   size: 10,
-                // },
-                color: 'rgba(0, 0, 0)',
-              },
-            },
-          },
-          elements: {
-            point: {
-              radius: 0,
-            },
-          },
-          hover: {
-            mode: 'nearest',
-            intersect: true,
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            title: {
-              display: true,
-            },
-            tooltip: {
-              mode: 'index' as const,
-              intersect: false,
-              callbacks: {
-                title: function (context) {
-                  const index = context[0].dataIndex;
-                  return labels[index] ? labels[index].toString() : '';
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  maxRotation: 0,
+                  minRotation: 0,
+                  // font: {
+                  //   size: 10,
+                  // },
+                  color: 'rgba(0, 0, 0)',
                 },
               },
             },
-          },
-        }}
-      />
-      <div className="legendBox">
-        {(() => {
-          const totalAverage = datasets.reduce(
-            (total: number, current: any) => {
-              const average = current.data.filter(
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: true,
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              title: {
+                display: true,
+              },
+              tooltip: {
+                mode: 'index' as const,
+                intersect: false,
+                callbacks: {
+                  title: function (context) {
+                    const index = context[0].dataIndex;
+                    return labels[index] ? labels[index].toString() : '';
+                  },
+                },
+              },
+            },
+          }}
+        />
+        <div className="legendBox">
+          {(() => {
+            const totalAverage = datasets.reduce(
+              (total: number, current: any) => {
+                const average = current.data.filter(
+                  (value: number) => value !== 0,
+                ).length
+                  ? current.data.reduce((a: number, b: number) => a + b, 0) /
+                    current.data.filter((value: number) => value !== 0).length
+                  : 0;
+                return total + average;
+              },
+              0,
+            );
+
+            let percentages = datasets.map((dataset: any) => {
+              const average = dataset.data.filter(
                 (value: number) => value !== 0,
               ).length
-                ? current.data.reduce((a: number, b: number) => a + b, 0) /
-                  current.data.filter((value: number) => value !== 0).length
+                ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
+                  dataset.data.filter((value: number) => value !== 0).length
                 : 0;
-              return total + average;
-            },
-            0,
-          );
+              return {
+                id: dataset.id,
+                percentage: totalAverage
+                  ? Math.round((average / totalAverage) * 100)
+                  : 0,
+              };
+            });
 
-          let percentages = datasets.map((dataset: any) => {
-            const average = dataset.data.filter((value: number) => value !== 0)
-              .length
-              ? dataset.data.reduce((a: number, b: number) => a + b, 0) /
-                dataset.data.filter((value: number) => value !== 0).length
-              : 0;
-            return {
-              id: dataset.id,
-              percentage: totalAverage
-                ? Math.round((average / totalAverage) * 100)
-                : 0,
-            };
-          });
+            if (percentages.length === 0) {
+              return null;
+            }
 
-          if (percentages.length === 0) {
-            return null;
-          }
+            const total = percentages.reduce(
+              (total: number, current: { percentage: number }) =>
+                total + current.percentage,
+              0,
+            );
+            const difference = 100 - total;
+            const maxIndex = percentages.reduce(
+              (
+                iMax: number,
+                x: { percentage: number },
+                i: number,
+                arr: { percentage: number }[],
+              ) => (x.percentage > arr[iMax].percentage ? i : iMax),
+              0,
+            );
+            percentages[maxIndex].percentage += difference;
 
-          const total = percentages.reduce(
-            (total: number, current: { percentage: number }) =>
-              total + current.percentage,
-            0,
-          );
-          const difference = 100 - total;
-          const maxIndex = percentages.reduce(
-            (
-              iMax: number,
-              x: { percentage: number },
-              i: number,
-              arr: { percentage: number }[],
-            ) => (x.percentage > arr[iMax].percentage ? i : iMax),
-            0,
-          );
-          percentages[maxIndex].percentage += difference;
-
-          return percentages.map((item: { id: string; percentage: number }) => (
-            <button
-              key={item.id}
-              id={item.id}
-              className="item"
-              onClick={() => handleButtonClick(item.id)}
-            >
-              {item.id === 'positive' && (
-                <img src="/statistics/positive.svg" alt="" />
-              )}
-              {item.id === 'negative' && (
-                <img src="/statistics/negative.svg" alt="" />
-              )}
-              {item.id === 'neutral' && (
-                <img src="/statistics/neutral.svg" alt="" />
-              )}
-              &nbsp;{item.percentage}%
-            </button>
-          ));
-        })()}
+            return percentages.map(
+              (item: { id: string; percentage: number }) => (
+                <button
+                  key={item.id}
+                  id={item.id}
+                  className="item"
+                  onClick={() => handleButtonClick(item.id)}
+                >
+                  {item.id === 'positive' && (
+                    <img src="/statistics/positive.svg" alt="" />
+                  )}
+                  {item.id === 'negative' && (
+                    <img src="/statistics/negative.svg" alt="" />
+                  )}
+                  {item.id === 'neutral' && (
+                    <img src="/statistics/neutral.svg" alt="" />
+                  )}
+                  &nbsp;{item.percentage}%
+                </button>
+              ),
+            );
+          })()}
+        </div>
       </div>
     </div>
   );

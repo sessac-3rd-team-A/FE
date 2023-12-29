@@ -12,7 +12,13 @@ export default function ThreeBox(
   // { age }: { age: string | null },
 ) {
   //메뉴클릭 확인 로직
+
   const [selectedMenu, setSelectedMenu] = useState<string>('menu1'); // 현재 선택된 메뉴이름
+  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // const updateMedia = () => {
+  //   setIsMobile(window.innerWidth <= 768);
+  // };
   //메뉴클릭 확인 로직
   const handleMenuChange = (menuId: string) => {
     setSelectedMenu(menuId);
@@ -20,6 +26,8 @@ export default function ThreeBox(
   //메뉴클릭 확인 로직
   useEffect(() => {
     console.log(selectedMenu);
+    // window.addEventListener('resize', updateMedia);
+    // return () => window.removeEventListener('resize', updateMedia);
   }, [selectedMenu]);
 
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
@@ -27,6 +35,7 @@ export default function ThreeBox(
   // console.log(gender);
   return (
     <>
+      {/* const componentsToRender = isMobile ? [] */}
       <div className="three-box-wrap">
         {/* Repeat the structure for each menu */}
         {Array.from({ length: 3 }, (_, index) => {
@@ -58,19 +67,6 @@ export default function ThreeBox(
                 checked={selectedMenu === menuId}
                 onChange={() => handleMenuChange(menuId)} //임시 주석처리
               />
-              <div className="three-box-contents">
-                <div className="three-box-inner">
-                  {componentsToRender[index]}
-                </div>
-                <div className="three-box-description">
-                  <div className="label-message">{`${labeLText[index]}`}</div>
-                  {/* <h3>{`TITLE ${3 - index}`}</h3> */}
-                  <div className="label-circle">
-                    <br></br>
-                    {`0${index + 1}`}
-                  </div>
-                </div>
-              </div>
               {menuId !== selectedMenu && (
                 <label
                   htmlFor={menuId}
@@ -87,6 +83,19 @@ export default function ThreeBox(
                   </span>
                 </label>
               )}
+              <div className="three-box-contents">
+                <div className="three-box-inner">
+                  {componentsToRender[index]}
+                </div>
+                <div className="three-box-description">
+                  <div className="label-message">{`${labeLText[index]}`}</div>
+                  {/* <h3>{`TITLE ${3 - index}`}</h3> */}
+                  <div className="label-circle">
+                    <br></br>
+                    {`0${index + 1}`}
+                  </div>
+                </div>
+              </div>
             </React.Fragment>
           );
         })}

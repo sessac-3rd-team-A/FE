@@ -35,6 +35,7 @@ const MemeComponent = (
         age={age}
         // memeImgInfo={memeImgInfo}
       />
+
       <div className="legendBox">
         <button className="item" style={{ visibility: 'hidden' }}>
           {<img src="/statistics/positive.svg" alt="" />}
@@ -44,12 +45,13 @@ const MemeComponent = (
           {<img src="/statistics/neutral.svg" alt="" />}
           <br />
         </button>
-        <div className="custom-select-wrapper">
+        <div className="custom-select-wrapper ">
           <div
             className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
           >
             <span
               className="custom-select-trigger"
+              // style={{''}}
               onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
               <div className="custom-select-cover">

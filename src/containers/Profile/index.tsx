@@ -106,11 +106,11 @@ export default function ProfilePage() {
                 router.push('/sigh');
               }}
             >
-              <Link
-                href="/sigh"
-                style={{ display: 'flex', alignItems: 'center', gap: '20px' }}
-              >
-                한숨 쉬러 가기 <CiCircleChevRight />
+              <Link href="/sigh">
+                <span>한숨 쉬러 가기 </span>
+                <span>
+                  <CiCircleChevRight />
+                </span>
               </Link>
             </div>
             <PRatio />

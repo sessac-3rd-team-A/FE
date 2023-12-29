@@ -75,7 +75,7 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
             />
           ))}
       </div>
-      <div>
+      <div className="meme-picture-button">
         {data.ranking.map((meme: any, index: any) => (
           <span key={index}>
             <button
