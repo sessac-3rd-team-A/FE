@@ -1,7 +1,5 @@
 @use 'sass:math';
 @import '~include-media/dist/include-media';
-@import url('https://fonts.cdnfonts.com/css/lemon-milk');
-@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
 // 반응형 크기 계산 (1920px or 개발자 입력 픽셀 기준)
 @function toSize($size, $standard: null) {

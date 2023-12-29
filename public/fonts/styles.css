@@ -1,0 +1,120 @@
+@font-face {
+  font-family: lemon milk;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkRegular-X3XE2.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: italic;
+  font-weight: 400;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkRegularItalic-L3AEy.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: normal;
+  font-weight: 300;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkLight-owxMq.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: italic;
+  font-weight: 300;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkLightItalic-7BjPE.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkMedium-mLZYV.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: italic;
+  font-weight: 500;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkMediumItalic-d95nl.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkBold-gx2B3.woff)
+      format('woff');
+}
+@font-face {
+  font-family: lemon milk;
+  font-style: italic;
+  font-weight: 700;
+  src:
+    local('LEMON MILK'),
+    url(https://fonts.cdnfonts.com/s/35897/LemonMilkBoldItalic-PKZ3P.woff)
+      format('woff');
+}
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
+  src:
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf')
+      format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 500;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot');
+  src:
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.ttf')
+      format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GmarketSans';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot');
+  src:
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2')
+      format('woff2'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff')
+      format('woff'),
+    url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf')
+      format('truetype');
+  font-display: swap;
+}

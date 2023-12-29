@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-
+import '../../public/fonts/styles.css';
 import '@/styles/global.scss';
 import Header from '@/containers/common/header';
 import RecoilRootProvider from '@/utils/recoilRootProvider';
