@@ -1,10 +1,10 @@
-'use client'
-import Loading from '@/containers/common/loading';
+'use client';
+import SighLoading from '@/containers/Sigh/loading';
 
 export default function LoadingPage() {
   return (
     <>
-      <Loading />
+      <SighLoading />
     </>
-  )
+  );
 }
