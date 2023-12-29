@@ -13,6 +13,7 @@ export default function SignInPage() {
   const router = useRouter();
   const resetUser = useResetRecoilState(userState);
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [idd, setIdd] = useState<string>('test');
   const [user, setUser] = useRecoilState(userState); // recoil
   const eyeRef1 = useRef<HTMLDivElement>(null);
   const eyeRef2 = useRef<HTMLDivElement>(null);
@@ -161,6 +162,7 @@ export default function SignInPage() {
             <p className="signIn-letter">SIGN IN</p>
             <input
               required
+              defaultValue={'test123'}
               name="userId"
               type="text"
               id="id"
@@ -170,6 +172,7 @@ export default function SignInPage() {
             />
             <input
               required
+              defaultValue={'test123'}
               name="password"
               type="password"
               id="pw"

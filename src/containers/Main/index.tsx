@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'react'; // recoil
 import '@/styles/main.scss';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Footer from '../common/footer';
+import Footer from '@/containers/common/footer';
 
 interface Section {
   text: string;
