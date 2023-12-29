@@ -18,6 +18,9 @@ export default function SighPage() {
     setSighText(newText);
   };
 
+  // 개행문자 에러
+  const formattedSighText = sighText.replace(/\r\n|\r|\n/g, '');
+
   const handleStartButtonClick = async () => {
     console.log(isLoading);
 
@@ -41,7 +44,7 @@ export default function SighPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            textDiary: sighText,
+            textDiary: formattedSighText,
           }),
         });
 
