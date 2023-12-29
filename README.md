@@ -43,14 +43,13 @@
 
 #### Backend
 
-```
-// 맥OS/리눅스 기준
-$ ./mvnw spring-boot:run
+```bash
+$ ./gradlew bootRun
 ```
 
 #### Frontend
 
-```
+```bash
 $ git clone https://github.com/sessac-3rd-team-A/FE.git
 $ npm install
 $ npm run dev
@@ -68,11 +67,11 @@ $ npm run dev
 
 ### BACKEND
 
-|                                         김세은                                          |                                        김정윤                                         |                                        김효중                                        |                                        홍민영                                        |
-| :-------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
-| <img  width="100px" src="https://avatars.githubusercontent.com/u/139741006?s=60&v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/95032287?s=60&v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/71661011?s=60&v=4"/> | <img width="100px" src="https://avatars.githubusercontent.com/u/65701100?s=60&v=4"/> |
-|                       [@seeun0210](https://github.com/seeun0210)                        |             [@pipi-shortstocking](https://github.com/pipi-shortstocking)              |                      [@rlagywnd4](https://github.com/rlagywnd4)                      |                   [@HongMinYeong](https://github.com/HongMinYeong)                   |
-|                                   그림일기 관련 기능                                    |                           회원정보 수정 <br /> 유효성 검사                            |                       로그인 기능 <br /> 사용자 인증 관련 기능                       |                                    통계 관련 기능                                    |
+|                                         김세은                                          |                                      김정윤                                      |                                        김효중                                        |                                     홍민영                                      |
+| :-------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+| <img  width="100px" src="https://avatars.githubusercontent.com/u/139741006?s=60&v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/95032287?v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/71661011?s=60&v=4"/> | <img width="100px" src="https://avatars.githubusercontent.com/u/65701100?v=4"/> |
+|                       [@seeun0210](https://github.com/seeun0210)                        |           [@pipi-shortstocking](https://github.com/pipi-shortstocking)           |                      [@rlagywnd4](https://github.com/rlagywnd4)                      |                [@HongMinYeong](https://github.com/HongMinYeong)                 |
+|                                   그림일기 관련 기능                                    |                         회원정보 수정 <br /> 유효성 검사                         |                       로그인 기능 <br /> 사용자 인증 관련 기능                       |                                 통계 관련 기능                                  |
 
 ## 🖱 사용 기술
 
