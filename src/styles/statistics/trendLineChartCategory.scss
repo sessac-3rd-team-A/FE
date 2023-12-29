@@ -75,7 +75,13 @@
   transform: rotate(45deg) translateY(-50%);
   transition: all 0.4s ease-in-out;
   transform-origin: 50% 0;
+  @include media('<=768px') {
+    width: toSizeM(10);
+    height: toSizeM(10);
+    right: toSizeM(10);
+  }
 }
+
 .custom-select.opened .custom-select-trigger:after {
   margin-top: 3px;
   transform: rotate(-135deg) translateY(-50%);
