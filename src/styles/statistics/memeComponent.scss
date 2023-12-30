@@ -24,7 +24,7 @@
   margin-top: toSize(5);
   @include media('<=768px') {
     left: toSizeM(-200);
-    top: toSizeM(-390);
+    top: toSizeM(-220);
   }
 }
 .custom-select-wrapper-testing select {
