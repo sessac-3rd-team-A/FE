@@ -11,12 +11,17 @@ import {
   Legend,
 } from 'chart.js';
 import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/utils/state';
 
 export default function TrendLineChartCategory() {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
-  const [selectedGender, setSelectedGender] = useState<string>('F');
-  const [selectedAge, setSelectedAge] = useState<string>('20대');
+  const [user, setUser] = useRecoilState(userState);
+  const { gender, age } = user;
+
+  const [selectedGender, setSelectedGender] = useState<string>(gender || 'F');
+  const [selectedAge, setSelectedAge] = useState<string>(age || '20대');
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
