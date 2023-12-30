@@ -4,12 +4,7 @@ import '../../styles/statistics/semo.scss';
 
 function Semo() {
   return (
-    <Image
-      src={profilePic}
-      alt="Picture of me"
-      //   placeholder="blur" // Optional blur-up while loading
-      className="semo-floating"
-    />
+    <Image src={profilePic} alt="Picture of me" className="semo-floating" />
   );
 }
 export default Semo;
