@@ -3,14 +3,18 @@ import '../../styles/statistics/memeComponent.scss';
 import { useState } from 'react';
 import MemeComponentImg from './memeComponentImg';
 import { relative } from 'path';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/utils/state';
 
 const MemeComponent = (
   { memeImgInfo }: any,
   // { gender }: { gender: string | null },
   // { age }: { age: string | null },
 ) => {
-  const [gender, setGender] = useState('F');
-  const [age, setAge] = useState('20대');
+  // const [gender, setGender] = useState('F');
+  // const [age, setAge] = useState('20대');
+  const [user, setUser] = useRecoilState(userState);
+  const { gender, age } = user;
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
 
@@ -27,7 +31,8 @@ const MemeComponent = (
     { label: '40대', value: '40대' },
     { label: '50+', value: '50대' },
   ];
-
+  // const [gender, setGender] = useRecoilState(user.gender);
+  // const [age, setAge] = useRecoilState(user.age);
   return (
     <>
       <MemeComponentImg
@@ -66,7 +71,7 @@ const MemeComponent = (
                     gender === g.value ? 'selection' : ''
                   }`}
                   onClick={() => {
-                    setGender(g.value);
+                    setUser((prevUser) => ({ ...prevUser, gender: g.value }));
                     setGenderDropdownOpen(false);
                   }}
                 >
@@ -94,7 +99,7 @@ const MemeComponent = (
                     age === a.value ? 'selection' : ''
                   }`}
                   onClick={() => {
-                    setAge(a.value);
+                    setUser((prevUser) => ({ ...prevUser, age: a.value }));
                     setAgeDropdownOpen(false);
                   }}
                 >
