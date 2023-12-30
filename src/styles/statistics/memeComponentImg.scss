@@ -5,7 +5,6 @@
   display: flex;
   @include media('<=768px') {
     flex-direction: column-reverse;
-    // width: 100%;
   }
 
   .meme-picture-message {
@@ -46,6 +45,7 @@
   }
 
   .meme-rank-button {
+    cursor: pointer;
     color: #000;
     font-family: 'GmarketSans';
     font-size: toSize(18);
@@ -57,7 +57,7 @@
     top: toSize(20);
     @include media('<=768px') {
       font-size: toSizeM(20);
-      top: toSizeM(-55);
+      top: toSizeM(-42);
       width: 10%;
     }
   }

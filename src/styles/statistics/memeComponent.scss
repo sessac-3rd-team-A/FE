@@ -14,19 +14,6 @@
   height: 20px;
 }
 
-// .legend-box-mobile3 {
-//   @include media('<=768px') {
-//     position: absolute;
-//     // width: toSizeM(90);
-//     // height: toSizeM(32);
-//     // font-size: toSizeM(20);
-//     // bottom: toSizeM(35);
-//     // left: toSizeM(80);
-//     left: 40%;
-//     bottom: toSize(900);
-//   }
-// }
-
 .custom-select-wrapper-testing {
   position: relative;
   display: inline-block;
@@ -37,7 +24,7 @@
   margin-top: toSize(5);
   @include media('<=768px') {
     left: toSizeM(-200);
-    top: toSizeM(-456);
+    top: toSizeM(-390);
   }
 }
 .custom-select-wrapper-testing select {
@@ -64,7 +51,8 @@
   transform: translateY(-15px);
   z-index: 10;
   @include media('<=768px') {
-    left: toSizeM(60);
+    left: toSizeM(40);
+    top: 50%;
   }
 }
 .custom-select.opened .custom-options-testing {
@@ -73,7 +61,8 @@
   pointer-events: all;
   transform: translateY(0);
   @include media('<=768px') {
-    left: toSizeM(60);
+    left: toSizeM(40);
+    // top: toSizeM(-60);
   }
 }
 .custom-options-testing:before {
@@ -89,8 +78,12 @@
   border-left: 1px solid #b5b5b5;
   background: #fff;
   transform: rotate(45deg);
+
   // transition: all 0.4s ease-in-out;
 }
 .meme-picture-button {
   padding: 10px;
+  @include media('<=768px') {
+    padding: 0;
+  }
 }

@@ -75,7 +75,7 @@ export default function TrendLineChartCategory() {
           borderColor: '#FF983A',
           backgroundColor: '#FF983A',
 
-          borderWidth: 1,
+          borderWidth: 2,
         },
         {
           id: 'neutral',
@@ -88,7 +88,7 @@ export default function TrendLineChartCategory() {
           }),
           borderColor: '#8F8F8F',
           backgroundColor: '#8F8F8F',
-          borderWidth: 1,
+          borderWidth: 2,
         },
         {
           id: 'negative',
@@ -101,7 +101,7 @@ export default function TrendLineChartCategory() {
           }),
           borderColor: '#4866D2',
           backgroundColor: '#4866D2',
-          borderWidth: 1,
+          borderWidth: 2,
         },
       ];
 
@@ -151,9 +151,7 @@ export default function TrendLineChartCategory() {
                 ticks: {
                   maxRotation: 0,
                   minRotation: 0,
-                  // font: {
-                  //   size: 10,
-                  // },
+                  display: false,
                   color: 'rgba(0, 0, 0)',
                 },
               },

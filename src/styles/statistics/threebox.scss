@@ -35,7 +35,6 @@ input[type='radio']:checked + .three-box-contents {
 
 /* 메뉴 버튼 디자인 */
 .three-box-label {
-  // height: toSize(876);
   height: 100%;
   width: toSize(100);
   display: flex;
@@ -52,7 +51,7 @@ input[type='radio']:checked + .three-box-contents {
     height: toSizeM(100);
     margin: toSizeM(5);
     justify-content: center;
-    // z-index: -1;
+
     transition: none;
   }
 }
@@ -89,23 +88,22 @@ input[type='radio']:checked + .three-box-contents {
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
     transform-origin: left;
-    // white-space: nowrap;
+
     left: toSize(50);
     font-family: 'LEMON MILK';
     font-size: toSize(28);
     font-style: normal;
     font-weight: 400;
-    line-height: 110%; /* 30.8px */
+    line-height: 110%;
     color: #fff;
     top: toSize(230);
-    // text-align: center;
+
     @include media('<=768px') {
       transform: rotate(0deg);
       top: toSizeM(32);
       font-size: toSizeM(28);
       transform: translate(-30%, 0);
       left: 50%;
-      // position: unset;
     }
   }
 
@@ -132,7 +130,7 @@ input[type='radio']:checked + .three-box-contents {
       height: toSizeM(74);
       top: toSizeM(12);
       font-size: toSizeM(30);
-      // left: toSizeM(-330);
+
       left: 3%;
       line-height: 89%;
     }
@@ -149,11 +147,11 @@ input[type='radio']:checked + .three-box-contents {
   visibility: collapse;
   float: left;
   height: 100%;
-  // height: toSize(876);
+
   width: toSize(1370);
   width: 0;
   // transition: all 0.1s ease-out;
-  // z-index: -1;
+
   overflow: hidden;
   border-radius: 40px;
   margin: 0 toSize(5);
@@ -184,9 +182,7 @@ input[type='radio']:checked + .three-box-contents {
 
   background-blend-mode: overlay;
   backdrop-filter: blur(90px);
-  // -moz-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  // -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  // box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+
   @include media('<=768px') {
     height: 100%;
     margin: 0;
@@ -194,17 +190,14 @@ input[type='radio']:checked + .three-box-contents {
 }
 .three-box-description {
   display: flex;
-  // width: toSize(90);
+
   height: 100%;
-  // background: red;
-  // justify-content: center;
+
   @include media('<=768px') {
     align-items: center;
-    height: toSizeM(240);
-    // width: toSizeM(170);
+    height: toSizeM(280);
+
     width: 100%;
-    // left: 50%;
-    // transform: translate(-50%, 0);
   }
 
   .label-message {
@@ -263,8 +256,6 @@ input[type='radio']:checked + .three-box-contents {
       right: 87%;
       top: toSize(26);
       line-height: 85%;
-
-      // position: unset;
     }
   }
 }
@@ -283,57 +274,3 @@ input[type='radio']:checked + .three-box-contents {
   font-size: 70px;
   color: #0f848c;
 }
-
-// @import '/src/styles/global.scss';
-
-// .chart {
-//   width: 85%;
-//   display: flex;
-
-//   @include media('<=768px') {
-//     width: 100%;
-//     padding: 0 30px 0 0;
-//   }
-//   .chart-inner-box {
-//     display: flex;
-//     width: 100%;
-//     @include media('<=768px') {
-//       height: 80%;
-//       flex-direction: column-reverse;
-//     }
-//   }
-// }
-// .legendBox {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-end;
-//   justify-content: flex-start;
-//   margin-top: toSize(35);
-//   @include media('<=768px') {
-//     // flex-direction: column;
-//     // justify-content: flex-start;
-//     flex-direction: row;
-//     padding: 0 0 toSizeM(30) 0;
-//   }
-//   .item {
-//     width: toSize(145);
-//     color: #000;
-//     font-family: 'GmarketSans';
-//     font-size: toSize(18);
-//     font-style: normal;
-//     font-weight: 700;
-//     line-height: normal;
-//     cursor: pointer;
-//     @include media('<=768px') {
-//       width: 18%;
-//       font-size: toSizeM(18);
-//     }
-//   }
-//   img {
-//     vertical-align: middle;
-//     width: toSize(35);
-//     @include media('<=768px') {
-//       width: toSizeM(25);
-//     }
-//   }
-// }
