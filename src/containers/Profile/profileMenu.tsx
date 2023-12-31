@@ -9,8 +9,8 @@ import { recoilState } from '@/types'
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
-  const [icon, setIcon] = useState<number>()
+  const [icon, setIcon] = useState<number>(2)
+  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${icon}.svg`);
 
   useEffect(() => {
     setIcon(selectedIcon)
@@ -47,15 +47,30 @@ export default function ProfileMenu() {
                     ? 'icon-selected-circle'
                     : 'icon-unselected-circle'
                 }
-                onClick={() =>
-                  handleIconClick(index)
-                }
+                onClick={() =>handleIconClick(index)}
               >
               <img
                 src={`/images/profileMenu/profileMenu_icon${index}.svg`}
                 alt={`아이콘 ${index}`}
                 className={`icon`}
               />
+                {/* <object type="image/svg+xml" 
+                  data={`/images/profileMenu/profileMenu_icon${index}.svg`}
+                  key={index}
+                  className={
+                    icon === index
+                      ? 'icon-selected-circle'
+                      : 'icon-unselected-circle'
+                  }
+                  onClick={() =>handleIconClick(index)}
+                  >
+                  <img
+                    src={`/images/profileMenu/profileMenu_icon${index}.svg`}
+                    alt={`아이콘 ${index}`}
+                    className={`icon`}
+                    onClick={() => handleIconClick(index)}
+                  />
+                </object> */}
               </div>
             </Link>
           ))}

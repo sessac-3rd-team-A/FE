@@ -86,7 +86,7 @@ export default function MyShopPage(): JSX.Element {
     const queryDefault = `${user.age} ${user.gender == 'F' ? '여자' : '남자'}`;
     if (!userDetail.error) {
       if (userDetail.userInfo.sentiment === 'positive') {
-        return `${queryDefault} 인형`;
+        return `${queryDefault} 기분`;
       }
       if (userDetail.userInfo.sentiment === 'negative') {
         return `${queryDefault} 스트레스`;
@@ -120,28 +120,8 @@ export default function MyShopPage(): JSX.Element {
     }
   }
 
-  // axios ver
-  // async function SearchResult(): Promise<ShoppingApiResponse> {
-  //   const query = '인형';
-  //   const displayNum = 20;
-  //   const url = `${API}?query=${encodeURIComponent(query)}&display=${displayNum}&start=1&sort=date`;
-
-  //   try {
-  //     const response = await axios.get(url, {
-  //       headers: {
-  //         'X-Naver-Client-Id': NAVER_CLIENT_ID || '',
-  //         'X-Naver-Client-Secret': NAVER_CLIENT_SECRET || '',
-  //       },
-  //     });
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('axios error:', error);
-  //     throw error;
-  //   }
-  // }
-
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent:'center' }}>
       <div className="myShop-container">
         <div className="header-temp" />
         <Image
