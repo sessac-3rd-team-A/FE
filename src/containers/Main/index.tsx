@@ -18,6 +18,7 @@ export default function MainPage() {
   const [loading, setLoading] = useState(false); // recoil
   const [isPage2, setIsPage2] = useState(false);
   const [isFooter, setIsFooter] = useState(false);
+  const [wHeight, setWHeight] = useState(0);
   const [pageCount, setPageCount] = useState(1); // 1, 2, 3
   // const [wWeight, setWWeight] = useState(window.innerWidth);
   // const [wHeight, setWHeight] = useState(window.innerHeight);
@@ -124,29 +125,29 @@ export default function MainPage() {
       }
     }
 
-    function preventDefaultTouch(e: TouchEvent) {
-      e.preventDefault();
+    // function preventDefaultTouch(e: TouchEvent) {
+    //   e.preventDefault();
 
-      if (!loading) {
-        setLoading(true);
-        const startY = e.touches[0].clientY;
-        const handleMove = (moveEvent: TouchEvent) => {
-          const deltaY = moveEvent.touches[0].clientY - startY;
+    //   if (!loading) {
+    //     setLoading(true);
+    //     const startY = e.touches[0].clientY;
+    //     const handleMove = (moveEvent: TouchEvent) => {
+    //       const deltaY = moveEvent.touches[0].clientY - startY;
 
-          if (deltaY > 0) {
-            handleScroll('ArrowUp');
-          } else if (deltaY < 0) {
-            handleScroll('ArrowDown');
-          } else {
-          }
-          window.removeEventListener('touchmove', handleMove);
-        };
-        window.addEventListener('touchmove', handleMove);
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      }
-    }
+    //       if (deltaY > 0) {
+    //         handleScroll('ArrowUp');
+    //       } else if (deltaY < 0) {
+    //         handleScroll('ArrowDown');
+    //       } else {
+    //       }
+    //       window.removeEventListener('touchmove', handleMove);
+    //     };
+    //     window.addEventListener('touchmove', handleMove);
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //     }, 500);
+    //   }
+    // }
 
     window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
     window.addEventListener('wheel', preventDefaultWheel, { passive: false }); // modern desktop
@@ -163,9 +164,17 @@ export default function MainPage() {
     };
   }, [isFooter, loading, isPage2, pageCount]);
 
+  useEffect(() => {
+    setWHeight(window.innerHeight);
+    console.log(wHeight);
+  }, []);
+
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
-      <div className="mainWindContainer">
+      <div
+        className="mainWindContainer"
+        style={window.innerWidth <= 768 ? { height: wHeight } : {}}
+      >
         <div className="mainWindImg">
           <Image
             src="/main/mainBlow.png"
@@ -205,8 +214,18 @@ export default function MainPage() {
         </div>
       </div>
 
-      <div className={`mainCardContainer`}>
-        <div className={`mainCardContainer inner`}>
+      <div
+        className={`mainCardContainer`}
+        style={window.innerWidth <= 768 ? { height: wHeight } : {}}
+      >
+        <div
+          className={`mainCardContainer inner`}
+          style={
+            window.innerWidth <= 768
+              ? { height: `calc(${wHeight}px - 11.9791666667vw)` }
+              : {}
+          }
+        >
           <div className={`mobileC`}>
             <div className="introContainer">
               <p className={`main2-intro ${pageCount === 1 ? 'fade-in' : ''}`}>
