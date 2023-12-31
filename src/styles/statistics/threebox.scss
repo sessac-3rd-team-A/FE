@@ -187,6 +187,7 @@ input[type='radio']:checked + .three-box-contents {
     height: 100%;
     margin: 0;
     align-items: center;
+    flex-direction: column;
   }
 }
 .three-box-description {
@@ -196,8 +197,7 @@ input[type='radio']:checked + .three-box-contents {
 
   @include media('<=768px') {
     align-items: center;
-    height: toSizeM(280);
-
+    height: toSizeM(250);
     width: 100%;
   }
 

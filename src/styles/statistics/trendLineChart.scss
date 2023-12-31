@@ -29,8 +29,48 @@
     // flex-direction: column;
     // justify-content: flex-start;
     flex-direction: row;
-    padding: 0 0 toSizeM(20) 0;
-    transform: translate(0px, toSizeM(-50));
+    margin-top: toSizeM(-520);
+    margin-left: auto;
+  }
+  .item {
+    width: toSize(145);
+    color: #000;
+    font-family: 'GmarketSans';
+    font-size: toSize(18);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+    .selected {
+      color: #3a89ff;
+    }
+    @include media('<=768px') {
+      width: 23%;
+      font-size: toSizeM(18);
+    }
+  }
+  .item.selected {
+    color: #3a89ff;
+  }
+  img {
+    vertical-align: middle;
+    width: toSize(35);
+    @include media('<=768px') {
+      width: toSizeM(25);
+    }
+  }
+}
+.legend-line-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: toSize(35);
+  @include media('<=768px') {
+    flex-direction: row;
+    margin-bottom: toSizeM(60);
+    align-items: center;
+    width: 95%;
   }
   .item {
     width: toSize(145);
