@@ -9,8 +9,8 @@ import { recoilState } from '@/types'
 
 export default function ProfileMenu() {
   const [selectedIcon, setSelectedIcon] = useRecoilState(selectedIconState);
-  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${selectedIcon}.svg`);
-  const [icon, setIcon] = useState<number>()
+  const [icon, setIcon] = useState<number>(2)
+  const [selectedImage, setSelectedImage] = useState(`/images/profileMenu/profileMenu_${icon}.svg`);
 
   useEffect(() => {
     setIcon(selectedIcon)
