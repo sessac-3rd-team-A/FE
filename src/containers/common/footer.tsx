@@ -66,7 +66,7 @@ export default function Footer() {
               </div>
               <div className="personGithub">
                 <Link href={'https://github.com/sy33002'}>
-                  <p>@sy33002L</p>
+                  <p>@sy33002</p>
                 </Link>
                 <Link href={'https://github.com/hoonsdev'}>
                   <p>@hoonsdev</p>
