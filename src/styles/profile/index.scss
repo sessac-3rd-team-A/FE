@@ -245,9 +245,12 @@ p {
     }
 
     .left-content {
-      .count {
-        height: 100px;
+      .count,
+      .link {
+        padding: 2rem 0;
+      }
 
+      .count {
         div:first-child {
           font-size: 3rem;
         }

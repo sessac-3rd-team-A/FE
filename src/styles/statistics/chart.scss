@@ -50,7 +50,8 @@
     height: toSize(210);
     margin: 0 0 0 toSize(9);
     @include media('<=768px') {
-      // width: 100%;
+      width: 80vw;
+      height: 15vh;
     }
   }
   .floating {

@@ -169,7 +169,7 @@ input[type='radio']:checked + .three-box-contents {
   margin: 1.5% 0 1.5% 1.5%;
   width: 92%;
   float: left;
-  border-radius: 28px;
+  border-radius: toSizeM(28);
   border: 0.5px solid #fff;
 
   background: linear-gradient(
@@ -186,6 +186,8 @@ input[type='radio']:checked + .three-box-contents {
   @include media('<=768px') {
     height: 100%;
     margin: 0;
+    align-items: center;
+    flex-direction: column;
   }
 }
 .three-box-description {
@@ -195,8 +197,7 @@ input[type='radio']:checked + .three-box-contents {
 
   @include media('<=768px') {
     align-items: center;
-    height: toSizeM(280);
-
+    height: toSizeM(250);
     width: 100%;
   }
 

@@ -4,7 +4,9 @@
   width: 85%;
   display: flex;
   @include media('<=768px') {
+    width: 100%;
     flex-direction: column-reverse;
+    align-items: center;
   }
 
   .meme-picture-message {
@@ -19,9 +21,7 @@
     position: relative;
     right: 3%;
     @include media('<=768px') {
-      right: -20%;
       font-size: toSizeM(48);
-      transform: translate(0, -30%);
     }
   }
 
@@ -30,11 +30,20 @@
     height: toSize(289);
     @include media('<=768px') {
       position: relative;
-      top: toSizeM(-40);
-      width: toSizeM(643);
+      top: toSizeM(20);
+      width: 75vw;
       height: toSizeM(363);
+      text-align: center;
+      margin-top: toSizeM(20);
     }
   }
+
+  .meme-default-container {
+    @include media('<=768px') {
+      margin-top: toSizeM(0);
+    }
+  }
+
   .meme-picture {
     width: 100%;
     height: 100%;
@@ -42,6 +51,11 @@
     position: relative;
     top: toSize(50);
     left: toSize(30);
+    @include media('<=768px') {
+      width: 90%;
+      top: 0;
+      left: 0;
+    }
   }
 
   .meme-rank-button {
@@ -55,10 +69,10 @@
     position: relative;
     left: toSize(80);
     top: toSize(20);
+    width: 10%;
     @include media('<=768px') {
       font-size: toSizeM(20);
-      top: toSizeM(-42);
-      width: 10%;
+      left: 0;
     }
   }
 
