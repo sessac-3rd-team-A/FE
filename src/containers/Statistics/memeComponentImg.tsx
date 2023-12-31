@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import '../../styles/statistics/memeComponentImg.scss';
-
+import Image from 'next/image';
 interface MemeComponentProps {
   gender: string | null;
   age: string | null;
 }
+const imageStyle = {
+  width: 'toSizeM(643)',
+  height: 'toSizeM(363)',
+};
 
 // API 요청 URL 생성 함수
 const createURL = (gender: string | null, age: string | null): string => {
@@ -51,7 +55,10 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
     return (
       <div className="meme-left-container">
         <div className="meme-picture-container">
-          <img
+          <Image
+            width={500}
+            height={500}
+            style={imageStyle}
             className="meme-picture"
             src={'statistics/sorry.png'} // 기본 이미지 URL
             alt="default meme"
@@ -67,7 +74,10 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
         {data.ranking
           .filter((meme: any) => meme.rank === selectedRank)
           .map((meme: any) => (
-            <img
+            <Image
+              width={500}
+              height={500}
+              style={imageStyle}
               className="meme-picture"
               key={meme.rank}
               src={meme.imageUrl}
