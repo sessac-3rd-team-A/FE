@@ -28,9 +28,13 @@
   .meme-picture-container {
     width: toSize(520);
     height: toSize(289);
+    position: relative;
+    top: toSize(50);
+    left: toSize(50);
     @include media('<=768px') {
       position: relative;
       top: toSizeM(20);
+      left: 0;
       width: 75vw;
       height: toSizeM(363);
       text-align: center;
@@ -73,6 +77,8 @@
     @include media('<=768px') {
       font-size: toSizeM(20);
       left: 0;
+      width: fit-content;
+      padding: 0;
     }
   }
 
