@@ -17,7 +17,6 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState } from '@/utils/state';
 import { useRouter } from 'next/navigation';
-// import axios, { AxiosResponse } from "axios";
 
 const API = '/naver/v1/search/shop.json';
 
@@ -67,8 +66,8 @@ export default function MyShopPage(): JSX.Element {
         {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
+            // 'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         },
       );
