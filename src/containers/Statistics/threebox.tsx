@@ -17,7 +17,6 @@ export default function ThreeBox(
     setSelectedMenu(menuId);
   };
 
-
   const labeLText: string[] = ['ALL', 'GROUP', 'MEME'];
   return (
     <>
@@ -61,7 +60,7 @@ export default function ThreeBox(
                 </label>
               )}
               <div className="three-box-contents">
-                <div className="three-box-inner">
+                <div className={`three-box-inner ${index === 2 ? 'h100' : ''}`}>
                   {componentsToRender[index]}
                 </div>
                 <div className="three-box-description">
