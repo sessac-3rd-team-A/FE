@@ -166,7 +166,7 @@ export default function TrendLineChart({ statisticsInfo }: any) {
             },
           }}
         />
-        <div className="legendBox">
+        <div className="legend-line-box">
           {(() => {
             const totalAverage = datasets.reduce(
               (total: number, current: any) => {

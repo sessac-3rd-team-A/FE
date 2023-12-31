@@ -54,13 +54,13 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
   if (!data || !data.success)
     return (
       <div className="meme-left-container">
-        <div className="meme-picture-container">
+        <div className="meme-picture-container meme-default-container">
           <Image
-            width={500}
-            height={500}
+            width={400}
+            height={400}
             style={imageStyle}
             className="meme-picture"
-            src={'statistics/sorry.png'} // 기본 이미지 URL
+            src="/statistics/sorry.png" // 기본 이미지 URL
             alt="default meme"
           />
         </div>
@@ -75,9 +75,8 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
           .filter((meme: any) => meme.rank === selectedRank)
           .map((meme: any) => (
             <Image
-              width={500}
-              height={500}
-              style={imageStyle}
+              fill
+              sizes="null"
               className="meme-picture"
               key={meme.rank}
               src={meme.imageUrl}

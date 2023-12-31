@@ -23,8 +23,8 @@
   top: toSize(50);
   margin-top: toSize(5);
   @include media('<=768px') {
-    left: toSizeM(-200);
-    top: toSizeM(-220);
+    left: toSizeM(-50);
+    // top: toSizeM(-220);
   }
 }
 .custom-select-wrapper-testing select {
@@ -51,8 +51,8 @@
   transform: translateY(-15px);
   z-index: 10;
   @include media('<=768px') {
-    left: toSizeM(40);
-    top: 50%;
+    // left: toSizeM(40);
+    // top: 50%;
   }
 }
 .custom-select.opened .custom-options-testing {
@@ -84,6 +84,9 @@
 .meme-picture-button {
   padding: 10px;
   @include media('<=768px') {
-    padding: 0;
+    padding: 0 toSize(20);
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
   }
 }
