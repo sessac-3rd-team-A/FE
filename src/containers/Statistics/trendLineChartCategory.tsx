@@ -15,6 +15,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/utils/state';
 
 export default function TrendLineChartCategory() {
+  // 차트의 날짜 레이블, 데이터셋, 선택된 성별 및 나이, 선택된 데이터셋 등을 상태 변수로 선언
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [user, setUser] = useRecoilState(userState);
@@ -25,6 +26,7 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
+  // 선택 옵션의 목록 정의
   const genderOptions = [
     { value: '전체', label: '전체' },
     { value: 'F', label: '여성' },
@@ -38,8 +40,9 @@ export default function TrendLineChartCategory() {
     { value: '40대', label: '40대' },
     { value: '50대', label: '50+' },
   ];
-
+  // API 요청 URL 초기화
   let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`;
+  // 선택된 성별 또는 나이가 '전체'가 아닌 경우, URL에 추가
   if (selectedGender !== '전체' || selectedAge !== '전체') {
     url += '?';
     if (selectedGender !== '전체') {
@@ -53,20 +56,22 @@ export default function TrendLineChartCategory() {
       }
     }
   }
+  // useEffect 훅을 사용하여 컴포넌트가 마운트되거나 selectedGender/selectedAge가 변경될 때 데이터를 가져오는 함수 호출
   useEffect(() => {
-    // Function to fetch data based on selectedGender and selectedAge
+    // 선택된 성별과 나이에 기반하여 데이터를 가져오는 비동기 함수
     const fetchData = async () => {
       const response = await fetch(url, { cache: 'no-store' });
       const info = await response.json();
-
+      // 현재 날짜 생성
       const currentDate = new Date();
+      // 최근 31일간의 날짜 레이블 생성
       const label = Array.from({ length: 31 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
         return date.toISOString().slice(0, 10);
       }).reverse();
       setLabels(label);
-
+      // 차트 데이터셋 생성
       const data = [
         {
           id: 'positive',
@@ -113,9 +118,10 @@ export default function TrendLineChartCategory() {
       setDatasets(data);
     };
 
-    fetchData(); // Fetch data when component mounts or when selectedGender/selectedAge changes
+    fetchData(); // 컴포넌트가 마운트되거나 selectedGender/selectedAge가 변경될 때 데이터를 가져오는 함수 호출
   }, [selectedGender, selectedAge]);
 
+  // 데이터셋 선택을 처리하는 함수
   const handleButtonClick = (id: string) => {
     if (visibleDataset === id) {
       setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
@@ -123,11 +129,11 @@ export default function TrendLineChartCategory() {
       setVisibleDataset(id); // 그렇지 않으면 선택
     }
   };
-
+  // 선택된 데이터셋에 따라 필터링된 데이터셋 생성
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
-
+  // 최근 31일간의 날짜 레이블을 마지막 두 자리로 새로운 배열 생성
   const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
@@ -190,9 +196,10 @@ export default function TrendLineChartCategory() {
             },
           }}
         ></Line>
-
+        {/* 범례와 백분율을 표시하는 컴포넌트 */}
         <div className="legend-line-box">
           {(() => {
+            // 모든 데이터셋의 평균을 계산
             const totalAverage = datasets.reduce(
               (total: number, current: any) => {
                 const average = current.data.filter(
@@ -205,7 +212,7 @@ export default function TrendLineChartCategory() {
               },
               0,
             );
-
+            // 각 데이터셋의 백분율 계산
             let percentages = datasets.map((dataset: any) => {
               const average = dataset.data.filter(
                 (value: number) => value !== 0,
@@ -220,17 +227,18 @@ export default function TrendLineChartCategory() {
                   : 0,
               };
             });
-
+            // 데이터셋이 없을 경우 null 반환
             if (percentages.length === 0) {
               return null;
             }
-
+            // 백분율의 합과 차이 계산
             const total = percentages.reduce(
               (total: number, current: { percentage: number }) =>
                 total + current.percentage,
               0,
             );
             const difference = 100 - total;
+            // 최대 백분율을 가진 데이터셋의 인덱스 찾기
             const maxIndex = percentages.reduce(
               (
                 iMax: number,
@@ -240,16 +248,17 @@ export default function TrendLineChartCategory() {
               ) => (x.percentage > arr[iMax].percentage ? i : iMax),
               0,
             );
+            // 차이를 최대 백분율에 추가하여 합이 100이 되도록 보정
             if (difference > 0) {
               percentages[maxIndex].percentage += difference;
-              // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
+              // 만약 한 item이 100이 되면 모든 값을 0으로 만든다.
               if (percentages[maxIndex].percentage >= 100) {
                 percentages = percentages.map((item: any) => {
                   return { ...item, percentage: 0 };
                 });
               }
             }
-
+            // 백분율을 이용하여 각 아이템을 렌더링
             return percentages.map(
               (item: { id: string; percentage: number }) => (
                 <button
@@ -260,6 +269,7 @@ export default function TrendLineChartCategory() {
                   }`}
                   onClick={() => handleButtonClick(item.id)}
                 >
+                  {/* 아이템 아이콘 및 백분율 표시 */}
                   {item.id === 'positive' && (
                     <img src="/statistics/positive.svg" alt="" />
                   )}
