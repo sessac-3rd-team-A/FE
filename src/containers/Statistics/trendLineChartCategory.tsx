@@ -15,7 +15,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '@/utils/state';
 
 export default function TrendLineChartCategory() {
-  // 차트의 날짜 레이블, 데이터셋, 선택된 성별 및 나이, 선택된 데이터셋 등을 상태 변수로 선언
+  // 차트의 날짜 라벨, 데이터셋, 선택된 성별 및 나이, 선택된 데이터셋 등을 상태 변수로 선언
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [user, setUser] = useRecoilState(userState);
@@ -64,7 +64,7 @@ export default function TrendLineChartCategory() {
       const info = await response.json();
       // 현재 날짜 생성
       const currentDate = new Date();
-      // 최근 31일간의 날짜 레이블 생성
+      // 최근 31일간의 날짜 라벨 생성
       const label = Array.from({ length: 31 }, (_, index) => {
         const date = new Date(currentDate);
         date.setDate(date.getDate() - index);
@@ -133,7 +133,7 @@ export default function TrendLineChartCategory() {
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
-  // 최근 31일간의 날짜 레이블을 마지막 두 자리로 새로운 배열 생성
+  // 최근 31일간의 날짜 라벨로 새로운 배열 생성
   const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
   return (
     <div className="chart">
