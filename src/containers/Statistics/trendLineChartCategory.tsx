@@ -85,7 +85,7 @@ export default function TrendLineChartCategory() {
           data: label.map((targetDate) => {
             const matchingData = info.find(
               //find메서드는 info배열에서 주어진 targetDate를 만족하는 첫 번째 요소를 찾아 반환한다.
-              (entry: string) => entry === targetDate,
+              (entry: { date: string }) => entry.date === targetDate,
             );
             //targetDate와 맞는 날짜가 있다면 해당하는 날의 평균값을 return한다. 없으면 0 return
             return matchingData ? matchingData.averagePositive : 0;
@@ -100,7 +100,7 @@ export default function TrendLineChartCategory() {
           label: 'Neutral',
           data: label.map((targetDate) => {
             const matchingData = info.find(
-              (entry: string) => entry === targetDate,
+              (entry: { date: string }) => entry.date === targetDate,
             );
             return matchingData ? matchingData.averageNeutral : 0;
           }),
@@ -113,7 +113,7 @@ export default function TrendLineChartCategory() {
           label: 'Negative',
           data: label.map((targetDate) => {
             const matchingData = info.find(
-              (entry: string) => entry === targetDate,
+              (entry: { date: string }) => entry.date === targetDate,
             );
             return matchingData ? matchingData.averageNegative : 0;
           }),
