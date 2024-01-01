@@ -64,22 +64,31 @@ export default function TrendLineChartCategory() {
       const info = await response.json();
       // 현재 날짜 생성
       const currentDate = new Date();
-      // 최근 31일간의 날짜 라벨 생성
+      console.log(currentDate + '1');
+      // 길이가 31인 배열을 생성하며, 배열의 각 요소는 index 값을 사용하여 채워지고
+      //index는 0에서 30까지의 값을 가지게 된다.
       const label = Array.from({ length: 31 }, (_, index) => {
+        // 변수에 저장된 현재 날짜를 기반으로 새로운 Date 객체를 생성
         const date = new Date(currentDate);
+        //setDate(현재 일 - 0~30까지의 인덱스) so 해당 월에 28일 까지 있다면 다음달 1 ,2 ,3 일도 계산
         date.setDate(date.getDate() - index);
+        //YYYY-MM-DD  label 에 반환
         return date.toISOString().slice(0, 10);
       }).reverse();
       setLabels(label);
+
       // 차트 데이터셋 생성
       const data = [
         {
           id: 'positive',
           label: 'Positive',
+          //targetDate는 현재 반복되고 있는 label 배열의 각 요소, 즉 날짜를 나타내는 변수
           data: label.map((targetDate) => {
             const matchingData = info.find(
-              (entry: { date: string }) => entry.date === targetDate,
+              //find메서드는 info배열에서 주어진 targetDate를 만족하는 첫 번째 요소를 찾아 반환한다.
+              (entry: string) => entry === targetDate,
             );
+            //targetDate와 맞는 날짜가 있다면 해당하는 날의 평균값을 return한다. 없으면 0 return
             return matchingData ? matchingData.averagePositive : 0;
           }),
           borderColor: '#FF983A',
@@ -92,7 +101,7 @@ export default function TrendLineChartCategory() {
           label: 'Neutral',
           data: label.map((targetDate) => {
             const matchingData = info.find(
-              (entry: { date: string }) => entry.date === targetDate,
+              (entry: string) => entry === targetDate,
             );
             return matchingData ? matchingData.averageNeutral : 0;
           }),
@@ -105,7 +114,7 @@ export default function TrendLineChartCategory() {
           label: 'Negative',
           data: label.map((targetDate) => {
             const matchingData = info.find(
-              (entry: { date: string }) => entry.date === targetDate,
+              (entry: string) => entry === targetDate,
             );
             return matchingData ? matchingData.averageNegative : 0;
           }),
