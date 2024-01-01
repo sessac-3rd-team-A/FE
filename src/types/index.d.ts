@@ -38,13 +38,13 @@ export interface userDataType {
 export interface userDetailType {
   userInfo: {
     tag: string;
-    sentiment: string,
+    sentiment: string;
     jobRelatedWords: string;
     jobCategories: string;
-  }
+  };
   error?: {
     message: string;
-  }
+  };
 }
 
 // diary result
@@ -87,25 +87,17 @@ export interface UserStateType {
   isLogin: boolean;
 }
 
-export interface recoilState extends UserStateType{
+export interface recoilState extends UserStateType {
   userState: UserStateType;
   selectedIconState: number;
 }
 
 //statistic all
-export interface StatisticsType {
+export interface StatisticsData {
   date: string;
   averagePositive: number;
   averageNegative: number;
   averageNeutral: number;
   count: number;
 }
-
-export interface StatisticsTypeArray extends Array<StatisticsType> {}
-
-// class Word {
-//   constructor(
-//       public term: string,
-//       public def: string
-//   ) {}
-// }
+[];

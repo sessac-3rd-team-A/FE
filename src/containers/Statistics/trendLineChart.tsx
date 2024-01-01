@@ -22,7 +22,19 @@ ChartJS.register(
   Legend,
 );
 
-export default function TrendLineChart({ statisticsInfo }: any) {
+type StatisticsData = {
+  date: string;
+  averagePositive: number;
+  averageNegative: number;
+  averageNeutral: number;
+  count: number;
+}[];
+
+export default function TrendLineChart({
+  statisticsInfo,
+}: {
+  statisticsInfo: StatisticsData;
+}) {
   const [labels, setLabels] = useState<any>([]);
   const [datasets, setDatasets] = useState<any>([]);
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
@@ -99,10 +111,12 @@ export default function TrendLineChart({ statisticsInfo }: any) {
       setVisibleDataset(id); // 그렇지 않으면 선택
     }
   };
-
+  //선택된 데이터셋만 필터링하여 filteredDatasets 변수에 저장
   const filteredDatasets = datasets.filter(
     (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
+
+  //차트의 x축 레이블을 설정하기 위해 newLabels 변수에 숫자 배열을 생성
   const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
 
   return (
@@ -168,8 +182,10 @@ export default function TrendLineChart({ statisticsInfo }: any) {
         />
         <div className="legend-line-box">
           {(() => {
+            // 모든 데이터셋의 평균을 계산
             const totalAverage = datasets.reduce(
               (total: number, current: any) => {
+                // 현재 데이터셋의 0이 아닌 값들로 평균을 계산
                 const average = current.data.filter(
                   (value: number) => value !== 0,
                 ).length
@@ -180,8 +196,9 @@ export default function TrendLineChart({ statisticsInfo }: any) {
               },
               0,
             );
-
+            // 각 데이터셋의 비율을 전체 평균에 기반하여 계산
             let percentages = datasets.map((dataset: any) => {
+              // 현재 데이터셋의 0이 아닌 값들로 평균을 계산
               const average = dataset.data.filter(
                 (value: number) => value !== 0,
               ).length
@@ -190,16 +207,17 @@ export default function TrendLineChart({ statisticsInfo }: any) {
                 : 0;
               return {
                 id: dataset.id,
+                // 전체 평균에 대한 비율을 계산하고 반올림
                 percentage: totalAverage
                   ? Math.round((average / totalAverage) * 100)
                   : 0,
               };
             });
-
+            // 비율이 없으면 null을 반환하여 렌더링 안함
             if (percentages.length === 0) {
               return null;
             }
-
+            // 비율을 조정하여 전체 합이 100%가 되도록 보정
             const total = percentages.reduce(
               (total: number, current: { percentage: number }) =>
                 total + current.percentage,
@@ -216,7 +234,7 @@ export default function TrendLineChart({ statisticsInfo }: any) {
               0,
             );
             percentages[maxIndex].percentage += difference;
-
+            // 각 데이터셋에 대한 아이콘과 비율을 포함한 버튼을 렌더링
             return percentages.map(
               (item: { id: string; percentage: number }) => (
                 <button

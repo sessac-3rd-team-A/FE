@@ -2,17 +2,11 @@
 import '../../styles/statistics/memeComponent.scss';
 import { useState } from 'react';
 import MemeComponentImg from './memeComponentImg';
-import { relative } from 'path';
+
 import { useRecoilState } from 'recoil';
 import { userState } from '@/utils/state';
 
-const MemeComponent = (
-  { memeImgInfo }: any,
-  // { gender }: { gender: string | null },
-  // { age }: { age: string | null },
-) => {
-  // const [gender, setGender] = useState('F');
-  // const [age, setAge] = useState('20대');
+const MemeComponent = () => {
   const [user, setUser] = useRecoilState(userState);
   const { gender, age } = user;
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
@@ -31,15 +25,10 @@ const MemeComponent = (
     { label: '40대', value: '40대' },
     { label: '50+', value: '50대' },
   ];
-  // const [gender, setGender] = useRecoilState(user.gender);
-  // const [age, setAge] = useRecoilState(user.age);
+
   return (
     <>
-      <MemeComponentImg
-        gender={gender}
-        age={age}
-        // memeImgInfo={memeImgInfo}
-      />
+      <MemeComponentImg gender={gender} age={age} />
 
       <div className="legendBox">
         <button className="item" style={{ visibility: 'hidden' }}>
@@ -56,7 +45,6 @@ const MemeComponent = (
           >
             <span
               className="custom-select-trigger"
-              // style={{''}}
               onClick={() => setGenderDropdownOpen(!genderDropdownOpen)}
             >
               <div className="custom-select-cover">
