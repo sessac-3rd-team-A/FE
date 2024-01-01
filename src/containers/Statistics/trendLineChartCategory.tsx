@@ -64,7 +64,6 @@ export default function TrendLineChartCategory() {
       const info = await response.json();
       // 현재 날짜 생성
       const currentDate = new Date();
-      console.log(currentDate + '1');
       // 길이가 31인 배열을 생성하며, 배열의 각 요소는 index 값을 사용하여 채워지고
       //index는 0에서 30까지의 값을 가지게 된다.
       const label = Array.from({ length: 31 }, (_, index) => {
