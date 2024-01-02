@@ -78,7 +78,7 @@ p {
   .left-content {
     height: 100%;
     display: grid;
-    grid-template-rows: 35% 60%;
+    grid-template-rows: minmax(toSize(184), 35%) minmax(toSize(184), 65%);
     grid-template-columns: repeat(2, 1fr);
     row-gap: toSize(20);
     column-gap: toSize(20);
@@ -218,7 +218,7 @@ p {
     }
 
     .left-content {
-      grid-template-rows: minmax(toSize(184), auto) minmax(100px, auto);
+      grid-template-rows: minmax(toSize(184), auto) minmax(toSize(184), auto);
       grid-template-columns: repeat(2, 1fr);
       row-gap: toSize(20);
       column-gap: toSize(20);
@@ -245,6 +245,7 @@ p {
     }
 
     .left-content {
+      height: auto;
       .count,
       .link {
         padding: 2rem 0;
