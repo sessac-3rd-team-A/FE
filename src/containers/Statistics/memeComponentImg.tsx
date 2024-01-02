@@ -10,7 +10,6 @@ const imageStyle = {
   height: 'toSizeM(363)',
 };
 
-// API 요청 URL 생성 함수
 const createURL = (gender: string | null, age: string | null): string => {
   let url: string = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics/meme`;
   if (gender && age) {
@@ -60,7 +59,7 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
             height={400}
             style={imageStyle}
             className="meme-picture"
-            src="/statistics/sorry.png" // 기본 이미지 URL
+            src="/statistics/sorry.png"
             alt="default meme"
           />
         </div>
@@ -87,6 +86,7 @@ export default function MemeComponentImg({ gender, age }: MemeComponentProps) {
       <div className="meme-picture-button">
         {data.ranking.map((meme: any, index: any) => (
           <button
+            key={meme.rank}
             onClick={() => handleClick(meme.rank)}
             className={`meme-rank-button${
               selectedRank === meme.rank ? ' selected' : ''

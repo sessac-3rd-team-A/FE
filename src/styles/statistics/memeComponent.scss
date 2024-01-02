@@ -51,8 +51,7 @@
   transform: translateY(-15px);
   z-index: 10;
   @include media('<=768px') {
-    // left: toSizeM(40);
-    // top: 50%;
+    left: toSizeM(40);
   }
 }
 .custom-select.opened .custom-options-testing {
@@ -62,7 +61,6 @@
   transform: translateY(0);
   @include media('<=768px') {
     left: toSizeM(40);
-    // top: toSizeM(-60);
   }
 }
 .custom-options-testing:before {
@@ -78,8 +76,6 @@
   border-left: 1px solid #b5b5b5;
   background: #fff;
   transform: rotate(45deg);
-
-  // transition: all 0.4s ease-in-out;
 }
 .meme-picture-button {
   padding: 10px;

@@ -25,6 +25,7 @@ export default function TrendLineChartCategory() {
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
   const [genderDropdownOpen, setGenderDropdownOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
+
   const genderOptions = [
     { value: '전체', label: '전체' },
     { value: 'F', label: '여성' },
@@ -40,6 +41,7 @@ export default function TrendLineChartCategory() {
   ];
 
   let url = `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`;
+
   if (selectedGender !== '전체' || selectedAge !== '전체') {
     url += '?';
     if (selectedGender !== '전체') {
@@ -53,16 +55,19 @@ export default function TrendLineChartCategory() {
       }
     }
   }
+
   useEffect(() => {
-    // Function to fetch data based on selectedGender and selectedAge
     const fetchData = async () => {
       const response = await fetch(url, { cache: 'no-store' });
       const info = await response.json();
 
       const currentDate = new Date();
+
       const label = Array.from({ length: 31 }, (_, index) => {
         const date = new Date(currentDate);
+
         date.setDate(date.getDate() - index);
+
         return date.toISOString().slice(0, 10);
       }).reverse();
       setLabels(label);
@@ -71,10 +76,12 @@ export default function TrendLineChartCategory() {
         {
           id: 'positive',
           label: 'Positive',
+
           data: label.map((targetDate) => {
             const matchingData = info.find(
               (entry: { date: string }) => entry.date === targetDate,
             );
+
             return matchingData ? matchingData.averagePositive : 0;
           }),
           borderColor: '#FF983A',
@@ -113,14 +120,14 @@ export default function TrendLineChartCategory() {
       setDatasets(data);
     };
 
-    fetchData(); // Fetch data when component mounts or when selectedGender/selectedAge changes
+    fetchData();
   }, [selectedGender, selectedAge]);
 
   const handleButtonClick = (id: string) => {
     if (visibleDataset === id) {
-      setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
+      setVisibleDataset('all');
     } else {
-      setVisibleDataset(id); // 그렇지 않으면 선택
+      setVisibleDataset(id);
     }
   };
 
@@ -175,7 +182,6 @@ export default function TrendLineChartCategory() {
               },
               title: {
                 display: true,
-                // text: '당신의 기분을 알려드려요 : )',
               },
               tooltip: {
                 mode: 'index' as const,
@@ -231,6 +237,7 @@ export default function TrendLineChartCategory() {
               0,
             );
             const difference = 100 - total;
+
             const maxIndex = percentages.reduce(
               (
                 iMax: number,
@@ -240,9 +247,10 @@ export default function TrendLineChartCategory() {
               ) => (x.percentage > arr[iMax].percentage ? i : iMax),
               0,
             );
+
             if (difference > 0) {
               percentages[maxIndex].percentage += difference;
-              // 만약 한 item이 100이 되면 모든 값을 0으로 만듭니다.
+
               if (percentages[maxIndex].percentage >= 100) {
                 percentages = percentages.map((item: any) => {
                   return { ...item, percentage: 0 };
@@ -274,7 +282,7 @@ export default function TrendLineChartCategory() {
               ),
             );
           })()}
-          {/* 성별 선택 드롭다운 */}
+
           <div className="custom-select-wrapper">
             <div
               className={`custom-select ${genderDropdownOpen ? 'opened' : ''}`}
@@ -310,7 +318,6 @@ export default function TrendLineChartCategory() {
             </div>
           </div>
 
-          {/* 연령 선택 드롭다운 */}
           <div className="custom-select-wrapper">
             <div className={`custom-select ${ageDropdownOpen ? 'opened' : ''}`}>
               <span
