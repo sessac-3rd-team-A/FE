@@ -16,6 +16,9 @@ export default function PGraph({ emoData }: Props) {
   const [data3, setData3] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
 
+  console.log('그래프 데이터 :: ', emoData);
+
+  // 날짜 리스트 설정 및 각 데이터 설정
   useEffect(() => {
     const today = Date.now();
     const dayList: string[] = [];
@@ -23,8 +26,8 @@ export default function PGraph({ emoData }: Props) {
     for (let i = 0; i < 7; i++) {
       const newDate = new Date(today - i * 1000 * 60 * 60 * 24);
       const year = newDate.getFullYear();
-      const month = newDate.getMonth() + 1;
-      const day = newDate.getDate();
+      const month = String(newDate.getMonth() + 1).padStart(2, '0');
+      const day = String(newDate.getDate()).padStart(2, '0');
       const newString = `${year}-${month}-${day}`;
       dayList.push(newString);
     }
