@@ -3,100 +3,98 @@
 $border-radius-size: toSize(15);
 
 .setting-form-container2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    padding-bottom: toSize(10);
+  }
+
+  .setting-form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
     align-items: center;
     justify-content: center;
+    width: 70%;
+    height: 50%;
+    padding: toSize(20);
 
-    p {
-        padding-bottom: toSize(10);
+    #nickName {
+      margin-bottom: toSize(20);
+      width: 100%;
+      border: 1px solid #3a89ff;
+      height: 20%;
+      border-radius: $border-radius-size;
+      padding: toSize(15);
+      font-family: GMarketSans;
+      font-size: toSize(20);
     }
 
-    .setting-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 70%;
-        height: 50%;
-        padding: toSize(20);
-
-        #nickName {
-            margin-bottom: toSize(20);
-            width: 100%;
-            border: 1px solid #3A89FF;
-            height: 20%;
-            border-radius: $border-radius-size;
-            padding: toSize(15);
-            font-family: GMarketSans;
-            font-size: toSize(20);
-        }
-    
-        #id {
-            margin-bottom: toSize(20);
-            width: 100%;
-            border: 1px solid #3A89FF;
-            height: 20%;
-            border-radius: $border-radius-size;
-            padding: toSize(15);
-            font-family: GMarketSans;
-            font-size: toSize(20);
-        }
-
-        .age-and-gender {
-            display: flex;
-            gap: toSize(20);
-            width: 100%;
-            height: 20%;
-
-            #age {
-                margin-bottom: toSize(20);
-                width: 100%;
-                border: 1px solid #3A89FF;
-                height: 100%;
-                border-radius: $border-radius-size;
-                padding-left: toSize(10);
-                font-family: GMarketSans;
-                font-size: toSize(20);
-                color: gray;
-            }
-        
-            #gender {
-                margin-bottom: toSize(20);
-                width: 100%;
-                border: 1px solid #3A89FF;
-                height: 100%;
-                border-radius: $border-radius-size;
-                padding-left: toSize(15);
-                font-family: GMarketSans;
-                font-size: toSize(20);
-                color: gray;
-            }
-
-        }
-        .submit-button {
-            background-color: #3A89FF;
-            color: white;
-            width: 30%;
-            font-size: toSize(20);
-            height: 15%;
-            border-radius: $border-radius-size;
-            font-family: Lemon Milk;
-            margin-top: toSize(20);
-        }
+    #id {
+      margin-bottom: toSize(20);
+      width: 100%;
+      border: 1px solid #3a89ff;
+      height: 20%;
+      border-radius: $border-radius-size;
+      padding: toSize(15);
+      font-family: GMarketSans;
+      font-size: toSize(20);
     }
 
-    .error-box {
-        color: red;
+    .age-and-gender {
+      display: flex;
+      gap: toSize(20);
+      width: 100%;
+      height: 20%;
+
+      #age {
+        margin-bottom: toSize(20);
+        width: 100%;
+        border: 1px solid #3a89ff;
+        height: 100%;
+        border-radius: $border-radius-size;
+        padding-left: toSize(10);
+        font-family: GMarketSans;
         font-size: toSize(20);
-        margin-top: toSize(10);
-    }
-    .complete-box {
-        color: green;
-        font-size: toSize(20);
-        margin-top: toSize(10);
-    }
+        color: gray;
+      }
 
+      #gender {
+        margin-bottom: toSize(20);
+        width: 100%;
+        border: 1px solid #3a89ff;
+        height: 100%;
+        border-radius: $border-radius-size;
+        padding-left: toSize(15);
+        font-family: GMarketSans;
+        font-size: toSize(20);
+        color: gray;
+      }
+    }
+    .submit-button {
+      background-color: #3a89ff;
+      color: white;
+      width: 30%;
+      font-size: toSize(20);
+      height: 15%;
+      border-radius: $border-radius-size;
+      font-family: LEMON MILK;
+      margin-top: toSize(20);
+    }
+  }
+
+  .error-box {
+    color: red;
+    font-size: toSize(20);
+    margin-top: toSize(10);
+  }
+  .complete-box {
+    color: green;
+    font-size: toSize(20);
+    margin-top: toSize(10);
+  }
 }
