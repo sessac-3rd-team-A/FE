@@ -6,16 +6,21 @@ import 'animate.css';
 import Image from 'next/image';
 import trendText from '../../../public/statistics/trendText.svg';
 import ThreeBox from '@/containers/Statistics/threebox';
-// import { StatisticsTypeArray } from '@/types';
+
+type StatisticsData = {
+  date: string;
+  averagePositive: number;
+  averageNegative: number;
+  averageNeutral: number;
+  count: number;
+}[];
 
 export default async function StatisticsPage() {
-  let statisticsInfo: any;
+  let statisticsInfo: StatisticsData;
 
   const statisticsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`,
-    {
-      cache: 'no-store',
-    },
+    { cache: 'no-store' },
   );
   statisticsInfo = await statisticsResponse.json();
 

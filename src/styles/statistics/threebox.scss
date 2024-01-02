@@ -1,6 +1,5 @@
 @import '/src/styles/global.scss';
 
-/* CODEPEN result 창크기에 맞추기 위한 사이즈 조절 */
 .three-box-wrap {
   display: flex;
   width: 100%;
@@ -13,12 +12,10 @@
   }
 }
 
-/* 라디오 인풋을 이용했으며 인풋에 라벨을 이어 버튼으로 사용하므로 인풋 자체는 보여질 필요가 없음, 인풋 자체는 보이지 않게 가림 */
 input.three-box-button {
   display: none;
 }
 
-/* 라디오 인풋에 체크가 되면, 인접한 .contents 상자를 보이게 함 */
 input[type='radio']:checked + .three-box-contents {
   visibility: visible;
   width: toSize(1370);
@@ -33,7 +30,6 @@ input[type='radio']:checked + .three-box-contents {
   }
 }
 
-/* 메뉴 버튼 디자인 */
 .three-box-label {
   height: 100%;
   width: toSize(100);
@@ -41,7 +37,7 @@ input[type='radio']:checked + .three-box-contents {
   float: left;
   overflow: hidden;
   cursor: pointer;
-  // transition: all 0.1s ease-out;
+
   margin: 0 toSize(5);
   border: toSize(10);
   border-radius: 40px;
@@ -55,8 +51,7 @@ input[type='radio']:checked + .three-box-contents {
     transition: none;
   }
 }
-/*  메뉴 버튼에 들어갈 아이콘을 100px * 100px, 투명한 PNG 로 저장하여 아래의 경로에 연동해주면 됨
-      위쪽 코드 .label.a 부터 맨 아래코드 .label.e 까지가 메뉴버튼 오른쪽-> 왼쪽 순서 */
+
 .three-box-label.a {
   background: #7caaf0;
   @include media('<=768px') {
@@ -164,7 +159,7 @@ input[type='radio']:checked + .three-box-contents {
   }
 }
 .three-box-inner {
-  display: flex; //가운데 회색박스 나옴
+  display: flex;
   height: 90%;
   margin: 1.5% 0 1.5% 1.5%;
   width: 92%;

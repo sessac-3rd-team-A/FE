@@ -22,9 +22,30 @@ ChartJS.register(
   Legend,
 );
 
-export default function TrendLineChart({ statisticsInfo }: any) {
+type StatisticsData = {
+  date: string;
+  averagePositive: number;
+  averageNegative: number;
+  averageNeutral: number;
+  count: number;
+}[];
+
+type Dataset = {
+  id: string;
+  label: string;
+  data: number[];
+  borderColor: string;
+  backgroundColor: string;
+  borderWidth: number;
+}[];
+
+export default function TrendLineChart({
+  statisticsInfo,
+}: {
+  statisticsInfo: StatisticsData;
+}) {
   const [labels, setLabels] = useState<any>([]);
-  const [datasets, setDatasets] = useState<any>([]);
+  const [datasets, setDatasets] = useState<Dataset>([]);
   const [visibleDataset, setVisibleDataset] = useState<string>('all');
 
   useEffect(() => {
@@ -94,15 +115,16 @@ export default function TrendLineChart({ statisticsInfo }: any) {
 
   const handleButtonClick = (id: string) => {
     if (visibleDataset === id) {
-      setVisibleDataset('all'); // 이미 선택된 id를 다시 클릭하면 선택 해제
+      setVisibleDataset('all');
     } else {
-      setVisibleDataset(id); // 그렇지 않으면 선택
+      setVisibleDataset(id);
     }
   };
 
   const filteredDatasets = datasets.filter(
-    (dataset: any) => visibleDataset === 'all' || dataset.id === visibleDataset,
+    (dataset) => visibleDataset === 'all' || dataset.id === visibleDataset,
   );
+
   const newLabels = Array.from({ length: 31 }, (_, i) => i).reverse();
 
   return (
@@ -190,6 +212,7 @@ export default function TrendLineChart({ statisticsInfo }: any) {
                 : 0;
               return {
                 id: dataset.id,
+
                 percentage: totalAverage
                   ? Math.round((average / totalAverage) * 100)
                   : 0,
