@@ -73,7 +73,7 @@ export default function MySettingPage() {
       // recoil 상태 업데이트
       setUser({
         userId: data.userId,
-        nickname: data.nickname,
+        nickname: nickname,
         age: data.age,
         gender: data.gender,
         isLogin: true,
