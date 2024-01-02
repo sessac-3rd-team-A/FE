@@ -16,8 +16,6 @@ export default function PGraph({ emoData }: Props) {
   const [data3, setData3] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
 
-  console.log('그래프 데이터 :: ', emoData);
-
   // 날짜 리스트 설정 및 각 데이터 설정
   useEffect(() => {
     const today = Date.now();
