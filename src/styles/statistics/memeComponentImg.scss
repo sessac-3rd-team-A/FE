@@ -53,8 +53,6 @@
     height: 100%;
     object-fit: contain;
     position: relative;
-    top: toSize(50);
-    left: toSize(30);
     @include media('<=768px') {
       width: 90%;
       top: 0;
