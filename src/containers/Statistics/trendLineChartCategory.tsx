@@ -58,7 +58,10 @@ export default function TrendLineChartCategory() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(url, { cache: 'no-store' });
+      const response = await fetch(url, {
+        cache: 'no-store',
+        next: { revalidate: 3600 },
+      });
       const info = await response.json();
 
       const currentDate = new Date();
