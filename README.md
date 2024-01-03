@@ -10,11 +10,11 @@
 >
 > ### 개발기간: 2023.12.11~ 2023.12.29
 
-### 🩵[프로젝트 배포 주소](http://ahwhew.site/)
+### 📎[프로젝트 배포 주소](http://ahwhew.site/)
 
 ### 💜[팀노션](https://even-taurus-17e.notion.site/Ah-whew-1c7815da1532435c81c35ff4a476c917?pvs=4)
 
-### 🩷[피그마](https://www.figma.com/community/file/1322241717698834138/ah-whew)
+### 📎[피그마](https://www.figma.com/community/file/1322241717698834138/ah-whew)
 
 ## 📦주요 기능
 
@@ -63,7 +63,7 @@ $ npm run dev
 | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img  width="100px" src="https://avatars.githubusercontent.com/u/43949061?v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/113359008?v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/123625444?v=4"/> | <img width="100px" src="https://avatars.githubusercontent.com/u/100843910?v=4"/> | <img width="100px" src="https://avatars.githubusercontent.com/u/139740067?v=4"/> |
 |                    [@Sangwoo97](https://github.com/Sangwoo97)                     |                      [@sy33002](https://github.com/sy33002)                       |                     [@hoonsdev](https://github.com/hoonsdev)                     |                       [@22-JWL](https://github.com/22-JWL)                       |                       [@jjsh03](https://github.com/jjsh03)                       |
-|                          메인화면 <br /> 회원가입/로그인                          |                          회원 정보 수정<br /> 추천 상점                           |                                유저 감정 & 캘린더                                |                           감정 트렌드& 사진 추천 순위                            |                       일기 작성 & 결과 <br /> 에러 & 로딩                        |
+|                          메인화면 <br /> 회원가입/로그인                          |                          회원 정보 수정<br /> 추천 상점                           |                                유저 감정 & 캘린더                                |                           감정 트렌드 & 사진 추천 순위                           |                       일기 작성 & 결과 <br /> 에러 & 로딩                        |
 
 ### BACKEND
 
@@ -71,14 +71,14 @@ $ npm run dev
 | :-------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
 | <img  width="100px" src="https://avatars.githubusercontent.com/u/139741006?s=60&v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/95032287?v=4" /> | <img width="100px" src="https://avatars.githubusercontent.com/u/71661011?s=60&v=4"/> |     <img width="100px" src="https://avatars.githubusercontent.com/u/65701100?v=4"/>     |
 |                       [@seeun0210](https://github.com/seeun0210)                        |           [@pipi-shortstocking](https://github.com/pipi-shortstocking)           |                      [@rlagywnd4](https://github.com/rlagywnd4)                      |                    [@HongMinYeong](https://github.com/HongMinYeong)                     |
-| 그림일기 AI 관련 기능 <br /> 프로필 대시보드 및 <br /> 추천상점 기능 <br /> docker 배포 |                         회원정보 수정 <br /> 유효성 검사                         |                       로그인 기능 <br /> 사용자 인증 관련 기능                       | 전체 유저 및 카테고리별 <br /> 평균값, 밈 랭킹 <br /> 통계 관련 기능 <br /> docker 배포 |
+| 그림일기 AI 관련 기능 <br /> 프로필 대시보드 및 <br /> 추천상점 기능 <br /> docker 배포 |            회원정보 수정 <br /> 유효성 검사 <br /> 자동 별명생성 기능            |                       로그인 기능 <br /> 사용자 인증 관련 기능                       | 전체 유저 및 카테고리별 <br /> 평균값, 밈 랭킹 <br /> 통계 관련 기능 <br /> docker 배포 |
 
 ## 🖱 사용 기술
 
 ### Front-end
 
 - 언어: <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
-- 프레임워크 및 라이브러리: <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white"/> ![image](https://github.com/sesac-ydp5-2nd-C/2nd-project-beatbay-back/assets/63192543/6e39c358-8bdc-43b7-90b4-562ed01caf3d) <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=Recoil&logoColor=white"/>
+- 프레임워크 및 라이브러리: <img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white"/> ![image](https://github.com/sesac-ydp5-2nd-C/2nd-project-beatbay-back/assets/63192543/6e39c358-8bdc-43b7-90b4-562ed01caf3d) <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=Recoil&logoColor=white"/> <img src="https://img.shields.io/badge/AmCharts 5-007396?style=flat-square&logo=AmCharts 5&logoColor=white" />
   <img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat&logo=Chart.js&logoColor=white"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=Sass&logoColor=white" />
 - Open API : <img src="https://img.shields.io/badge/네이버 쇼핑검색 API-03C75A?style=flat-square&logo=Naver&logoColor=white" />
 
