@@ -166,7 +166,6 @@ export default function MainPage() {
 
   useEffect(() => {
     setWHeight(window.innerHeight);
-    console.log(wHeight);
   }, []);
 
   return (
