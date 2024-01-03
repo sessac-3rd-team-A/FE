@@ -55,6 +55,7 @@ export default function Header() {
       if (rExp - 60 * 60 < +now.toString().slice(0, 10)) {
         // 액세스 토큰도 동시 만료일 때 로그아웃 처리
         if (!isATokenExp(accessToken)) {
+          resetUser();
           localStorage.clear();
           router.push('/');
           return;

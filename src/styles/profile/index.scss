@@ -200,12 +200,12 @@ p {
 
   .profile-container {
     overflow-y: visible;
-    height: auto;
+    // height: auto;
     padding-bottom: toSize(80 + 50);
   }
 
   .info-container {
-    height: auto;
+    // height: auto;
     flex-direction: column;
   }
 
