@@ -111,6 +111,7 @@ export default function MyShopPage(): JSX.Element {
       const res = await fetch(url, {
         method: 'GET',
         headers: headers,
+        next: { revalidate: 3600 }
       });
       return res.json();
     } catch (err) {
