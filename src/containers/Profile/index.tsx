@@ -54,7 +54,7 @@ export default function ProfilePage() {
 
   // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
-    checkAuth();
+    // checkAuth();
     // responseInterceptor();
     getUserInfo();
     setNickname(user.nickname);
