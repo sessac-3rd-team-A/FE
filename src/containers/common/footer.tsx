@@ -60,9 +60,9 @@ export default function Footer() {
               <div className="teamPerson">
                 <p>김지형</p>
                 <p>김태훈</p>
-                <p>전수현</p>
-                <p>김상우</p>
                 <p>이재욱</p>
+                <p>김상우</p>
+                <p>전수현</p>
               </div>
               <div className="personGithub">
                 <Link href={'https://github.com/sy33002'}>
