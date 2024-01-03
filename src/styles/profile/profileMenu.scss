@@ -54,9 +54,10 @@ $container-size: toSize(200);
 
           .icon {
             width: 80%;
+            transform: translateX(10%) translateY(10%);
 
             @media screen and (max-width: 768px) {
-              transform: scale(1.3)
+              transform: scale(1.3) translateX(10%) translateY(10%)
             }
           }
         }
