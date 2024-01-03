@@ -46,7 +46,7 @@
             animation: slideIn 1s ease infinite alternate;
             
             @media screen and (min-width: 1920px) {
-                transform: translate(-500%, 250%);
+                animation: slideInMaxWidth 1s ease infinite alternate;
             }
         }
     }
@@ -144,6 +144,15 @@
     }
   }
 
+
+@keyframes slideInMaxWidth {
+    from {
+      transform: translate(-320%, 260%);
+    }
+    to {
+      transform: translate(-280%, 260%);
+    }
+  }
 
 
 
