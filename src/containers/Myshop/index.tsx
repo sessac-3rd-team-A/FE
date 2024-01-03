@@ -53,6 +53,7 @@ export default function MyShopPage(): JSX.Element {
         setItemsResult(result.items || []);
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        alert('로그인을 다시 해주세요!');
       }
     };
 
