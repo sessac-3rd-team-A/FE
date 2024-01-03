@@ -50,10 +50,11 @@ export default function ProfileMenu() {
                 onClick={() =>handleIconClick(index)}
               >
               <img
-                src={`/images/profileMenu/profileMenu_icon${index}.svg`}
+                src={`/images/profileMenu/profileMenu_icon${index}.webp`}
                 alt={`아이콘 ${index}`}
                 className={`icon`}
               />
+              </div>
                 {/* <object type="image/svg+xml" 
                   data={`/images/profileMenu/profileMenu_icon${index}.svg`}
                   key={index}
@@ -71,7 +72,6 @@ export default function ProfileMenu() {
                     onClick={() => handleIconClick(index)}
                   />
                 </object> */}
-              </div>
             </Link>
           ))}
         </div>
