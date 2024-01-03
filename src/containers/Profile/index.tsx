@@ -13,7 +13,6 @@ import { ProfileCalendarType } from '@/types';
 import { useRecoilState } from 'recoil'; // recoil
 import { userState } from '@/utils/state'; // recoil
 import { useRouter } from 'next/navigation';
-import responseInterceptor from '@/utils/fetch';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -54,8 +53,7 @@ export default function ProfilePage() {
 
   // 초기 렌더링 시 데이터 fetching
   useEffect(() => {
-    // checkAuth();
-    // responseInterceptor();
+    checkAuth();
     getUserInfo();
     setNickname(user.nickname);
   }, []);
