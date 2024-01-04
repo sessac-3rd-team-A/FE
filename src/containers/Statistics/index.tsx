@@ -20,7 +20,7 @@ export default async function StatisticsPage() {
 
   const statisticsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER}/api/statistics`,
-    { cache: 'no-store', next: { revalidate: 3600 } },
+    { next: { revalidate: 3600 } },
   );
   statisticsInfo = await statisticsResponse.json();
 

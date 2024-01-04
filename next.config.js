@@ -17,7 +17,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'localhost',
+        hostname: 'ahwhew.site',
       },
       {
         protocol: 'https',
@@ -25,6 +25,7 @@ const nextConfig = {
       },
     ],
   },
+  output: 'standalone', // 이 줄을 추가하여 두 설정을 합침
 };
 
 module.exports = nextConfig;
