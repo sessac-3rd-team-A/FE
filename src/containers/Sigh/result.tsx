@@ -50,7 +50,6 @@ export default function SighResultPage() {
   }
 
   // 카톡 공유
-  // csr에서만 실행
   if (typeof window !== 'undefined') {
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
@@ -79,6 +78,7 @@ export default function SighResultPage() {
         alert('링크가 클립보드에 복사되었습니다!');
       })
       .catch((err) => {
+        alert('http 환경에서는 제한된 기능입니다!');
         console.error('링크 복사 실패:', err);
       });
   };
