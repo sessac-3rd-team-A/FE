@@ -82,7 +82,11 @@ export default function MainPage() {
 
   function navigateStart() {
     if (pageCount == 3) {
-      router.push('/profile');
+      if (user.isLogin) {
+        router.push('/profile');
+      } else {
+        alert('로그인 해주세요');
+      }
     } else {
       router.push('/sigh');
     }
@@ -166,6 +170,7 @@ export default function MainPage() {
   }, [isFooter, loading, isPage2, pageCount]);
 
   useEffect(() => {
+    console.log(user);
     setWHeight(window.innerHeight);
     setWWidth(window.innerWidth);
   }, []);
