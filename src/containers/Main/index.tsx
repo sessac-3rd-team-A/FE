@@ -19,6 +19,7 @@ export default function MainPage() {
   const [isPage2, setIsPage2] = useState(false);
   const [isFooter, setIsFooter] = useState(false);
   const [wHeight, setWHeight] = useState(1920);
+  const [wWidth, setWWidth] = useState(1920);
   const [pageCount, setPageCount] = useState(1); // 1, 2, 3
   // const [wWeight, setWWeight] = useState(window.innerWidth);
   // const [wHeight, setWHeight] = useState(window.innerHeight);
@@ -166,6 +167,7 @@ export default function MainPage() {
 
   useEffect(() => {
     setWHeight(window.innerHeight);
+    setWWidth(window.innerWidth);
   }, []);
 
   return (
@@ -215,12 +217,12 @@ export default function MainPage() {
 
       <div
         className={`mainCardContainer`}
-        style={wHeight <= 768 ? { height: wHeight } : {}}
+        style={wWidth <= 768 ? { height: wHeight } : {}}
       >
         <div
           className={`mainCardContainer inner`}
           style={
-            wHeight <= 768
+            wWidth <= 768
               ? { height: `calc(${wHeight}px - 11.9791666667vw)` }
               : {}
           }
