@@ -14,11 +14,12 @@ interface Section {
 
 export default function MainPage() {
   const router = useRouter();
-  const [user, setUser] = useRecoilState(userState); // recoil
+  // const [user, setUser] = useRecoilState(userState); // recoil
   const [loading, setLoading] = useState(false); // recoil
   const [isPage2, setIsPage2] = useState(false);
   const [isFooter, setIsFooter] = useState(false);
   const [wHeight, setWHeight] = useState(1920);
+  const [wWidth, setWWidth] = useState(1920);
   const [pageCount, setPageCount] = useState(1); // 1, 2, 3
   // const [wWeight, setWWeight] = useState(window.innerWidth);
   // const [wHeight, setWHeight] = useState(window.innerHeight);
@@ -80,11 +81,16 @@ export default function MainPage() {
   };
 
   function navigateStart() {
-    if (pageCount == 3) {
-      router.push('/profile');
-    } else {
-      router.push('/sigh');
-    }
+    // if (pageCount == 3) {
+    //   if (user.isLogin) {
+    //     router.push('/profile');
+    //   } else {
+    //     alert('로그인 해주세요');
+    //   }
+    // } else {
+    //   router.push('/sigh');
+    // }
+    router.push('/sigh');
   }
 
   useEffect(() => {
@@ -166,6 +172,7 @@ export default function MainPage() {
 
   useEffect(() => {
     setWHeight(window.innerHeight);
+    setWWidth(window.innerWidth);
   }, []);
 
   return (
@@ -215,12 +222,12 @@ export default function MainPage() {
 
       <div
         className={`mainCardContainer`}
-        style={wHeight <= 768 ? { height: wHeight } : {}}
+        style={wWidth <= 768 ? { height: wHeight } : {}}
       >
         <div
           className={`mainCardContainer inner`}
           style={
-            wHeight <= 768
+            wWidth <= 768
               ? { height: `calc(${wHeight}px - 11.9791666667vw)` }
               : {}
           }
