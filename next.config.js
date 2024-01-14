@@ -1,5 +1,13 @@
-/** @type {import('next').NextConfig} */
+const fs = require('fs');
+const path = require('path');
+
 const nextConfig = {
+  server: {
+    https: {
+      key: fs.readFileSync(path.join(__dirname, 'privkey.pem')),
+      cert: fs.readFileSync(path.join(__dirname, 'fullchain.pem')),
+    },
+  },
   reactStrictMode: false,
   async rewrites() {
     return [
@@ -17,7 +25,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'ahwhew.site',
+        hostname: 'www.ahwhew.com',
       },
       {
         protocol: 'https',
@@ -25,7 +33,7 @@ const nextConfig = {
       },
     ],
   },
-  output: 'standalone', // 이 줄을 추가하여 두 설정을 합침
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
